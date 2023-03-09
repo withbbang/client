@@ -4,7 +4,7 @@ import Index from 'screens/index';
 import NotFound from 'screens/notFound';
 import Sign from 'screens/sign';
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <>
       <BrowserRouter>
