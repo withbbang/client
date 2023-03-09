@@ -19,7 +19,7 @@ export function* handleFetchKeyPair() {
   }
 }
 
-const fetchKeyPair = async () => {
+const fetchKeyPair = async (): Promise<any> => {
   return fetch('server/key')
     .then((res) => res.json())
     .then((res) => res)
