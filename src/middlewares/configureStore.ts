@@ -1,14 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import logger from 'redux-logger';
-import users from 'middlewares/reduxTookits/userSlice';
 import sagaConfigure from './configureSaga';
 import Redux from 'redux';
-
-const rootReducer = combineReducers({
-  users
-  // add others...
-});
+import { rootReducer } from './configureReducer';
 
 const sagaMiddleware: SagaMiddleware = createSagaMiddleware();
 
