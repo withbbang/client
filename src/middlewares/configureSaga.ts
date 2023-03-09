@@ -3,7 +3,7 @@ import { userSaga } from 'middlewares/sagas/userSaga';
 
 function sagaConfigure(sagaMiddleware: SagaMiddleware): void {
   sagaMiddleware.run(userSaga);
-  // ... add others
+  // add others...
 }
 
 export default sagaConfigure;

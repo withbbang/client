@@ -7,7 +7,7 @@ import Redux from 'redux';
 
 const rootReducer = combineReducers({
   users
-  // others...
+  // add others...
 });
 
 const sagaMiddleware: SagaMiddleware = createSagaMiddleware();
