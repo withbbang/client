@@ -16,7 +16,7 @@ export function* handleGetUser() {
   }
 }
 
-const fetchUser = async () => {
+const fetchUser = async (): Promise<any> => {
   return fetch('https://jsonplaceholder.typicode.com/users')
     .then((res) => res.json())
     .then((res) => res)
