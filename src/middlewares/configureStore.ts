@@ -1,17 +1,20 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import logger from 'redux-logger';
 import users from 'middlewares/reduxTookits/userSlice';
 import sagaConfigure from './configureSaga';
+import Redux from 'redux';
 
 const rootReducer = combineReducers({
   users
   // others...
 });
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware: SagaMiddleware = createSagaMiddleware();
 
-const middlewares: Array<any> = [sagaMiddleware];
+const middlewares: Array<
+  SagaMiddleware | Redux.Middleware<{}, any, Redux.Dispatch<Redux.AnyAction>>
+> = [sagaMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
