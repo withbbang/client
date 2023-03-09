@@ -1,10 +1,13 @@
 import { Action } from 'redux';
 import SignCT from './SignCT';
 import { connect } from 'react-redux';
-import { requestKeyPair } from 'middlewares/reduxTookits/commonSlice';
+import {
+  CommonState,
+  requestKeyPair
+} from 'middlewares/reduxTookits/commonSlice';
 import { PropState } from 'middlewares/configureReducer';
 
-const mapStateToProps = (state: PropState) => {
+const mapStateToProps = (state: PropState): CommonState => {
   return state.common;
 };
 
