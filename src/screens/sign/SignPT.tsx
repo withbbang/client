@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SignPT = () => {
+const SignPT = (): JSX.Element => {
   return <div>Hello!</div>;
 };
 
