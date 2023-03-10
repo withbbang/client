@@ -10,7 +10,7 @@ export function* signSaga() {
   yield takeEvery(requestSignIn.type, handlePostSignIn);
 }
 
-export function* handlePostSignIn(data: Object) {
+export function* handlePostSignIn(data: any) {
   try {
     const res: Generator = yield call(postSignIn, data);
     yield put(successSignIn(res));
@@ -19,6 +19,6 @@ export function* handlePostSignIn(data: Object) {
   }
 }
 
-async function postSignIn(data: Object): Promise<any> {
+async function postSignIn(data: any): Promise<any> {
   return postAPI('server/sign/in', data);
 }

@@ -29,7 +29,8 @@ function getAPI(url: string): Promise<any> {
   });
 }
 
-function postAPI(url: string, data: Object): Promise<any> {
+function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
+  console.debug('parameters: ', payload);
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'POST',
@@ -38,7 +39,7 @@ function postAPI(url: string, data: Object): Promise<any> {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(payload)
     })
       .then((response) => {
         if (response.status === 400) {
@@ -61,7 +62,8 @@ function postAPI(url: string, data: Object): Promise<any> {
   });
 }
 
-function putAPI(url: string, data: Object): Promise<any> {
+function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
+  console.debug('parameters: ', payload);
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'PUT',
@@ -70,7 +72,7 @@ function putAPI(url: string, data: Object): Promise<any> {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(payload)
     })
       .then((response) => {
         if (response.status === 400) {
@@ -93,7 +95,11 @@ function putAPI(url: string, data: Object): Promise<any> {
   });
 }
 
-function deleteAPI(url: string, data: Object): Promise<any> {
+function deleteAPI(
+  url: string,
+  { payload }: { payload: Object }
+): Promise<any> {
+  console.debug('parameters: ', payload);
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'DELETE',
@@ -102,7 +108,7 @@ function deleteAPI(url: string, data: Object): Promise<any> {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(payload)
     })
       .then((response) => {
         if (response.status === 400) {
