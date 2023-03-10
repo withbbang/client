@@ -55,7 +55,7 @@ function postAPI(url: string, data: Object): Promise<any> {
       })
       .catch((error) => {
         console.debug(error);
-        // reject('Error Getting Data');
+        // reject('Error Postting Data');
         reject(error);
       });
   });
@@ -87,7 +87,7 @@ function putAPI(url: string, data: Object): Promise<any> {
       })
       .catch((error) => {
         console.debug(error);
-        // reject('Error Getting Data');
+        // reject('Error Putting Data');
         reject(error);
       });
   });
@@ -119,7 +119,7 @@ function deleteAPI(url: string, data: Object): Promise<any> {
       })
       .catch((error) => {
         console.debug(error);
-        // reject('Error Getting Data');
+        // reject('Error Deleting Data');
         reject(error);
       });
   });
