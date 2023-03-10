@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import { setUser, failedGetUser } from 'middlewares/reduxTookits/userSlice';
 import { takeEvery } from 'redux-saga/effects';
 import { getUser } from 'middlewares/reduxTookits/userSlice';
+import { getAPI } from 'modules/apis';
 
 export function* userSaga() {
   yield takeEvery(getUser.type, handleGetUser);
@@ -17,10 +18,5 @@ export function* handleGetUser() {
 }
 
 const fetchUser = async (): Promise<any> => {
-  return fetch('https://jsonplaceholder.typicode.com/users')
-    .then((res) => res.json())
-    .then((res) => res)
-    .catch((error) => {
-      throw new Error(error.message);
-    });
+  return getAPI('https://jsonplaceholder.typicode.com/users');
 };
