@@ -3,15 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 export interface CommonState {
   isFetching: boolean;
   publicKey: string;
-  successMsg: string;
-  failMsg: string;
+  message: string;
+  isSuccess: boolean;
+  isFail: boolean;
 }
 
 export const initialState: CommonState = {
   isFetching: false,
   publicKey: '',
-  successMsg: '',
-  failMsg: ''
+  message: '',
+  isSuccess: false,
+  isFail: false
 };
 
 const commonSlice = createSlice({
@@ -22,12 +24,14 @@ const commonSlice = createSlice({
       state.isFetching = true;
     },
     successKeyPair(state, action): void {
-      state.successMsg = action.payload;
+      state.message = action.payload;
       state.isFetching = false;
+      state.isSuccess = true;
     },
     failKeyPair(state, action): void {
-      state.failMsg = action.payload;
+      state.message = action.payload;
       state.isFetching = false;
+      state.isFail = true;
     }
   }
 });

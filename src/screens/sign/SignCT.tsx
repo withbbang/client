@@ -4,8 +4,14 @@ import SignPT from './SignPT';
 
 const SignCT = (props: any): JSX.Element => {
   useEffect(() => {
-    console.log(props);
     props.requestKeyPair();
+
+    const data = {
+      id: 'ADMIN',
+      password: '!'
+    };
+
+    props.requestSignIn(data);
   }, []);
 
   return <SignPT />;

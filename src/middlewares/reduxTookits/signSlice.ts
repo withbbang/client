@@ -1,35 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState: SignState = {
-  id: '',
-  password: '',
   isFetching: false,
-  successMessage: '',
-  failMessage: ''
+  message: '',
+  isSuccess: false,
+  isFail: false
 };
 
 export interface SignState {
-  id: string;
-  password: string;
   isFetching: boolean;
-  successMessage: string;
-  failMessage: string;
+  message: string;
+  isSuccess: boolean;
+  isFail: boolean;
 }
 
 const signSlice = createSlice({
   name: 'sign',
   initialState,
   reducers: {
-    requestSignIn(state: SignState) {
+    requestSignIn(state: SignState, action) {
       state.isFetching = true;
     },
-    successSignIn(state, action) {
-      state.successMessage = action.payload;
+    successSignIn(state: SignState, action) {
+      state.message = action.payload;
       state.isFetching = false;
+      state.isSuccess = true;
     },
-    failSignIn(state, action) {
-      state.failMessage = action.payload;
+    failSignIn(state: SignState, action) {
+      state.message = action.payload;
       state.isFetching = false;
+      state.isFail = true;
     }
   }
 });
