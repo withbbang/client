@@ -10,7 +10,7 @@ function getAPI(url: string): Promise<any> {
       }
     })
       .then((response) => {
-        if (response.status === 400) {
+        if (response.status === 404) {
         } else if (response.status === 200) {
           return response.json();
         } else {
@@ -44,7 +44,7 @@ function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       body: JSON.stringify(payload)
     })
       .then((response) => {
-        if (response.status === 400) {
+        if (response.status === 404) {
         } else if (response.status === 200) {
           return response.json();
         } else {
@@ -78,7 +78,7 @@ function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       body: JSON.stringify(payload)
     })
       .then((response) => {
-        if (response.status === 400) {
+        if (response.status === 404) {
         } else if (response.status === 200) {
           return response.json();
         } else {
@@ -115,7 +115,7 @@ function deleteAPI(
       body: JSON.stringify(payload)
     })
       .then((response) => {
-        if (response.status === 400) {
+        if (response.status === 404) {
         } else if (response.status === 200) {
           return response.json();
         } else {
