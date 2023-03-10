@@ -30,10 +30,30 @@ const signSlice = createSlice({
       state.message = action.payload;
       state.isFetching = false;
       state.isFail = true;
+    },
+    requestSignUp(state: SignState, action) {
+      state.isFetching = true;
+    },
+    successSignUp(state: SignState, action) {
+      state.message = action.payload;
+      state.isFetching = false;
+      state.isSuccess = true;
+    },
+    failSignUp(state: SignState, action) {
+      state.message = action.payload;
+      state.isFetching = false;
+      state.isFail = true;
     }
   }
 });
 
-export const { requestSignIn, successSignIn, failSignIn } = signSlice.actions;
+export const {
+  requestSignIn,
+  successSignIn,
+  failSignIn,
+  requestSignUp,
+  successSignUp,
+  failSignUp
+} = signSlice.actions;
 
 export default signSlice.reducer;

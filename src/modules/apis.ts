@@ -1,3 +1,4 @@
+// GET API
 function getAPI(url: string): Promise<any> {
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -29,6 +30,7 @@ function getAPI(url: string): Promise<any> {
   });
 }
 
+// POST API
 function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
   console.debug('parameters: ', payload);
   return new Promise((resolve, reject) => {
@@ -62,6 +64,7 @@ function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
   });
 }
 
+// PUT API
 function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
   console.debug('parameters: ', payload);
   return new Promise((resolve, reject) => {
@@ -95,6 +98,7 @@ function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
   });
 }
 
+// DELETE API
 function deleteAPI(
   url: string,
   { payload }: { payload: Object }
