@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface CommonState {
   isFetching: boolean;
-  publicKey: string;
+  publicKey?: string;
   message: string;
   isSuccess: boolean;
   isFail: boolean;
@@ -20,23 +20,24 @@ const commonSlice = createSlice({
   name: 'sign',
   initialState,
   reducers: {
-    requestKeyPair(state: CommonState): void {
+    requestPublicKey(state: CommonState): void {
       state.isFetching = true;
     },
-    successKeyPair(state, action): void {
-      state.message = action.payload;
+    successPublicKey(state, action): void {
+      state.message = action.payload.message;
+      state.publicKey = action.payload.publicKey;
       state.isFetching = false;
       state.isSuccess = true;
     },
-    failKeyPair(state, action): void {
-      state.message = action.payload;
+    failPublicKey(state, action): void {
+      state.message = action.payload.message;
       state.isFetching = false;
       state.isFail = true;
     }
   }
 });
 
-export const { requestKeyPair, successKeyPair, failKeyPair } =
+export const { requestPublicKey, successPublicKey, failPublicKey } =
   commonSlice.actions;
 
 export default commonSlice.reducer;

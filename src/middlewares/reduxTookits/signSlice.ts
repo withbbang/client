@@ -1,18 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const initialState: SignState = {
-  isFetching: false,
-  message: '',
-  isSuccess: false,
-  isFail: false
-};
-
 export interface SignState {
   isFetching: boolean;
   message: string;
   isSuccess: boolean;
   isFail: boolean;
+  isLoggedIn?: boolean;
 }
+
+export const initialState: SignState = {
+  isFetching: false,
+  message: '',
+  isSuccess: false,
+  isFail: false,
+  isLoggedIn: false
+};
 
 const signSlice = createSlice({
   name: 'sign',
@@ -25,11 +27,13 @@ const signSlice = createSlice({
       state.message = action.payload;
       state.isFetching = false;
       state.isSuccess = true;
+      state.isLoggedIn = true;
     },
     failSignIn(state: SignState, action) {
       state.message = action.payload;
       state.isFetching = false;
       state.isFail = true;
+      state.isLoggedIn = false;
     },
     requestSignUp(state: SignState, action) {
       state.isFetching = true;

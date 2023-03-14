@@ -3,22 +3,31 @@ import SignCT from './SignCT';
 import { connect } from 'react-redux';
 import {
   CommonState,
-  requestKeyPair
+  requestPublicKey
 } from 'middlewares/reduxTookits/commonSlice';
 import { PropState } from 'middlewares/configureReducer';
-import { requestSignIn } from 'middlewares/reduxTookits/signSlice';
+import { requestSignIn, SignState } from 'middlewares/reduxTookits/signSlice';
 
-const mapStateToProps = (state: PropState): CommonState => {
-  return state.common;
+const mapStateToProps = (state: PropState): CommonState | SignState => {
+  return {
+    ...state.common,
+    ...state.sign
+  };
 };
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
-    requestKeyPair: (): void => {
-      dispatch(requestKeyPair());
+    requestPublicKey: (): void => {
+      dispatch(requestPublicKey());
     },
-    requestSignIn: (data: Object): void => {
-      dispatch(requestSignIn(data));
+    requestSignIn: ({
+      id,
+      password
+    }: {
+      id: string;
+      password: string;
+    }): void => {
+      dispatch(requestSignIn({ id, password }));
     }
   };
 };

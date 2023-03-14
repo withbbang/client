@@ -1,30 +1,30 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
-  failKeyPair,
-  requestKeyPair,
-  successKeyPair
+  failPublicKey,
+  requestPublicKey,
+  successPublicKey
 } from 'middlewares/reduxTookits/commonSlice';
 import { getAPI } from 'modules/apis';
 
 export function* commonSaga() {
-  yield takeEvery(requestKeyPair.type, handleGetKeyPair);
+  yield takeEvery(requestPublicKey.type, handleGetPublicKey);
 }
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-function* handleGetKeyPair() {
+function* handleGetPublicKey() {
   try {
-    const res: Generator = yield call(getKeyPair);
-    yield put(successKeyPair(res));
+    const res: Generator = yield call(getPublicKey);
+    yield put(successPublicKey(res));
   } catch (error: any) {
-    yield put(failKeyPair(error.message));
+    yield put(failPublicKey(error.message));
   }
 }
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-async function getKeyPair(): Promise<any> {
+async function getPublicKey(): Promise<any> {
   return getAPI('server/sign');
 }
