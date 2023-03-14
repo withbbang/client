@@ -19,9 +19,23 @@ const LogCT = (props: typeLogCT): JSX.Element => {
     !props.isFetching &&
       props.isSuccess &&
       !props.isFail &&
+      !props.isLoggedOut &&
       props.isLoggedIn &&
       console.log('로그인 완료!');
-  }, [props.isFetching, props.isSuccess, props.isFail, props.isLoggedIn]);
+
+    !props.isFetching &&
+      props.isSuccess &&
+      !props.isFail &&
+      props.isLoggedOut &&
+      !props.isLoggedIn &&
+      console.log('로그아웃 완료!');
+  }, [
+    props.isFetching,
+    props.isSuccess,
+    props.isFail,
+    props.isLoggedIn,
+    props.isLoggedOut
+  ]);
 
   const handleConsoleLog = () => {
     console.log('publicKey: ', props.publicKey);
