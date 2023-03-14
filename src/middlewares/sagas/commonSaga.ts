@@ -26,5 +26,5 @@ function* handleGetPublicKey() {
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 async function getPublicKey(): Promise<any> {
-  return getAPI('server/sign');
+  return getAPI('server/log');
 }

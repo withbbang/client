@@ -1,3 +1,5 @@
+import { handleGetCookie } from './cookie';
+
 // GET API
 function getAPI(url: string): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -6,7 +8,9 @@ function getAPI(url: string): Promise<any> {
       // mode: "no-cors",
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
+        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
       }
     })
       .then((response) => {
@@ -41,7 +45,9 @@ function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       // mode: "no-cors",
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
+        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
       },
       body: JSON.stringify(payload)
     })
@@ -77,7 +83,9 @@ function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       // mode: "no-cors",
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
+        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
       },
       body: JSON.stringify(payload)
     })
@@ -116,7 +124,9 @@ function deleteAPI(
       // mode: "no-cors",
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
+        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
       },
       body: JSON.stringify(payload)
     })
