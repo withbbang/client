@@ -78,7 +78,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
   };
 
   const handleLogOut = () => {
-    props.requestLogOut({ id: 'admin' });
+    props.requestLogOut({ id: 'ADMINISTER' });
   };
 
   return (
@@ -86,6 +86,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
       onConsoleLog={handleConsoleLog}
       onLogIn={handleLogIn}
       onLogOut={handleLogOut}
+      loading={props.isFetching}
     />
   );
 };
