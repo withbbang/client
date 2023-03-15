@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { JSEncrypt } from 'jsencrypt';
 import LogPT from './LogPT';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
+import { handleGetCookie } from 'modules/cookie';
 
 const LogCT = (props: typeLogCT): JSX.Element => {
+  const navigate = useNavigate();
   const encrypt = new JSEncrypt();
 
   useEffect(() => {
+    !!handleGetCookie('atk') && !!handleGetCookie('rtk') && navigate('/admin');
+
     props.requestPublicKey();
   }, []);
 
@@ -21,14 +26,14 @@ const LogCT = (props: typeLogCT): JSX.Element => {
       !props.isFail &&
       !props.isLoggedOut &&
       props.isLoggedIn &&
-      console.log('로그인 완료!');
+      navigate('/admin');
 
     !props.isFetching &&
       props.isSuccess &&
       !props.isFail &&
       props.isLoggedOut &&
       !props.isLoggedIn &&
-      console.log('로그아웃 완료!');
+      navigate('/');
   }, [
     props.isFetching,
     props.isSuccess,
@@ -73,7 +78,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
   };
 
   const handleLogOut = () => {
-    props.requestLogOut({ id: 'ADMINISTER' });
+    props.requestLogOut({ id: 'admin' });
   };
 
   return (

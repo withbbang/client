@@ -14,23 +14,22 @@ function getAPI(url: string): Promise<any> {
       }
     })
       .then((response) => {
-        if (response.status === 500) {
-          reject(response);
-        } else if (response.status === 404) {
-        } else if (response.status === 200) {
+        if (response.status < 300) {
           return response.json();
         } else {
+          reject(new Error('오류발생'));
         }
       })
       .then((result) => {
-        if (result) {
+        if (result.code !== '000000') {
+          reject(new Error(result.message));
+        } else {
           console.debug('result: ', result);
           resolve(result);
         }
       })
       .catch((error) => {
         console.debug(error);
-        // reject('Error Getting Data');
         reject(error);
       });
   });
@@ -52,23 +51,22 @@ function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       body: JSON.stringify(payload)
     })
       .then((response) => {
-        if (response.status === 500) {
-          reject(response);
-        } else if (response.status === 404) {
-        } else if (response.status === 200) {
+        if (response.status < 300) {
           return response.json();
         } else {
+          reject(new Error('오류발생'));
         }
       })
       .then((result) => {
-        if (result) {
+        if (result.code !== '000000') {
+          reject(new Error(result.message));
+        } else {
           console.debug('result: ', result);
           resolve(result);
         }
       })
       .catch((error) => {
         console.debug(error);
-        // reject('Error Postting Data');
         reject(error);
       });
   });
@@ -90,23 +88,22 @@ function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       body: JSON.stringify(payload)
     })
       .then((response) => {
-        if (response.status === 500) {
-          reject(response);
-        } else if (response.status === 404) {
-        } else if (response.status === 200) {
+        if (response.status < 300) {
           return response.json();
         } else {
+          reject(new Error('오류발생'));
         }
       })
       .then((result) => {
-        if (result) {
+        if (result.code !== '000000') {
+          reject(new Error(result.message));
+        } else {
           console.debug('result: ', result);
           resolve(result);
         }
       })
       .catch((error) => {
         console.debug(error);
-        // reject('Error Putting Data');
         reject(error);
       });
   });
@@ -131,23 +128,22 @@ function deleteAPI(
       body: JSON.stringify(payload)
     })
       .then((response) => {
-        if (response.status === 500) {
-          reject(response);
-        } else if (response.status === 404) {
-        } else if (response.status === 200) {
+        if (response.status < 300) {
           return response.json();
         } else {
+          reject(new Error('오류발생'));
         }
       })
       .then((result) => {
-        if (result) {
+        if (result.code !== '000000') {
+          reject(new Error(result.message));
+        } else {
           console.debug('result: ', result);
           resolve(result);
         }
       })
       .catch((error) => {
         console.debug(error);
-        // reject('Error Deleting Data');
         reject(error);
       });
   });

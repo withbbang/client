@@ -4,6 +4,7 @@ import Index from 'screens/index';
 import NotFound from 'screens/notFound';
 import Sign from 'screens/sign';
 import Log from 'screens/log';
+import Admin from 'screens/admin';
 
 const App = (): JSX.Element => {
   return (
@@ -13,6 +14,7 @@ const App = (): JSX.Element => {
           <Route path="/" element={<Index />} />
           <Route path="/sign" element={<Sign />} />
           <Route path="/log" element={<Log />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
