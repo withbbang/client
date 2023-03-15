@@ -9,8 +9,8 @@ function getAPI(url: string): Promise<any> {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
-        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
+        Authorization: 'Bearer ' + handleGetCookie('atk'),
+        Refresh: 'Bearer ' + handleGetCookie('rtk')
       }
     })
       .then((response) => {
@@ -45,8 +45,8 @@ function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
-        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
+        Authorization: 'Bearer ' + handleGetCookie('atk'),
+        Refresh: 'Bearer ' + handleGetCookie('rtk')
       },
       body: JSON.stringify(payload)
     })
@@ -82,8 +82,8 @@ function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
-        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
+        Authorization: 'Bearer ' + handleGetCookie('atk'),
+        Refresh: 'Bearer ' + handleGetCookie('rtk')
       },
       body: JSON.stringify(payload)
     })
@@ -122,8 +122,8 @@ function deleteAPI(
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('accessToken'),
-        Refresh: 'Bearer ' + handleGetCookie('refreshToken')
+        Authorization: 'Bearer ' + handleGetCookie('atk'),
+        Refresh: 'Bearer ' + handleGetCookie('rtk')
       },
       body: JSON.stringify(payload)
     })
