@@ -7,7 +7,17 @@ const LogPT = ({
   onLogOut,
   loading
 }: typeLogPT): JSX.Element => {
-  return <Loader />;
+  return loading ? (
+    <Loader />
+  ) : (
+    <div>
+      <h1 onClick={onConsoleLog}>Hello!</h1>
+      <input type="text" id="id" />
+      <input type="password" id="password" />
+      <button onClick={() => onLogIn('id', 'password')}>로그인</button>
+      <button onClick={onLogOut}>로그아웃</button>
+    </div>
+  );
 };
 
 interface typeLogPT {
