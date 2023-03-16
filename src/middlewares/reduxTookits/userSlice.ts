@@ -1,27 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface UserState {
+  message: string;
+  isFetching: boolean;
+  isSuccess: boolean;
+  isFail: boolean;
+  ID?: string;
+  AUTH?: number;
+}
+
+export const initialState: UserState = {
+  message: '',
+  isFetching: false,
+  isSuccess: false,
+  isFail: false,
+  ID: '',
+  AUTH: 30
+};
+
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    users: [],
-    loading: false,
-    error: ''
-  },
+  initialState,
   reducers: {
-    getUser(state) {
-      state.loading = true;
+    requestUserInfo(state: UserState, action) {
+      state.message = '';
+      state.isFetching = true;
+      state.isSuccess = false;
+      state.isFail = false;
     },
-    setUser(state, action) {
-      state.users = action.payload;
-      state.loading = false;
+    successUserInfo(state: UserState, action) {
+      state.message = action.payload;
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isFail = false;
+      state.ID = action.payload;
+      state.AUTH = action.payload;
     },
-    failedGetUser(state, action) {
-      state.error = action.payload;
-      state.loading = false;
+    failUserInfo(state: UserState, action) {
+      state.message = action.payload;
+      state.isFetching = false;
+      state.isSuccess = false;
+      state.isFail = true;
+      state.ID = '';
+      state.AUTH = 30;
     }
   }
 });
 
-export const { getUser, setUser, failedGetUser } = userSlice.actions;
+export const { requestUserInfo, successUserInfo, failUserInfo } =
+  userSlice.actions;
 
 export default userSlice.reducer;

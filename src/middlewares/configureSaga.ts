@@ -7,8 +7,8 @@ import { logSaga } from './sagas/logSaga';
 function sagaConfigure(sagaMiddleware: SagaMiddleware): void {
   sagaMiddleware.run(userSaga);
   sagaMiddleware.run(signSaga);
-  sagaMiddleware.run(commonSaga);
   sagaMiddleware.run(logSaga);
+  sagaMiddleware.run(commonSaga);
   // add others...
 }
 

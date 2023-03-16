@@ -74,11 +74,11 @@ const LogCT = (props: typeLogCT): JSX.Element => {
       return;
     }
 
-    props.requestLogIn({ id: ID, password: encrypted });
+    props.requestLogIn(ID, encrypted);
   };
 
   const handleLogOut = () => {
-    props.requestLogOut({ id: 'ADMINISTER' });
+    props.requestLogOut('ADMINISTER');
   };
 
   return (
@@ -93,8 +93,8 @@ const LogCT = (props: typeLogCT): JSX.Element => {
 
 interface typeLogCT extends CommonState, LogState {
   requestPublicKey: () => void;
-  requestLogIn: ({ id, password }: { id: string; password: string }) => void;
-  requestLogOut: ({ id }: { id: string }) => void;
+  requestLogIn: (id: string, password: string) => void;
+  requestLogOut: (id: string) => void;
 }
 
 export default LogCT;

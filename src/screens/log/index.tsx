@@ -24,16 +24,10 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestPublicKey: (): void => {
       dispatch(requestPublicKey());
     },
-    requestLogIn: ({
-      id,
-      password
-    }: {
-      id: string;
-      password: string;
-    }): void => {
+    requestLogIn: (id: string, password: string): void => {
       dispatch(requestLogIn({ id, password }));
     },
-    requestLogOut: ({ id }: { id: string }): void => {
+    requestLogOut: (id: string): void => {
       dispatch(requestLogOut({ id }));
     }
   };

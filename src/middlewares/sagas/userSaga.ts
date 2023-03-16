@@ -1,22 +1,30 @@
-import { call, put } from 'redux-saga/effects';
-import { setUser, failedGetUser } from 'middlewares/reduxTookits/userSlice';
-import { takeEvery } from 'redux-saga/effects';
-import { getUser } from 'middlewares/reduxTookits/userSlice';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import {
+  requestUserInfo,
+  successUserInfo,
+  failUserInfo
+} from 'middlewares/reduxTookits/userSlice';
 import { getAPI } from 'modules/apis';
 
 export function* userSaga() {
-  yield takeEvery(getUser.type, handleGetUser);
+  yield takeEvery(requestUserInfo.type, handleGetUser);
 }
 
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////        process         ///////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 export function* handleGetUser() {
   try {
     const res: Generator = yield call(fetchUser);
-    yield put(setUser(res));
+    yield put(successUserInfo(res));
   } catch (error: any) {
-    yield put(failedGetUser(error.message));
+    yield put(failUserInfo(error.message));
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////      API function      ///////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 const fetchUser = async (): Promise<any> => {
-  return getAPI('https://jsonplaceholder.typicode.com/users');
+  return getAPI('server/user');
 };

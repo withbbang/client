@@ -69,7 +69,7 @@ const SignCT = (props: typeSignCT): JSX.Element => {
       return;
     }
 
-    props.requestSignUp({ id: ID, password: encrypted });
+    props.requestSignUp(ID, encrypted);
   };
 
   const handleSignOut = (id: string, password: string) => {
@@ -100,7 +100,7 @@ const SignCT = (props: typeSignCT): JSX.Element => {
       return;
     }
 
-    props.requestSignOut({ id: ID, password: encrypted });
+    props.requestSignOut(ID, encrypted);
   };
 
   return (
@@ -114,8 +114,8 @@ const SignCT = (props: typeSignCT): JSX.Element => {
 
 interface typeSignCT extends CommonState, SignState {
   requestPublicKey: () => void;
-  requestSignUp: ({ id, password }: { id: string; password: string }) => void;
-  requestSignOut: ({ id, password }: { id: string; password: string }) => void;
+  requestSignUp: (id: string, password: string) => void;
+  requestSignOut: (id: string, password: string) => void;
 }
 
 export default SignCT;

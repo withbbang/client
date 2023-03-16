@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface SignState {
-  isFetching: boolean;
   message: string;
+  isFetching: boolean;
   isSuccess: boolean;
   isFail: boolean;
   isSignUp?: boolean;
@@ -10,8 +10,8 @@ export interface SignState {
 }
 
 export const initialState: SignState = {
-  isFetching: false,
   message: '',
+  isFetching: false,
   isSuccess: false,
   isFail: false,
   isSignUp: false,
@@ -23,7 +23,10 @@ const signSlice = createSlice({
   initialState,
   reducers: {
     requestSignUp(state: SignState, action) {
+      state.message = '';
       state.isFetching = true;
+      state.isSuccess = false;
+      state.isFail = false;
     },
     successSignUp(state: SignState, action) {
       state.message = action.payload;
@@ -42,7 +45,12 @@ const signSlice = createSlice({
       state.isSignOut = false;
     },
     requestSignOut(state: SignState, action) {
+      state.message = '';
       state.isFetching = true;
+      state.isSuccess = false;
+      state.isFail = false;
+      state.isSignUp = false;
+      state.isSignOut = false;
     },
     successSignOut(state: SignState, action) {
       state.message = action.payload;

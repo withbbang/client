@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface LogState {
-  isFetching: boolean;
   message: string;
+  isFetching: boolean;
   isSuccess: boolean;
   isFail: boolean;
   isLoggedIn?: boolean;
@@ -10,8 +10,8 @@ export interface LogState {
 }
 
 export const initialState: LogState = {
-  isFetching: false,
   message: '',
+  isFetching: false,
   isSuccess: false,
   isFail: false,
   isLoggedIn: false,
@@ -23,35 +23,49 @@ const logSlice = createSlice({
   initialState,
   reducers: {
     requestLogIn(state: LogState, action) {
+      state.message = '';
       state.isFetching = true;
+      state.isSuccess = false;
+      state.isFail = false;
     },
     successLogIn(state: LogState, action) {
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
+      state.isFail = false;
       state.isLoggedIn = true;
       state.isLoggedOut = false;
     },
     failLogIn(state: LogState, action) {
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.isFetching = false;
+      state.isSuccess = false;
       state.isFail = true;
       state.isLoggedIn = false;
+      state.isLoggedOut = false;
     },
     requestLogOut(state: LogState, action) {
+      state.message = '';
       state.isFetching = true;
+      state.isSuccess = false;
+      state.isFail = false;
+      state.isLoggedIn = false;
+      state.isLoggedOut = false;
     },
     successLogOut(state: LogState, action) {
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
+      state.isFail = false;
       state.isLoggedIn = false;
       state.isLoggedOut = true;
     },
     failLogOut(state: LogState, action) {
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.isFetching = false;
+      state.isSuccess = false;
       state.isFail = true;
+      state.isLoggedIn = false;
       state.isLoggedOut = false;
     }
   }

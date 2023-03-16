@@ -1,5 +1,5 @@
-import { Loader } from 'components/loader/Loader';
 import React from 'react';
+import { Loader } from 'components/loader/Loader';
 
 const LogPT = ({
   onConsoleLog,
@@ -7,11 +7,10 @@ const LogPT = ({
   onLogOut,
   loading
 }: typeLogPT): JSX.Element => {
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <div>
-      <h1 onClick={onConsoleLog}>Hello!</h1>
+      <Loader loading={loading} />
+      <div onClick={onConsoleLog}>Hello!</div>
       <input type="text" id="id" />
       <input type="password" id="password" />
       <button onClick={() => onLogIn('id', 'password')}>로그인</button>
