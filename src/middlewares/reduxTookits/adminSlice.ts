@@ -1,53 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface UserState {
+export interface AdminState {
   message: string;
   isFetching: boolean;
   isSuccess: boolean;
   isFail: boolean;
-  ID?: string;
-  AUTH?: number;
+  id?: string;
+  auth?: number;
 }
 
-export const initialState: UserState = {
+export const initialState: AdminState = {
   message: '',
   isFetching: false,
   isSuccess: false,
   isFail: false,
-  ID: '',
-  AUTH: 30
+  id: '',
+  auth: 30
 };
 
-const userSlice = createSlice({
-  name: 'user',
+const adminSlice = createSlice({
+  name: 'admin',
   initialState,
   reducers: {
-    requestUserInfo(state: UserState, action) {
+    requestAdminInfo(state: AdminState) {
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
-    successUserInfo(state: UserState, action) {
+    successAdminInfo(state: AdminState, action) {
       state.message = action.payload;
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
-      state.ID = action.payload;
-      state.AUTH = action.payload;
+      state.id = action.payload;
+      state.auth = action.payload;
     },
-    failUserInfo(state: UserState, action) {
+    failAdminInfo(state: AdminState, action) {
       state.message = action.payload;
       state.isFetching = false;
       state.isSuccess = false;
       state.isFail = true;
-      state.ID = '';
-      state.AUTH = 30;
+      state.id = '';
+      state.auth = 30;
     }
   }
 });
 
-export const { requestUserInfo, successUserInfo, failUserInfo } =
-  userSlice.actions;
+export const { requestAdminInfo, successAdminInfo, failAdminInfo } =
+  adminSlice.actions;
 
-export default userSlice.reducer;
+export default adminSlice.reducer;

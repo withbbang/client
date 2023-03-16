@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { JSEncrypt } from 'jsencrypt';
 import SignPT from './SignPT';
 import { SignState } from 'middlewares/reduxTookits/signSlice';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SignCT = (props: typeSignCT): JSX.Element => {
+  const navigate = useNavigate();
   const encrypt = new JSEncrypt();
 
   useEffect(() => {
@@ -12,23 +14,19 @@ const SignCT = (props: typeSignCT): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    props.publicKey && encrypt.setPublicKey(props.publicKey);
-  }, [props.publicKey]);
-
-  useEffect(() => {
     !props.isFetching &&
       props.isSuccess &&
       !props.isFail &&
       props.isSignUp &&
       !props.isSignOut &&
-      console.log('가입 완료!');
+      navigate('/log');
 
     !props.isFetching &&
       props.isSuccess &&
       !props.isFail &&
       !props.isSignUp &&
       props.isSignOut &&
-      console.log('탈퇴 완료!');
+      navigate('/');
   }, [
     props.isFetching,
     props.isSuccess,
@@ -42,6 +40,8 @@ const SignCT = (props: typeSignCT): JSX.Element => {
   };
 
   const handleSignUp = (id: string, password: string) => {
+    // 공개키값 세팅은 최초 1회만 하는게 아니라 암호화를 진행 할 때마다 해줘야함.
+    props.publicKey && encrypt.setPublicKey(props.publicKey);
     const ID = (document.getElementById(id) as HTMLInputElement).value;
     const PASSWORD = (document.getElementById(password) as HTMLInputElement)
       .value;

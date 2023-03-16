@@ -1,19 +1,26 @@
 import { PropState } from 'middlewares/configureReducer';
-import { requestUserInfo, UserState } from 'middlewares/reduxTookits/userSlice';
+import {
+  requestAdminInfo,
+  AdminState
+} from 'middlewares/reduxTookits/adminSlice';
+import { requestLogOut } from 'middlewares/reduxTookits/logSlice';
 import { connect } from 'react-redux';
 import { Action } from 'redux';
 import AdminCT from './AdminCT';
 
-const mapStateToProps = (state: PropState): UserState => {
+const mapStateToProps = (state: PropState): AdminState => {
   return {
-    ...state.user
+    ...state.admin
   };
 };
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
-    requestUserInfo: (id: string): void => {
-      dispatch(requestUserInfo({ id }));
+    requestAdminInfo: (): void => {
+      dispatch(requestAdminInfo());
+    },
+    requestLogOut: (id: string): void => {
+      dispatch(requestLogOut({ id }));
     }
   };
 };

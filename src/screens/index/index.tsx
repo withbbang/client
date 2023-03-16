@@ -3,7 +3,7 @@ import IndexCT from './IndexCT';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state: any) => {
-  return state.users;
+  return state.admin;
 };
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {

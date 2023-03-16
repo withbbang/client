@@ -1,30 +1,30 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
-  requestUserInfo,
-  successUserInfo,
-  failUserInfo
-} from 'middlewares/reduxTookits/userSlice';
+  requestAdminInfo,
+  successAdminInfo,
+  failAdminInfo
+} from 'middlewares/reduxTookits/adminSlice';
 import { getAPI } from 'modules/apis';
 
-export function* userSaga() {
-  yield takeEvery(requestUserInfo.type, handleGetUser);
+export function* adminSaga() {
+  yield takeEvery(requestAdminInfo.type, handleGetAdminInfo);
 }
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-export function* handleGetUser() {
+export function* handleGetAdminInfo() {
   try {
-    const res: Generator = yield call(fetchUser);
-    yield put(successUserInfo(res));
+    const res: Generator = yield call(getAdminInfo);
+    yield put(successAdminInfo(res));
   } catch (error: any) {
-    yield put(failUserInfo(error.message));
+    yield put(failAdminInfo(error.message));
   }
 }
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-const fetchUser = async (): Promise<any> => {
-  return getAPI('server/user');
+const getAdminInfo = async (): Promise<any> => {
+  return getAPI('server/admin');
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { JSEncrypt } from 'jsencrypt';
 import LogPT from './LogPT';
@@ -15,10 +15,6 @@ const LogCT = (props: typeLogCT): JSX.Element => {
 
     props.requestPublicKey();
   }, []);
-
-  useEffect(() => {
-    props.publicKey && encrypt.setPublicKey(props.publicKey);
-  }, [props.publicKey]);
 
   useEffect(() => {
     !props.isFetching &&
@@ -47,6 +43,8 @@ const LogCT = (props: typeLogCT): JSX.Element => {
   };
 
   const handleLogIn = (id: string, password: string) => {
+    // 공개키값 세팅은 최초 1회만 하는게 아니라 암호화를 진행 할 때마다 해줘야함.
+    props.publicKey && encrypt.setPublicKey(props.publicKey);
     const ID = (document.getElementById(id) as HTMLInputElement).value;
     const PASSWORD = (document.getElementById(password) as HTMLInputElement)
       .value;

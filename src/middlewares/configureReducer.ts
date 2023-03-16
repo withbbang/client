@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import user, { UserState } from 'middlewares/reduxTookits/userSlice';
+import admin, { AdminState } from 'middlewares/reduxTookits/adminSlice';
 import sign, { SignState } from 'middlewares/reduxTookits/signSlice';
 import common, { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import log, { LogState } from 'middlewares/reduxTookits/logSlice';
 
 const rootReducer = combineReducers({
-  user,
+  admin,
   sign,
   log,
   common
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
 });
 
 interface PropState {
-  user: UserState;
+  admin: AdminState;
   sign: SignState;
   log: LogState;
   common: CommonState;
