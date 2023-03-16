@@ -4,7 +4,7 @@ import {
   successAdminInfo,
   failAdminInfo
 } from 'middlewares/reduxTookits/adminSlice';
-import { getAPI } from 'modules/apis';
+import { postAPI } from 'modules/apis';
 
 export function* adminSaga() {
   yield takeEvery(requestAdminInfo.type, handleGetAdminInfo);
@@ -15,7 +15,7 @@ export function* adminSaga() {
 //////////////////////////////////////////////////////////////////////////////
 export function* handleGetAdminInfo() {
   try {
-    const res: Generator = yield call(getAdminInfo);
+    const res: Generator = yield call(postAdminInfo);
     yield put(successAdminInfo(res));
   } catch (error: any) {
     yield put(failAdminInfo(error.message));
@@ -25,6 +25,6 @@ export function* handleGetAdminInfo() {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-const getAdminInfo = async (): Promise<any> => {
-  return getAPI('server/admin');
+const postAdminInfo = async (): Promise<any> => {
+  return postAPI('server/admin/info');
 };

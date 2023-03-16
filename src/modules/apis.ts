@@ -36,8 +36,11 @@ function getAPI(url: string): Promise<any> {
 }
 
 // POST API
-function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
-  console.debug('parameters: ', payload);
+function postAPI(
+  url: string,
+  payload: any | undefined = undefined
+): Promise<any> {
+  console.debug('parameters: ', { payload });
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'POST',
@@ -48,7 +51,7 @@ function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
         Authorization: 'Bearer ' + handleGetCookie('atk'),
         Refresh: 'Bearer ' + handleGetCookie('rtk')
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ payload })
     })
       .then((response) => {
         if (response.status < 300) {
@@ -73,8 +76,11 @@ function postAPI(url: string, { payload }: { payload: Object }): Promise<any> {
 }
 
 // PUT API
-function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
-  console.debug('parameters: ', payload);
+function putAPI(
+  url: string,
+  payload: any | undefined = undefined
+): Promise<any> {
+  console.debug('parameters: ', { payload });
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'PUT',
@@ -85,7 +91,7 @@ function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
         Authorization: 'Bearer ' + handleGetCookie('atk'),
         Refresh: 'Bearer ' + handleGetCookie('rtk')
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ payload })
     })
       .then((response) => {
         if (response.status < 300) {
@@ -112,9 +118,9 @@ function putAPI(url: string, { payload }: { payload: Object }): Promise<any> {
 // DELETE API
 function deleteAPI(
   url: string,
-  { payload }: { payload: Object }
+  payload: any | undefined = undefined
 ): Promise<any> {
-  console.debug('parameters: ', payload);
+  console.debug('parameters: ', { payload });
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'DELETE',
@@ -125,7 +131,7 @@ function deleteAPI(
         Authorization: 'Bearer ' + handleGetCookie('atk'),
         Refresh: 'Bearer ' + handleGetCookie('rtk')
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ payload })
     })
       .then((response) => {
         if (response.status < 300) {

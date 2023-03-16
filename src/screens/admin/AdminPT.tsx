@@ -1,11 +1,14 @@
 import { Loader } from 'components/loader/Loader';
 import React from 'react';
 
-const AdminPT = ({ onLogOut, loading }: typeAdminPT): JSX.Element => {
+const AdminPT = ({ onLogOut, id, auth, loading }: typeAdminPT): JSX.Element => {
   return (
     <div>
       <Loader loading={loading} />
-      Hello
+      {id}
+      <br />
+      {auth}
+      <br />
       <button onClick={onLogOut}>로그아웃</button>
     </div>
   );
@@ -13,6 +16,8 @@ const AdminPT = ({ onLogOut, loading }: typeAdminPT): JSX.Element => {
 
 interface typeAdminPT {
   onLogOut: () => void;
+  id: string;
+  auth: number;
   loading: boolean;
 }
 

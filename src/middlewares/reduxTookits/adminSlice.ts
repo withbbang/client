@@ -15,7 +15,7 @@ export const initialState: AdminState = {
   isSuccess: false,
   isFail: false,
   id: '',
-  auth: 30
+  auth: -1
 };
 
 const adminSlice = createSlice({
@@ -29,20 +29,20 @@ const adminSlice = createSlice({
       state.isFail = false;
     },
     successAdminInfo(state: AdminState, action) {
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
-      state.id = action.payload;
-      state.auth = action.payload;
+      state.id = action.payload.id;
+      state.auth = action.payload.auth;
     },
     failAdminInfo(state: AdminState, action) {
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;
       state.isFail = true;
       state.id = '';
-      state.auth = 30;
+      state.auth = -1;
     }
   }
 });
