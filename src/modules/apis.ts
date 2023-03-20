@@ -1,6 +1,10 @@
 import { handleGetCookie } from './cookie';
 
-// GET API
+/**
+ * GET API
+ * @param {string} url 요청 URL
+ * @returns {Promise<any>}
+ */
 function getAPI(url: string): Promise<any> {
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -35,7 +39,12 @@ function getAPI(url: string): Promise<any> {
   });
 }
 
-// POST API
+/**
+ * POST API
+ * @param {string} url 요청 URL
+ * @param {any} payload 요청 DATA
+ * @returns {Promise<any>}
+ */
 function postAPI(
   url: string,
   { payload }: any | undefined = undefined
@@ -75,7 +84,12 @@ function postAPI(
   });
 }
 
-// PUT API
+/**
+ * PUT API
+ * @param {string} url 요청 URL
+ * @param {any} payload 요청 DATA
+ * @returns {Promise<any>}
+ */
 function putAPI(
   url: string,
   { payload }: any | undefined = undefined
@@ -115,7 +129,12 @@ function putAPI(
   });
 }
 
-// DELETE API
+/**
+ * DELETE API
+ * @param {string} url 요청 URL
+ * @param {any} payload 요청 DATA
+ * @returns {Promise<any>}
+ */
 function deleteAPI(
   url: string,
   { payload }: any | undefined = undefined
