@@ -33,7 +33,7 @@ function getAPI(url: string): Promise<any> {
         }
       })
       .catch((error) => {
-        console.debug(error);
+        console.error(error);
         reject(error);
       });
   });
@@ -42,7 +42,7 @@ function getAPI(url: string): Promise<any> {
 /**
  * POST API
  * @param {string} url 요청 URL
- * @param {any} payload 요청 DATA
+ * @param {any | undefined} payload 요청 DATA
  * @returns {Promise<any>}
  */
 function postAPI(
@@ -78,7 +78,7 @@ function postAPI(
         }
       })
       .catch((error) => {
-        console.debug(error);
+        console.error(error);
         reject(error);
       });
   });
@@ -87,7 +87,7 @@ function postAPI(
 /**
  * PUT API
  * @param {string} url 요청 URL
- * @param {any} payload 요청 DATA
+ * @param {any | undefined} payload 요청 DATA
  * @returns {Promise<any>}
  */
 function putAPI(
@@ -123,7 +123,7 @@ function putAPI(
         }
       })
       .catch((error) => {
-        console.debug(error);
+        console.error(error);
         reject(error);
       });
   });
@@ -132,7 +132,7 @@ function putAPI(
 /**
  * DELETE API
  * @param {string} url 요청 URL
- * @param {any} payload 요청 DATA
+ * @param {any | undefined} payload 요청 DATA
  * @returns {Promise<any>}
  */
 function deleteAPI(
@@ -168,7 +168,7 @@ function deleteAPI(
         }
       })
       .catch((error) => {
-        console.debug(error);
+        console.error(error);
         reject(error);
       });
   });
