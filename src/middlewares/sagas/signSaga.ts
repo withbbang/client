@@ -39,9 +39,9 @@ function* handlePostSignOut(data: any) {
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 async function postSignUp(data: any): Promise<any> {
-  return postAPI('server/sign/up', data);
+  return postAPI('/server/sign/up', data);
 }
 
 async function postSignOut(data: any): Promise<any> {
-  return postAPI('server/sign/out', data);
+  return postAPI('/server/sign/out', data);
 }

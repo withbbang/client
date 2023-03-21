@@ -26,5 +26,5 @@ function* handlePostPost(data: any) {
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 async function postPost(data: any): Promise<any> {
-  return postAPI('server/post', data);
+  return postAPI('/server/admin/post', data);
 }

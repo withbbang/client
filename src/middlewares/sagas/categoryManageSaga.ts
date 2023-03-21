@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { getAPI, postAPI } from 'modules/apis';
+import { postAPI } from 'modules/apis';
 import {
   requestCategory,
   successCategory,
@@ -13,7 +13,7 @@ import {
 } from 'middlewares/reduxTookits/categoryManageSlice';
 
 export function* categoryManageSaga() {
-  yield takeEvery(requestCategory.type, handleGetCategories);
+  yield takeEvery(requestCategory.type, handlepostCategories);
   yield takeEvery(requestCreateCategory.type, handlePostCreateCategory);
   yield takeEvery(requestUpdateCategory.type, handlePostUpdateCategory);
 }
@@ -21,9 +21,9 @@ export function* categoryManageSaga() {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-function* handleGetCategories() {
+function* handlepostCategories() {
   try {
-    const res: Generator = yield call(getCategories);
+    const res: Generator = yield call(postCategories);
     yield put(successCategory(res));
   } catch (error: any) {
     yield put(failCategory(error.message));
@@ -51,14 +51,14 @@ function* handlePostUpdateCategory(data: any) {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-async function getCategories(): Promise<any> {
-  return getAPI('server/category');
+async function postCategories(): Promise<any> {
+  return postAPI('/server/admin/category-manage/categories');
 }
 
 async function postCreateCategory(data: any): Promise<any> {
-  return postAPI('server/category/create', data);
+  return postAPI('/server/admin/category-manage/create', data);
 }
 
 async function postUpdateCategory(data: any): Promise<any> {
-  return postAPI('server/category/update', data);
+  return postAPI('/server/admin/category-manage/update', data);
 }

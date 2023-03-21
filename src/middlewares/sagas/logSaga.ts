@@ -39,9 +39,9 @@ function* handlePostLogOut(data: any) {
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 async function postLogIn(data: any): Promise<any> {
-  return postAPI('server/log/in', data);
+  return postAPI('/server/log/in', data);
 }
 
 async function postLogOut(data: any): Promise<any> {
-  return postAPI('server/log/out', data);
+  return postAPI('/server/log/out', data);
 }

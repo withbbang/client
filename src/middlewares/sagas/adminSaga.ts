@@ -26,5 +26,5 @@ function* handleGetAdminInfo() {
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 async function postAdminInfo(): Promise<any> {
-  return postAPI('server/admin/info');
+  return postAPI('/server/admin/info');
 }
