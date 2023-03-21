@@ -4,13 +4,17 @@ import sign, { SignState } from 'middlewares/reduxTookits/signSlice';
 import common, { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import log, { LogState } from 'middlewares/reduxTookits/logSlice';
 import post, { PostState } from './reduxTookits/postSlice';
+import categoryManage, {
+  CategoryManageState
+} from './reduxTookits/categoryManageSlice';
 
 const rootReducer = combineReducers({
   admin,
   sign,
   log,
   common,
-  post
+  post,
+  categoryManage
   // add others...
 });
 
@@ -20,6 +24,7 @@ interface PropState {
   log: LogState;
   common: CommonState;
   post: PostState;
+  categoryManage: CategoryManageState;
   // add others...
 }
 

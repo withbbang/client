@@ -17,4 +17,5 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     }
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(PostCT);
