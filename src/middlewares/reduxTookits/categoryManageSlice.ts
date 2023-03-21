@@ -37,8 +37,8 @@ const categoryManageSlice = createSlice({
     failCategory(state: CategoryManageState, action) {
       state.message = action.payload.message;
       state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
+      state.isSuccess = false;
+      state.isFail = true;
       state.categories = [];
     },
     requestCreateCategory(state: CategoryManageState, action) {
@@ -56,8 +56,8 @@ const categoryManageSlice = createSlice({
     failCreateCategory(state: CategoryManageState, action) {
       state.message = action.payload.message;
       state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
+      state.isSuccess = false;
+      state.isFail = true;
     },
     requestUpdateCategory(state: CategoryManageState, action) {
       state.message = '';
@@ -74,8 +74,8 @@ const categoryManageSlice = createSlice({
     failUpdateCategory(state: CategoryManageState, action) {
       state.message = action.payload.message;
       state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
+      state.isSuccess = false;
+      state.isFail = true;
     }
   }
 });
