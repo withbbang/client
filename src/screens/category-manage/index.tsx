@@ -8,6 +8,7 @@ import {
 } from 'middlewares/reduxTookits/categoryManageSlice';
 import { Action } from 'redux';
 import CategoryManageCT from './CategoryManageCT';
+import { Category } from 'modules/types';
 
 const mapStateToProps = (state: PropState): CategoryManageState => {
   return {
@@ -23,8 +24,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestCreateCategory: (title: string, priority?: number): void => {
       dispatch(requestCreateCategory({ title, priority }));
     },
-    requestUpdateCategory: (title: string, priority?: number): void => {
-      dispatch(requestUpdateCategory({ title, priority }));
+    requestUpdateCategory: (categories: Array<Category>): void => {
+      dispatch(requestUpdateCategory({ categories }));
     }
   };
 };
