@@ -2,6 +2,7 @@ import React from 'react';
 import { Loader } from 'components/loader/Loader';
 import { Category } from 'modules/types';
 import { Card } from 'components/card/Card';
+import LeftSideBar from 'components/leftSideBar';
 
 const CategoryManagePT = ({
   loading,
@@ -11,6 +12,7 @@ const CategoryManagePT = ({
 }: typeCategoryManagePT): JSX.Element => (
   <div>
     <Loader loading={loading} />
+    <LeftSideBar />
     <div>
       {categories &&
         categories.length > 0 &&
@@ -24,7 +26,7 @@ const CategoryManagePT = ({
 
 interface typeCategoryManagePT {
   loading: boolean;
-  categories: Array<Category>;
+  categories?: Array<Category>;
   onCreateCategory: (id: string, priority?: number) => void;
   onUpdateCategory: () => void;
 }

@@ -11,7 +11,8 @@ const LeftSideBarPT = ({
   onLogOut,
   id,
   toggle,
-  onToggle
+  onToggle,
+  items
 }: typeLeftSideBarPT): JSX.Element => {
   return (
     <>
@@ -53,46 +54,23 @@ const LeftSideBarPT = ({
               <button>Login</button>
             </div>
           )}
-          <div className={styles.menu}>
-            <div className={styles.banner} />
-            <div className={styles.svg}>
-              <DoubleArrow width="30px" height="30px" fill="#fff" />
-            </div>
-            Javascript
-            <div className={styles.svg_}>
-              <Arrow width="25px" height="25px" fill="#fff" />
-            </div>
-          </div>
-          <div className={styles.menu}>
-            <div className={styles.banner} />
-            <div className={styles.svg}>
-              <DoubleArrow width="30px" height="30px" fill="#fff" />
-            </div>
-            Python
-            <div className={styles.svg_}>
-              <Arrow width="25px" height="25px" fill="#fff" />
-            </div>
-          </div>
-          <div className={styles.menu}>
-            <div className={styles.banner} />
-            <div className={styles.svg}>
-              <DoubleArrow width="30px" height="30px" fill="#fff" />
-            </div>
-            Java
-            <div className={styles.svg_}>
-              <Arrow width="25px" height="25px" fill="#fff" />
-            </div>
-          </div>
-          <div className={styles.menu}>
-            <div className={styles.banner} />
-            <div className={styles.svg}>
-              <DoubleArrow width="30px" height="30px" fill="#fff" />
-            </div>
-            Learning
-            <div className={styles.svg_}>
-              <Arrow width="25px" height="25px" fill="#fff" />
-            </div>
-          </div>
+          {items &&
+            Array.isArray(items) &&
+            items.length > 0 &&
+            items.map((item, idx) => {
+              return (
+                <div className={styles.menu} key={idx}>
+                  <div className={styles.banner} />
+                  <div className={styles.svg}>
+                    <DoubleArrow width="30px" height="30px" fill="#fff" />
+                  </div>
+                  {item.TITLE}
+                  <div className={styles.svg_}>
+                    <Arrow width="25px" height="25px" fill="#fff" />
+                  </div>
+                </div>
+              );
+            })}
           {isLoggedIn && (
             <div className={styles.log_out} onClick={onLogOut}>
               Log Out
@@ -116,6 +94,7 @@ interface typeLeftSideBarPT {
   id?: string;
   toggle: boolean;
   onToggle: () => void;
+  items?: Array<any>;
 }
 
 export default LeftSideBarPT;

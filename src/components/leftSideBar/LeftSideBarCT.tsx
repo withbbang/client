@@ -5,6 +5,7 @@ import LeftSideBarPT from './LeftSideBarPT';
 import { handleGetCookie } from 'modules/cookie';
 import { useNavigate } from 'react-router-dom';
 import { AdminState } from 'middlewares/reduxTookits/adminSlice';
+import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
 
 const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 
     props.requestVisitCount();
     props.requestPublicKey();
+    props.requestCategory();
   }, []);
 
   useEffect(() => {
@@ -40,13 +42,19 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
       id={props.id}
       toggle={toggle}
       onToggle={handleToggle}
+      items={props.categories}
     />
   );
 };
 
-interface typeLeftSideBarCT extends CommonState, LogState, AdminState {
+interface typeLeftSideBarCT
+  extends CommonState,
+    LogState,
+    AdminState,
+    CategoryManageState {
   requestPublicKey: () => void;
   requestVisitCount: () => void;
+  requestCategory: () => void;
   requestLogIn: (id: string, password: string) => void;
   requestLogOut: (id: string) => void;
 }

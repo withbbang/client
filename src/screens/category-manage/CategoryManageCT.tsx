@@ -10,8 +10,6 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
 
   useEffect(() => {
     !!!handleGetCookie('atk') && !!!handleGetCookie('rtk') && navigate('/');
-
-    props.requestCategory();
   }, []);
 
   const handleCreateCategory = (id: string, priority?: number) => {
@@ -26,7 +24,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   };
 
   const handleUpdateCategory = () => {
-    props.requestUpdateCategory(props.categories);
+    props.categories && props.requestUpdateCategory(props.categories);
   };
 
   return (
@@ -40,7 +38,6 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
 };
 
 interface typeCategoryManageCT extends CategoryManageState {
-  requestCategory: () => void;
   requestCreateCategory: (title: string, priority?: number) => void;
   requestUpdateCategory: (categories: Array<Category>) => void;
 }

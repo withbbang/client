@@ -1,6 +1,10 @@
 import { PropState } from 'middlewares/configureReducer';
 import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 import {
+  CategoryManageState,
+  requestCategory
+} from 'middlewares/reduxTookits/categoryManageSlice';
+import {
   CommonState,
   requestPublicKey,
   requestVisitCount
@@ -16,11 +20,12 @@ import LeftSideBarCT from './LeftSideBarCT';
 
 const mapStateToProps = (
   state: PropState
-): CommonState | LogState | AdminState => {
+): CommonState | LogState | AdminState | CategoryManageState => {
   return {
     ...state.common,
     ...state.log,
-    ...state.admin
+    ...state.admin,
+    ...state.categoryManage
   };
 };
 
@@ -31,6 +36,9 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     },
     requestVisitCount: (): void => {
       dispatch(requestVisitCount());
+    },
+    requestCategory: (): void => {
+      dispatch(requestCategory());
     },
     requestLogIn: (id: string, password: string): void => {
       dispatch(requestLogIn({ id, password }));
