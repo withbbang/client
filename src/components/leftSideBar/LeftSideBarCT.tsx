@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import LeftSideBarPT from './LeftSideBarPT';
@@ -8,6 +8,7 @@ import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 
 const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   const navigate = useNavigate();
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     !!!handleGetCookie('atk') && !!!handleGetCookie('rtk') && navigate('/');
@@ -16,8 +17,17 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
     props.requestPublicKey();
   }, []);
 
-  const handleLogOut = () => {
+  useEffect(() => {
+    if (props.id && props.auth !== undefined && props.auth > -1) {
+    }
+  }, [props.id, props.auth]);
+
+  const handleLogOut = (): void => {
     props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
+  };
+
+  const handleToggle = (): void => {
+    setToggle(!toggle);
   };
 
   return (
@@ -28,6 +38,8 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
       isLoggedIn={props.isLoggedIn}
       onLogOut={handleLogOut}
       id={props.id}
+      toggle={toggle}
+      onToggle={handleToggle}
     />
   );
 };

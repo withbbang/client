@@ -37,14 +37,30 @@
       color: #fff;
       padding: 15px 15px 0 15px;
 
-      .close {
-        box-sizing: border-box;
-        height: fit-content;
-        width: fit-content;
+      .toggle {
+        display: flex;
+        position: absolute;
+        list-style: none;
+        color: #fff;
+        z-index: 1200;
+        top: 0%;
+        right: -29px;
         cursor: pointer;
+        font-size: 25px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: rgb(75, 75, 75);
 
-        > svg {
+        svg {
+          transition: all 0.7s;
           transform: rotate(180deg);
+        }
+
+        &.off {
+          svg {
+            transition: all 0.7s;
+            transform: rotate(0deg);
+          }
         }
       }
     }

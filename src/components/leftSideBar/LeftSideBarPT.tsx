@@ -1,7 +1,7 @@
 import React from 'react';
 import { Loader } from 'components/loader/Loader';
 import styles from './LeftSideBar.module.scss';
-import { Arrow, DoubleArrow, LogOut } from 'modules/svg';
+import { Arrow, DoubleArrow, LogOut, More } from 'modules/svg';
 
 const LeftSideBarPT = ({
   loading,
@@ -9,27 +9,28 @@ const LeftSideBarPT = ({
   today,
   isLoggedIn,
   onLogOut,
-  id
+  id,
+  toggle,
+  onToggle
 }: typeLeftSideBarPT): JSX.Element => {
   return (
     <>
       <Loader loading={loading} />
       <div
-        //   className={
-        //     props.sideToggle ? styles.wrap : [styles.wrap, styles.off].join(" ")
-        //   }
-        className={styles.wrap}
+        className={toggle ? styles.wrap : [styles.wrap, styles.off].join(' ')}
       >
         <div className={styles.inner_wrap}>
           <div className={styles.visitor_count}>
             <div className={styles.visitor}>Total {total ? total : 0}</div>
             <div className={styles.visitor}>Today {today ? today : 0}</div>
-            <div
-              className={styles.close}
-              // onClick={() => props.setSideToggle(!props.sideToggle)}
+            <li
+              className={
+                toggle ? styles.toggle : [styles.toggle, styles.off].join(' ')
+              }
+              onClick={onToggle}
             >
-              <DoubleArrow width="25px" height="25px" fill="#fff" />
-            </div>
+              <DoubleArrow width="30px" height="30px" fill="#fff" />
+            </li>
           </div>
           {isLoggedIn && id ? (
             <div className={[styles.user, styles.log_in].join(' ')}>
@@ -113,6 +114,8 @@ interface typeLeftSideBarPT {
   isLoggedIn?: boolean;
   onLogOut: () => void;
   id?: string;
+  toggle: boolean;
+  onToggle: () => void;
 }
 
 export default LeftSideBarPT;
