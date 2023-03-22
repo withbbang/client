@@ -1,0 +1,186 @@
+.wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  background-color: rgb(75, 75, 75);
+  transform: translateX(0);
+  transition: 0.8s ease;
+  box-sizing: border-box;
+  z-index: 50;
+
+  &.off {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background-color: rgb(75, 75, 75);
+    transform: translateX(-300px);
+    transition: 0.8s ease;
+    box-sizing: border-box;
+    z-index: 50;
+  }
+
+  .inner_wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    .visitor_count {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      padding: 15px 15px 0 15px;
+
+      .close {
+        box-sizing: border-box;
+        height: fit-content;
+        width: fit-content;
+        cursor: pointer;
+
+        > svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .user {
+      width: 100%;
+      height: 160px;
+      padding: 40px 15px 40px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      box-sizing: border-box;
+
+      &.log_in {
+        justify-content: space-evenly;
+        flex-direction: row;
+
+        .avatar {
+          width: 80px;
+          height: 80px;
+          box-sizing: border-box;
+
+          > img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+        }
+
+        .infos {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 30px;
+          color: rgb(200, 200, 200);
+
+          > span {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+          }
+        }
+      }
+
+      > input {
+        font-size: 15px;
+        color: #fff;
+        width: calc(100% - 30px);
+        padding: 10px;
+        border: none;
+        background: transparent;
+      }
+
+      > input:focus {
+        outline: none;
+        box-shadow: 0 0 3px 2px #a19f9d;
+      }
+
+      > input::placeholder {
+        color: #eee;
+      }
+
+      > button {
+        width: 100%;
+        height: 36px;
+        background: linear-gradient(
+          0deg,
+          rgba(177, 177, 177, 1) 0%,
+          rgba(108, 106, 100, 1) 52%,
+          rgba(177, 177, 177, 1) 100%
+        );
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 15px;
+        border: none;
+        transition: all 0.9s;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+
+      > button:hover {
+        box-shadow: 0 36px 0 0 rgba(254, 242, 222, 0.25) inset,
+          0 -36px 0 0 rgba(254, 242, 222, 0.25) inset;
+      }
+    }
+
+    .menu {
+      width: 100%;
+      padding: 15px 15px 15px 0;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      .banner {
+        width: 15px;
+      }
+
+      &:hover {
+        background-color: rgb(100, 100, 100);
+      }
+
+      .svg {
+        box-sizing: border-box;
+        margin-right: 15px;
+      }
+
+      .svg_ {
+        box-sizing: border-box;
+        margin-left: auto;
+      }
+    }
+
+    .log_out {
+      color: #fff;
+      width: 100%;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 0 15px 0;
+      position: fixed;
+      bottom: 0;
+      cursor: pointer;
+      box-sizing: border-box;
+
+      .svg {
+        margin-left: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
