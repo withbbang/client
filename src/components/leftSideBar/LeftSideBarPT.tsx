@@ -35,7 +35,7 @@ const LeftSideBarPT = ({
           </div>
           {isLoggedIn && id ? (
             <div className={[styles.user, styles.log_in].join(' ')}>
-              <div className={styles.avatar}>{/* <img src={img} /> */}</div>
+              {/* <div className={styles.avatar}><img src={img} /></div> */}
               <div className={styles.infos}>
                 <span>{id}</span>
                 {id}

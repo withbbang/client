@@ -7,6 +7,8 @@ import post, { PostState } from './reduxTookits/postSlice';
 import categoryManage, {
   CategoryManageState
 } from './reduxTookits/categoryManageSlice';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
   admin,
@@ -18,6 +20,14 @@ const rootReducer = combineReducers({
   // add others...
 });
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['admin', 'log', 'common', 'categoryManage']
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 interface PropState {
   admin: AdminState;
   sign: SignState;
@@ -28,4 +38,4 @@ interface PropState {
   // add others...
 }
 
-export { rootReducer, PropState };
+export { persistedReducer, PropState };

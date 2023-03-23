@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import logger from 'redux-logger';
 import sagaConfigure from './configureSaga';
-import { rootReducer } from './configureReducer';
+import { persistedReducer } from './configureReducer';
 
 const sagaMiddleware: SagaMiddleware = createSagaMiddleware();
 
@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middlewares),
   devTools: process.env.NODE_ENV !== 'production'
