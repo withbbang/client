@@ -1,5 +1,18 @@
 import { handleGetCookie } from './cookie';
 
+const headers: HeadersInit | undefined =
+  handleGetCookie('atk') && handleGetCookie('rtk')
+    ? {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + handleGetCookie('atk'),
+        Refresh: 'Bearer ' + handleGetCookie('rtk')
+      }
+    : {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      };
+
 /**
  * GET API
  * @param {string} url 요청 URL
@@ -10,12 +23,7 @@ function getAPI(url: string): Promise<any> {
     fetch(url, {
       method: 'GET',
       // mode: "no-cors",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('atk'),
-        Refresh: 'Bearer ' + handleGetCookie('rtk')
-      }
+      headers
     })
       .then((response) => {
         if (response.status < 300) {
@@ -51,12 +59,7 @@ function postAPI(url: string, { payload }: any = {}): Promise<any> {
     fetch(url, {
       method: 'POST',
       // mode: "no-cors",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('atk'),
-        Refresh: 'Bearer ' + handleGetCookie('rtk')
-      },
+      headers,
       body: JSON.stringify(payload)
     })
       .then((response) => {
@@ -93,12 +96,7 @@ function putAPI(url: string, { payload }: any = {}): Promise<any> {
     fetch(url, {
       method: 'PUT',
       // mode: "no-cors",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('atk'),
-        Refresh: 'Bearer ' + handleGetCookie('rtk')
-      },
+      headers,
       body: JSON.stringify(payload)
     })
       .then((response) => {
@@ -135,12 +133,7 @@ function deleteAPI(url: string, { payload }: any = {}): Promise<any> {
     fetch(url, {
       method: 'DELETE',
       // mode: "no-cors",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('atk'),
-        Refresh: 'Bearer ' + handleGetCookie('rtk')
-      },
+      headers,
       body: JSON.stringify(payload)
     })
       .then((response) => {

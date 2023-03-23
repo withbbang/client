@@ -24,14 +24,14 @@ const LeftSideBarPT = ({
           <div className={styles.visitor_count}>
             <div className={styles.visitor}>Total {total ? total : 0}</div>
             <div className={styles.visitor}>Today {today ? today : 0}</div>
-            <li
+            <div
               className={
                 toggle ? styles.toggle : [styles.toggle, styles.off].join(' ')
               }
               onClick={onToggle}
             >
               <SVG type="doubleArrow" width="30px" height="30px" fill="#fff" />
-            </li>
+            </div>
           </div>
           {isLoggedIn && id ? (
             <div className={[styles.user, styles.log_in].join(' ')}>

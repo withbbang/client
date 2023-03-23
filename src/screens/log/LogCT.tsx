@@ -11,7 +11,11 @@ const LogCT = (props: typeLogCT): JSX.Element => {
   const encrypt = new JSEncrypt();
 
   useEffect(() => {
-    !!handleGetCookie('atk') && !!handleGetCookie('rtk') && navigate('/admin');
+    props.isLoggedIn &&
+      !props.isLoggedOut &&
+      !!handleGetCookie('atk') &&
+      !!handleGetCookie('rtk') &&
+      navigate('/admin');
 
     props.requestPublicKey();
   }, []);

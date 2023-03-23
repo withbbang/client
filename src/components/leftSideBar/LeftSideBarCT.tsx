@@ -12,8 +12,6 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
-    !!!handleGetCookie('atk') && !!!handleGetCookie('rtk') && navigate('/');
-
     props.requestVisitCount();
     props.requestPublicKey();
     props.requestCategory();
