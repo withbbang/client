@@ -1,5 +1,4 @@
 import { PropState } from 'middlewares/configureReducer';
-import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 import {
   CategoryManageState,
   requestCategory
@@ -19,14 +18,10 @@ import { connect } from 'react-redux';
 import { Action } from 'redux';
 import LeftSideBarCT from './LeftSideBarCT';
 
-const mapStateToProps = (
-  state: PropState
-): CommonState | LogState | AdminState | CategoryManageState => {
+const mapStateToProps = (state: PropState): CommonState | LogState => {
   return {
     ...state.common,
-    ...state.log,
-    ...state.admin,
-    ...state.categoryManage
+    ...state.log
   };
 };
 

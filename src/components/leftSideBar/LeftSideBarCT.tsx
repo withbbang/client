@@ -3,12 +3,13 @@ import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import LeftSideBarPT from './LeftSideBarPT';
 import { useNavigate } from 'react-router-dom';
-import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
+import { Category } from 'modules/types';
 
 const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
+  const [categories, setCategories] = useState<Array<Category> | undefined>([]);
 
   useEffect(() => {
     props.requestVisitCount();
@@ -16,10 +17,13 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    if (props.id && props.auth !== undefined && props.auth > -1) {
-      props.requestSideBarCategory(props.id);
-    }
-  }, [props.id, props.auth]);
+    props.id && props.requestSideBarCategory(props.id);
+  }, [props.id]);
+
+  useEffect(() => {
+    setCategories(props.sideBarCategories);
+    console.log('categories: ', props.sideBarCategories);
+  }, [props.sideBarCategories]);
 
   const handleLogOut = (): void => {
     props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
@@ -39,16 +43,12 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
       id={props.id}
       toggle={toggle}
       onToggle={handleToggle}
-      items={props.categories}
+      items={categories}
     />
   );
 };
 
-interface typeLeftSideBarCT
-  extends CommonState,
-    LogState,
-    AdminState,
-    CategoryManageState {
+interface typeLeftSideBarCT extends CommonState, LogState {
   requestPublicKey: () => void;
   requestVisitCount: () => void;
   requestSideBarCategory: (id?: string) => void;

@@ -1,5 +1,4 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import admin, { AdminState } from 'middlewares/reduxTookits/adminSlice';
 import sign, { SignState } from 'middlewares/reduxTookits/signSlice';
 import common, { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import log, { LogState } from 'middlewares/reduxTookits/logSlice';
@@ -11,7 +10,6 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
-  admin,
   sign,
   log,
   common,
@@ -39,7 +37,6 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 interface PropState {
-  admin: AdminState;
   sign: SignState;
   log: LogState;
   common: CommonState;

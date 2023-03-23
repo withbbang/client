@@ -11,15 +11,11 @@ import {
   LogState,
   requestLogOut
 } from 'middlewares/reduxTookits/logSlice';
-import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 
-const mapStateToProps = (
-  state: PropState
-): CommonState | LogState | AdminState => {
+const mapStateToProps = (state: PropState): CommonState | LogState => {
   return {
     ...state.common,
-    ...state.log,
-    ...state.admin
+    ...state.log
   };
 };
 

@@ -5,7 +5,6 @@ import LogPT from './LogPT';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { handleGetCookie } from 'modules/cookie';
-import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 
 const LogCT = (props: typeLogCT): JSX.Element => {
   const navigate = useNavigate();
@@ -72,7 +71,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
   );
 };
 
-interface typeLogCT extends CommonState, LogState, AdminState {
+interface typeLogCT extends CommonState, LogState {
   requestPublicKey: () => void;
   requestLogIn: (id: string, password: string) => void;
   requestLogOut: (id: string) => void;

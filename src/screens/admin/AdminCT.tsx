@@ -1,4 +1,4 @@
-import { AdminState } from 'middlewares/reduxTookits/adminSlice';
+import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { handleGetCookie } from 'modules/cookie';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,8 +11,6 @@ const AdminCT = (props: typeAdminCT): JSX.Element => {
 
   useEffect(() => {
     !!!handleGetCookie('atk') && !!!handleGetCookie('rtk') && navigate('/');
-
-    props.requestAdminInfo();
   }, []);
 
   useEffect(() => {
@@ -23,7 +21,7 @@ const AdminCT = (props: typeAdminCT): JSX.Element => {
   }, [props.id, props.auth]);
 
   const handleLogOut = () => {
-    props.requestLogOut('ADMINISTER');
+    props.id && props.requestLogOut(props.id);
   };
 
   return (
@@ -36,8 +34,7 @@ const AdminCT = (props: typeAdminCT): JSX.Element => {
   );
 };
 
-interface typeAdminCT extends AdminState {
-  requestAdminInfo: () => void;
+interface typeAdminCT extends LogState {
   requestLogOut: (id: string) => void;
 }
 
