@@ -1,5 +1,6 @@
 import React from 'react';
 import { Loader } from 'components/loader/Loader';
+import LeftSideBar from 'components/leftSideBar';
 
 const LogPT = ({
   onConsoleLog,
@@ -10,6 +11,7 @@ const LogPT = ({
   return (
     <div>
       <Loader loading={loading} />
+      <LeftSideBar />
       <div onClick={onConsoleLog}>Hello!</div>
       <input type="text" id="id" />
       <input type="password" id="password" />

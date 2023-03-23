@@ -1,12 +1,17 @@
+import LeftSideBar from 'components/leftSideBar';
+import { Loader } from 'components/loader/Loader';
 import React from 'react';
 
 const SignPT = ({
+  loading,
   onConsoleLog,
   onSignUp,
   onSignOut
 }: typeSignPT): JSX.Element => {
   return (
     <div>
+      <Loader loading={loading} />
+      <LeftSideBar />
       <h1 onClick={onConsoleLog}>Hello!</h1>
       <input type="text" id="id" />
       <input type="password" id="password" />
@@ -17,6 +22,7 @@ const SignPT = ({
 };
 
 interface typeSignPT {
+  loading: boolean;
   onConsoleLog: () => void;
   onSignUp: (id: string, password: string) => void;
   onSignOut: (id: string, password: string) => void;

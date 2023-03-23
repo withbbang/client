@@ -1,10 +1,12 @@
-import { Loader } from 'components/loader/Loader';
 import React from 'react';
+import LeftSideBar from 'components/leftSideBar';
+import { Loader } from 'components/loader/Loader';
 
 const AdminPT = ({ onLogOut, id, auth, loading }: typeAdminPT): JSX.Element => {
   return (
     <div>
       <Loader loading={loading} />
+      <LeftSideBar />
       {id}
       <br />
       {auth}

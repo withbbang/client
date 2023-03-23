@@ -10,3 +10,10 @@ export interface Category {
   TITLE: string;
   PRIORITY: number;
 }
+
+export interface typeSVG {
+  type: string;
+  width: string;
+  height: string;
+  fill: string;
+}

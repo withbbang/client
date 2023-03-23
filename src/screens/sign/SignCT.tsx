@@ -105,6 +105,7 @@ const SignCT = (props: typeSignCT): JSX.Element => {
 
   return (
     <SignPT
+      loading={props.isFetching}
       onConsoleLog={handleConsoleLog}
       onSignUp={handleSignUp}
       onSignOut={handleSignOut}

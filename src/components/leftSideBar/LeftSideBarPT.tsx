@@ -1,7 +1,7 @@
 import React from 'react';
 import { Loader } from 'components/loader/Loader';
 import styles from './LeftSideBar.module.scss';
-import { Arrow, DoubleArrow, LogOut, More } from 'modules/svg';
+import SVG from 'modules/SVG';
 
 const LeftSideBarPT = ({
   loading,
@@ -30,7 +30,7 @@ const LeftSideBarPT = ({
               }
               onClick={onToggle}
             >
-              <DoubleArrow width="30px" height="30px" fill="#fff" />
+              <SVG type="doubleArrow" width="30px" height="30px" fill="#fff" />
             </li>
           </div>
           {isLoggedIn && id ? (
@@ -62,11 +62,16 @@ const LeftSideBarPT = ({
                 <div className={styles.menu} key={idx}>
                   <div className={styles.banner} />
                   <div className={styles.svg}>
-                    <DoubleArrow width="30px" height="30px" fill="#fff" />
+                    <SVG
+                      type="doubleArrow"
+                      width="30px"
+                      height="30px"
+                      fill="#fff"
+                    />
                   </div>
                   {item.TITLE}
                   <div className={styles.svg_}>
-                    <Arrow width="25px" height="25px" fill="#fff" />
+                    <SVG type="arrow" width="30px" height="30px" fill="#fff" />
                   </div>
                 </div>
               );
@@ -75,7 +80,7 @@ const LeftSideBarPT = ({
             <div className={styles.log_out} onClick={onLogOut}>
               Log Out
               <div className={styles.svg}>
-                <LogOut width="20px" height="20px" fill="#fff" />
+                <SVG type="logOut" width="20px" height="20px" fill="#fff" />
               </div>
             </div>
           )}
