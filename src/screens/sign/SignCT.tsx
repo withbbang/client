@@ -35,10 +35,6 @@ const SignCT = (props: typeSignCT): JSX.Element => {
     props.isSignOut
   ]);
 
-  const handleConsoleLog = () => {
-    console.log('publicKey: ', props.publicKey);
-  };
-
   const handleSignUp = (id: string, password: string) => {
     // 공개키값 세팅은 최초 1회만 하는게 아니라 암호화를 진행 할 때마다 해줘야함.
     props.publicKey && encrypt.setPublicKey(props.publicKey);
@@ -106,7 +102,6 @@ const SignCT = (props: typeSignCT): JSX.Element => {
   return (
     <SignPT
       loading={props.isFetching}
-      onConsoleLog={handleConsoleLog}
       onSignUp={handleSignUp}
       onSignOut={handleSignOut}
     />
