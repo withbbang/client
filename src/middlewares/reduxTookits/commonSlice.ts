@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Category } from 'modules/types';
 
 export interface CommonState {
   message: string;
@@ -8,6 +9,7 @@ export interface CommonState {
   publicKey?: string;
   today?: number;
   total?: number;
+  sideBarCategories?: Array<Category>;
 }
 
 export const initialState: CommonState = {
@@ -17,7 +19,8 @@ export const initialState: CommonState = {
   isFail: false,
   publicKey: '',
   today: 0,
-  total: 0
+  total: 0,
+  sideBarCategories: []
 };
 
 const commonSlice = createSlice({
@@ -65,6 +68,26 @@ const commonSlice = createSlice({
       state.isFail = true;
       state.today = 0;
       state.total = 0;
+    },
+    requestSideBarCategory(state: CommonState, action) {
+      state.message = '';
+      state.isFetching = true;
+      state.isSuccess = false;
+      state.isFail = false;
+    },
+    successSideBarCategory(state: CommonState, action) {
+      state.message = action.payload.message;
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isFail = false;
+      state.sideBarCategories = action.payload.categories;
+    },
+    failSideBarCategory(state: CommonState, action) {
+      state.message = action.payload.message;
+      state.isFetching = false;
+      state.isSuccess = false;
+      state.isFail = true;
+      state.sideBarCategories = [];
     }
   }
 });
@@ -75,7 +98,10 @@ export const {
   failPublicKey,
   requestVisitCount,
   successVisitCount,
-  failVisitCount
+  failVisitCount,
+  requestSideBarCategory,
+  successSideBarCategory,
+  failSideBarCategory
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

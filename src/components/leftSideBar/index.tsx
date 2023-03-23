@@ -7,6 +7,7 @@ import {
 import {
   CommonState,
   requestPublicKey,
+  requestSideBarCategory,
   requestVisitCount
 } from 'middlewares/reduxTookits/commonSlice';
 import {
@@ -37,8 +38,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestVisitCount: (): void => {
       dispatch(requestVisitCount());
     },
-    requestCategory: (): void => {
-      dispatch(requestCategory());
+    requestSideBarCategory: (id?: string): void => {
+      dispatch(requestSideBarCategory({ id }));
     },
     requestLogIn: (id: string, password: string): void => {
       dispatch(requestLogIn({ id, password }));

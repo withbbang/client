@@ -5,42 +5,21 @@ import LogPT from './LogPT';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { handleGetCookie } from 'modules/cookie';
+import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 
 const LogCT = (props: typeLogCT): JSX.Element => {
   const navigate = useNavigate();
   const encrypt = new JSEncrypt();
 
   useEffect(() => {
-    props.isLoggedIn &&
-      !props.isLoggedOut &&
-      !!handleGetCookie('atk') &&
-      !!handleGetCookie('rtk') &&
-      navigate('/admin');
+    // props.isLoggedIn &&
+    //   !props.isLoggedOut &&
+    //   !!handleGetCookie('atk') &&
+    //   !!handleGetCookie('rtk') &&
+    //   navigate('/admin');
 
     props.requestPublicKey();
   }, []);
-
-  useEffect(() => {
-    !props.isFetching &&
-      props.isSuccess &&
-      !props.isFail &&
-      !props.isLoggedOut &&
-      props.isLoggedIn &&
-      navigate('/admin');
-
-    !props.isFetching &&
-      props.isSuccess &&
-      !props.isFail &&
-      props.isLoggedOut &&
-      !props.isLoggedIn &&
-      navigate('/');
-  }, [
-    props.isFetching,
-    props.isSuccess,
-    props.isFail,
-    props.isLoggedIn,
-    props.isLoggedOut
-  ]);
 
   const handleConsoleLog = () => {
     console.log('publicKey: ', props.publicKey);
@@ -80,7 +59,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
   };
 
   const handleLogOut = () => {
-    props.requestLogOut('ADMINISTER');
+    props.id && props.requestLogOut(props.id);
   };
 
   return (
@@ -93,7 +72,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
   );
 };
 
-interface typeLogCT extends CommonState, LogState {
+interface typeLogCT extends CommonState, LogState, AdminState {
   requestPublicKey: () => void;
   requestLogIn: (id: string, password: string) => void;
   requestLogOut: (id: string) => void;

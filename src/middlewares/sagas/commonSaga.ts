@@ -1,17 +1,21 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   failPublicKey,
+  failSideBarCategory,
   failVisitCount,
   requestPublicKey,
+  requestSideBarCategory,
   requestVisitCount,
   successPublicKey,
+  successSideBarCategory,
   successVisitCount
 } from 'middlewares/reduxTookits/commonSlice';
-import { getAPI } from 'modules/apis';
+import { getAPI, postAPI } from 'modules/apis';
 
 export function* commonSaga() {
   yield takeEvery(requestPublicKey.type, handleGetPublicKey);
   yield takeEvery(requestVisitCount.type, handleGetVisitCount);
+  yield takeEvery(requestSideBarCategory.type, handleGetSideBarCategories);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -35,6 +39,15 @@ function* handleGetVisitCount() {
   }
 }
 
+function* handleGetSideBarCategories(data: any) {
+  try {
+    const res: Generator = yield call(postSideBarCategories, data);
+    yield put(successSideBarCategory(res));
+  } catch (error: any) {
+    yield put(failSideBarCategory(error.message));
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -44,4 +57,8 @@ async function getPublicKey(): Promise<any> {
 
 async function getVisitCount() {
   return getAPI('/server/common/visit-count');
+}
+
+async function postSideBarCategories(data: any) {
+  return postAPI('/server/common/categories');
 }

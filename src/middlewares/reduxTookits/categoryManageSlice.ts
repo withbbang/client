@@ -21,7 +21,6 @@ const categoryManageSlice = createSlice({
   name: 'categoryManage',
   initialState,
   reducers: {
-    //TODO: common으로 옮길지 고민
     requestCategory(state: CategoryManageState) {
       state.message = '';
       state.isFetching = true;

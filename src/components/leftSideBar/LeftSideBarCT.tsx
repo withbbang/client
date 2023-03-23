@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import LeftSideBarPT from './LeftSideBarPT';
-import { handleGetCookie } from 'modules/cookie';
 import { useNavigate } from 'react-router-dom';
 import { AdminState } from 'middlewares/reduxTookits/adminSlice';
 import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
@@ -14,11 +13,11 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   useEffect(() => {
     props.requestVisitCount();
     props.requestPublicKey();
-    props.requestCategory();
   }, []);
 
   useEffect(() => {
     if (props.id && props.auth !== undefined && props.auth > -1) {
+      props.requestSideBarCategory(props.id);
     }
   }, [props.id, props.auth]);
 
@@ -52,7 +51,7 @@ interface typeLeftSideBarCT
     CategoryManageState {
   requestPublicKey: () => void;
   requestVisitCount: () => void;
-  requestCategory: () => void;
+  requestSideBarCategory: (id?: string) => void;
   requestLogIn: (id: string, password: string) => void;
   requestLogOut: (id: string) => void;
 }
