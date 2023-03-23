@@ -18,8 +18,8 @@ const AdminPT = ({ onLogOut, id, auth, loading }: typeAdminPT): JSX.Element => {
 
 interface typeAdminPT {
   onLogOut: () => void;
-  id: string;
-  auth: number;
+  id?: string;
+  auth?: number;
   loading: boolean;
 }
 

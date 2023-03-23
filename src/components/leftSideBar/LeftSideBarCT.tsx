@@ -3,7 +3,6 @@ import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import LeftSideBarPT from './LeftSideBarPT';
 import { useNavigate } from 'react-router-dom';
-import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
 import { Category } from 'modules/types';
 
 const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
@@ -13,16 +12,14 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 
   useEffect(() => {
     props.requestVisitCount();
-    props.requestPublicKey();
   }, []);
 
   useEffect(() => {
-    props.id && props.requestSideBarCategory(props.id);
+    props.requestSideBarCategory(props.id);
   }, [props.id]);
 
   useEffect(() => {
     setCategories(props.sideBarCategories);
-    console.log('categories: ', props.sideBarCategories);
   }, [props.sideBarCategories]);
 
   const handleLogOut = (): void => {

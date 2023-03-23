@@ -1,9 +1,5 @@
 import { PropState } from 'middlewares/configureReducer';
 import {
-  CategoryManageState,
-  requestCategory
-} from 'middlewares/reduxTookits/categoryManageSlice';
-import {
   CommonState,
   requestPublicKey,
   requestSideBarCategory,

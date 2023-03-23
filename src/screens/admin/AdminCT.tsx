@@ -6,30 +6,25 @@ import AdminPT from './AdminPT';
 
 const AdminCT = (props: typeAdminCT): JSX.Element => {
   const navigate = useNavigate();
-  const [id, setId] = useState('');
-  const [auth, setAuth] = useState(30);
 
   useEffect(() => {
-    !!!handleGetCookie('atk') && !!!handleGetCookie('rtk') && navigate('/');
-  }, []);
-
-  useEffect(() => {
-    if (props.id && props.auth !== undefined && props.auth > -1) {
-      setId(props.id);
-      setAuth(props.auth);
-    }
-  }, [props.id, props.auth]);
+    !props.isLoggedIn &&
+      props.isLoggedOut &&
+      !!!handleGetCookie('atk') &&
+      !!!handleGetCookie('rtk') &&
+      navigate('/');
+  }, [props.isLoggedIn, props.isLoggedOut]);
 
   const handleLogOut = () => {
-    props.id && props.requestLogOut(props.id);
+    props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
   };
 
   return (
     <AdminPT
       loading={props.isFetching}
       onLogOut={handleLogOut}
-      id={id}
-      auth={auth}
+      id={props.id}
+      auth={props.auth}
     />
   );
 };

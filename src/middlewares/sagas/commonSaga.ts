@@ -60,5 +60,5 @@ async function getVisitCount() {
 }
 
 async function postSideBarCategories(data: any) {
-  return postAPI('/server/common/categories');
+  return postAPI('/server/common/categories', data);
 }

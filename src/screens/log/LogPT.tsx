@@ -3,29 +3,40 @@ import { Loader } from 'components/loader/Loader';
 import LeftSideBar from 'components/leftSideBar';
 
 const LogPT = ({
-  onConsoleLog,
   onLogIn,
   onLogOut,
-  loading
+  loading,
+  onSetId,
+  onSetPassword
 }: typeLogPT): JSX.Element => {
   return (
     <div>
       <Loader loading={loading} />
       <LeftSideBar />
-      <div onClick={onConsoleLog}>Hello!</div>
-      <input type="text" id="id" />
-      <input type="password" id="password" />
-      <button onClick={() => onLogIn('id', 'password')}>로그인</button>
+      <input
+        type="text"
+        id="id"
+        onChange={(e) => onSetId(e.target.value)}
+        onKeyUp={(e) => onLogIn(e)}
+      />
+      <input
+        type="password"
+        id="password"
+        onChange={(e) => onSetPassword(e.target.value)}
+        onKeyUp={(e) => onLogIn(e)}
+      />
+      <button onClick={() => onLogIn()}>로그인</button>
       <button onClick={onLogOut}>로그아웃</button>
     </div>
   );
 };
 
 interface typeLogPT {
-  onConsoleLog: () => void;
-  onLogIn: (id: string, password: string) => void;
+  onLogIn: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
   onLogOut: () => void;
   loading: boolean;
+  onSetId: React.Dispatch<React.SetStateAction<string>>;
+  onSetPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default LogPT;

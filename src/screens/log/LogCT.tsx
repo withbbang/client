@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { JSEncrypt } from 'jsencrypt';
 import LogPT from './LogPT';
@@ -8,42 +8,49 @@ import { handleGetCookie } from 'modules/cookie';
 
 const LogCT = (props: typeLogCT): JSX.Element => {
   const navigate = useNavigate();
+  const [id, setId] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const encrypt = new JSEncrypt();
 
   useEffect(() => {
-    // props.isLoggedIn &&
-    //   !props.isLoggedOut &&
-    //   !!handleGetCookie('atk') &&
-    //   !!handleGetCookie('rtk') &&
-    //   navigate('/admin');
+    props.isLoggedIn &&
+      !props.isLoggedOut &&
+      !!handleGetCookie('atk') &&
+      !!handleGetCookie('rtk') &&
+      navigate('/');
 
     props.requestPublicKey();
   }, []);
 
-  const handleConsoleLog = () => {
-    console.log('publicKey: ', props.publicKey);
-  };
+  useEffect(() => {
+    props.isLoggedIn &&
+      !props.isLoggedOut &&
+      !!handleGetCookie('atk') &&
+      !!handleGetCookie('rtk') &&
+      navigate('/');
+  }, [props.isLoggedIn, props.isLoggedOut]);
 
-  const handleLogIn = (id: string, password: string) => {
-    // 공개키값 세팅은 최초 1회만 하는게 아니라 암호화를 진행 할 때마다 해줘야함.
-    props.publicKey && encrypt.setPublicKey(props.publicKey);
-    const ID = (document.getElementById(id) as HTMLInputElement).value;
-    const PASSWORD = (document.getElementById(password) as HTMLInputElement)
-      .value;
+  const handleLogIn = (e?: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e !== undefined && e.key !== 'Enter') {
+      return;
+    }
 
-    if (!ID) {
+    if (!id) {
       alert('ID를 입력해주세욥!');
       return;
     }
 
-    if (!PASSWORD) {
+    if (!password) {
       alert('비밀번호를 입력해주세욥!');
       return;
     }
 
+    // 공개키값 세팅은 최초 1회만 하는게 아니라 암호화를 진행 할 때마다 해줘야함.
+    props.publicKey && encrypt.setPublicKey(props.publicKey);
+
     let encrypted: string | boolean = '';
     try {
-      encrypted = encrypt.encrypt(PASSWORD);
+      encrypted = encrypt.encrypt(password);
     } catch (e) {
       console.error('암호화 에러');
       return;
@@ -54,19 +61,20 @@ const LogCT = (props: typeLogCT): JSX.Element => {
       return;
     }
 
-    props.requestLogIn(ID, encrypted);
+    props.requestLogIn(id, encrypted);
   };
 
   const handleLogOut = () => {
-    props.id && props.requestLogOut(props.id);
+    props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
   };
 
   return (
     <LogPT
-      onConsoleLog={handleConsoleLog}
       onLogIn={handleLogIn}
       onLogOut={handleLogOut}
       loading={props.isFetching}
+      onSetId={setId}
+      onSetPassword={setPassword}
     />
   );
 };
