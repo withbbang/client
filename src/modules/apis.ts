@@ -33,10 +33,10 @@ function getAPI(url: string): Promise<any> {
         }
       })
       .then((result) => {
+        console.debug('result: ', result);
         if (result.code !== '000000') {
-          reject(new Error(result.message));
+          reject(result);
         } else {
-          console.debug('result: ', result);
           resolve(result);
         }
       })
@@ -70,10 +70,10 @@ function postAPI(url: string, { payload }: any = {}): Promise<any> {
         }
       })
       .then((result) => {
+        console.debug('result: ', result);
         if (result.code !== '000000') {
-          reject(new Error(result.message));
+          reject(result);
         } else {
-          console.debug('result: ', result);
           resolve(result);
         }
       })
@@ -107,10 +107,10 @@ function putAPI(url: string, { payload }: any = {}): Promise<any> {
         }
       })
       .then((result) => {
+        console.debug('result: ', result);
         if (result.code !== '000000') {
-          reject(new Error(result.message));
+          reject(result);
         } else {
-          console.debug('result: ', result);
           resolve(result);
         }
       })
@@ -144,10 +144,10 @@ function deleteAPI(url: string, { payload }: any = {}): Promise<any> {
         }
       })
       .then((result) => {
+        console.debug('result: ', result);
         if (result.code !== '000000') {
-          reject(new Error(result.message));
+          reject(result);
         } else {
-          console.debug('result: ', result);
           resolve(result);
         }
       })

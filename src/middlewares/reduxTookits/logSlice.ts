@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface LogState {
+  code?: string;
   message: string;
   isFetching: boolean;
   isSuccess: boolean;
@@ -12,6 +13,7 @@ export interface LogState {
 }
 
 export const initialState: LogState = {
+  code: '',
   message: '',
   isFetching: false,
   isSuccess: false,
@@ -27,12 +29,14 @@ const logSlice = createSlice({
   initialState,
   reducers: {
     requestLogIn(state: LogState, action) {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successLogIn(state: LogState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
@@ -43,6 +47,7 @@ const logSlice = createSlice({
       state.auth = action.payload.auth;
     },
     failLogIn(state: LogState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;
@@ -53,6 +58,7 @@ const logSlice = createSlice({
       state.auth = -1;
     },
     requestLogOut(state: LogState, action) {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
@@ -61,6 +67,7 @@ const logSlice = createSlice({
       state.isLoggedOut = false;
     },
     successLogOut(state: LogState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
@@ -71,6 +78,7 @@ const logSlice = createSlice({
       state.auth = -1;
     },
     failLogOut(state: LogState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;

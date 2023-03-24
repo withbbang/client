@@ -22,7 +22,7 @@ function* handlePostSignUp(data: any) {
     const res: Generator = yield call(postSignUp, data);
     yield put(successSignUp(res));
   } catch (error: any) {
-    yield put(failSignUp(error.message));
+    yield put(failSignUp(error));
   }
 }
 
@@ -31,7 +31,7 @@ function* handlePostSignOut(data: any) {
     const res: Generator = yield call(postSignOut, data);
     yield put(successSignOut(res));
   } catch (error: any) {
-    yield put(failSignOut(error.message));
+    yield put(failSignOut(error));
   }
 }
 

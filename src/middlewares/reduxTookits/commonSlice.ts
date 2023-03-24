@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Category } from 'modules/types';
 
 export interface CommonState {
+  code?: string;
   message: string;
   isFetching: boolean;
   isSuccess: boolean;
@@ -13,6 +14,7 @@ export interface CommonState {
 }
 
 export const initialState: CommonState = {
+  code: '',
   message: '',
   isFetching: false,
   isSuccess: false,
@@ -28,12 +30,14 @@ const commonSlice = createSlice({
   initialState,
   reducers: {
     requestPublicKey(state: CommonState): void {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successPublicKey(state, action): void {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
@@ -41,6 +45,7 @@ const commonSlice = createSlice({
       state.publicKey = action.payload.publicKey;
     },
     failPublicKey(state, action): void {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;
@@ -48,12 +53,14 @@ const commonSlice = createSlice({
       state.publicKey = '';
     },
     requestVisitCount(state: CommonState): void {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successVisitCount(state: CommonState, action): void {
+      state.code = action.payload.code;
       state.message = '';
       state.isFetching = false;
       state.isSuccess = true;
@@ -62,6 +69,7 @@ const commonSlice = createSlice({
       state.total = action.payload.total;
     },
     failVisitCount(state: CommonState, action): void {
+      state.code = action.payload.code;
       state.message = '';
       state.isFetching = false;
       state.isSuccess = false;
@@ -70,12 +78,14 @@ const commonSlice = createSlice({
       state.total = 0;
     },
     requestSideBarCategory(state: CommonState, action) {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successSideBarCategory(state: CommonState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
@@ -83,6 +93,7 @@ const commonSlice = createSlice({
       state.sideBarCategories = action.payload.categories;
     },
     failSideBarCategory(state: CommonState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;

@@ -18,7 +18,7 @@ function* handlePostPost(data: any) {
     const res: Generator = yield call(postPost, data);
     yield put(successPost(res));
   } catch (error: any) {
-    yield put(failPost(error.message));
+    yield put(failPost(error));
   }
 }
 

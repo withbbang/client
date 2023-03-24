@@ -26,7 +26,7 @@ function* handleGetPublicKey() {
     const res: Generator = yield call(getPublicKey);
     yield put(successPublicKey(res));
   } catch (error: any) {
-    yield put(failPublicKey(error.message));
+    yield put(failPublicKey(error));
   }
 }
 
@@ -35,7 +35,7 @@ function* handleGetVisitCount() {
     const res: Generator = yield call(getVisitCount);
     yield put(successVisitCount(res));
   } catch (error: any) {
-    yield put(failVisitCount(error.message));
+    yield put(failVisitCount(error));
   }
 }
 
@@ -44,7 +44,7 @@ function* handleGetSideBarCategories(data: any) {
     const res: Generator = yield call(postSideBarCategories, data);
     yield put(successSideBarCategory(res));
   } catch (error: any) {
-    yield put(failSideBarCategory(error.message));
+    yield put(failSideBarCategory(error));
   }
 }
 

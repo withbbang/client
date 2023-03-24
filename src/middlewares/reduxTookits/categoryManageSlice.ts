@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Category } from 'modules/types';
 
 export interface CategoryManageState {
+  code?: string;
   message: string;
   isFetching: boolean;
   isSuccess: boolean;
@@ -10,6 +11,7 @@ export interface CategoryManageState {
 }
 
 export const initialState: CategoryManageState = {
+  code: '',
   message: '',
   isFetching: false,
   isSuccess: false,
@@ -22,12 +24,14 @@ const categoryManageSlice = createSlice({
   initialState,
   reducers: {
     requestCategory(state: CategoryManageState) {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successCategory(state: CategoryManageState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
@@ -35,6 +39,7 @@ const categoryManageSlice = createSlice({
       state.categories = action.payload.categories;
     },
     failCategory(state: CategoryManageState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;
@@ -42,36 +47,42 @@ const categoryManageSlice = createSlice({
       state.categories = [];
     },
     requestCreateCategory(state: CategoryManageState, action) {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successCreateCategory(state: CategoryManageState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
     },
     failCreateCategory(state: CategoryManageState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;
       state.isFail = true;
     },
     requestUpdateCategory(state: CategoryManageState, action) {
+      state.code = '';
       state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successUpdateCategory(state: CategoryManageState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
     },
     failUpdateCategory(state: CategoryManageState, action) {
+      state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;
