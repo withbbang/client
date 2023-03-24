@@ -35,9 +35,7 @@ const Popup = (props: typePopup): JSX.Element => {
     if (props.code !== undefined) code = +props.code;
     else return;
 
-    if (!isNaN(code) && code >= 30 && code <= 90) {
-      setIsActive(true);
-    }
+    if (!isNaN(code) && code >= 30 && code <= 90) setIsActive(true);
   }, [props.code]);
 
   const handleLogOut = () => {
