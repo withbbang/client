@@ -36,12 +36,12 @@ const LogCT = (props: typeLogCT): JSX.Element => {
     }
 
     if (!id) {
-      alert('ID를 입력해주세욥!');
+      alert('ID를 입력해주세욥!!!');
       return;
     }
 
     if (!password) {
-      alert('비밀번호를 입력해주세욥!');
+      alert('비밀번호를 입력해주세욥!!!');
       return;
     }
 
