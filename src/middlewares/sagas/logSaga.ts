@@ -6,12 +6,16 @@ import {
   failLogIn,
   requestLogOut,
   successLogOut,
-  failLogOut
+  failLogOut,
+  requestForceLogOut,
+  successForceLogOut,
+  failForceLogOut
 } from 'middlewares/reduxTookits/logSlice';
 
 export function* logSaga() {
   yield takeEvery(requestLogIn.type, handlePostLogIn);
   yield takeEvery(requestLogOut.type, handlePostLogOut);
+  yield takeEvery(requestForceLogOut.type, handlePostForceLogOut);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -35,6 +39,15 @@ function* handlePostLogOut(data: any) {
   }
 }
 
+function* handlePostForceLogOut(data: any) {
+  try {
+    const res: Generator = yield call(postForceLogOut, data);
+    yield put(successForceLogOut(res));
+  } catch (error: any) {
+    yield put(failForceLogOut(error));
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -44,4 +57,8 @@ async function postLogIn(data: any): Promise<any> {
 
 async function postLogOut(data: any): Promise<any> {
   return postAPI('/server/log/out', data);
+}
+
+async function postForceLogOut(data: any) {
+  return postAPI('/server/force/log-out', data);
 }

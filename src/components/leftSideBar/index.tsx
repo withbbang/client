@@ -29,8 +29,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestVisitCount: (): void => {
       dispatch(requestVisitCount());
     },
-    requestSideBarCategory: (id?: string): void => {
-      dispatch(requestSideBarCategory({ id }));
+    requestSideBarCategory: (): void => {
+      dispatch(requestSideBarCategory());
     },
     requestLogIn: (id: string, password: string): void => {
       dispatch(requestLogIn({ id, password }));

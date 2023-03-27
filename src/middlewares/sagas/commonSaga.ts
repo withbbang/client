@@ -10,7 +10,7 @@ import {
   successSideBarCategory,
   successVisitCount
 } from 'middlewares/reduxTookits/commonSlice';
-import { getAPI, postAPI } from 'modules/apis';
+import { getAPI } from 'modules/apis';
 
 export function* commonSaga() {
   yield takeEvery(requestPublicKey.type, handleGetPublicKey);
@@ -39,9 +39,9 @@ function* handleGetVisitCount() {
   }
 }
 
-function* handleGetSideBarCategories(data: any) {
+function* handleGetSideBarCategories() {
   try {
-    const res: Generator = yield call(postSideBarCategories, data);
+    const res: Generator = yield call(getSideBarCategories);
     yield put(successSideBarCategory(res));
   } catch (error: any) {
     yield put(failSideBarCategory(error));
@@ -59,6 +59,6 @@ async function getVisitCount() {
   return getAPI('/server/common/visit-count');
 }
 
-async function postSideBarCategories(data: any) {
-  return postAPI('/server/common/categories', data);
+async function getSideBarCategories() {
+  return getAPI('/server/common/categories');
 }

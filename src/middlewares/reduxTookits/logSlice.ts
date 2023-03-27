@@ -85,6 +85,35 @@ const logSlice = createSlice({
       state.isFail = true;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
+    },
+    requestForceLogOut(state: LogState, action) {
+      state.code = '';
+      state.message = '';
+      state.isFetching = true;
+      state.isSuccess = false;
+      state.isFail = false;
+      state.isLoggedIn = false;
+      state.isLoggedOut = false;
+    },
+    successForceLogOut(state: LogState, action) {
+      state.code = action.payload.code;
+      state.message = action.payload.message;
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isFail = false;
+      state.isLoggedIn = false;
+      state.isLoggedOut = true;
+      state.id = '';
+      state.auth = -1;
+    },
+    failForceLogOut(state: LogState, action) {
+      state.code = action.payload.code;
+      state.message = action.payload.message;
+      state.isFetching = false;
+      state.isSuccess = false;
+      state.isFail = true;
+      state.isLoggedIn = false;
+      state.isLoggedOut = false;
     }
   }
 });
@@ -95,7 +124,10 @@ export const {
   failLogIn,
   requestLogOut,
   successLogOut,
-  failLogOut
+  failLogOut,
+  requestForceLogOut,
+  successForceLogOut,
+  failForceLogOut
 } = logSlice.actions;
 
 export default logSlice.reducer;

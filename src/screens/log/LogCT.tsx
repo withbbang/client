@@ -14,20 +14,20 @@ const LogCT = (props: typeLogCT): JSX.Element => {
 
   useEffect(() => {
     props.isLoggedIn &&
-      !props.isLoggedOut &&
-      !!handleGetCookie('atk') &&
-      !!handleGetCookie('rtk') &&
-      navigate('/');
-
-    props.requestPublicKey();
+    !props.isLoggedOut &&
+    !!handleGetCookie('atk') &&
+    !!handleGetCookie('rtk')
+      ? navigate('/')
+      : props.requestPublicKey();
   }, []);
 
   useEffect(() => {
     props.isLoggedIn &&
-      !props.isLoggedOut &&
-      !!handleGetCookie('atk') &&
-      !!handleGetCookie('rtk') &&
-      navigate('/');
+    !props.isLoggedOut &&
+    !!handleGetCookie('atk') &&
+    !!handleGetCookie('rtk')
+      ? navigate('/')
+      : props.requestPublicKey();
   }, [props.isLoggedIn, props.isLoggedOut]);
 
   const handleLogIn = (e?: React.KeyboardEvent<HTMLInputElement>) => {

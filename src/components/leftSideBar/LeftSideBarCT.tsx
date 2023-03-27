@@ -8,19 +8,11 @@ import { Category } from 'modules/types';
 const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
-  const [categories, setCategories] = useState<Array<Category> | undefined>([]);
 
   useEffect(() => {
     props.requestVisitCount();
+    props.requestSideBarCategory();
   }, []);
-
-  useEffect(() => {
-    props.requestSideBarCategory(props.id);
-  }, [props.id]);
-
-  useEffect(() => {
-    setCategories(props.sideBarCategories);
-  }, [props.sideBarCategories]);
 
   const handleLogOut = (): void => {
     props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
@@ -40,7 +32,7 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
       id={props.id}
       toggle={toggle}
       onToggle={handleToggle}
-      items={categories}
+      items={props.sideBarCategories}
     />
   );
 };
@@ -48,7 +40,7 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 interface typeLeftSideBarCT extends CommonState, LogState {
   requestPublicKey: () => void;
   requestVisitCount: () => void;
-  requestSideBarCategory: (id?: string) => void;
+  requestSideBarCategory: () => void;
   requestLogIn: (id: string, password: string) => void;
   requestLogOut: (id: string) => void;
 }

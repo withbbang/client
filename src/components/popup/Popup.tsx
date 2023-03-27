@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { PropState } from 'middlewares/configureReducer';
-import { LogState, requestLogOut } from 'middlewares/reduxTookits/logSlice';
+import {
+  LogState,
+  requestForceLogOut
+} from 'middlewares/reduxTookits/logSlice';
 import { connect } from 'react-redux';
 import { Action } from 'redux';
 import { SignState } from 'middlewares/reduxTookits/signSlice';
@@ -21,8 +24,8 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
-    requestLogOut: (id: string): void => {
-      dispatch(requestLogOut({ id }));
+    requestForceLogOut: (id: string): void => {
+      dispatch(requestForceLogOut({ id }));
     }
   };
 };
@@ -39,7 +42,9 @@ const Popup = (props: typePopup): JSX.Element => {
   }, [props.code]);
 
   const handleLogOut = () => {
-    props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
+    props.id
+      ? props.requestForceLogOut(props.id)
+      : alert('부적절한 요청입니다.');
     setIsActive(false);
   };
 
@@ -58,7 +63,7 @@ const Popup = (props: typePopup): JSX.Element => {
 };
 
 interface typePopup extends LogState {
-  requestLogOut: (id: string) => void;
+  requestForceLogOut: (id: string) => void;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Popup);

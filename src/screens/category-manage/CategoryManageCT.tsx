@@ -9,9 +9,9 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    !!!handleGetCookie('atk') && !!!handleGetCookie('rtk') && navigate('/');
-
-    props.requestCategory();
+    !!!handleGetCookie('atk') && !!!handleGetCookie('rtk')
+      ? navigate('/')
+      : props.requestCategory();
   }, []);
 
   const handleCreateCategory = (id: string, priority?: number) => {
