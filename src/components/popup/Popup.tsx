@@ -32,20 +32,32 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
 
 const Popup = (props: typePopup): JSX.Element => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [errorType, setErrorType] = useState<string>('');
 
   useEffect(() => {
     let code = -1;
     if (props.code !== undefined) code = +props.code;
     else return;
 
-    if (!isNaN(code) && code >= 30 && code <= 90) setIsActive(true);
+    if (!isNaN(code) && code >= 30 && code <= 90) {
+      setIsActive(true);
+      setErrorType('auth');
+    }
   }, [props.code]);
 
-  const handleLogOut = () => {
-    props.id
-      ? props.requestForceLogOut(props.id)
-      : alert('부적절한 요청입니다.');
+  const handleBtn = () => {
+    switch (errorType) {
+      case 'auth':
+        props.id
+          ? props.requestForceLogOut(props.id)
+          : alert('부적절한 요청입니다.');
+        break;
+      default:
+        break;
+    }
+
     setIsActive(false);
+    setErrorType('');
   };
 
   return (
@@ -54,7 +66,7 @@ const Popup = (props: typePopup): JSX.Element => {
         <div className={styles.background}>
           <div className={styles.modal_body}>
             <h2>{props.message}</h2>
-            <button onClick={handleLogOut}>확인</button>
+            <button onClick={handleBtn}>확인</button>
           </div>
         </div>
       ) : null}
