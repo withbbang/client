@@ -4,6 +4,7 @@ import { Loader } from 'components/loader/Loader';
 import styles from './Index.module.scss';
 import Card from 'components/card/Card';
 import Header from 'components/header/Header';
+import Footer from 'components/footer/Footer';
 
 const IndexPT = (props: any) => {
   return (
@@ -24,6 +25,7 @@ const IndexPT = (props: any) => {
             ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };
