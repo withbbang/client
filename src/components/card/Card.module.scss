@@ -1,0 +1,45 @@
+.wrap {
+  display: block;
+  max-width: 400px;
+  width: 45%;
+  padding: 2%;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: solid 0.5px rgb(75, 75, 75);
+  box-sizing: border-box;
+  max-height: 200px;
+  min-height: 200px;
+  transform: scale(1);
+  box-shadow: none;
+  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+
+  h3 {
+    margin: 0;
+    font-size: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  p {
+    max-height: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis; /* text 넘침 ...로 가리기 */
+    // white-space: nowrap; /* 줄 넘기기 방지 */
+    word-break: break-all; /* 줄 넘기기 */
+
+    /* 최대 줄 4개로 보여주기 */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.wrap:hover {
+  cursor: pointer;
+  /* 1.05배로 크기 키우기 */
+  transform: scale(1.03);
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+  /* transform, box-shadow 속성 300ms 속도로 변경 */
+  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+}

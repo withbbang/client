@@ -1,0 +1,15 @@
+.wrap {
+  width: 100%;
+
+  .innerWrap {
+    padding: 10% 10%;
+    width: calc(80%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    // flex-flow: row wrap; /* 하위 두개의 모든 기능 제공 */
+    flex-direction: row; /* 아이템 나열 방향 -> 수평 */
+    flex-wrap: wrap; /* 아이템 width가 넘어갔을 경우 다음 라인으로 넘길지 말지 -> wrap: 넘김, nowrap: 안 넘김 */
+  }
+}

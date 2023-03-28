@@ -1,5 +1,4 @@
 import React from 'react';
-import { Loader } from 'components/loader/Loader';
 import styles from './LeftSideBar.module.scss';
 import SVG from 'modules/SVG';
 import Popup from 'components/popup/Popup';
@@ -17,7 +16,6 @@ const LeftSideBarPT = ({
 }: typeLeftSideBarPT): JSX.Element => {
   return (
     <>
-      <Loader loading={loading} />
       <Popup />
       <div
         className={toggle ? styles.wrap : [styles.wrap, styles.off].join(' ')}

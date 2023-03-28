@@ -7,6 +7,7 @@ export interface CommonState {
   isFetching: boolean;
   isSuccess: boolean;
   isFail: boolean;
+  isNight?: boolean;
   publicKey?: string;
   today?: number;
   total?: number;
@@ -19,6 +20,7 @@ export const initialState: CommonState = {
   isFetching: false,
   isSuccess: false,
   isFail: false,
+  isNight: false,
   publicKey: '',
   today: 0,
   total: 0,
@@ -99,6 +101,9 @@ const commonSlice = createSlice({
       state.isSuccess = false;
       state.isFail = true;
       state.sideBarCategories = [];
+    },
+    handleIsNight(state: CommonState) {
+      state.isNight = !state.isNight;
     }
   }
 });
@@ -112,7 +117,8 @@ export const {
   failVisitCount,
   requestSideBarCategory,
   successSideBarCategory,
-  failSideBarCategory
+  failSideBarCategory,
+  handleIsNight
 } = commonSlice.actions;
 
 export default commonSlice.reducer;
