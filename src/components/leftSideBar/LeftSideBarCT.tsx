@@ -24,9 +24,9 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 
   return (
     <LeftSideBarPT
-      loading={props.isFetching}
       total={props.total}
       today={props.today}
+      isNight={props.isNight}
       isLoggedIn={props.isLoggedIn}
       onLogOut={handleLogOut}
       id={props.id}

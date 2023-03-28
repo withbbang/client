@@ -4,9 +4,9 @@ import SVG from 'modules/SVG';
 import Popup from 'components/popup/Popup';
 
 const LeftSideBarPT = ({
-  loading,
   total,
   today,
+  isNight,
   isLoggedIn,
   onLogOut,
   id,
@@ -18,7 +18,15 @@ const LeftSideBarPT = ({
     <>
       <Popup />
       <div
-        className={toggle ? styles.wrap : [styles.wrap, styles.off].join(' ')}
+        className={
+          toggle
+            ? isNight
+              ? [styles.wrap, styles.night].join(' ')
+              : styles.wrap
+            : isNight
+            ? [styles.wrap, styles.off, styles.night].join(' ')
+            : [styles.wrap, styles.off].join(' ')
+        }
       >
         <div className={styles.inner_wrap}>
           <div className={styles.visitor_count}>
@@ -26,7 +34,13 @@ const LeftSideBarPT = ({
             <div className={styles.visitor}>Today {today ? today : 0}</div>
             <div
               className={
-                toggle ? styles.toggle : [styles.toggle, styles.off].join(' ')
+                toggle
+                  ? isNight
+                    ? [styles.toggle, styles.night].join(' ')
+                    : styles.toggle
+                  : isNight
+                  ? [styles.toggle, styles.off, styles.night].join(' ')
+                  : [styles.toggle, styles.off].join(' ')
               }
               onClick={onToggle}
             >
@@ -91,9 +105,9 @@ const LeftSideBarPT = ({
 };
 
 interface typeLeftSideBarPT {
-  loading: boolean;
   total?: number;
   today?: number;
+  isNight?: boolean;
   isLoggedIn?: boolean;
   onLogOut: () => void;
   id?: string;

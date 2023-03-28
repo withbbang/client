@@ -11,7 +11,7 @@
   min-height: 200px;
   transform: scale(1);
   box-shadow: none;
-  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 
   h3 {
     margin: 0;
@@ -40,6 +40,6 @@
   transform: scale(1.03);
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-  /* transform, box-shadow 속성 300ms 속도로 변경 */
-  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+  /* transform, box-shadow 속성 0.5s 속도로 변경 */
+  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
