@@ -29,7 +29,13 @@ const LeftSideBarPT = ({
         }
       >
         <div className={styles.inner_wrap}>
-          <div className={styles.visitor_count}>
+          <div
+            className={
+              isNight
+                ? [styles.visitor_count, styles.night].join(' ')
+                : styles.visitor_count
+            }
+          >
             <div className={styles.visitor}>Total {total ? total : 0}</div>
             <div className={styles.visitor}>Today {today ? today : 0}</div>
             <div

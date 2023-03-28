@@ -61,8 +61,13 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      color: #fff;
+      color: rgb(0, 0, 0);
       padding: 15px 15px 0 15px;
+      transition: color 0.5s ease-in-out;
+      -moz-transition: color 0.5s linear;
+      -webkit-transition: color 0.5s linear;
+      -ms-transition: color 0.5s linear;
+      -o-transition: color 0.5s linear;
 
       .toggle {
         display: flex;
@@ -106,6 +111,15 @@
           -ms-transition: background-color 0.5s linear;
           -o-transition: background-color 0.5s linear;
         }
+      }
+
+      &.night {
+        color: rgb(255, 255, 255);
+        transition: color 0.5s ease-in-out;
+        -moz-transition: color 0.5s linear;
+        -webkit-transition: color 0.5s linear;
+        -ms-transition: color 0.5s linear;
+        -o-transition: color 0.5s linear;
       }
     }
 
