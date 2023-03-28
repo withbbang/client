@@ -4,7 +4,7 @@
   left: 0;
   width: 300px;
   height: 100%;
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(220, 220, 220);
   transform: translateX(0);
   transition: transform 0.5s ease-in-out, background-color 0.5s linear;
   -moz-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
@@ -20,7 +20,7 @@
     left: 0;
     width: 300px;
     height: 100%;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(220, 220, 220);
     transform: translateX(-300px);
     transition: transform 0.5s ease-in-out;
     -moz-transition: transform 0.5s ease-in-out;
@@ -81,7 +81,7 @@
         font-size: 25px;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
-        background-color: rgb(230, 230, 230);
+        background-color: rgb(220, 220, 220);
         transition: background-color 0.5s linear;
         -moz-transition: background-color 0.5s linear;
         -webkit-transition: background-color 0.5s linear;
