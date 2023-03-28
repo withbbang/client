@@ -1,7 +1,8 @@
+import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import React, { useEffect, useState } from 'react';
 import IndexPT from './IndexPT';
 
-const IndexCT = () => {
+const IndexCT = (props: typeIndexCT) => {
   const [items, setItems] = useState<Array<TempItem>>([]);
   useEffect(() => {
     setItems([
@@ -58,8 +59,10 @@ const IndexCT = () => {
     ]);
   }, []);
 
-  return <IndexPT items={items} />;
+  return <IndexPT isNight={props.isNight} items={items} />;
 };
+
+interface typeIndexCT extends CommonState {}
 
 interface TempItem {
   title: string;

@@ -11,7 +11,11 @@ const IndexPT = (props: any) => {
       <Loader loading={false} />
       <Header />
       <LeftSideBar />
-      <div className={styles.wrap}>
+      <div
+        className={
+          props.isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap
+        }
+      >
         <div className={styles.innerWrap}>
           {Array.isArray(props.items) &&
             props.items.length > 0 &&
@@ -23,5 +27,9 @@ const IndexPT = (props: any) => {
     </>
   );
 };
+
+interface typeIndexPT {
+  isNight?: boolean;
+}
 
 export default IndexPT;

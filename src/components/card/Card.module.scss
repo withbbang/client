@@ -5,22 +5,34 @@
   padding: 2%;
   margin: 10px 0;
   border-radius: 10px;
-  border: solid 0.5px rgb(75, 75, 75);
   box-sizing: border-box;
   max-height: 200px;
   min-height: 200px;
   transform: scale(1);
   box-shadow: none;
-  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+  background: #fff;
+  transition: background-color 0.5s linear, transform 0.5s ease-in-out,
+    box-shadow 0.5s ease-in-out;
+  -moz-transition: background-color 0.5s linear;
+  -webkit-transition: background-color 0.5s linear;
+  -ms-transition: background-color 0.5s linear;
+  -o-transition: background-color 0.5s linear;
 
   h3 {
+    color: #000;
     margin: 0;
     font-size: 1.5em;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 0.5s ease-in-out;
+    -moz-transition: color 0.5s linear;
+    -webkit-transition: color 0.5s linear;
+    -ms-transition: color 0.5s linear;
+    -o-transition: color 0.5s linear;
   }
 
   p {
+    color: rgb(56, 72, 93);
     max-height: 110px;
     overflow: hidden;
     text-overflow: ellipsis; /* text 넘침 ...로 가리기 */
@@ -31,6 +43,39 @@
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
+
+    transition: color 0.5s ease-in-out;
+    -moz-transition: color 0.5s linear;
+    -webkit-transition: color 0.5s linear;
+    -ms-transition: color 0.5s linear;
+    -o-transition: color 0.5s linear;
+  }
+
+  &.night {
+    background-color: rgb(25, 25, 25);
+    transition: background-color 0.5s linear;
+    -moz-transition: background-color 0.5s linear;
+    -webkit-transition: background-color 0.5s linear;
+    -ms-transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
+
+    h3 {
+      color: #fff;
+      transition: color 0.5s ease-in-out;
+      -moz-transition: color 0.5s linear;
+      -webkit-transition: color 0.5s linear;
+      -ms-transition: color 0.5s linear;
+      -o-transition: color 0.5s linear;
+    }
+
+    p {
+      color: rgb(150, 150, 150);
+      transition: color 0.5s ease-in-out;
+      -moz-transition: color 0.5s linear;
+      -webkit-transition: color 0.5s linear;
+      -ms-transition: color 0.5s linear;
+      -o-transition: color 0.5s linear;
+    }
   }
 }
 
@@ -42,4 +87,8 @@
   box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
   /* transform, box-shadow 속성 0.5s 속도로 변경 */
   transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+
+  &.night {
+    box-shadow: 4px 4px 2px 1px rgba(255, 255, 255, 0.2);
+  }
 }

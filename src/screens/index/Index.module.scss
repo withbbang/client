@@ -1,9 +1,24 @@
 .wrap {
   width: 100%;
+  background: rgb(240, 240, 240);
+  transition: background-color 0.5s linear;
+  -moz-transition: background-color 0.5s linear;
+  -webkit-transition: background-color 0.5s linear;
+  -ms-transition: background-color 0.5s linear;
+  -o-transition: background-color 0.5s linear;
+
+  &.night {
+    background-color: rgb(75, 75, 75);
+    transition: background-color 0.5s linear;
+    -moz-transition: background-color 0.5s linear;
+    -webkit-transition: background-color 0.5s linear;
+    -ms-transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
+  }
 
   .innerWrap {
     padding: 10% 10%;
-    width: calc(80%);
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;

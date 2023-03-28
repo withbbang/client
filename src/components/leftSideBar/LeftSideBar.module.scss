@@ -42,7 +42,7 @@
 
   &.night {
     transform: translateX(0);
-    background-color: rgb(25, 25, 25);
+    background-color: rgb(50, 50, 50);
     transition: transform 0.5s ease-in-out, background-color 0.5s linear;
     -moz-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
     -webkit-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
@@ -99,7 +99,7 @@
         }
 
         &.night {
-          background-color: rgb(25, 25, 25);
+          background-color: rgb(50, 50, 50);
           transition: background-color 0.5s linear;
           -moz-transition: background-color 0.5s linear;
           -webkit-transition: background-color 0.5s linear;

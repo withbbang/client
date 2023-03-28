@@ -16,7 +16,9 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
 };
 
 const Card = ({ isNight, title, contents }: typeCard): JSX.Element => (
-  <div className={styles.wrap}>
+  <div
+    className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
+  >
     <h3>{title}</h3>
     <p>{contents}</p>
   </div>
