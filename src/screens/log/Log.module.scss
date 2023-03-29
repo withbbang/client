@@ -25,7 +25,8 @@
         -ms-transition: background-color 0.5s linear;
         -o-transition: background-color 0.5s linear;
 
-        :nth-child(n):focus {
+        > input:focus,
+        button:hover {
           border: solid 1px rgb(125, 125, 125);
           box-shadow: 4px 4px 2px 1px rgba(255, 255, 255, 0.2);
           transition: box-shadow 0.5s ease-in-out;
@@ -69,17 +70,22 @@
         background: #fff;
       }
 
-      :nth-child(n):focus {
-        box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-        transition: box-shadow 0.5s ease-in-out;
-      }
-
       > input {
         padding: 0 10px;
       }
 
+      > input:focus,
+      button:hover {
+        box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.5s ease-in-out;
+      }
+
       > input::placeholder {
         color: #aaa;
+      }
+
+      > button {
+        cursor: pointer;
       }
     }
   }

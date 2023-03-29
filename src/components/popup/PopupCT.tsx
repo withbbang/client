@@ -24,7 +24,7 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
       setIsActive(true);
     } else if (isNaN(code) && props.code !== '') {
       setIsActive(true);
-      setErrorType('etc');
+      setErrorType('client');
     }
   }, [props.code, props.message]);
 
@@ -36,7 +36,7 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
           : alert('부적절한 요청입니다.');
         break;
       case 'server':
-      case 'etc':
+      case 'client':
         props.handleCodeMessage('', '');
         break;
       default:
@@ -48,7 +48,12 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
   };
 
   return (
-    <PopupPT isActive={isActive} message={props.message} onBtn={handleBtn} />
+    <PopupPT
+      isActive={isActive}
+      message={props.message}
+      isNight={props.isNight}
+      onBtn={handleBtn}
+    />
   );
 };
 

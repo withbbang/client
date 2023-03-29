@@ -10,6 +10,9 @@ const LogPT = ({
   onLogIn,
   loading,
   isNight,
+  idRef,
+  btnRef,
+  passwordRef,
   onSetId,
   onSetPassword
 }: typeLogPT): JSX.Element => {
@@ -32,6 +35,7 @@ const LogPT = ({
               id="id"
               onChange={(e) => onSetId(e.target.value)}
               onKeyUp={(e) => onLogIn(e)}
+              ref={idRef}
             />
             <input
               placeholder="PASSWORD"
@@ -39,8 +43,11 @@ const LogPT = ({
               id="password"
               onChange={(e) => onSetPassword(e.target.value)}
               onKeyUp={(e) => onLogIn(e)}
+              ref={passwordRef}
             />
-            <button onClick={() => onLogIn()}>Log In</button>
+            <button onClick={() => onLogIn()} ref={btnRef}>
+              로그인
+            </button>
           </div>
         </div>
       </div>
@@ -53,6 +60,9 @@ interface typeLogPT {
   onLogIn: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
   loading: boolean;
   isNight?: boolean;
+  idRef: React.MutableRefObject<HTMLInputElement>;
+  passwordRef: React.MutableRefObject<HTMLInputElement>;
+  btnRef: React.MutableRefObject<HTMLButtonElement>;
   onSetId: React.Dispatch<React.SetStateAction<string>>;
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
 }

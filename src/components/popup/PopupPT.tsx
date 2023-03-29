@@ -1,13 +1,19 @@
 import React from 'react';
 import styles from './Popup.module.scss';
 
-const PopupPT = ({ isActive, message, onBtn }: typePopupPT) => {
+const PopupPT = ({ isActive, message, isNight, onBtn }: typePopupPT) => {
   return (
     <>
-      {isActive ? (
-        <div className={styles.background}>
+      {isActive && message !== '성공' ? (
+        <div
+          className={
+            isNight
+              ? [styles.background, styles.night].join(' ')
+              : styles.background
+          }
+        >
           <div className={styles.modal_body}>
-            <h2>{message}</h2>
+            <span>{message}</span>
             <button onClick={onBtn}>확인</button>
           </div>
         </div>
@@ -19,6 +25,7 @@ const PopupPT = ({ isActive, message, onBtn }: typePopupPT) => {
 interface typePopupPT {
   isActive: boolean;
   message?: string;
+  isNight?: boolean;
   onBtn: () => void;
 }
 

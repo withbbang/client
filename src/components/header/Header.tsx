@@ -81,7 +81,7 @@ const Header = (props: typeHeader): JSX.Element => {
           <SVG type="search" fill={props.isNight ? '#fff' : '#000'} />
         </span>
         <span className={styles.log} onClick={handleLog}>
-          {isLoggedIn ? 'Log Out' : 'Log In'}
+          {isLoggedIn ? '로그아웃' : '로그인'}
         </span>
       </div>
     </div>
