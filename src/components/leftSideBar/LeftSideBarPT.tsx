@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './LeftSideBar.module.scss';
 import SVG from 'modules/SVG';
-import Popup from 'components/popup/Popup';
 
 const LeftSideBarPT = ({
   total,
@@ -16,7 +15,6 @@ const LeftSideBarPT = ({
 }: typeLeftSideBarPT): JSX.Element => {
   return (
     <>
-      <Popup />
       <div
         className={
           toggle

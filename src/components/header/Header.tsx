@@ -8,8 +8,9 @@ import { connect } from 'react-redux';
 import { Action } from 'redux';
 import styles from './Header.module.scss';
 import SVG from 'modules/SVG';
-import { LogState } from 'middlewares/reduxTookits/logSlice';
+import { LogState, requestLogOut } from 'middlewares/reduxTookits/logSlice';
 import { handleGetCookie } from 'modules/cookie';
+import { useNavigate } from 'react-router-dom';
 
 const mapStateToProps = (state: PropState): CommonState | LogState => {
   return {
@@ -22,12 +23,16 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
     handleIsNight: (): void => {
       dispatch(handleIsNight());
+    },
+    requestLogOut: (id: string): void => {
+      dispatch(requestLogOut({ id }));
     }
   };
 };
 
 const Header = (props: typeHeader): JSX.Element => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     !!!handleGetCookie('atk') &&
@@ -37,6 +42,14 @@ const Header = (props: typeHeader): JSX.Element => {
       ? setIsLoggedIn(false)
       : setIsLoggedIn(true);
   }, [props.id, props.isLoggedIn]);
+
+  const handleLog = () => {
+    isLoggedIn
+      ? props.id
+        ? props.requestLogOut(props.id)
+        : console.log('오류 팝업')
+      : navigate('/log');
+  };
 
   return (
     <div
@@ -67,7 +80,9 @@ const Header = (props: typeHeader): JSX.Element => {
         <span>
           <SVG type="search" fill={props.isNight ? '#fff' : '#000'} />
         </span>
-        <span className={styles.log}>{isLoggedIn ? 'Log Out' : 'Log In'}</span>
+        <span className={styles.log} onClick={handleLog}>
+          {isLoggedIn ? 'Log Out' : 'Log In'}
+        </span>
       </div>
     </div>
   );
@@ -75,6 +90,7 @@ const Header = (props: typeHeader): JSX.Element => {
 
 interface typeHeader extends CommonState, LogState {
   handleIsNight: () => void;
+  requestLogOut: (id: string) => void;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

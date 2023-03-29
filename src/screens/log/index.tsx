@@ -6,11 +6,7 @@ import {
   requestPublicKey
 } from 'middlewares/reduxTookits/commonSlice';
 import { PropState } from 'middlewares/configureReducer';
-import {
-  requestLogIn,
-  LogState,
-  requestLogOut
-} from 'middlewares/reduxTookits/logSlice';
+import { requestLogIn, LogState } from 'middlewares/reduxTookits/logSlice';
 
 const mapStateToProps = (state: PropState): CommonState | LogState => {
   return {
@@ -26,9 +22,6 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     },
     requestLogIn: (id: string, password: string): void => {
       dispatch(requestLogIn({ id, password }));
-    },
-    requestLogOut: (id: string): void => {
-      dispatch(requestLogOut({ id }));
     }
   };
 };

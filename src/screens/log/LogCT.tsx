@@ -64,15 +64,11 @@ const LogCT = (props: typeLogCT): JSX.Element => {
     props.requestLogIn(id, encrypted);
   };
 
-  const handleLogOut = () => {
-    props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
-  };
-
   return (
     <LogPT
       onLogIn={handleLogIn}
-      onLogOut={handleLogOut}
       loading={props.isFetching}
+      isNight={props.isNight}
       onSetId={setId}
       onSetPassword={setPassword}
     />
@@ -82,7 +78,6 @@ const LogCT = (props: typeLogCT): JSX.Element => {
 interface typeLogCT extends CommonState, LogState {
   requestPublicKey: () => void;
   requestLogIn: (id: string, password: string) => void;
-  requestLogOut: (id: string) => void;
 }
 
 export default LogCT;

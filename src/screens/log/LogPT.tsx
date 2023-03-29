@@ -1,40 +1,58 @@
 import React from 'react';
 import { Loader } from 'components/loader/Loader';
 import LeftSideBar from 'components/leftSideBar';
+import Header from 'components/header/Header';
+import Footer from 'components/footer/Footer';
+import styles from './Log.module.scss';
+import Popup from 'components/popup';
 
 const LogPT = ({
   onLogIn,
-  onLogOut,
   loading,
+  isNight,
   onSetId,
   onSetPassword
 }: typeLogPT): JSX.Element => {
   return (
-    <div>
+    <>
       <Loader loading={loading} />
+      <Header />
       <LeftSideBar />
-      <input
-        type="text"
-        id="id"
-        onChange={(e) => onSetId(e.target.value)}
-        onKeyUp={(e) => onLogIn(e)}
-      />
-      <input
-        type="password"
-        id="password"
-        onChange={(e) => onSetPassword(e.target.value)}
-        onKeyUp={(e) => onLogIn(e)}
-      />
-      <button onClick={() => onLogIn()}>로그인</button>
-      <button onClick={onLogOut}>로그아웃</button>
-    </div>
+      <Popup />
+      <div
+        className={
+          isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap
+        }
+      >
+        <div className={styles.innerWrap}>
+          <div className={styles.box}>
+            <input
+              placeholder="ID"
+              type="text"
+              id="id"
+              onChange={(e) => onSetId(e.target.value)}
+              onKeyUp={(e) => onLogIn(e)}
+            />
+            <input
+              placeholder="PASSWORD"
+              type="password"
+              id="password"
+              onChange={(e) => onSetPassword(e.target.value)}
+              onKeyUp={(e) => onLogIn(e)}
+            />
+            <button onClick={() => onLogIn()}>Log In</button>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 
 interface typeLogPT {
   onLogIn: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
-  onLogOut: () => void;
   loading: boolean;
+  isNight?: boolean;
   onSetId: React.Dispatch<React.SetStateAction<string>>;
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -28,7 +28,7 @@ export const initialState: CommonState = {
 };
 
 const commonSlice = createSlice({
-  name: 'sign',
+  name: 'common',
   initialState,
   reducers: {
     requestPublicKey(state: CommonState): void {
@@ -38,7 +38,7 @@ const commonSlice = createSlice({
       state.isSuccess = false;
       state.isFail = false;
     },
-    successPublicKey(state, action): void {
+    successPublicKey(state: CommonState, action): void {
       state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
@@ -46,7 +46,7 @@ const commonSlice = createSlice({
       state.isFail = false;
       state.publicKey = action.payload.publicKey;
     },
-    failPublicKey(state, action): void {
+    failPublicKey(state: CommonState, action): void {
       state.code = action.payload.code;
       state.message = action.payload.message;
       state.isFetching = false;
