@@ -58,7 +58,7 @@ const Header = (props: typeHeader): JSX.Element => {
       }
     >
       <div>
-        <span>
+        <span onClick={() => navigate('/')}>
           <SVG
             type="logo"
             width="200px"
