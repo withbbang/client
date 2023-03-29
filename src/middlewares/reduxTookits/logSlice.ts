@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface LogState {
-  code?: string;
-  message: string;
   isFetching: boolean;
   isSuccess: boolean;
   isFail: boolean;
@@ -13,8 +11,6 @@ export interface LogState {
 }
 
 export const initialState: LogState = {
-  code: '',
-  message: '',
   isFetching: false,
   isSuccess: false,
   isFail: false,
@@ -29,15 +25,11 @@ const logSlice = createSlice({
   initialState,
   reducers: {
     requestLogIn(state: LogState, action) {
-      state.code = '';
-      state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successLogIn(state: LogState, action) {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
@@ -46,9 +38,7 @@ const logSlice = createSlice({
       state.id = action.payload.id;
       state.auth = action.payload.auth;
     },
-    failLogIn(state: LogState, action) {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
+    failLogIn(state: LogState) {
       state.isFetching = false;
       state.isSuccess = false;
       state.isFail = true;
@@ -58,17 +48,13 @@ const logSlice = createSlice({
       state.auth = -1;
     },
     requestLogOut(state: LogState, action) {
-      state.code = '';
-      state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     },
-    successLogOut(state: LogState, action) {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
+    successLogOut(state: LogState) {
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
@@ -78,8 +64,6 @@ const logSlice = createSlice({
       state.auth = -1;
     },
     failLogOut(state: LogState, action) {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = false;
       state.isFail = true;
@@ -87,17 +71,13 @@ const logSlice = createSlice({
       state.isLoggedOut = false;
     },
     requestForceLogOut(state: LogState, action) {
-      state.code = '';
-      state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     },
-    successForceLogOut(state: LogState, action) {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
+    successForceLogOut(state: LogState) {
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
@@ -106,9 +86,7 @@ const logSlice = createSlice({
       state.id = '';
       state.auth = -1;
     },
-    failForceLogOut(state: LogState, action) {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
+    failForceLogOut(state: LogState) {
       state.isFetching = false;
       state.isSuccess = false;
       state.isFail = true;

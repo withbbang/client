@@ -8,6 +8,7 @@ import {
   successSignOut,
   failSignOut
 } from 'middlewares/reduxTookits/signSlice';
+import { handleCodeMessage } from 'middlewares/reduxTookits/commonSlice';
 
 export function* signSaga() {
   yield takeEvery(requestSignUp.type, handlePostSignUp);
@@ -20,18 +21,22 @@ export function* signSaga() {
 function* handlePostSignUp(data: any) {
   try {
     const res: Generator = yield call(postSignUp, data);
-    yield put(successSignUp(res));
+    yield put(successSignUp());
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failSignUp(error));
+    yield put(handleCodeMessage(error));
   }
 }
 
 function* handlePostSignOut(data: any) {
   try {
     const res: Generator = yield call(postSignOut, data);
-    yield put(successSignOut(res));
+    yield put(successSignOut());
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failSignOut(error));
+    yield put(handleCodeMessage(error));
   }
 }
 

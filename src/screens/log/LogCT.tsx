@@ -19,15 +19,6 @@ const LogCT = (props: typeLogCT): JSX.Element => {
     !!handleGetCookie('rtk')
       ? navigate('/')
       : props.requestPublicKey();
-  }, []);
-
-  useEffect(() => {
-    props.isLoggedIn &&
-    !props.isLoggedOut &&
-    !!handleGetCookie('atk') &&
-    !!handleGetCookie('rtk')
-      ? navigate('/')
-      : props.requestPublicKey();
   }, [props.isLoggedIn, props.isLoggedOut]);
 
   const handleLogIn = (e?: React.KeyboardEvent<HTMLInputElement>) => {
@@ -36,12 +27,12 @@ const LogCT = (props: typeLogCT): JSX.Element => {
     }
 
     if (!id) {
-      alert('ID를 입력해주세욥!');
+      props.handleCodeMessage('EMPTY ID', 'ID를 입력해주세요.');
       return;
     }
 
     if (!password) {
-      alert('비밀번호를 입력해주세욥!');
+      props.handleCodeMessage('EMPTY PASSWORD', 'PASSWORD를 입력해주세요.');
       return;
     }
 
@@ -52,16 +43,17 @@ const LogCT = (props: typeLogCT): JSX.Element => {
     try {
       encrypted = encrypt.encrypt(password);
     } catch (e) {
-      console.error('암호화 에러');
+      props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
       return;
     }
 
     if (encrypted === false) {
-      console.error('암호화 에러');
+      props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
       return;
     }
 
     props.requestLogIn(id, encrypted);
+    props.handleCodeMessage('', '');
   };
 
   return (
@@ -78,6 +70,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
 interface typeLogCT extends CommonState, LogState {
   requestPublicKey: () => void;
   requestLogIn: (id: string, password: string) => void;
+  handleCodeMessage: (code: string, message: string) => void;
 }
 
 export default LogCT;

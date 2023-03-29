@@ -15,9 +15,16 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
     if (props.code !== undefined) code = +props.code;
     else return;
 
-    if (!isNaN(code) && code >= 30 && code <= 90) {
+    if (!isNaN(code) && code !== 0) {
+      if (code >= 40 && code <= 90) {
+        setErrorType('auth');
+      } else {
+        setErrorType('server');
+      }
       setIsActive(true);
-      setErrorType('auth');
+    } else if (isNaN(code) && props.code !== '') {
+      setIsActive(true);
+      setErrorType('etc');
     }
   }, [props.code, props.message]);
 
@@ -27,6 +34,10 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
         props.id
           ? props.requestForceLogOut(props.id)
           : alert('부적절한 요청입니다.');
+        break;
+      case 'server':
+      case 'etc':
+        props.handleCodeMessage('', '');
         break;
       default:
         break;
@@ -48,6 +59,7 @@ interface typePopupCT
     CategoryManageState,
     PostState {
   requestForceLogOut: (id: string) => void;
+  handleCodeMessage: (code: string, message: string) => void;
 }
 
 export default PopupCT;

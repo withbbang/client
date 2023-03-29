@@ -18,7 +18,7 @@ const PopupPT = ({ isActive, message, onBtn }: typePopupPT) => {
 
 interface typePopupPT {
   isActive: boolean;
-  message: string;
+  message?: string;
   onBtn: () => void;
 }
 

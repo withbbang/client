@@ -3,7 +3,7 @@ import { Category } from 'modules/types';
 
 export interface CommonState {
   code?: string;
-  message: string;
+  message?: string;
   isFetching: boolean;
   isSuccess: boolean;
   isFail: boolean;
@@ -104,6 +104,10 @@ const commonSlice = createSlice({
     },
     handleIsNight(state: CommonState) {
       state.isNight = !state.isNight;
+    },
+    handleCodeMessage(state: CommonState, action) {
+      state.code = action.payload.code;
+      state.message = action.payload.message;
     }
   }
 });
@@ -118,7 +122,8 @@ export const {
   requestSideBarCategory,
   successSideBarCategory,
   failSideBarCategory,
-  handleIsNight
+  handleIsNight,
+  handleCodeMessage
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

@@ -11,6 +11,7 @@ import {
   successUpdateCategory,
   failUpdateCategory
 } from 'middlewares/reduxTookits/categoryManageSlice';
+import { handleCodeMessage } from 'middlewares/reduxTookits/commonSlice';
 
 export function* categoryManageSaga() {
   yield takeEvery(requestCategory.type, handlepostCategories);
@@ -25,26 +26,32 @@ function* handlepostCategories() {
   try {
     const res: Generator = yield call(postCategories);
     yield put(successCategory(res));
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failCategory(error));
+    yield put(handleCodeMessage(error));
   }
 }
 
 function* handlePostCreateCategory(data: any) {
   try {
     const res: Generator = yield call(postCreateCategory, data);
-    yield put(successCreateCategory(res));
+    yield put(successCreateCategory());
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failCreateCategory(error));
+    yield put(handleCodeMessage(error));
   }
 }
 
 function* handlePostUpdateCategory(data: any) {
   try {
     const res: Generator = yield call(postUpdateCategory, data);
-    yield put(successUpdateCategory(res));
+    yield put(successUpdateCategory());
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failUpdateCategory(error));
+    yield put(handleCodeMessage(error));
   }
 }
 

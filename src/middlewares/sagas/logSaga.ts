@@ -11,6 +11,7 @@ import {
   successForceLogOut,
   failForceLogOut
 } from 'middlewares/reduxTookits/logSlice';
+import { handleCodeMessage } from 'middlewares/reduxTookits/commonSlice';
 
 export function* logSaga() {
   yield takeEvery(requestLogIn.type, handlePostLogIn);
@@ -25,26 +26,32 @@ function* handlePostLogIn(data: any) {
   try {
     const res: Generator = yield call(postLogIn, data);
     yield put(successLogIn(res));
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failLogIn(error));
+    yield put(handleCodeMessage(error));
   }
 }
 
 function* handlePostLogOut(data: any) {
   try {
     const res: Generator = yield call(postLogOut, data);
-    yield put(successLogOut(res));
+    yield put(successLogOut());
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failLogOut(error));
+    yield put(handleCodeMessage(error));
   }
 }
 
 function* handlePostForceLogOut(data: any) {
   try {
     const res: Generator = yield call(postForceLogOut, data);
-    yield put(successForceLogOut(res));
+    yield put(successForceLogOut());
+    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failForceLogOut(error));
+    yield put(handleCodeMessage(error));
   }
 }
 

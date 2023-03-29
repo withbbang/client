@@ -3,6 +3,7 @@ import LogCT from './LogCT';
 import { connect } from 'react-redux';
 import {
   CommonState,
+  handleCodeMessage,
   requestPublicKey
 } from 'middlewares/reduxTookits/commonSlice';
 import { PropState } from 'middlewares/configureReducer';
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     },
     requestLogIn: (id: string, password: string): void => {
       dispatch(requestLogIn({ id, password }));
+    },
+    handleCodeMessage: (code: string, message: string): void => {
+      dispatch(handleCodeMessage({ code, message }));
     }
   };
 };
