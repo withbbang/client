@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Index from 'screens/index';
 import NotFound from 'screens/notFound';
 import Sign from 'screens/sign';
