@@ -3,7 +3,6 @@ import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import LeftSideBarPT from './LeftSideBarPT';
 import { useNavigate } from 'react-router-dom';
-import { Category } from 'modules/types';
 
 const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 
   useEffect(() => {
     props.requestVisitCount();
-    props.requestSideBarCategory();
+    props.requestSideBarCategory(props.id);
   }, []);
 
   const handleLogOut = (): void => {
@@ -20,6 +19,10 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 
   const handleToggle = (): void => {
     setToggle(!toggle);
+  };
+
+  const handleNavigate = (title: string) => {
+    navigate(`/${title}`);
   };
 
   return (
@@ -32,6 +35,7 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
       id={props.id}
       toggle={toggle}
       onToggle={handleToggle}
+      onNavigate={handleNavigate}
       items={props.sideBarCategories}
     />
   );
@@ -40,7 +44,7 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 interface typeLeftSideBarCT extends CommonState, LogState {
   requestPublicKey: () => void;
   requestVisitCount: () => void;
-  requestSideBarCategory: () => void;
+  requestSideBarCategory: (id?: string) => void;
   requestLogIn: (id: string, password: string) => void;
   requestLogOut: (id: string) => void;
 }

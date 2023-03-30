@@ -6,6 +6,7 @@ import post, { PostState } from './reduxTookits/postSlice';
 import categoryManage, {
   CategoryManageState
 } from './reduxTookits/categoryManageSlice';
+import contents, { ContentsState } from './reduxTookits/contentsSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   log,
   common,
   post,
+  contents,
   categoryManage
   // add others...
 });
@@ -28,7 +30,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['admin', 'log', 'common', 'categoryManage'] // add others...
+  whitelist: ['log', 'common'] // add others...
 };
 
 /**
@@ -41,6 +43,7 @@ interface PropState {
   log: LogState;
   common: CommonState;
   post: PostState;
+  contents: ContentsState;
   categoryManage: CategoryManageState;
   // add others...
 }

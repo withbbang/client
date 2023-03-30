@@ -7,7 +7,7 @@ import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import Popup from 'components/popup';
 
-const IndexPT = (props: any) => {
+const IndexPT = ({ isNight, items }: typeIndexPT) => {
   return (
     <>
       <Loader loading={false} />
@@ -16,16 +16,27 @@ const IndexPT = (props: any) => {
       <Popup />
       <div
         className={
-          props.isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap
+          isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap
         }
       >
-        <div className={styles.innerWrap}>
-          {Array.isArray(props.items) &&
-            props.items.length > 0 &&
-            props.items.map((item: any, idx: number) => (
-              <Card key={idx} title={item.title} contents={item.contents} />
+        {Array.isArray(items) && items.length > 0 ? (
+          <div className={styles.innerWrap}>
+            {items.map((item: any, idx: number) => (
+              <Card
+                key={idx}
+                id={item.ID}
+                contentTitle={item.CONTENT_TITLE}
+                categoryTitle={item.CATEGORY_TITLE}
+                contents={item.CONTENT}
+                path={item.PATH}
+              />
             ))}
-        </div>
+          </div>
+        ) : (
+          <div className={[styles.innerWrap, styles.nothing].join(' ')}>
+            컨텐츠가 없습니다~!
+          </div>
+        )}
       </div>
       <Footer />
     </>
@@ -34,6 +45,7 @@ const IndexPT = (props: any) => {
 
 interface typeIndexPT {
   isNight?: boolean;
+  items?: Array<any>;
 }
 
 export default IndexPT;

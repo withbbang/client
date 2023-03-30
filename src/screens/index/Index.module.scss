@@ -1,5 +1,7 @@
 .wrap {
+  display: flex;
   width: 100%;
+  min-height: calc(100% - 100px);
   background: rgb(240, 240, 240);
   transition: background-color 0.5s linear;
   -moz-transition: background-color 0.5s linear;
@@ -14,6 +16,17 @@
     -webkit-transition: background-color 0.5s linear;
     -ms-transition: background-color 0.5s linear;
     -o-transition: background-color 0.5s linear;
+
+    .innerWrap {
+      &.nothing {
+        color: #fff;
+        transition: color 0.5s linear;
+        -moz-transition: color 0.5s linear;
+        -webkit-transition: color 0.5s linear;
+        -ms-transition: color 0.5s linear;
+        -o-transition: color 0.5s linear;
+      }
+    }
   }
 
   .innerWrap {
@@ -26,5 +39,17 @@
     // flex-flow: row wrap; /* 하위 두개의 모든 기능 제공 */
     flex-direction: row; /* 아이템 나열 방향 -> 수평 */
     flex-wrap: wrap; /* 아이템 width가 넘어갔을 경우 다음 라인으로 넘길지 말지 -> wrap: 넘김, nowrap: 안 넘김 */
+
+    &.nothing {
+      color: #000;
+      font-weight: bold;
+      font-size: 2rem;
+      justify-content: center;
+      transition: color 0.5s linear;
+      -moz-transition: color 0.5s linear;
+      -webkit-transition: color 0.5s linear;
+      -ms-transition: color 0.5s linear;
+      -o-transition: color 0.5s linear;
+    }
   }
 }

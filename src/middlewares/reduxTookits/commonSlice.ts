@@ -79,7 +79,7 @@ const commonSlice = createSlice({
       state.today = 0;
       state.total = 0;
     },
-    requestSideBarCategory(state: CommonState) {
+    requestSideBarCategory(state: CommonState, action) {
       state.code = '';
       state.message = '';
       state.isFetching = true;

@@ -11,6 +11,7 @@ const LeftSideBarPT = ({
   id,
   toggle,
   onToggle,
+  onNavigate,
   items
 }: typeLeftSideBarPT): JSX.Element => {
   return (
@@ -77,19 +78,28 @@ const LeftSideBarPT = ({
             items.length > 0 &&
             items.map((item, idx) => {
               return (
-                <div className={styles.menu} key={idx}>
+                <div
+                  className={styles.menu}
+                  onClick={() => onNavigate(item.TITLE)}
+                  key={idx}
+                >
                   <div className={styles.banner} />
                   <div className={styles.svg}>
                     <SVG
-                      type="doubleArrow"
+                      type={item.TITLE}
                       width="30px"
                       height="30px"
-                      fill="#fff"
+                      fill={isNight ? '#fff' : '#000'}
                     />
                   </div>
                   {item.TITLE}
                   <div className={styles.svg_}>
-                    <SVG type="arrow" width="30px" height="30px" fill="#fff" />
+                    <SVG
+                      type="arrow"
+                      width="30px"
+                      height="30px"
+                      fill={isNight ? '#fff' : '#000'}
+                    />
                   </div>
                 </div>
               );
@@ -117,6 +127,7 @@ interface typeLeftSideBarPT {
   id?: string;
   toggle: boolean;
   onToggle: () => void;
+  onNavigate: (path: string) => void;
   items?: Array<any>;
 }
 
