@@ -25,9 +25,8 @@ const IndexPT = ({ isNight, items }: typeIndexPT) => {
               <Card
                 key={idx}
                 id={item.ID}
-                contentTitle={item.CONTENT_TITLE}
-                categoryTitle={item.CATEGORY_TITLE}
-                contents={item.CONTENT}
+                title={item.TITLE}
+                content={item.CONTENT}
                 path={item.PATH}
               />
             ))}

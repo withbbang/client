@@ -80,7 +80,7 @@ const LeftSideBarPT = ({
               return (
                 <div
                   className={styles.menu}
-                  onClick={() => onNavigate(item.TITLE)}
+                  onClick={() => onNavigate(item.PATH)}
                   key={idx}
                 >
                   <div className={styles.banner} />

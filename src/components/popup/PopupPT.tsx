@@ -4,7 +4,7 @@ import styles from './Popup.module.scss';
 const PopupPT = ({ isActive, message, isNight, onBtn }: typePopupPT) => {
   return (
     <>
-      {isActive && message !== '성공' ? (
+      {isActive && message && message !== '성공' ? (
         <div
           className={
             isNight

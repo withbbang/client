@@ -21,8 +21,8 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
     setToggle(!toggle);
   };
 
-  const handleNavigate = (title: string) => {
-    navigate(`/${title}`);
+  const handleNavigate = (path: string) => {
+    navigate(`/${path}`);
   };
 
   return (

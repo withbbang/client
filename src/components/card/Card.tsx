@@ -16,18 +16,11 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {};
 };
 
-const Card = ({
-  isNight,
-  id,
-  contentTitle,
-  categoryTitle,
-  contents,
-  path
-}: typeCard): JSX.Element => {
+const Card = ({ isNight, title, content, path }: typeCard): JSX.Element => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    path ? navigate(path) : navigate(`/:${categoryTitle}/:${id}`);
+    path ? navigate(path) : alert('부적절한 요청입니다.');
   };
 
   return (
@@ -35,17 +28,16 @@ const Card = ({
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
       onClick={handleNavigate}
     >
-      <h3>{contentTitle}</h3>
-      <p>{contents}</p>
+      <h3>{title}</h3>
+      <p>{content ? content : title}</p>
     </div>
   );
 };
 
 interface typeCard extends CommonState {
   id: string;
-  contentTitle: string;
-  categoryTitle: string;
-  contents: string;
+  title: string;
+  content: string;
   path?: string;
 }
 
