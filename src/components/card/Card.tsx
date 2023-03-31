@@ -37,7 +37,7 @@ const Card = ({ isNight, title, content, path }: typeCard): JSX.Element => {
 interface typeCard extends CommonState {
   id: string;
   title: string;
-  content: string;
+  content?: string;
   path?: string;
 }
 

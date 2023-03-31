@@ -27,6 +27,7 @@ const LogCT = (props: typeLogCT): JSX.Element => {
 
   const handleLogIn = (e?: React.KeyboardEvent<HTMLInputElement>) => {
     e?.preventDefault();
+
     if (e !== undefined && e.key !== 'Enter') {
       return;
     }

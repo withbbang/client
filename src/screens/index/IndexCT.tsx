@@ -12,7 +12,13 @@ const IndexCT = (props: typeIndexCT) => {
     props.requestContents(title, props.id);
   }, []);
 
-  return <IndexPT isNight={props.isNight} items={props.contents} />;
+  return (
+    <IndexPT
+      loading={props.isFetching}
+      isNight={props.isNight}
+      items={props.contents}
+    />
+  );
 };
 
 interface typeIndexCT extends CommonState, LogState, ContentsState {

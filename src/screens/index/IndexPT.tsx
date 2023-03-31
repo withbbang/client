@@ -7,10 +7,10 @@ import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import Popup from 'components/popup';
 
-const IndexPT = ({ isNight, items }: typeIndexPT) => {
+const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
   return (
     <>
-      <Loader loading={false} />
+      <Loader loading={loading} />
       <Header />
       <LeftSideBar />
       <Popup />
@@ -43,6 +43,7 @@ const IndexPT = ({ isNight, items }: typeIndexPT) => {
 };
 
 interface typeIndexPT {
+  loading: boolean;
   isNight?: boolean;
   items?: Array<any>;
 }

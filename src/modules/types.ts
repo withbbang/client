@@ -3,12 +3,13 @@ export interface Category {
   TITLE: string;
   PRIORITY: number;
   PATH: string;
+  DESCRIPTION?: string;
 }
 
 export interface Content {
   ID: string;
   TITLE: string;
-  CONTENT: string;
+  CONTENT?: string;
   HIT: number;
   HEART: number;
   CREATE_DT: string;
