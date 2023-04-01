@@ -1,5 +1,5 @@
 export interface Category {
-  ID: string;
+  ID: number;
   TITLE: string;
   PRIORITY: number;
   PATH: string;
