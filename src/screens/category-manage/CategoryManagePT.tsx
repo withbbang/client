@@ -17,7 +17,13 @@ const CategoryManagePT = ({
   updateBtnRef,
   onSetTitle,
   onCreateCategory,
-  onUpdateCategory
+  onUpdateCategory,
+  onDragStart,
+  onDrag,
+  onDragEnd,
+  onDragOver,
+  onDragEnter,
+  onDragLeave
 }: typeCategoryManagePT): JSX.Element => (
   <>
     <Loader loading={loading} />
@@ -36,6 +42,12 @@ const CategoryManagePT = ({
               content={category.CONTENT}
               path={category.PATH}
               description={category.DESCRIPTION}
+              onDragStart={onDragStart}
+              onDrag={onDrag}
+              onDragEnd={onDragEnd}
+              onDragOver={onDragOver}
+              onDragEnter={onDragEnter}
+              onDragLeave={onDragLeave}
             />
           ))}
         </div>
@@ -72,6 +84,12 @@ interface typeCategoryManagePT {
   onSetTitle: React.Dispatch<React.SetStateAction<string>>;
   onCreateCategory: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
   onUpdateCategory: () => void;
+  onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDrag: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
 export default CategoryManagePT;

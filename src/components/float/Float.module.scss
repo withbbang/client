@@ -19,7 +19,7 @@
     box-shadow 0.5s ease-in-out;
   -o-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
     box-shadow 0.5s ease-in-out;
-  cursor: grab;
+  cursor: move;
 
   .innerWrap {
     display: flex;
@@ -88,7 +88,7 @@
 }
 
 .wrap:hover {
-  cursor: grab;
+  cursor: move;
   /* 1.03배로 크기 키우기 */
   transform: scale(1.03);
   /* offset-x | offset-y | blur-radius | spread-radius | color */

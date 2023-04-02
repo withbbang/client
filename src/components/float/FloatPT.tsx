@@ -6,11 +6,24 @@ const FloatPT = ({
   title,
   content,
   path,
-  description
+  description,
+  onDragStart,
+  onDrag,
+  onDragEnd,
+  onDragOver,
+  onDragEnter,
+  onDragLeave
 }: typeFloatPT): JSX.Element => {
   return (
     <div
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
+      draggable
+      onDragStart={(e) => onDragStart(e)}
+      onDrag={(e) => onDrag(e)}
+      onDragEnd={(e) => onDragEnd(e)}
+      onDragOver={(e) => onDragOver(e)}
+      onDragEnter={(e) => onDragEnter(e)}
+      onDragLeave={(e) => onDragLeave(e)}
     >
       <div className={styles.innerWrap}>
         <h3>카테고리: {title}</h3>
@@ -27,6 +40,12 @@ interface typeFloatPT {
   content?: string;
   path?: string;
   description: string;
+  onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDrag: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
 export default FloatPT;
