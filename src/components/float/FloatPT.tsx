@@ -3,6 +3,8 @@ import styles from './Float.module.scss';
 
 const FloatPT = ({
   isNight,
+  idx,
+  isDrag,
   title,
   content,
   path,
@@ -12,18 +14,20 @@ const FloatPT = ({
   onDragEnd,
   onDragOver,
   onDragEnter,
-  onDragLeave
+  onDragLeave,
+  onDrop
 }: typeFloatPT): JSX.Element => {
   return (
     <div
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
       draggable
-      onDragStart={(e) => onDragStart(e)}
-      onDrag={(e) => onDrag(e)}
-      onDragEnd={(e) => onDragEnd(e)}
-      onDragOver={(e) => onDragOver(e)}
-      onDragEnter={(e) => onDragEnter(e)}
-      onDragLeave={(e) => onDragLeave(e)}
+      onDragStart={(e) => onDragStart(e, idx)}
+      onDrag={(e) => onDrag(e, idx)}
+      onDragEnd={(e) => onDragEnd(e, idx)}
+      onDragOver={(e) => onDragOver(e, idx)}
+      onDragEnter={(e) => onDragEnter(e, idx)}
+      onDragLeave={(e) => onDragLeave(e, idx)}
+      onDrop={(e) => onDrop(e, idx)}
     >
       <div className={styles.innerWrap}>
         <h3>카테고리: {title}</h3>
@@ -36,16 +40,19 @@ const FloatPT = ({
 
 interface typeFloatPT {
   isNight?: boolean;
+  idx: number;
+  isDrag: boolean;
   title: string;
   content?: string;
   path?: string;
   description: string;
-  onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDrag: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragStart: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDrag: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragEnd: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragEnter: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragLeave: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDrop: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
 }
 
 export default FloatPT;

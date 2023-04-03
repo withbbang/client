@@ -12,6 +12,8 @@ const CategoryManagePT = ({
   loading,
   isNight,
   categories,
+  tempCategories,
+  isDrag,
   titleRef,
   createBtnRef,
   updateBtnRef,
@@ -23,12 +25,13 @@ const CategoryManagePT = ({
   onDragEnd,
   onDragOver,
   onDragEnter,
-  onDragLeave
+  onDragLeave,
+  onDrop
 }: typeCategoryManagePT): JSX.Element => (
   <>
     <Loader loading={loading} />
     <Header />
-    <LeftSideBar />
+    {/* <LeftSideBar /> */}
     <Popup />
     <div
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
@@ -38,6 +41,8 @@ const CategoryManagePT = ({
           {categories.map((category: any, idx: number) => (
             <Float
               key={idx}
+              idx={idx}
+              isDrag={isDrag}
               title={category.TITLE}
               content={category.CONTENT}
               path={category.PATH}
@@ -48,6 +53,7 @@ const CategoryManagePT = ({
               onDragOver={onDragOver}
               onDragEnter={onDragEnter}
               onDragLeave={onDragLeave}
+              onDrop={onDrop}
             />
           ))}
         </div>
@@ -78,18 +84,21 @@ interface typeCategoryManagePT {
   loading: boolean;
   isNight?: boolean;
   categories?: Array<Category>;
+  tempCategories?: Array<Category>;
+  isDrag: boolean;
   titleRef: React.MutableRefObject<HTMLInputElement>;
   createBtnRef: React.MutableRefObject<HTMLButtonElement>;
   updateBtnRef: React.MutableRefObject<HTMLButtonElement>;
   onSetTitle: React.Dispatch<React.SetStateAction<string>>;
   onCreateCategory: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
   onUpdateCategory: () => void;
-  onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDrag: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragStart: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDrag: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragEnd: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragEnter: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDragLeave: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
+  onDrop: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
 }
 
 export default CategoryManagePT;

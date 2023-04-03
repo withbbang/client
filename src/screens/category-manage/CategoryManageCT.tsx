@@ -20,6 +20,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const [tempCategories, setTempCategories] = useState<Array<Category>>([]);
   const [title, setTitle] = useState<string>('');
   const [isDrag, setIsDrag] = useState<boolean>(false);
+  const [draggingIdx, setDraggingIdx] = useState<number>(-1);
 
   const tempArr = [
     { ID: 1, TITLE: 'title_1', PRIORITY: 1, PATH: 'paht_1' },
@@ -39,14 +40,15 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   ];
 
   useEffect(() => {
-    !!!handleGetCookie('atk') ||
-    !!!handleGetCookie('rtk') ||
-    !props.id ||
-    !props.isLoggedIn
-      ? navigate('/')
-      : props.requestCategory();
+    // !!!handleGetCookie('atk') ||
+    // !!!handleGetCookie('rtk') ||
+    // !props.id ||
+    // !props.isLoggedIn
+    //   ? navigate('/')
+    //   : props.requestCategory();
 
     setCategories(tempArr);
+    setTempCategories(tempArr);
   }, []);
 
   // useEffect(() => {
@@ -85,40 +87,41 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     updateBtnRef && updateBtnRef.current.blur();
   };
 
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
+    setIsDrag(true);
+    setDraggingIdx(idx);
+    e.currentTarget.style.opacity = '0.4';
     console.log('dragStart');
   };
 
-  const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDrag = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
     console.log('drag');
   };
 
-  const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDragEnd = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
+    setIsDrag(false);
+    setDraggingIdx(-1);
+    e.currentTarget.style.opacity = '';
     console.log('dragEnd');
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
+    if (draggingIdx !== idx) {
+    }
+
     console.log('dragOver');
   };
 
-  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
     console.log('dragEnter');
   };
 
-  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
     console.log('dragLeave');
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
+    console.log('dragDrop');
   };
 
   return (
@@ -126,6 +129,8 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       loading={props.isFetching}
       isNight={props.isNight}
       categories={categories}
+      tempCategories={tempCategories}
+      isDrag={isDrag}
       titleRef={titleRef}
       createBtnRef={createBtnRef}
       updateBtnRef={updateBtnRef}
@@ -138,6 +143,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       onDragOver={handleDragOver}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
     />
   );
 };
