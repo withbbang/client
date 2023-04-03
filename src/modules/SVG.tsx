@@ -85,7 +85,7 @@ const SVG = (props: typeSVG): JSX.Element => {
       );
     case 'TYPESCRIPT':
     case 'TypeScript':
-    case 'Tpyescript':
+    case 'Typescript':
     case 'typescript':
     case 'TS':
     case 'Ts':
