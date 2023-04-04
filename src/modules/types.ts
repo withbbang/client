@@ -26,3 +26,9 @@ export interface typeSVG {
   bracketFill?: string;
   quoteFill?: string;
 }
+
+export interface Authority {
+  AUTH: number;
+  PERMISSION?: string;
+  DESCRIPTION: string;
+}

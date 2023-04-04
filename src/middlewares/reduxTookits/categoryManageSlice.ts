@@ -41,10 +41,11 @@ const categoryManageSlice = createSlice({
       state.isSuccess = false;
       state.isFail = false;
     },
-    successCreateCategory(state: CategoryManageState) {
+    successCreateCategory(state: CategoryManageState, action) {
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
+      state.categories = action.payload.categories;
     },
     failCreateCategory(state: CategoryManageState) {
       state.isFetching = false;
@@ -56,10 +57,11 @@ const categoryManageSlice = createSlice({
       state.isSuccess = false;
       state.isFail = false;
     },
-    successUpdateCategory(state: CategoryManageState) {
+    successUpdateCategory(state: CategoryManageState, action) {
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
+      state.categories = action.payload.categories;
     },
     failUpdateCategory(state: CategoryManageState) {
       state.isFetching = false;

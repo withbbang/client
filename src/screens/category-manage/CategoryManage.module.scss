@@ -53,4 +53,139 @@
       -o-transition: color 0.5s linear;
     }
   }
+
+  .createBox {
+    display: flex;
+    position: fixed;
+    top: 60%;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background-color: rgb(220, 220, 220);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-sizing: border-box;
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+    -moz-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+    -webkit-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+    -ms-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+    -o-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+    z-index: 50;
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      width: 30px;
+      height: 50px;
+      position: absolute;
+      list-style: none;
+      left: -29px;
+      z-index: 50;
+      box-sizing: border-box;
+      top: calc(100% - 175px);
+      background-color: rgb(220, 220, 220);
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      transition: background-color 0.5s linear;
+      -moz-transition: background-color 0.5s linear;
+      -webkit-transition: background-color 0.5s linear;
+      -ms-transition: background-color 0.5s linear;
+      -o-transition: background-color 0.5s linear;
+      cursor: pointer;
+
+      svg {
+        transition: transform linear 0.5s;
+      }
+    }
+
+    .innerBox {
+      width: 300px;
+      height: calc(100% - 60px);
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      justify-content: space-between;
+
+      :nth-child(n) {
+        width: 250px;
+        height: 40px;
+        border: solid 1px rgb(125, 125, 125);
+        border-radius: 10px;
+        box-sizing: border-box;
+        box-shadow: none;
+        transition: box-shadow 0.5s ease-in-out;
+        background: #fff;
+      }
+
+      > input,
+      select {
+        padding: 0 10px;
+      }
+
+      > input:focus,
+      select:focus,
+      button:hover {
+        box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.5s ease-in-out;
+      }
+
+      > input::placeholder {
+        color: #aaa;
+      }
+
+      > select,
+      button {
+        cursor: pointer;
+      }
+    }
+
+    &.night {
+      background-color: rgb(60, 60, 60);
+      transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+      -moz-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+      -webkit-transition: transform 0.5s ease-in-out,
+        background-color 0.5s linear;
+      -ms-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+      -o-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+
+      .toggle {
+        background-color: rgb(60, 60, 60);
+        transition: background-color 0.5s linear;
+        -moz-transition: background-color 0.5s linear;
+        -webkit-transition: background-color 0.5s linear;
+        -ms-transition: background-color 0.5s linear;
+        -o-transition: background-color 0.5s linear;
+      }
+
+      .innerBox {
+        > input:focus,
+        select:focus,
+        button:hover {
+          border: solid 1px rgb(125, 125, 125);
+          box-shadow: 4px 4px 2px 1px rgba(255, 255, 255, 0.2);
+          transition: box-shadow 0.5s ease-in-out;
+        }
+      }
+    }
+
+    &.off {
+      right: 0px;
+      transform: translateX(300px);
+      transition: transform 0.5s ease-in-out;
+      -moz-transition: transform 0.5s ease-in-out;
+      -webkit-transition: transform 0.5s ease-in-out;
+      -ms-transition: transform 0.5s ease-in-out;
+      -o-transition: transform 0.5s ease-in-out;
+      box-sizing: border-box;
+      z-index: 50;
+
+      .toggle {
+        svg {
+          transform: rotate(180deg);
+          transition: transform linear 0.5s;
+        }
+      }
+    }
+  }
 }

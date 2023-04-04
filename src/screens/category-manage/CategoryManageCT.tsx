@@ -6,28 +6,40 @@ import { useNavigate } from 'react-router-dom';
 import { Category } from 'modules/types';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
+import { AuthorityState } from 'middlewares/reduxTookits/authoritySlice';
 
 const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const navigate = useNavigate();
 
   const titleRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+  const pathRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
   const createBtnRef =
     React.useRef() as React.MutableRefObject<HTMLButtonElement>;
   const updateBtnRef =
     React.useRef() as React.MutableRefObject<HTMLButtonElement>;
 
   const [categories, setCategories] = useState<Array<Category>>([]);
-  const [title, setTitle] = useState<string>('');
   const [isDrag, setIsDrag] = useState<boolean>(false);
   const [draggingIdx, setDraggingIdx] = useState<number>(-1);
+  const [toggle, setToggle] = useState<boolean>(false);
+
+  const [title, setTitle] = useState<string>('');
+  const [priority, setPriority] = useState<number | undefined>();
+  const [auth, setAuth] = useState<number>(20);
+  const [path, setPath] = useState<string>('');
 
   useEffect(() => {
-    !!!handleGetCookie('atk') ||
-    !!!handleGetCookie('rtk') ||
-    !props.id ||
-    !props.isLoggedIn
-      ? navigate('/')
-      : props.requestCategory(props.id);
+    if (
+      !!!handleGetCookie('atk') ||
+      !!!handleGetCookie('rtk') ||
+      !props.id ||
+      !props.isLoggedIn
+    ) {
+      navigate('/');
+    } else {
+      props.requestCategory(props.id);
+      props.requestAuthority(props.id);
+    }
   }, []);
 
   useEffect(() => {
@@ -47,8 +59,18 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       return;
     }
 
-    props.requestCreateCategory(title);
-    props.handleCodeMessage('', '');
+    if (!path) {
+      props.handleCodeMessage('EMPTY PATH', 'PATH을 입력해주세요.');
+      handleCreateBlur();
+      return;
+    }
+
+    if (props.id) {
+      props.requestCreateCategory(title, path, auth, props.id, priority);
+      props.handleCodeMessage('', '');
+    } else {
+      props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+    }
     handleCreateBlur();
   };
 
@@ -59,11 +81,16 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
 
   const handleCreateBlur = () => {
     titleRef && titleRef.current.blur();
+    pathRef && pathRef.current.blur();
     createBtnRef && createBtnRef.current.blur();
   };
 
   const handleUpdateBlur = () => {
     updateBtnRef && updateBtnRef.current.blur();
+  };
+
+  const handleToggle = () => {
+    setToggle(!toggle);
   };
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
@@ -109,12 +136,17 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     <CategoryManagePT
       loading={props.isFetching}
       isNight={props.isNight}
+      authorities={props.authorities}
       categories={categories}
       isDrag={isDrag}
+      toggle={toggle}
       titleRef={titleRef}
+      pathRef={pathRef}
       createBtnRef={createBtnRef}
       updateBtnRef={updateBtnRef}
+      onToggle={handleToggle}
       onSetTitle={setTitle}
+      onSetPath={setPath}
       onCreateCategory={handleCreateCategory}
       onUpdateCategory={handleUpdateCategory}
       onDragStart={handleDragStart}
@@ -131,10 +163,18 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
 interface typeCategoryManageCT
   extends CommonState,
     LogState,
-    CategoryManageState {
+    CategoryManageState,
+    AuthorityState {
   requestCategory: (id?: string) => void;
-  requestCreateCategory: (title: string, priority?: number) => void;
+  requestCreateCategory: (
+    title: string,
+    path: string,
+    auth: number,
+    id?: string,
+    priority?: number
+  ) => void;
   requestUpdateCategory: (categories: Array<Category>) => void;
+  requestAuthority: (id?: string) => void;
   handleCodeMessage: (code: string, message: string) => void;
 }
 

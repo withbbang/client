@@ -36,7 +36,7 @@ function* handlepostCategories(data: any) {
 function* handlePostCreateCategory(data: any) {
   try {
     const res: Generator = yield call(postCreateCategory, data);
-    yield put(successCreateCategory());
+    yield put(successCreateCategory(res));
     yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failCreateCategory(error));
@@ -47,7 +47,7 @@ function* handlePostCreateCategory(data: any) {
 function* handlePostUpdateCategory(data: any) {
   try {
     const res: Generator = yield call(postUpdateCategory, data);
-    yield put(successUpdateCategory());
+    yield put(successUpdateCategory(res));
     yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failUpdateCategory(error));

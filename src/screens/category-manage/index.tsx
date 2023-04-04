@@ -14,14 +14,19 @@ import {
   handleCodeMessage
 } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
+import {
+  AuthorityState,
+  requestAuthority
+} from 'middlewares/reduxTookits/authoritySlice';
 
 const mapStateToProps = (
   state: PropState
-): CommonState | LogState | CategoryManageState => {
+): CommonState | LogState | CategoryManageState | AuthorityState => {
   return {
     ...state.common,
     ...state.log,
-    ...state.categoryManage
+    ...state.categoryManage,
+    ...state.authority
   };
 };
 
@@ -30,11 +35,20 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestCategory: (id?: string): void => {
       dispatch(requestCategory({ id }));
     },
-    requestCreateCategory: (title: string, priority?: number): void => {
-      dispatch(requestCreateCategory({ title, priority }));
+    requestCreateCategory: (
+      title: string,
+      path: string,
+      auth: number,
+      id?: string,
+      priority?: number
+    ): void => {
+      dispatch(requestCreateCategory({ title, path, auth, id, priority }));
     },
     requestUpdateCategory: (categories: Array<Category>): void => {
       dispatch(requestUpdateCategory({ categories }));
+    },
+    requestAuthority: (id?: string): void => {
+      dispatch(requestAuthority({ id }));
     },
     handleCodeMessage: (code: string, message: string): void => {
       dispatch(handleCodeMessage({ code, message }));

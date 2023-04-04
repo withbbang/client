@@ -7,6 +7,7 @@ import categoryManage, {
   CategoryManageState
 } from './reduxTookits/categoryManageSlice';
 import contents, { ContentsState } from './reduxTookits/contentsSlice';
+import authority, { AuthorityState } from './reduxTookits/authoritySlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   common,
   post,
   contents,
-  categoryManage
+  categoryManage,
+  authority
   // add others...
 });
 
@@ -45,6 +47,7 @@ interface PropState {
   post: PostState;
   contents: ContentsState;
   categoryManage: CategoryManageState;
+  authority: AuthorityState;
   // add others...
 }
 

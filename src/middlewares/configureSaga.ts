@@ -5,6 +5,7 @@ import { logSaga } from './sagas/logSaga';
 import { postSaga } from './sagas/postSaga';
 import { contentsSaga } from './sagas/contentsSaga';
 import { categoryManageSaga } from './sagas/categoryManageSaga';
+import { authoritySaga } from './sagas/authoritySaga';
 
 function sagaConfigure(sagaMiddleware: SagaMiddleware): void {
   sagaMiddleware.run(signSaga);
@@ -13,6 +14,7 @@ function sagaConfigure(sagaMiddleware: SagaMiddleware): void {
   sagaMiddleware.run(postSaga);
   sagaMiddleware.run(contentsSaga);
   sagaMiddleware.run(categoryManageSaga);
+  sagaMiddleware.run(authoritySaga);
   // add others...
 }
 
