@@ -22,7 +22,7 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
   };
 
   const handleNavigate = (path: string) => {
-    navigate(`/${path}`);
+    navigate(path);
   };
 
   return (

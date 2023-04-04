@@ -12,7 +12,6 @@ const CategoryManagePT = ({
   loading,
   isNight,
   categories,
-  tempCategories,
   isDrag,
   titleRef,
   createBtnRef,
@@ -31,7 +30,7 @@ const CategoryManagePT = ({
   <>
     <Loader loading={loading} />
     <Header />
-    {/* <LeftSideBar /> */}
+    <LeftSideBar />
     <Popup />
     <div
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
@@ -84,7 +83,6 @@ interface typeCategoryManagePT {
   loading: boolean;
   isNight?: boolean;
   categories?: Array<Category>;
-  tempCategories?: Array<Category>;
   isDrag: boolean;
   titleRef: React.MutableRefObject<HTMLInputElement>;
   createBtnRef: React.MutableRefObject<HTMLButtonElement>;
