@@ -27,8 +27,8 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
-    requestCategory: (): void => {
-      dispatch(requestCategory());
+    requestCategory: (id?: string): void => {
+      dispatch(requestCategory({ id }));
     },
     requestCreateCategory: (title: string, priority?: number): void => {
       dispatch(requestCreateCategory({ title, priority }));

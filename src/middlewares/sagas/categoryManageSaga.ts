@@ -22,9 +22,9 @@ export function* categoryManageSaga() {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-function* handlepostCategories() {
+function* handlepostCategories(data: any) {
   try {
-    const res: Generator = yield call(postCategories);
+    const res: Generator = yield call(postCategories, data);
     yield put(successCategory(res));
     yield put(handleCodeMessage(res));
   } catch (error: any) {
@@ -58,8 +58,8 @@ function* handlePostUpdateCategory(data: any) {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-async function postCategories(): Promise<any> {
-  return postAPI('/server/admin/category-manage/categories');
+async function postCategories(data: any): Promise<any> {
+  return postAPI('/server/admin/category-manage/categories', data);
 }
 
 async function postCreateCategory(data: any): Promise<any> {

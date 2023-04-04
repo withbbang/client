@@ -19,7 +19,7 @@ const categoryManageSlice = createSlice({
   name: 'categoryManage',
   initialState,
   reducers: {
-    requestCategory(state: CategoryManageState) {
+    requestCategory(state: CategoryManageState, action) {
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;

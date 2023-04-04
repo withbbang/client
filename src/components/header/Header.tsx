@@ -44,11 +44,16 @@ const Header = (props: typeHeader): JSX.Element => {
   }, [props.id, props.isLoggedIn]);
 
   const handleLog = () => {
-    isLoggedIn
-      ? props.id
-        ? props.requestLogOut(props.id)
-        : console.log('오류 팝업')
-      : navigate('/log');
+    if (isLoggedIn) {
+      if (props.id) {
+        props.requestLogOut(props.id);
+        navigate('/');
+      } else {
+        console.log('오류 팝업');
+      }
+    } else {
+      navigate('/log');
+    }
   };
 
   return (

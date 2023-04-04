@@ -1,17 +1,24 @@
 import { handleGetCookie } from './cookie';
 
-const headers: HeadersInit | undefined =
-  handleGetCookie('atk') && handleGetCookie('rtk')
-    ? {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + handleGetCookie('atk'),
-        Refresh: 'Bearer ' + handleGetCookie('rtk')
-      }
-    : {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      };
+/**
+ * API 헤더 설정 함수
+ * @returns {HeadersInit}
+ */
+function handleSetHeaders(): HeadersInit {
+  if (handleGetCookie('atk') && handleGetCookie('rtk')) {
+    return {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + handleGetCookie('atk'),
+      Refresh: 'Bearer ' + handleGetCookie('rtk')
+    };
+  } else {
+    return {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    };
+  }
+}
 
 /**
  * GET API
@@ -23,7 +30,7 @@ function getAPI(url: string): Promise<any> {
     fetch(url, {
       method: 'GET',
       // mode: "no-cors",
-      headers
+      headers: handleSetHeaders()
     })
       .then((response) => {
         if (response.status < 300) {
@@ -59,7 +66,7 @@ function postAPI(url: string, { payload }: any = {}): Promise<any> {
     fetch(url, {
       method: 'POST',
       // mode: "no-cors",
-      headers,
+      headers: handleSetHeaders(),
       body: JSON.stringify(payload)
     })
       .then((response) => {
@@ -96,7 +103,7 @@ function putAPI(url: string, { payload }: any = {}): Promise<any> {
     fetch(url, {
       method: 'PUT',
       // mode: "no-cors",
-      headers,
+      headers: handleSetHeaders(),
       body: JSON.stringify(payload)
     })
       .then((response) => {
@@ -133,7 +140,7 @@ function deleteAPI(url: string, { payload }: any = {}): Promise<any> {
     fetch(url, {
       method: 'DELETE',
       // mode: "no-cors",
-      headers,
+      headers: handleSetHeaders(),
       body: JSON.stringify(payload)
     })
       .then((response) => {

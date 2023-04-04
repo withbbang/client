@@ -10,8 +10,11 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
 
   useEffect(() => {
     props.requestVisitCount();
-    props.requestSideBarCategory(props.id);
   }, []);
+
+  useEffect(() => {
+    props.requestSideBarCategory(props.id);
+  }, [props.id, props.isLoggedIn, props.isLoggedOut]);
 
   const handleLogOut = (): void => {
     props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');

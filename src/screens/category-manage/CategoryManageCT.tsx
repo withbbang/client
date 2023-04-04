@@ -27,7 +27,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     !props.id ||
     !props.isLoggedIn
       ? navigate('/')
-      : props.requestCategory();
+      : props.requestCategory(props.id);
   }, []);
 
   useEffect(() => {
@@ -132,7 +132,7 @@ interface typeCategoryManageCT
   extends CommonState,
     LogState,
     CategoryManageState {
-  requestCategory: () => void;
+  requestCategory: (id?: string) => void;
   requestCreateCategory: (title: string, priority?: number) => void;
   requestUpdateCategory: (categories: Array<Category>) => void;
   handleCodeMessage: (code: string, message: string) => void;

@@ -10,7 +10,7 @@ const IndexCT = (props: typeIndexCT) => {
 
   useEffect(() => {
     props.requestContents(title, props.id);
-  }, []);
+  }, [props.id, props.isLoggedIn, props.isLoggedOut]);
 
   return (
     <IndexPT
