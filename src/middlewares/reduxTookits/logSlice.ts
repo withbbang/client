@@ -26,7 +26,7 @@ const logSlice = createSlice({
       state.id = action.payload.id;
       state.auth = action.payload.auth;
     },
-    failLogIn(state: LogState) {
+    failLogIn(state: LogState, action) {
       state.isLoggedIn = false;
       state.isLoggedOut = false;
       state.id = '';
@@ -36,7 +36,7 @@ const logSlice = createSlice({
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     },
-    successLogOut(state: LogState) {
+    successLogOut(state: LogState, action) {
       state.isLoggedIn = false;
       state.isLoggedOut = true;
       state.id = '';
@@ -50,13 +50,13 @@ const logSlice = createSlice({
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     },
-    successForceLogOut(state: LogState) {
+    successForceLogOut(state: LogState, action) {
       state.isLoggedIn = false;
       state.isLoggedOut = true;
       state.id = '';
       state.auth = -1;
     },
-    failForceLogOut(state: LogState) {
+    failForceLogOut(state: LogState, action) {
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     }

@@ -33,7 +33,7 @@ function* handlePostLogIn(data: any) {
 function* handlePostLogOut(data: any) {
   try {
     const res: Generator = yield call(postLogOut, data);
-    yield put(successLogOut());
+    yield put(successLogOut(res));
   } catch (error: any) {
     yield put(failLogOut(error));
   }
@@ -42,7 +42,7 @@ function* handlePostLogOut(data: any) {
 function* handlePostForceLogOut(data: any) {
   try {
     const res: Generator = yield call(postForceLogOut, data);
-    yield put(successForceLogOut());
+    yield put(successForceLogOut(res));
   } catch (error: any) {
     yield put(failForceLogOut(error));
   }

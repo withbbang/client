@@ -5,8 +5,11 @@ import PopupPT from './PopupPT';
 import { SignState } from 'middlewares/reduxTookits/signSlice';
 import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
 import { PostState } from 'middlewares/reduxTookits/postSlice';
+import { useNavigate } from 'react-router-dom';
 
 const PopupCT = (props: typePopupCT): JSX.Element => {
+  const navigate = useNavigate();
+
   const [isActive, setIsActive] = useState<boolean>(false);
   const [errorType, setErrorType] = useState<string>('');
 
@@ -31,9 +34,12 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
   const handleBtn = () => {
     switch (errorType) {
       case 'auth':
-        props.id
-          ? props.requestForceLogOut(props.id)
-          : alert('부적절한 요청입니다.');
+        if (props.id) {
+          props.requestForceLogOut(props.id);
+          navigate('/');
+        } else {
+          props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+        }
         break;
       case 'server':
       case 'client':
