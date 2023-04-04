@@ -1,17 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Category } from 'modules/types';
+import { CommonState } from './commonSlice';
 
 export interface CategoryManageState {
-  isFetching: boolean;
-  isSuccess: boolean;
-  isFail: boolean;
   categories?: Array<Category>;
 }
 
 export const initialState: CategoryManageState = {
-  isFetching: false,
-  isSuccess: false,
-  isFail: false,
   categories: []
 };
 
@@ -19,55 +14,23 @@ const categoryManageSlice = createSlice({
   name: 'categoryManage',
   initialState,
   reducers: {
-    requestCategory(state: CategoryManageState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
-    },
+    requestCategory(state: CategoryManageState, action) {},
     successCategory(state: CategoryManageState, action) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.categories = action.payload.categories;
     },
     failCategory(state: CategoryManageState) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
       state.categories = [];
     },
-    requestCreateCategory(state: CategoryManageState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
-    },
+    requestCreateCategory(state: CategoryManageState, action) {},
     successCreateCategory(state: CategoryManageState, action) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.categories = action.payload.categories;
     },
-    failCreateCategory(state: CategoryManageState) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
-    },
-    requestUpdateCategory(state: CategoryManageState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
-    },
+    failCreateCategory(state: CategoryManageState) {},
+    requestUpdateCategory(state: CategoryManageState, action) {},
     successUpdateCategory(state: CategoryManageState, action) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.categories = action.payload.categories;
     },
-    failUpdateCategory(state: CategoryManageState) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
-    }
+    failUpdateCategory(state: CategoryManageState) {}
   }
 });
 
@@ -82,5 +45,71 @@ export const {
   successUpdateCategory,
   failUpdateCategory
 } = categoryManageSlice.actions;
+
+export const categoryManageExtraReducers = {
+  'categoryManage/requestCategory': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'categoryManage/successCategory': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/failCategory': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/requestCreateCategory': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'categoryManage/successCreateCategory': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/failCreateCategory': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/requestUpdateCategory': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'categoryManage/successUpdateCategory': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/failUpdateCategory': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  }
+};
 
 export default categoryManageSlice.reducer;

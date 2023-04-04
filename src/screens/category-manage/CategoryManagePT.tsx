@@ -131,7 +131,7 @@ const CategoryManagePT = ({
 );
 
 interface typeCategoryManagePT {
-  loading: boolean;
+  loading?: boolean;
   isNight?: boolean;
   authorities?: Array<Authority>;
   categories?: Array<Category>;

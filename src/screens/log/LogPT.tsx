@@ -58,7 +58,7 @@ const LogPT = ({
 
 interface typeLogPT {
   onLogIn: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
-  loading: boolean;
+  loading?: boolean;
   isNight?: boolean;
   idRef: React.MutableRefObject<HTMLInputElement>;
   passwordRef: React.MutableRefObject<HTMLInputElement>;

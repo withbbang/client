@@ -16,7 +16,7 @@ const SignPT = ({ loading, onSignUp, onSignOut }: typeSignPT): JSX.Element => {
 };
 
 interface typeSignPT {
-  loading: boolean;
+  loading?: boolean;
   onSignUp: (id: string, password: string) => void;
   onSignOut: (id: string, password: string) => void;
 }

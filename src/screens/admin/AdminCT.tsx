@@ -1,3 +1,4 @@
+import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { handleGetCookie } from 'modules/cookie';
 import React, { useEffect, useState } from 'react';
@@ -29,7 +30,7 @@ const AdminCT = (props: typeAdminCT): JSX.Element => {
   );
 };
 
-interface typeAdminCT extends LogState {
+interface typeAdminCT extends CommonState, LogState {
   requestLogOut: (id: string) => void;
 }
 

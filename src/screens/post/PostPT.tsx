@@ -11,7 +11,7 @@ const PostPT = ({ loading }: typePostPT) => (
 );
 
 interface typePostPT {
-  loading: boolean;
+  loading?: boolean;
 }
 
 export default PostPT;

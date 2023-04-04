@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { CommonState } from './commonSlice';
 
 export interface LogState {
-  isFetching: boolean;
-  isSuccess: boolean;
-  isFail: boolean;
   isLoggedIn?: boolean;
   isLoggedOut?: boolean;
   id?: string;
@@ -11,9 +9,6 @@ export interface LogState {
 }
 
 export const initialState: LogState = {
-  isFetching: false,
-  isSuccess: false,
-  isFail: false,
   isLoggedIn: false,
   isLoggedOut: false,
   id: '',
@@ -24,72 +19,44 @@ const logSlice = createSlice({
   name: 'log',
   initialState,
   reducers: {
-    requestLogIn(state: LogState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
-    },
+    requestLogIn(state: LogState, action) {},
     successLogIn(state: LogState, action) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.isLoggedIn = true;
       state.isLoggedOut = false;
       state.id = action.payload.id;
       state.auth = action.payload.auth;
     },
     failLogIn(state: LogState) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
       state.id = '';
       state.auth = -1;
     },
     requestLogOut(state: LogState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     },
     successLogOut(state: LogState) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.isLoggedIn = false;
       state.isLoggedOut = true;
       state.id = '';
       state.auth = -1;
     },
     failLogOut(state: LogState, action) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     },
     requestForceLogOut(state: LogState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     },
     successForceLogOut(state: LogState) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.isLoggedIn = false;
       state.isLoggedOut = true;
       state.id = '';
       state.auth = -1;
     },
     failForceLogOut(state: LogState) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
       state.isLoggedIn = false;
       state.isLoggedOut = false;
     }
@@ -107,5 +74,71 @@ export const {
   successForceLogOut,
   failForceLogOut
 } = logSlice.actions;
+
+export const logExtraReducers = {
+  'log/requestLogIn': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'log/successLogIn': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'log/failLogIn': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'log/requestLogOut': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'log/successLogOut': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'log/failLogOut': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'log/requestForceLogOut': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'log/successForceLogOut': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'log/failForceLogOut': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  }
+};
 
 export default logSlice.reducer;

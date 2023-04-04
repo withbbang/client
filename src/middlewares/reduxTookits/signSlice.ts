@@ -1,17 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { CommonState } from './commonSlice';
 
 export interface SignState {
-  isFetching: boolean;
-  isSuccess: boolean;
-  isFail: boolean;
   isSignUp?: boolean;
   isSignOut?: boolean;
 }
 
 export const initialState: SignState = {
-  isFetching: false,
-  isSuccess: false,
-  isFail: false,
   isSignUp: false,
   isSignOut: false
 };
@@ -20,43 +15,24 @@ const signSlice = createSlice({
   name: 'sign',
   initialState,
   reducers: {
-    requestSignUp(state: SignState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
-    },
+    requestSignUp(state: SignState, action) {},
     successSignUp(state: SignState) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.isSignUp = true;
       state.isSignOut = false;
     },
     failSignUp(state: SignState) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
       state.isSignUp = false;
       state.isSignOut = false;
     },
     requestSignOut(state: SignState, action) {
-      state.isFetching = true;
-      state.isSuccess = false;
-      state.isFail = false;
       state.isSignUp = false;
       state.isSignOut = false;
     },
     successSignOut(state: SignState) {
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.isFail = false;
       state.isSignUp = false;
       state.isSignOut = true;
     },
     failSignOut(state: SignState) {
-      state.isFetching = false;
-      state.isSuccess = false;
-      state.isFail = true;
       state.isSignUp = false;
       state.isSignOut = false;
     }
@@ -71,5 +47,50 @@ export const {
   successSignOut,
   failSignOut
 } = signSlice.actions;
+
+export const signExtraReducers = {
+  'sign/requestSignUp': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'sign/successSignUp': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'sign/failSignUp': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'sign/requestSignOut': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'sign/successSignOut': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'sign/failSignOut': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  }
+};
 
 export default signSlice.reducer;

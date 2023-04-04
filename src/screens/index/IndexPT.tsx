@@ -43,7 +43,7 @@ const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
 };
 
 interface typeIndexPT {
-  loading: boolean;
+  loading?: boolean;
   isNight?: boolean;
   items?: Array<any>;
 }

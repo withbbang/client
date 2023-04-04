@@ -20,7 +20,7 @@ interface typeAdminPT {
   onLogOut: () => void;
   id?: string;
   auth?: number;
-  loading: boolean;
+  loading?: boolean;
 }
 
 export default AdminPT;

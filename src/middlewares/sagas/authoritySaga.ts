@@ -5,7 +5,6 @@ import {
   requestAuthority,
   successAuthority
 } from 'middlewares/reduxTookits/authoritySlice';
-import { handleCodeMessage } from 'middlewares/reduxTookits/commonSlice';
 
 export function* authoritySaga() {
   yield takeEvery(requestAuthority.type, handlePostAuthority);
@@ -17,10 +16,8 @@ function* handlePostAuthority(data: any) {
   try {
     const res: Generator = yield call(postAuthorities, data);
     yield put(successAuthority(res));
-    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failAuthority(error));
-    yield put(handleCodeMessage(error));
   }
 }
 

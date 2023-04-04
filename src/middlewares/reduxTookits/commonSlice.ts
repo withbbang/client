@@ -1,12 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Category } from 'modules/types';
+import { authorityExtraReducers } from './authoritySlice';
+import { categoryManageExtraReducers } from './categoryManageSlice';
+import { contentsExtraReducers } from './contentsSlice';
+import { logExtraReducers } from './logSlice';
+import { postExtraReducers } from './postSlice';
+import { signExtraReducers } from './signSlice';
 
 export interface CommonState {
   code?: string;
   message?: string;
-  isFetching: boolean;
-  isSuccess: boolean;
-  isFail: boolean;
+  isFetching?: boolean;
+  isSuccess?: boolean;
+  isFail?: boolean;
   isNight?: boolean;
   publicKey?: string;
   today?: number;
@@ -108,7 +114,22 @@ const commonSlice = createSlice({
     handleCodeMessage(state: CommonState, action) {
       state.code = action.payload.code;
       state.message = action.payload.message;
+    },
+    handleAPIStatus(state: CommonState, action) {
+      state.isFetching = action.payload.isFetching;
+      state.isSuccess = action.payload.isSuccess;
+      state.isFail = action.payload.isFail;
     }
+  },
+  // API 리듀서들 비동기 상태값들 한번에 관리하기 위한 extraReducers 모음
+  extraReducers: {
+    ...categoryManageExtraReducers,
+    ...authorityExtraReducers,
+    ...contentsExtraReducers,
+    ...logExtraReducers,
+    ...postExtraReducers,
+    ...signExtraReducers
+    // ...add others
   }
 });
 
@@ -123,7 +144,8 @@ export const {
   successSideBarCategory,
   failSideBarCategory,
   handleIsNight,
-  handleCodeMessage
+  handleCodeMessage,
+  handleAPIStatus
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

@@ -1,4 +1,3 @@
-import { handleCodeMessage } from 'middlewares/reduxTookits/commonSlice';
 import {
   failContents,
   requestContents,
@@ -19,7 +18,6 @@ function* handlePostContents(data: any) {
   try {
     const res: Generator = yield call(postContents, data);
     yield put(successContents(res));
-    yield put(handleCodeMessage(res));
   } catch (error: any) {
     yield put(failContents(error));
   }
