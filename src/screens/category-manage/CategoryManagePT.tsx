@@ -3,11 +3,13 @@ import { Loader } from 'components/loader/Loader';
 import { Authority, Category } from 'modules/types';
 import LeftSideBar from 'components/leftSideBar';
 import Header from 'components/header/Header';
-import Popup from 'components/popup';
+import ErrorPopup from 'components/errorPopup';
 import styles from './CategoryManage.module.scss';
 import Footer from 'components/footer/Footer';
 import Float from 'components/float';
 import SVG from 'modules/SVG';
+import ConfirmPopup from 'components/confirmPopup/ConfirmPopup';
+import FunctionPopup from 'components/functionPopup/FunctionPopup';
 
 const CategoryManagePT = ({
   loading,
@@ -15,29 +17,45 @@ const CategoryManagePT = ({
   authorities,
   categories,
   isDrag,
+  title,
+  path,
   toggle,
+  isConfirmPopupActive,
+  isFunctionPopupActive,
+  confirmMessage,
   titleRef,
   pathRef,
   createBtnRef,
   updateBtnRef,
-  onToggle,
+  children,
+  onSetToggle,
   onSetTitle,
   onSetPath,
+  onSetIsConfirmPopupActive,
+  onModifyPopup,
+  onSingleUpdateCategory,
   onCreateCategory,
-  onUpdateCategory,
+  onMultiUpdateCategory,
   onDragStart,
-  onDrag,
   onDragEnd,
-  onDragOver,
-  onDragEnter,
-  onDragLeave,
-  onDrop
+  onDragOver
 }: typeCategoryManagePT): JSX.Element => (
   <>
     <Loader loading={loading} />
     <Header />
     <LeftSideBar />
-    <Popup />
+    <ErrorPopup />
+    <ConfirmPopup
+      isActive={isConfirmPopupActive}
+      confirmMessage={confirmMessage}
+      onCancle={onSetIsConfirmPopupActive}
+      onConfirm={onSingleUpdateCategory}
+    />
+    <FunctionPopup
+      isActive={isFunctionPopupActive}
+      children={children}
+      onClose={onModifyPopup}
+    />
     <div
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
     >
@@ -64,13 +82,10 @@ const CategoryManagePT = ({
                   content={category.CONTENT}
                   path={category.PATH}
                   description={category.DESCRIPTION}
+                  onModifyPopup={onModifyPopup}
                   onDragStart={onDragStart}
-                  onDrag={onDrag}
                   onDragEnd={onDragEnd}
                   onDragOver={onDragOver}
-                  onDragEnter={onDragEnter}
-                  onDragLeave={onDragLeave}
-                  onDrop={onDrop}
                 />
               ))
             : '컨텐츠가 없습니다~!'}
@@ -87,7 +102,7 @@ const CategoryManagePT = ({
             : [styles.createBox, styles.off].join(' ')
         }
       >
-        <div className={styles.toggle} onClick={onToggle}>
+        <div className={styles.toggle} onClick={onSetToggle}>
           <SVG type="doubleArrow" width="30px" height="30px" fill="#fff" />
         </div>
         <div className={styles.innerBox}>
@@ -95,6 +110,7 @@ const CategoryManagePT = ({
             placeholder="TITLE"
             type="text"
             id="title"
+            value={title}
             onChange={(e) => onSetTitle(e.target.value)}
             onKeyUp={(e) => onCreateCategory(e)}
             ref={titleRef}
@@ -103,6 +119,7 @@ const CategoryManagePT = ({
             placeholder="PATH"
             type="text"
             id="path"
+            value={path}
             onChange={(e) => onSetPath(e.target.value)}
             onKeyUp={(e) => onCreateCategory(e)}
             ref={pathRef}
@@ -145,23 +162,28 @@ interface typeCategoryManagePT {
   authorities?: Array<Authority>;
   categories?: Array<Category>;
   isDrag: boolean;
+  title: string;
+  path: string;
   toggle: boolean;
+  isConfirmPopupActive: boolean;
+  isFunctionPopupActive: boolean;
+  confirmMessage: string;
   titleRef: React.MutableRefObject<HTMLInputElement>;
   pathRef: React.MutableRefObject<HTMLInputElement>;
   createBtnRef: React.MutableRefObject<HTMLButtonElement>;
   updateBtnRef: React.MutableRefObject<HTMLButtonElement>;
-  onToggle: () => void;
+  children: JSX.Element | null;
+  onSetToggle: () => void;
   onSetTitle: React.Dispatch<React.SetStateAction<string>>;
   onSetPath: React.Dispatch<React.SetStateAction<string>>;
+  onSetIsConfirmPopupActive: React.Dispatch<React.SetStateAction<boolean>>;
+  onModifyPopup: (idx?: number) => void;
+  onSingleUpdateCategory: () => void;
   onCreateCategory: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
-  onUpdateCategory: () => void;
+  onMultiUpdateCategory: () => void;
   onDragStart: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDrag: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
   onDragEnd: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDragEnter: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDragLeave: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDrop: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
 }
 
 export default CategoryManagePT;

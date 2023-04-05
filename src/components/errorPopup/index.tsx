@@ -12,7 +12,7 @@ import {
   CommonState,
   handleCodeMessage
 } from 'middlewares/reduxTookits/commonSlice';
-import PopupCT from './PopupCT';
+import ErrorPopupCT from './ErrorPopupCT';
 
 const mapStateToProps = (
   state: PropState
@@ -37,4 +37,4 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PopupCT);
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorPopupCT);

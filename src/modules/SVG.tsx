@@ -187,6 +187,27 @@ const SVG = (props: typeSVG): JSX.Element => {
           </g>
         </svg>
       );
+    case 'close':
+      return (
+        <svg
+          width={props.width ? props.width : '30px'}
+          height={props.height ? props.height : '30px'}
+          viewBox="0 0 24 24"
+          fill={props.fill ? props.fill : '#fff'}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="Menu / Close_MD">
+            <path
+              id="Vector"
+              d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
+              stroke="#000000"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
+        </svg>
+      );
     case 'trash':
       return (
         <svg
@@ -222,7 +243,7 @@ const SVG = (props: typeSVG): JSX.Element => {
             fillRule="evenodd"
             id="Page-1"
             stroke="none"
-            stroke-width="1"
+            strokeWidth="1"
           >
             <g fillRule="nonzero" id="edit">
               <path

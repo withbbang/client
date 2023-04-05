@@ -21,7 +21,7 @@ const mapStateToProps = (state: PropState): CommonState | LogState => {
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
-    handleIsNight: (): void => {
+    onIsNight: (): void => {
       dispatch(handleIsNight());
     },
     requestLogOut: (id: string): void => {
@@ -76,7 +76,7 @@ const Header = (props: typeHeader): JSX.Element => {
         </span>
       </div>
       <div>
-        <span onClick={props.handleIsNight}>
+        <span onClick={props.onIsNight}>
           <SVG type={props.isNight ? 'night' : 'day'} fill={'#fffb00'} />
         </span>
         <span>
@@ -91,7 +91,7 @@ const Header = (props: typeHeader): JSX.Element => {
 };
 
 interface typeHeader extends CommonState, LogState {
-  handleIsNight: () => void;
+  onIsNight: () => void;
   requestLogOut: (id: string) => void;
 }
 

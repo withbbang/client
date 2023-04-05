@@ -7,6 +7,7 @@ import { Category } from 'modules/types';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { AuthorityState } from 'middlewares/reduxTookits/authoritySlice';
+import styles from 'components/functionPopup/FunctionPopup.module.scss';
 
 const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const navigate = useNavigate();
@@ -22,6 +23,13 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const [isDrag, setIsDrag] = useState<boolean>(false);
   const [draggingIdx, setDraggingIdx] = useState<number>(-1);
   const [toggle, setToggle] = useState<boolean>(false);
+  const [isConfirmPopupActive, setIsConfirmPopupActive] =
+    useState<boolean>(false);
+  const [confirmMessage, setConfirmMessage] = useState<string>('');
+  const [confirmBtn, setConfirmBtn] = useState<null | any>(null);
+  const [isFunctionPopupActive, setIsFunctionPopupActive] =
+    useState<boolean>(false);
+  const [selectedIdx, setSelectedIdx] = useState<number>(-1);
 
   const [title, setTitle] = useState<string>('');
   const [priority, setPriority] = useState<number | undefined>();
@@ -46,40 +54,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     props.categories !== undefined && setCategories(props.categories);
   }, [props.categories]);
 
-  const handleCreateCategory = (e?: React.KeyboardEvent<HTMLInputElement>) => {
-    e?.preventDefault();
-
-    if (e !== undefined && e.key !== 'Enter') {
-      return;
-    }
-
-    if (!title) {
-      props.handleCodeMessage('EMPTY TITLE', 'TITLE을 입력해주세요.');
-      handleCreateBlur();
-      return;
-    }
-
-    if (!path) {
-      props.handleCodeMessage('EMPTY PATH', 'PATH을 입력해주세요.');
-      handleCreateBlur();
-      return;
-    }
-
-    if (props.id) {
-      props.requestCreateCategory(title, path, auth, props.id, priority);
-      props.handleCodeMessage('', '');
-    } else {
-      props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
-    }
-    handleCreateBlur();
-  };
-
-  const handleUpdateCategory = () => {
-    props.categories && props.requestUpdateCategory(props.categories);
-    handleUpdateBlur();
-  };
-
-  const handleCreateBlur = () => {
+  const handleBlur = () => {
     titleRef && titleRef.current.blur();
     pathRef && pathRef.current.blur();
     createBtnRef && createBtnRef.current.blur();
@@ -89,17 +64,159 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     updateBtnRef && updateBtnRef.current.blur();
   };
 
-  const handleToggle = () => {
+  const handleConfirmPopup = (type?: string) => {
+    switch (type) {
+      case 'create':
+        setConfirmMessage('생성하시겠습니까?');
+        setIsConfirmPopupActive(!isConfirmPopupActive);
+        setConfirmBtn(() => {
+          if (props.id) {
+            props.requestCreateCategory(title, path, auth, props.id, priority);
+            props.handleCodeMessage('', '');
+          } else {
+            props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+          }
+        });
+        break;
+      case 'singleUpdate':
+        setConfirmMessage('수정하시겠습니까?');
+        setIsConfirmPopupActive(!isConfirmPopupActive);
+        break;
+      case 'singleUpdate':
+        setConfirmMessage('수정하시겠습니까?');
+        setIsConfirmPopupActive(!isConfirmPopupActive);
+        break;
+      default:
+        setConfirmMessage('');
+        setIsConfirmPopupActive(!isConfirmPopupActive);
+        setConfirmBtn(null);
+        break;
+    }
+  };
+
+  const handleCreateCategory = (e?: React.KeyboardEvent<HTMLInputElement>) => {
+    e?.preventDefault();
+
+    if (e !== undefined && e.key !== 'Enter') {
+      return;
+    }
+
+    if (!title) {
+      props.handleCodeMessage('EMPTY TITLE', 'TITLE을 입력해주세요.');
+      handleBlur();
+      return;
+    }
+
+    if (!path) {
+      props.handleCodeMessage('EMPTY PATH', 'PATH을 입력해주세요.');
+      handleBlur();
+      return;
+    }
+
+    handleConfirmPopup('singleUpdate');
+    handleBlur();
+  };
+
+  const handleSingleUpdateCategory = (
+    e?: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    e?.preventDefault();
+
+    if (e !== undefined && e.key !== 'Enter') {
+      return;
+    }
+
+    if (!title) {
+      props.handleCodeMessage('EMPTY TITLE', 'TITLE을 입력해주세요.');
+      handleBlur();
+      return;
+    }
+
+    if (!path) {
+      props.handleCodeMessage('EMPTY PATH', 'PATH을 입력해주세요.');
+      handleBlur();
+      return;
+    }
+
+    handleConfirmPopup('create');
+    handleBlur();
+  };
+
+  const handleMultiUpdateCategory = () => {
+    //TODO: 순서 변한거 있는지 검증
+    props.categories && props.requestUpdateCategory(props.categories);
+    handleUpdateBlur();
+  };
+
+  const handleSetToggle = () => {
+    if (toggle) {
+      setTimeout(() => {
+        setTitle('');
+        setPath('');
+      }, 500);
+    }
+
     setToggle(!toggle);
   };
+
+  const handleModifyPopup = (idx?: number) => {
+    if (idx !== undefined && idx > -1) {
+      // useState의 set함수는 기본적으로 비동기이다.
+      // 따라서 setSelectedIdx(selectedIdx) 이후 해당 selectedIdx에 있는 값을 가져올 수 없다.
+      const { TITLE, PATH } = categories[idx];
+      setSelectedIdx(idx);
+      setTitle(TITLE);
+      setPath(PATH);
+    } else {
+      setSelectedIdx(-1);
+      setTitle('');
+      setPath('');
+    }
+
+    setIsFunctionPopupActive(!isFunctionPopupActive);
+  };
+
+  const handleChildren =
+    selectedIdx > -1 ? (
+      <div className={styles.box}>
+        <input
+          placeholder="TITLE"
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onKeyUp={(e) => handleSingleUpdateCategory(e)}
+          ref={titleRef}
+        />
+        <input
+          placeholder="PATH"
+          type="text"
+          id="path"
+          value={path}
+          onChange={(e) => setPath(e.target.value)}
+          onKeyUp={(e) => handleSingleUpdateCategory(e)}
+          ref={pathRef}
+        />
+        {Array.isArray(props.authorities) && props.authorities.length > 0 && (
+          <select defaultValue={categories[selectedIdx].AUTH}>
+            {props.authorities.map((authority, idx) => (
+              <option key={idx} value={authority.AUTH}>
+                {authority.DESCRIPTION}
+              </option>
+            ))}
+          </select>
+        )}
+        <button onClick={() => handleSingleUpdateCategory()} ref={createBtnRef}>
+          카테고리 수정
+        </button>
+      </div>
+    ) : null;
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
     setIsDrag(true);
     setDraggingIdx(idx);
     e.currentTarget.style.opacity = '0.4';
   };
-
-  const handleDrag = (e: React.DragEvent<HTMLDivElement>, idx: number) => {};
 
   const handleDragEnd = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
     e.stopPropagation();
@@ -124,6 +241,8 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     setDraggingIdx(idx);
   };
 
+  const handleDrag = (e: React.DragEvent<HTMLDivElement>, idx: number) => {};
+
   const handleDragEnter = (
     e: React.DragEvent<HTMLDivElement>,
     idx: number
@@ -143,23 +262,28 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       authorities={props.authorities}
       categories={categories}
       isDrag={isDrag}
+      title={title}
+      path={path}
       toggle={toggle}
+      isConfirmPopupActive={isConfirmPopupActive}
+      isFunctionPopupActive={isFunctionPopupActive}
+      confirmMessage={confirmMessage}
       titleRef={titleRef}
       pathRef={pathRef}
       createBtnRef={createBtnRef}
       updateBtnRef={updateBtnRef}
-      onToggle={handleToggle}
+      children={handleChildren}
+      onSetToggle={handleSetToggle}
       onSetTitle={setTitle}
       onSetPath={setPath}
+      onSetIsConfirmPopupActive={setIsConfirmPopupActive}
+      onModifyPopup={handleModifyPopup}
+      onSingleUpdateCategory={handleSingleUpdateCategory}
       onCreateCategory={handleCreateCategory}
-      onUpdateCategory={handleUpdateCategory}
+      onMultiUpdateCategory={handleMultiUpdateCategory}
       onDragStart={handleDragStart}
-      onDrag={handleDrag}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
     />
   );
 };

@@ -1,7 +1,12 @@
 import React from 'react';
-import styles from './Popup.module.scss';
+import styles from './ErrorPopup.module.scss';
 
-const PopupPT = ({ isActive, message, isNight, onBtn }: typePopupPT) => {
+const ErrorPopupPT = ({
+  isActive,
+  message,
+  isNight,
+  onBtn
+}: typeErrorPopupPT) => {
   return (
     <>
       {isActive && message && message !== '성공' ? (
@@ -22,11 +27,11 @@ const PopupPT = ({ isActive, message, isNight, onBtn }: typePopupPT) => {
   );
 };
 
-interface typePopupPT {
+interface typeErrorPopupPT {
   isActive: boolean;
   message?: string;
   isNight?: boolean;
   onBtn: () => void;
 }
 
-export default PopupPT;
+export default ErrorPopupPT;

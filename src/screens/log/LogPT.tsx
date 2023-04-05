@@ -4,7 +4,7 @@ import LeftSideBar from 'components/leftSideBar';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import styles from './Log.module.scss';
-import Popup from 'components/popup';
+import ErrorPopup from 'components/errorPopup';
 
 const LogPT = ({
   onLogIn,
@@ -21,7 +21,7 @@ const LogPT = ({
       <Loader loading={loading} />
       <Header />
       <LeftSideBar />
-      <Popup />
+      <ErrorPopup />
       <div
         className={
           isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap

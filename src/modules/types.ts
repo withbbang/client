@@ -4,6 +4,7 @@ export interface Category {
   PRIORITY: number;
   PATH: string;
   DESCRIPTION?: string;
+  AUTH: number;
 }
 
 export interface Content {

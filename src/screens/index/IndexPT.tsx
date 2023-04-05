@@ -5,7 +5,7 @@ import styles from './Index.module.scss';
 import Card from 'components/card/Card';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
-import Popup from 'components/popup';
+import ErrorPopup from 'components/errorPopup';
 
 const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
   return (
@@ -13,7 +13,7 @@ const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
       <Loader loading={loading} />
       <Header />
       <LeftSideBar />
-      <Popup />
+      <ErrorPopup />
       <div
         className={
           isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap

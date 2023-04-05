@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
-import PopupPT from './PopupPT';
+import ErrorPopupPT from './ErrorPopupPT';
 import { SignState } from 'middlewares/reduxTookits/signSlice';
 import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
 import { PostState } from 'middlewares/reduxTookits/postSlice';
 import { useNavigate } from 'react-router-dom';
 
-const PopupCT = (props: typePopupCT): JSX.Element => {
+const ErrorPopupCT = (props: typeErrorPopupCT): JSX.Element => {
   const navigate = useNavigate();
 
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -54,7 +54,7 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
   };
 
   return (
-    <PopupPT
+    <ErrorPopupPT
       isActive={isActive}
       message={props.message}
       isNight={props.isNight}
@@ -63,7 +63,7 @@ const PopupCT = (props: typePopupCT): JSX.Element => {
   );
 };
 
-interface typePopupCT
+interface typeErrorPopupCT
   extends CommonState,
     SignState,
     LogState,
@@ -73,4 +73,4 @@ interface typePopupCT
   handleCodeMessage: (code: string, message: string) => void;
 }
 
-export default PopupCT;
+export default ErrorPopupCT;

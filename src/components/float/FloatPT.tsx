@@ -10,40 +10,37 @@ const FloatPT = ({
   content,
   path,
   description,
+  onModifyPopup,
   onDragStart,
-  onDrag,
   onDragEnd,
-  onDragOver,
-  onDragEnter,
-  onDragLeave,
-  onDrop
+  onDragOver
 }: typeFloatPT): JSX.Element => {
   return (
     <div
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
       draggable
       onDragStart={(e) => onDragStart(e, idx)}
-      onDrag={(e) => onDrag(e, idx)}
       onDragEnd={(e) => onDragEnd(e, idx)}
       onDragOver={(e) => onDragOver(e, idx)}
-      onDragEnter={(e) => onDragEnter(e, idx)}
-      onDragLeave={(e) => onDragLeave(e, idx)}
-      onDrop={(e) => onDrop(e, idx)}
     >
       <div className={styles.innerWrap}>
         <div className={styles.floatBtns}>
-          <SVG
-            type="modify"
-            width="15px"
-            height="15px"
-            fill={isNight ? '#fff' : '#000'}
-          />
-          <SVG
-            type="trash"
-            width="16px"
-            height="16px"
-            fill={isNight ? '#fff' : '#000'}
-          />
+          <span onClick={() => onModifyPopup(idx)}>
+            <SVG
+              type="modify"
+              width="15px"
+              height="15px"
+              fill={isNight ? '#fff' : '#000'}
+            />
+          </span>
+          <span>
+            <SVG
+              type="trash"
+              width="16px"
+              height="16px"
+              fill={isNight ? '#fff' : '#000'}
+            />
+          </span>
         </div>
         <h3>카테고리: {title}</h3>
         <p>경로: {path}</p>
@@ -61,13 +58,10 @@ interface typeFloatPT {
   content?: string;
   path?: string;
   description: string;
+  onModifyPopup: (idx?: number) => void;
   onDragStart: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDrag: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
   onDragEnd: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDragEnter: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDragLeave: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
-  onDrop: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
 }
 
 export default FloatPT;
