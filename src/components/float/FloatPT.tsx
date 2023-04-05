@@ -1,3 +1,4 @@
+import SVG from 'modules/SVG';
 import React from 'react';
 import styles from './Float.module.scss';
 
@@ -30,6 +31,20 @@ const FloatPT = ({
       onDrop={(e) => onDrop(e, idx)}
     >
       <div className={styles.innerWrap}>
+        <div className={styles.floatBtns}>
+          <SVG
+            type="modify"
+            width="15px"
+            height="15px"
+            fill={isNight ? '#fff' : '#000'}
+          />
+          <SVG
+            type="trash"
+            width="16px"
+            height="16px"
+            fill={isNight ? '#fff' : '#000'}
+          />
+        </div>
         <h3>카테고리: {title}</h3>
         <p>경로: {path}</p>
         <p>권한: {description}</p>

@@ -116,7 +116,11 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     const draggedItem = newCategories[draggingIdx];
     newCategories.splice(draggingIdx, 1);
     newCategories.splice(idx, 0, draggedItem);
-    setCategories(newCategories);
+    setCategories(
+      newCategories.map((category: Category, idx: number) => {
+        return { ...category, PRIORITY: idx + 1 };
+      })
+    );
     setDraggingIdx(idx);
   };
 

@@ -19,13 +19,25 @@
     -o-transition: background-color 0.5s linear;
 
     .innerWrap {
-      &.nothing {
+      .count {
+        flex: 0;
         color: #fff;
         transition: color 0.5s linear;
         -moz-transition: color 0.5s linear;
         -webkit-transition: color 0.5s linear;
         -ms-transition: color 0.5s linear;
         -o-transition: color 0.5s linear;
+      }
+
+      .contents {
+        &.noContents {
+          color: #fff;
+          transition: color 0.5s linear;
+          -moz-transition: color 0.5s linear;
+          -webkit-transition: color 0.5s linear;
+          -ms-transition: color 0.5s linear;
+          -o-transition: color 0.5s linear;
+        }
       }
     }
   }
@@ -34,10 +46,40 @@
     padding: 10% 10%;
     width: 80%;
     display: flex;
+    flex-direction: column;
 
-    // flex-flow: row wrap; /* 하위 두개의 모든 기능 제공 */
-    flex-direction: row; /* 아이템 나열 방향 -> 수평 */
-    flex-wrap: wrap; /* 아이템 width가 넘어갔을 경우 다음 라인으로 넘길지 말지 -> wrap: 넘김, nowrap: 안 넘김 */
+    .count {
+      flex: 0;
+      margin: 10px;
+      color: #000;
+      transition: color 0.5s linear;
+      -moz-transition: color 0.5s linear;
+      -webkit-transition: color 0.5s linear;
+      -ms-transition: color 0.5s linear;
+      -o-transition: color 0.5s linear;
+    }
+
+    .contents {
+      display: flex;
+      width: 100%;
+
+      // flex-flow: row wrap; /* 하위 두개의 모든 기능 제공 */
+      flex-direction: row; /* 아이템 나열 방향 -> 수평 */
+      flex-wrap: wrap; /* 아이템 width가 넘어갔을 경우 다음 라인으로 넘길지 말지 -> wrap: 넘김, nowrap: 안 넘김 */
+
+      &.noContents {
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        color: #000;
+        font-size: 2rem;
+        transition: color 0.5s linear;
+        -moz-transition: color 0.5s linear;
+        -webkit-transition: color 0.5s linear;
+        -ms-transition: color 0.5s linear;
+        -o-transition: color 0.5s linear;
+      }
+    }
 
     &.nothing {
       align-items: center;

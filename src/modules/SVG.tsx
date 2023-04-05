@@ -187,6 +187,58 @@ const SVG = (props: typeSVG): JSX.Element => {
           </g>
         </svg>
       );
+    case 'trash':
+      return (
+        <svg
+          width={props.width ? props.width : '30px'}
+          height={props.height ? props.height : '30px'}
+          viewBox="0 0 1024 1024"
+          className="icon"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M692.2 182.2V72.9H327.8v109.3H145.6v72.9h728.8v-72.9H692.2z m-291.5 0v-36.4h218.6v36.4H400.7zM730.8 874.5H289.2l-34.3-548.8-72.8 4.5 38.6 617.2h578.6l38.6-617.2-72.8-4.5z"
+            fill={props.fill ? props.fill : '#fff'}
+          />
+          <path
+            d="M400.7 400.8h72.9v437.3h-72.9zM546.4 400.8h72.9v437.3h-72.9z"
+            fill={props.fill ? props.fill : '#fff'}
+          />
+        </svg>
+      );
+    case 'modify':
+      return (
+        <svg
+          width={props.width ? props.width : '30px'}
+          height={props.height ? props.height : '30px'}
+          viewBox="0 -1 119 119"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+        >
+          <g
+            fill={props.fill ? props.fill : '#fff'}
+            fillRule="evenodd"
+            id="Page-1"
+            stroke="none"
+            stroke-width="1"
+          >
+            <g fillRule="nonzero" id="edit">
+              <path
+                d="M114.2,108.3 L4.8,108.3 C2.5,108.3 0.7,110.2 0.7,112.4 C0.7,114.6 2.6,116.5 4.8,116.5 L114.3,116.5 C116.6,116.5 118.4,114.6 118.4,112.4 C118.4,110.2 116.5,108.3 114.2,108.3 Z"
+                fill={props.fill ? props.fill : '#fff'}
+                id="Shape"
+              />
+              <path
+                d="M0.7,72 L0.6,91.5 C0.6,92.6 1,93.7 1.8,94.5 C2.6,95.3 3.6,95.7 4.7,95.7 L24.1,95.6 C25.2,95.6 26.2,95.2 27,94.4 L94,27.4 C95.6,25.8 95.6,23.2 94,21.5 L74.8,2.1 C73.2,0.5 70.6,0.5 68.9,2.1 L55.5,15.6 L1.9,69.1 C1.2,69.9 0.7,70.9 0.7,72 Z M71.9,10.9 L85.4,24.4 L77.8,32 L64.3,18.5 L71.9,10.9 Z M9,73.8 L58.4,24.4 L71.9,37.9 L22.5,87.2 L8.9,87.3 L9,73.8 Z"
+                fill={props.fill ? props.fill : '#fff'}
+                id="Shape"
+              />
+            </g>
+          </g>
+        </svg>
+      );
     case 'day':
       return (
         <svg

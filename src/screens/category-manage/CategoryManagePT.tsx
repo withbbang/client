@@ -41,32 +41,41 @@ const CategoryManagePT = ({
     <div
       className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
     >
-      {Array.isArray(categories) && categories.length > 0 ? (
-        <div className={styles.innerWrap}>
-          {categories.map((category: any, idx: number) => (
-            <Float
-              key={idx}
-              idx={idx}
-              isDrag={isDrag}
-              title={category.TITLE}
-              content={category.CONTENT}
-              path={category.PATH}
-              description={category.DESCRIPTION}
-              onDragStart={onDragStart}
-              onDrag={onDrag}
-              onDragEnd={onDragEnd}
-              onDragOver={onDragOver}
-              onDragEnter={onDragEnter}
-              onDragLeave={onDragLeave}
-              onDrop={onDrop}
-            />
-          ))}
+      <div className={styles.innerWrap}>
+        <div className={styles.count}>
+          <span>
+            {Array.isArray(categories) && categories.length} categories
+          </span>
         </div>
-      ) : (
-        <div className={[styles.innerWrap, styles.nothing].join(' ')}>
-          컨텐츠가 없습니다~!
+        <div
+          className={
+            Array.isArray(categories) && categories.length > 0
+              ? styles.contents
+              : [styles.contents, styles.noContents].join(' ')
+          }
+        >
+          {Array.isArray(categories) && categories.length > 0
+            ? categories.map((category: any, idx: number) => (
+                <Float
+                  key={idx}
+                  idx={idx}
+                  isDrag={isDrag}
+                  title={category.TITLE}
+                  content={category.CONTENT}
+                  path={category.PATH}
+                  description={category.DESCRIPTION}
+                  onDragStart={onDragStart}
+                  onDrag={onDrag}
+                  onDragEnd={onDragEnd}
+                  onDragOver={onDragOver}
+                  onDragEnter={onDragEnter}
+                  onDragLeave={onDragLeave}
+                  onDrop={onDrop}
+                />
+              ))
+            : '컨텐츠가 없습니다~!'}
         </div>
-      )}
+      </div>
       <div
         className={
           toggle
