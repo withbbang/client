@@ -10,9 +10,9 @@ import {
   requestSingleUpdateCategory,
   successSingleUpdateCategory,
   failSingleUpdateCategory,
-  requestUpdateCategory,
-  successUpdateCategory,
-  failUpdateCategory
+  requestMultiUpdateCategory,
+  successMultiUpdateCategory,
+  failMultiUpdateCategory
 } from 'middlewares/reduxTookits/categoryManageSlice';
 
 export function* categoryManageSaga() {
@@ -22,7 +22,7 @@ export function* categoryManageSaga() {
     requestSingleUpdateCategory.type,
     handlePostSingleUpdateCategory
   );
-  yield takeEvery(requestUpdateCategory.type, handlePostUpdateCategory);
+  yield takeEvery(requestMultiUpdateCategory.type, handlePostUpdateCategory);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -58,9 +58,9 @@ function* handlePostSingleUpdateCategory(data: any) {
 function* handlePostUpdateCategory(data: any) {
   try {
     const res: Generator = yield call(postUpdateCategory, data);
-    yield put(successUpdateCategory(res));
+    yield put(successMultiUpdateCategory(res));
   } catch (error: any) {
-    yield put(failUpdateCategory(error));
+    yield put(failMultiUpdateCategory(error));
   }
 }
 
@@ -80,5 +80,5 @@ async function postSingleUpdateCategory(data: any): Promise<any> {
 }
 
 async function postUpdateCategory(data: any): Promise<any> {
-  return postAPI('/server/admin/category-manage/update', data);
+  return postAPI('/server/admin/category-manage/multi-update', data);
 }

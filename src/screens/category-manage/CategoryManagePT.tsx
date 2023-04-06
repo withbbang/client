@@ -24,6 +24,7 @@ const CategoryManagePT = ({
   isFunctionPopupActive,
   confirmMessage,
   confirmType,
+  isModifiedOrder,
   titleRef,
   pathRef,
   createBtnRef,
@@ -33,6 +34,7 @@ const CategoryManagePT = ({
   onSetTitle,
   onSetPath,
   onSetIsConfirmPopupActive,
+  onRevertOrder,
   onConfirmBtn,
   onModifyPopup,
   onSingleUpdateCategory,
@@ -66,6 +68,14 @@ const CategoryManagePT = ({
           <span>
             {Array.isArray(categories) && categories.length} categories
           </span>
+          <div>
+            <button disabled={!isModifiedOrder} onClick={onMultiUpdateCategory}>
+              순서저장
+            </button>
+            <button disabled={!isModifiedOrder} onClick={onRevertOrder}>
+              되돌리기
+            </button>
+          </div>
         </div>
         <div
           className={
@@ -171,6 +181,7 @@ interface typeCategoryManagePT {
   isFunctionPopupActive: boolean;
   confirmMessage: string;
   confirmType?: string;
+  isModifiedOrder: boolean;
   titleRef: React.MutableRefObject<HTMLInputElement>;
   pathRef: React.MutableRefObject<HTMLInputElement>;
   createBtnRef: React.MutableRefObject<HTMLButtonElement>;
@@ -180,6 +191,7 @@ interface typeCategoryManagePT {
   onSetTitle: React.Dispatch<React.SetStateAction<string>>;
   onSetPath: React.Dispatch<React.SetStateAction<string>>;
   onSetIsConfirmPopupActive: React.Dispatch<React.SetStateAction<boolean>>;
+  onRevertOrder: () => void;
   onConfirmBtn: (type?: string) => void;
   onModifyPopup: (idx?: number) => void;
   onSingleUpdateCategory: () => void;

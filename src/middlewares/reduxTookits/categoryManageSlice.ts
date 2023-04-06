@@ -31,11 +31,11 @@ const categoryManageSlice = createSlice({
       state.categories = action.payload.categories;
     },
     failSingleUpdateCategory(state: CategoryManageState) {},
-    requestUpdateCategory(state: CategoryManageState, action) {},
-    successUpdateCategory(state: CategoryManageState, action) {
+    requestMultiUpdateCategory(state: CategoryManageState, action) {},
+    successMultiUpdateCategory(state: CategoryManageState, action) {
       state.categories = action.payload.categories;
     },
-    failUpdateCategory(state: CategoryManageState) {}
+    failMultiUpdateCategory(state: CategoryManageState) {}
   }
 });
 
@@ -49,9 +49,9 @@ export const {
   requestSingleUpdateCategory,
   successSingleUpdateCategory,
   failSingleUpdateCategory,
-  requestUpdateCategory,
-  successUpdateCategory,
-  failUpdateCategory
+  requestMultiUpdateCategory,
+  successMultiUpdateCategory,
+  failMultiUpdateCategory
 } = categoryManageSlice.actions;
 
 export const categoryManageExtraReducers = {
@@ -124,21 +124,27 @@ export const categoryManageExtraReducers = {
     state.code = action.payload.code;
     state.message = action.payload.message;
   },
-  'categoryManage/requestUpdateCategory': (state: CommonState) => {
+  'categoryManage/requestMultiUpdateCategory': (state: CommonState) => {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
     state.code = '';
     state.message = '';
   },
-  'categoryManage/successUpdateCategory': (state: CommonState, action: any) => {
+  'categoryManage/successMultiUpdateCategory': (
+    state: CommonState,
+    action: any
+  ) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
     state.code = action.payload.code;
     state.message = action.payload.message;
   },
-  'categoryManage/failUpdateCategory': (state: CommonState, action: any) => {
+  'categoryManage/failMultiUpdateCategory': (
+    state: CommonState,
+    action: any
+  ) => {
     state.isFetching = false;
     state.isSuccess = false;
     state.isFail = true;

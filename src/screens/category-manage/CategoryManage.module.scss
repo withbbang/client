@@ -20,13 +20,37 @@
 
     .innerWrap {
       .count {
-        flex: 0;
         color: #fff;
         transition: color 0.5s linear;
         -moz-transition: color 0.5s linear;
         -webkit-transition: color 0.5s linear;
         -ms-transition: color 0.5s linear;
         -o-transition: color 0.5s linear;
+
+        > div {
+          > button {
+            color: #fff;
+            background-color: rgb(25, 25, 25);
+            transition: background-color 0.5s linear, color 0.5s ease-in-out,
+              box-shadow 0.5s ease-in-out;
+            -moz-transition: background-color 0.5s linear,
+              color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+            -webkit-transition: background-color 0.5s linear,
+              color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+            -ms-transition: background-color 0.5s linear, color 0.5s ease-in-out,
+              box-shadow 0.5s ease-in-out;
+            -o-transition: background-color 0.5s linear, color 0.5s ease-in-out,
+              box-shadow 0.5s ease-in-out;
+          }
+
+          > button:disabled {
+            opacity: 0.3;
+          }
+
+          > button:hover {
+            box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.2);
+          }
+        }
       }
 
       .contents {
@@ -49,6 +73,7 @@
     flex-direction: column;
 
     .count {
+      display: flex;
       flex: 0;
       margin: 10px;
       color: #000;
@@ -57,6 +82,41 @@
       -webkit-transition: color 0.5s linear;
       -ms-transition: color 0.5s linear;
       -o-transition: color 0.5s linear;
+
+      > span {
+        margin-right: auto;
+      }
+
+      > div {
+        > button {
+          margin-left: 10px;
+          padding: 5px 10px;
+          border: solid 1px rgb(125, 125, 125);
+          border-radius: 10px;
+          box-sizing: border-box;
+          box-shadow: none;
+          background: #fff;
+          transition: background-color 0.5s linear, box-shadow 0.5s ease-in-out;
+          -moz-transition: background-color 0.5s linear,
+            box-shadow 0.5s ease-in-out;
+          -webkit-transition: background-color 0.5s linear,
+            box-shadow 0.5s ease-in-out;
+          -ms-transition: background-color 0.5s linear,
+            box-shadow 0.5s ease-in-out;
+          -o-transition: background-color 0.5s linear,
+            box-shadow 0.5s ease-in-out;
+          cursor: pointer;
+        }
+
+        > button:disabled {
+          opacity: 0.7;
+        }
+
+        > button:hover {
+          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+          transition: box-shadow 0.5s ease-in-out;
+        }
+      }
     }
 
     .contents {

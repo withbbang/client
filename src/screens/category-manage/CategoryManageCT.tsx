@@ -30,9 +30,8 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const [isFunctionPopupActive, setIsFunctionPopupActive] =
     useState<boolean>(false);
   const [selectedIdx, setSelectedIdx] = useState<number>(-1);
-
+  const [isModifiedOrder, setIsModifiedOrder] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
-  const [priority, setPriority] = useState<number | undefined>();
   const [auth, setAuth] = useState<number>(20);
   const [path, setPath] = useState<string>('');
 
@@ -71,7 +70,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     switch (type) {
       case 'create':
         if (props.id) {
-          props.requestCreateCategory(title, path, auth, props.id, priority);
+          props.requestCreateCategory(title, path, auth, props.id);
           props.handleCodeMessage('', '');
         } else {
           props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
@@ -84,13 +83,22 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
             props.id,
             path,
             categories[selectedIdx].ID,
-            auth
+            auth,
+            categories[selectedIdx].PRIORITY
           );
           props.handleCodeMessage('', '');
         } else {
           props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
         }
         handleModifyPopup();
+        break;
+      case 'multiUpdate':
+        if (props.id) {
+          props.requestMultiUpdateCategory(categories, props.id);
+          props.handleCodeMessage('', '');
+        } else {
+          props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+        }
         break;
       default:
         break;
@@ -105,10 +113,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
         setIsConfirmPopupActive(!isConfirmPopupActive);
         break;
       case 'singleUpdate':
-        setConfirmMessage('수정하시겠습니까?');
-        setIsConfirmPopupActive(!isConfirmPopupActive);
-        break;
-      case 'singleUpdate':
+      case 'multiUpdate':
         setConfirmMessage('수정하시겠습니까?');
         setIsConfirmPopupActive(!isConfirmPopupActive);
         break;
@@ -161,14 +166,29 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       return;
     }
 
+    //TODO: 객체 비교 공부하기
+    const originCategory = props.categories && props.categories[selectedIdx];
+    const copiedCategory = categories[selectedIdx];
+    if (JSON.stringify(originCategory) === JSON.stringify(copiedCategory)) {
+      props.handleCodeMessage('SAME INPUTS', '입력값이 동일합니다.');
+      handleBlur();
+      return;
+    }
+
     handleConfirmPopup('singleUpdate');
     handleBlur();
   };
 
   const handleMultiUpdateCategory = () => {
-    //TODO: 순서 변한거 있는지 검증
-    props.categories && props.requestUpdateCategory(props.categories);
-    handleUpdateBlur();
+    if (!isModifiedOrder) {
+      props.handleCodeMessage(
+        'NOT MODIFIED ORDER',
+        '순서가 변경되지 않았습니다.'
+      );
+      return;
+    }
+
+    handleConfirmPopup('multiUpdate');
   };
 
   const handleSetToggle = () => {
@@ -186,7 +206,8 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const handleModifyPopup = (idx?: number) => {
     if (idx !== undefined && idx > -1) {
       // useState의 set함수는 기본적으로 비동기이다.
-      // 따라서 setSelectedIdx(selectedIdx) 이후 해당 selectedIdx에 있는 값을 가져올 수 없다.
+      // 따라서 setSelectedIdx(selectedIdx) 이후
+      // 바로 해당 selectedIdx에 있는 값을 가져올 수 없다.
       const { TITLE, PATH } = categories[idx];
       setSelectedIdx(idx);
       setTitle(TITLE);
@@ -198,6 +219,26 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     }
 
     setIsFunctionPopupActive(!isFunctionPopupActive);
+  };
+
+  const handleCheckOrder = () => {
+    if (props.categories) {
+      setIsModifiedOrder(
+        props.categories.some(
+          (category: Category, idx: number) =>
+            category.ID !== categories[idx].ID
+        )
+      );
+    } else {
+      setIsModifiedOrder(false);
+    }
+  };
+
+  const handleRevertOrder = () => {
+    if (props.categories && isModifiedOrder) {
+      setCategories(props.categories);
+      setIsModifiedOrder(false);
+    }
   };
 
   const handleChildren =
@@ -248,6 +289,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     setIsDrag(false);
     setDraggingIdx(-1);
     e.currentTarget.style.opacity = '';
+    handleCheckOrder();
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>, idx: number) => {
@@ -293,6 +335,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       isFunctionPopupActive={isFunctionPopupActive}
       confirmMessage={confirmMessage}
       confirmType={confirmType}
+      isModifiedOrder={isModifiedOrder}
       titleRef={titleRef}
       pathRef={pathRef}
       createBtnRef={createBtnRef}
@@ -302,6 +345,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       onSetTitle={setTitle}
       onSetPath={setPath}
       onSetIsConfirmPopupActive={setIsConfirmPopupActive}
+      onRevertOrder={handleRevertOrder}
       onConfirmBtn={handleConfirmBtn}
       onModifyPopup={handleModifyPopup}
       onSingleUpdateCategory={handleSingleUpdateCategory}
@@ -332,9 +376,13 @@ interface typeCategoryManageCT
     id: string,
     path: string,
     categoryId: number,
-    auth: number
+    auth: number,
+    priority?: number
   ) => void;
-  requestUpdateCategory: (categories: Array<Category>) => void;
+  requestMultiUpdateCategory: (
+    categories: Array<Category>,
+    id?: string
+  ) => void;
   requestAuthority: (id?: string) => void;
   handleCodeMessage: (code: string, message: string) => void;
 }
