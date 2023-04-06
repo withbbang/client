@@ -23,6 +23,7 @@ const CategoryManagePT = ({
   isConfirmPopupActive,
   isFunctionPopupActive,
   confirmMessage,
+  confirmType,
   titleRef,
   pathRef,
   createBtnRef,
@@ -32,6 +33,7 @@ const CategoryManagePT = ({
   onSetTitle,
   onSetPath,
   onSetIsConfirmPopupActive,
+  onConfirmBtn,
   onModifyPopup,
   onSingleUpdateCategory,
   onCreateCategory,
@@ -48,8 +50,8 @@ const CategoryManagePT = ({
     <ConfirmPopup
       isActive={isConfirmPopupActive}
       confirmMessage={confirmMessage}
-      onCancle={onSetIsConfirmPopupActive}
-      onConfirm={onSingleUpdateCategory}
+      confirmType={confirmType}
+      onConfirm={onConfirmBtn}
     />
     <FunctionPopup
       isActive={isFunctionPopupActive}
@@ -168,6 +170,7 @@ interface typeCategoryManagePT {
   isConfirmPopupActive: boolean;
   isFunctionPopupActive: boolean;
   confirmMessage: string;
+  confirmType?: string;
   titleRef: React.MutableRefObject<HTMLInputElement>;
   pathRef: React.MutableRefObject<HTMLInputElement>;
   createBtnRef: React.MutableRefObject<HTMLButtonElement>;
@@ -177,6 +180,7 @@ interface typeCategoryManagePT {
   onSetTitle: React.Dispatch<React.SetStateAction<string>>;
   onSetPath: React.Dispatch<React.SetStateAction<string>>;
   onSetIsConfirmPopupActive: React.Dispatch<React.SetStateAction<boolean>>;
+  onConfirmBtn: (type?: string) => void;
   onModifyPopup: (idx?: number) => void;
   onSingleUpdateCategory: () => void;
   onCreateCategory: (e?: React.KeyboardEvent<HTMLInputElement>) => void;

@@ -26,7 +26,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const [isConfirmPopupActive, setIsConfirmPopupActive] =
     useState<boolean>(false);
   const [confirmMessage, setConfirmMessage] = useState<string>('');
-  const [confirmBtn, setConfirmBtn] = useState<null | any>(null);
+  const [confirmType, setConfirmType] = useState<string | undefined>();
   const [isFunctionPopupActive, setIsFunctionPopupActive] =
     useState<boolean>(false);
   const [selectedIdx, setSelectedIdx] = useState<number>(-1);
@@ -64,19 +64,45 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
     updateBtnRef && updateBtnRef.current.blur();
   };
 
+  const handleConfirmBtn = (type?: string) => {
+    setConfirmType(type);
+    setConfirmMessage('');
+    setIsConfirmPopupActive(!isConfirmPopupActive);
+    switch (type) {
+      case 'create':
+        if (props.id) {
+          props.requestCreateCategory(title, path, auth, props.id, priority);
+          props.handleCodeMessage('', '');
+        } else {
+          props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+        }
+        break;
+      case 'singleUpdate':
+        if (props.id) {
+          props.requestSingleUpdateCategory(
+            title,
+            props.id,
+            path,
+            categories[selectedIdx].ID,
+            auth
+          );
+          props.handleCodeMessage('', '');
+        } else {
+          props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+        }
+        handleModifyPopup();
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleConfirmPopup = (type?: string) => {
+    setConfirmType(type);
     switch (type) {
       case 'create':
         setConfirmMessage('생성하시겠습니까?');
         setIsConfirmPopupActive(!isConfirmPopupActive);
-        setConfirmBtn(() => {
-          if (props.id) {
-            props.requestCreateCategory(title, path, auth, props.id, priority);
-            props.handleCodeMessage('', '');
-          } else {
-            props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
-          }
-        });
         break;
       case 'singleUpdate':
         setConfirmMessage('수정하시겠습니까?');
@@ -87,9 +113,6 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
         setIsConfirmPopupActive(!isConfirmPopupActive);
         break;
       default:
-        setConfirmMessage('');
-        setIsConfirmPopupActive(!isConfirmPopupActive);
-        setConfirmBtn(null);
         break;
     }
   };
@@ -113,7 +136,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       return;
     }
 
-    handleConfirmPopup('singleUpdate');
+    handleConfirmPopup('create');
     handleBlur();
   };
 
@@ -138,7 +161,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       return;
     }
 
-    handleConfirmPopup('create');
+    handleConfirmPopup('singleUpdate');
     handleBlur();
   };
 
@@ -150,6 +173,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
 
   const handleSetToggle = () => {
     if (toggle) {
+      handleConfirmPopup();
       setTimeout(() => {
         setTitle('');
         setPath('');
@@ -268,6 +292,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       isConfirmPopupActive={isConfirmPopupActive}
       isFunctionPopupActive={isFunctionPopupActive}
       confirmMessage={confirmMessage}
+      confirmType={confirmType}
       titleRef={titleRef}
       pathRef={pathRef}
       createBtnRef={createBtnRef}
@@ -277,6 +302,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       onSetTitle={setTitle}
       onSetPath={setPath}
       onSetIsConfirmPopupActive={setIsConfirmPopupActive}
+      onConfirmBtn={handleConfirmBtn}
       onModifyPopup={handleModifyPopup}
       onSingleUpdateCategory={handleSingleUpdateCategory}
       onCreateCategory={handleCreateCategory}
@@ -300,6 +326,13 @@ interface typeCategoryManageCT
     auth: number,
     id?: string,
     priority?: number
+  ) => void;
+  requestSingleUpdateCategory: (
+    title: string,
+    id: string,
+    path: string,
+    categoryId: number,
+    auth: number
   ) => void;
   requestUpdateCategory: (categories: Array<Category>) => void;
   requestAuthority: (id?: string) => void;

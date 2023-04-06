@@ -7,6 +7,9 @@ import {
   requestCreateCategory,
   successCreateCategory,
   failCreateCategory,
+  requestSingleUpdateCategory,
+  successSingleUpdateCategory,
+  failSingleUpdateCategory,
   requestUpdateCategory,
   successUpdateCategory,
   failUpdateCategory
@@ -15,6 +18,10 @@ import {
 export function* categoryManageSaga() {
   yield takeEvery(requestCategory.type, handlepostCategories);
   yield takeEvery(requestCreateCategory.type, handlePostCreateCategory);
+  yield takeEvery(
+    requestSingleUpdateCategory.type,
+    handlePostSingleUpdateCategory
+  );
   yield takeEvery(requestUpdateCategory.type, handlePostUpdateCategory);
 }
 
@@ -39,6 +46,15 @@ function* handlePostCreateCategory(data: any) {
   }
 }
 
+function* handlePostSingleUpdateCategory(data: any) {
+  try {
+    const res: Generator = yield call(postSingleUpdateCategory, data);
+    yield put(successSingleUpdateCategory(res));
+  } catch (error: any) {
+    yield put(failSingleUpdateCategory(error));
+  }
+}
+
 function* handlePostUpdateCategory(data: any) {
   try {
     const res: Generator = yield call(postUpdateCategory, data);
@@ -57,6 +73,10 @@ async function postCategories(data: any): Promise<any> {
 
 async function postCreateCategory(data: any): Promise<any> {
   return postAPI('/server/admin/category-manage/create', data);
+}
+
+async function postSingleUpdateCategory(data: any): Promise<any> {
+  return postAPI('/server/admin/category-manage/single-update', data);
 }
 
 async function postUpdateCategory(data: any): Promise<any> {

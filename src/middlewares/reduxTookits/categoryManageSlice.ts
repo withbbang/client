@@ -26,6 +26,11 @@ const categoryManageSlice = createSlice({
       state.categories = action.payload.categories;
     },
     failCreateCategory(state: CategoryManageState) {},
+    requestSingleUpdateCategory(state: CategoryManageState, action) {},
+    successSingleUpdateCategory(state: CategoryManageState, action) {
+      state.categories = action.payload.categories;
+    },
+    failSingleUpdateCategory(state: CategoryManageState) {},
     requestUpdateCategory(state: CategoryManageState, action) {},
     successUpdateCategory(state: CategoryManageState, action) {
       state.categories = action.payload.categories;
@@ -41,6 +46,9 @@ export const {
   requestCreateCategory,
   successCreateCategory,
   failCreateCategory,
+  requestSingleUpdateCategory,
+  successSingleUpdateCategory,
+  failSingleUpdateCategory,
   requestUpdateCategory,
   successUpdateCategory,
   failUpdateCategory
@@ -83,6 +91,33 @@ export const categoryManageExtraReducers = {
     state.message = action.payload.message;
   },
   'categoryManage/failCreateCategory': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/requestSingleUpdateCategory': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'categoryManage/successSingleUpdateCategory': (
+    state: CommonState,
+    action: any
+  ) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/failSingleUpdateCategory': (
+    state: CommonState,
+    action: any
+  ) => {
     state.isFetching = false;
     state.isSuccess = false;
     state.isFail = true;

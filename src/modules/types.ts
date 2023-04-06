@@ -18,7 +18,7 @@ export interface Content {
 }
 
 export interface typeSVG {
-  type: string;
+  type?: string;
   width?: string;
   height?: string;
   fill?: string;

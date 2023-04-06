@@ -4,6 +4,7 @@ import {
   CategoryManageState,
   requestCategory,
   requestCreateCategory,
+  requestSingleUpdateCategory,
   requestUpdateCategory
 } from 'middlewares/reduxTookits/categoryManageSlice';
 import { Action } from 'redux';
@@ -43,6 +44,17 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
       priority?: number
     ): void => {
       dispatch(requestCreateCategory({ title, path, auth, id, priority }));
+    },
+    requestSingleUpdateCategory: (
+      title: string,
+      id: string,
+      path: string,
+      categoryId: number,
+      auth: number
+    ): void => {
+      dispatch(
+        requestSingleUpdateCategory({ title, id, path, categoryId, auth })
+      );
     },
     requestUpdateCategory: (categories: Array<Category>): void => {
       dispatch(requestUpdateCategory({ categories }));

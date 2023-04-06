@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
 const ConfirmPopup = ({
   isActive,
   confirmMessage,
+  confirmType,
   isNight,
-  onCancle,
   onConfirm
 }: typeConfirmPopup): JSX.Element => {
   return (
@@ -35,8 +35,8 @@ const ConfirmPopup = ({
           <div className={styles.modal_body}>
             <span>{confirmMessage}</span>
             <div>
-              <button onClick={() => onCancle(!isActive)}>취소</button>
-              <button onClick={onConfirm}>확인</button>
+              <button onClick={() => onConfirm()}>취소</button>
+              <button onClick={() => onConfirm(confirmType)}>확인</button>
             </div>
           </div>
         </div>
@@ -48,8 +48,8 @@ const ConfirmPopup = ({
 interface typeConfirmPopup extends CommonState {
   isActive: boolean;
   confirmMessage: string;
-  onCancle: React.Dispatch<React.SetStateAction<boolean>>;
-  onConfirm: () => void;
+  confirmType?: string;
+  onConfirm: (type?: string) => void;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfirmPopup);
