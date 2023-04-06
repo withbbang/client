@@ -96,6 +96,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
         if (props.id) {
           props.requestMultiUpdateCategory(categories, props.id);
           props.handleCodeMessage('', '');
+          setIsModifiedOrder(false);
         } else {
           props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
         }
