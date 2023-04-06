@@ -50,7 +50,10 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    props.categories !== undefined && setCategories(props.categories);
+    if (props.categories !== undefined) {
+      setCategories(props.categories);
+      setIsModifiedOrder(false);
+    }
   }, [props.categories]);
 
   const handleBlur = () => {
@@ -83,8 +86,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
             props.id,
             path,
             categories[selectedIdx].ID,
-            auth,
-            categories[selectedIdx].PRIORITY
+            auth
           );
           props.handleCodeMessage('', '');
         } else {
