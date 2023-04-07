@@ -5,11 +5,7 @@ import {
   requestSideBarCategory,
   requestVisitCount
 } from 'middlewares/reduxTookits/commonSlice';
-import {
-  LogState,
-  requestLogIn,
-  requestLogOut
-} from 'middlewares/reduxTookits/logSlice';
+import { LogState, requestLogIn } from 'middlewares/reduxTookits/logSlice';
 import { connect } from 'react-redux';
 import { Action } from 'redux';
 import LeftSideBarCT from './LeftSideBarCT';
@@ -34,9 +30,6 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     },
     requestLogIn: (id: string, password: string): void => {
       dispatch(requestLogIn({ id, password }));
-    },
-    requestLogOut: (id: string): void => {
-      dispatch(requestLogOut({ id }));
     }
   };
 };

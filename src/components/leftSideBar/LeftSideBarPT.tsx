@@ -7,7 +7,6 @@ const LeftSideBarPT = ({
   today,
   isNight,
   isLoggedIn,
-  onLogOut,
   id,
   toggle,
   onToggle,
@@ -52,25 +51,12 @@ const LeftSideBarPT = ({
               <SVG type="doubleArrow" width="30px" height="30px" fill="#fff" />
             </div>
           </div>
-          {isLoggedIn && id ? (
+          {isLoggedIn && id && (
             <div className={[styles.user, styles.log_in].join(' ')}>
               {/* <div className={styles.avatar}><img src={img} /></div> */}
               <div className={styles.infos}>
                 <span>{id}</span>
-                {id}
               </div>
-            </div>
-          ) : (
-            <div className={styles.user}>
-              <input
-              //   onChange={(e) => props.setEmail(e.target.value)}
-              //   onKeyPress={(e) => props.onEmailPress(e)}
-              //   type="email"
-              //   placeholder="Email..."
-              //   ref={props.emailRef}
-              />
-              {/* <button onClick={props.doRequestLogin}>Login</button> */}
-              <button>Login</button>
             </div>
           )}
           {items &&
@@ -104,14 +90,6 @@ const LeftSideBarPT = ({
                 </div>
               );
             })}
-          {isLoggedIn && (
-            <div className={styles.log_out} onClick={onLogOut}>
-              Log Out
-              <div className={styles.svg}>
-                <SVG type="logOut" width="20px" height="20px" fill="#fff" />
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>
@@ -123,7 +101,6 @@ interface typeLeftSideBarPT {
   today?: number;
   isNight?: boolean;
   isLoggedIn?: boolean;
-  onLogOut: () => void;
   id?: string;
   toggle: boolean;
   onToggle: () => void;

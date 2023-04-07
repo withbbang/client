@@ -16,10 +16,6 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
     props.requestSideBarCategory(props.id);
   }, [props.id, props.isLoggedIn, props.isLoggedOut]);
 
-  const handleLogOut = (): void => {
-    props.id ? props.requestLogOut(props.id) : alert('부적절한 요청입니다.');
-  };
-
   const handleToggle = (): void => {
     setToggle(!toggle);
   };
@@ -34,7 +30,6 @@ const LeftSideBarCT = (props: typeLeftSideBarCT): JSX.Element => {
       today={props.today}
       isNight={props.isNight}
       isLoggedIn={props.isLoggedIn}
-      onLogOut={handleLogOut}
       id={props.id}
       toggle={toggle}
       onToggle={handleToggle}
@@ -49,7 +44,6 @@ interface typeLeftSideBarCT extends CommonState, LogState {
   requestVisitCount: () => void;
   requestSideBarCategory: (id?: string) => void;
   requestLogIn: (id: string, password: string) => void;
-  requestLogOut: (id: string) => void;
 }
 
 export default LeftSideBarCT;

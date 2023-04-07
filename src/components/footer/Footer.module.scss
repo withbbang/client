@@ -1,16 +1,16 @@
 .wrap {
   width: 100%;
-  height: 100px;
+  height: 120px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   background-color: rgb(210, 210, 210);
   transition: background-color 0.5s linear;
   -moz-transition: background-color 0.5s linear;
   -webkit-transition: background-color 0.5s linear;
   -ms-transition: background-color 0.5s linear;
   -o-transition: background-color 0.5s linear;
-  z-index: 40;
 
   &.night {
     background-color: rgb(50, 50, 50);
@@ -19,6 +19,50 @@
     -webkit-transition: background-color 0.5s linear;
     -ms-transition: background-color 0.5s linear;
     -o-transition: background-color 0.5s linear;
+
+    .bottom {
+      color: #fff;
+      transition: color 0.5s ease-in-out;
+      -moz-transition: color 0.5s linear;
+      -webkit-transition: color 0.5s linear;
+      -ms-transition: color 0.5s linear;
+      -o-transition: color 0.5s linear;
+    }
+  }
+
+  .top {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      > span:hover {
+        cursor: pointer;
+      }
+
+      > span {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: rgb(0, 0, 0);
+    font-size: 0.7rem;
+    font-weight: 100;
+    transition: color 0.5s ease-in-out;
+    -moz-transition: color 0.5s linear;
+    -webkit-transition: color 0.5s linear;
+    -ms-transition: color 0.5s linear;
+    -o-transition: color 0.5s linear;
   }
 
   > span:hover {
