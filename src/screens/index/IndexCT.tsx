@@ -10,7 +10,7 @@ const IndexCT = (props: typeIndexCT) => {
 
   useEffect(() => {
     props.requestContents(path ? `/${path}` : path, props.id);
-  }, [props.id, props.isLoggedIn, props.isLoggedOut]);
+  }, [path, props.id, props.isLoggedIn, props.isLoggedOut]);
 
   return (
     <IndexPT

@@ -4,7 +4,6 @@ import Index from 'screens/index';
 import NotFound from 'screens/notFound';
 import Sign from 'screens/sign';
 import Log from 'screens/log';
-import Admin from 'screens/admin';
 import Post from './screens/post';
 import CategoryManage from './screens/category-manage';
 
