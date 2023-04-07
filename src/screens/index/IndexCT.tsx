@@ -6,10 +6,10 @@ import { ContentsState } from 'middlewares/reduxTookits/contentsSlice';
 import IndexPT from './IndexPT';
 
 const IndexCT = (props: typeIndexCT) => {
-  const { title } = useParams();
+  const { path } = useParams();
 
   useEffect(() => {
-    props.requestContents(title, props.id);
+    props.requestContents(`/${path}`, props.id);
   }, [props.id, props.isLoggedIn, props.isLoggedOut]);
 
   return (
@@ -22,7 +22,7 @@ const IndexCT = (props: typeIndexCT) => {
 };
 
 interface typeIndexCT extends CommonState, LogState, ContentsState {
-  requestContents: (title?: string, id?: string) => void;
+  requestContents: (path?: string, id?: string) => void;
 }
 
 export default IndexCT;

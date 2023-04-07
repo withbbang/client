@@ -17,7 +17,7 @@ const App = (): JSX.Element => {
         <Route path="/log" element={<Log />} />
         <Route path="/admin/post" element={<Post />} />
         <Route path="/admin/category-manage" element={<CategoryManage />} />
-        <Route path="/:title" element={<Index />} />
+        <Route path="/:path" element={<Index />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

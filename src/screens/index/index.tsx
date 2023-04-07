@@ -21,8 +21,8 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
-    requestContents: (title?: string, id?: string): void => {
-      dispatch(requestContents({ title, id }));
+    requestContents: (path?: string, id?: string): void => {
+      dispatch(requestContents({ path, id }));
     }
   };
 };
