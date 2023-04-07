@@ -9,7 +9,7 @@ const IndexCT = (props: typeIndexCT) => {
   const { path } = useParams();
 
   useEffect(() => {
-    props.requestContents(`/${path}`, props.id);
+    props.requestContents(path ? `/${path}` : path, props.id);
   }, [props.id, props.isLoggedIn, props.isLoggedOut]);
 
   return (
