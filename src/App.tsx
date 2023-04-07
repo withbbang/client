@@ -6,6 +6,7 @@ import Sign from 'screens/sign';
 import Log from 'screens/log';
 import Post from './screens/post';
 import CategoryManage from './screens/category-manage';
+import ContentManage from './screens/content-manage';
 
 const App = (): JSX.Element => {
   return (
@@ -16,6 +17,7 @@ const App = (): JSX.Element => {
         <Route path="/log" element={<Log />} />
         <Route path="/admin/post" element={<Post />} />
         <Route path="/admin/category-manage" element={<CategoryManage />} />
+        <Route path="/admin/content-manage" element={<ContentManage />} />
         <Route path="/:path" element={<Index />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
