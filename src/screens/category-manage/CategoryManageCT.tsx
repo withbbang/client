@@ -32,8 +32,8 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const [selectedIdx, setSelectedIdx] = useState<number>(-1);
   const [isModifiedOrder, setIsModifiedOrder] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
-  const [auth, setAuth] = useState<number>(20);
   const [path, setPath] = useState<string>('');
+  const [auth, setAuth] = useState<number>(20);
 
   useEffect(() => {
     if (
@@ -82,6 +82,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       case 'singleUpdate':
         if (props.id) {
           props.requestSingleUpdateCategory(
+            categories[selectedIdx].IS_DELETED,
             title,
             props.id,
             path,
@@ -98,17 +99,30 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
         if (props.id) {
           props.requestMultiUpdateCategory(categories, props.id);
           props.handleCodeMessage('', '');
-          setIsModifiedOrder(false);
         } else {
           props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
         }
+        setIsModifiedOrder(false);
+        break;
+      case 'deleteRestore':
+        if (props.id) {
+          props.requestDeleteRestoreCategory(
+            categories[selectedIdx].IS_DELETED,
+            categories[selectedIdx].ID,
+            props.id
+          );
+          props.handleCodeMessage('', '');
+        } else {
+          props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+        }
+        handleDeleteRestore();
         break;
       default:
         break;
     }
   };
 
-  const handleConfirmPopup = (type?: string) => {
+  const handleConfirmPopup = (type?: string, idx?: number) => {
     setConfirmType(type);
     switch (type) {
       case 'create':
@@ -118,6 +132,12 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       case 'singleUpdate':
       case 'multiUpdate':
         setConfirmMessage('수정하시겠습니까?');
+        setIsConfirmPopupActive(!isConfirmPopupActive);
+        break;
+      case 'deleteRestore':
+        idx !== undefined && idx > -1 && categories[idx].IS_DELETED === 'Y'
+          ? setConfirmMessage('복원하시겠습니까?')
+          : setConfirmMessage('삭제하시겠습니까?');
         setIsConfirmPopupActive(!isConfirmPopupActive);
         break;
       default:
@@ -171,7 +191,12 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
 
     //TODO: 객체 비교 공부하기
     const originCategory = props.categories && props.categories[selectedIdx];
-    const copiedCategory = categories[selectedIdx];
+    const copiedCategory = {
+      ...categories[selectedIdx],
+      TITLE: title,
+      PATH: path,
+      AUTH: auth
+    };
     if (JSON.stringify(originCategory) === JSON.stringify(copiedCategory)) {
       props.handleCodeMessage('SAME INPUTS', '입력값이 동일합니다.');
       handleBlur();
@@ -211,17 +236,29 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       // useState의 set함수는 기본적으로 비동기이다.
       // 따라서 setSelectedIdx(selectedIdx) 이후
       // 바로 해당 selectedIdx에 있는 값을 가져올 수 없다.
-      const { TITLE, PATH } = categories[idx];
+      const { TITLE, PATH, AUTH } = categories[idx];
       setSelectedIdx(idx);
       setTitle(TITLE);
       setPath(PATH);
+      setAuth(AUTH);
     } else {
       setSelectedIdx(-1);
       setTitle('');
       setPath('');
+      setAuth(-1);
     }
 
     setIsFunctionPopupActive(!isFunctionPopupActive);
+  };
+
+  const handleDeleteRestore = (idx?: number) => {
+    if (idx !== undefined && idx > -1) {
+      setSelectedIdx(idx);
+      handleConfirmPopup('deleteRestore', idx);
+    } else {
+      setSelectedIdx(-1);
+      handleConfirmPopup();
+    }
   };
 
   const handleCheckOrder = () => {
@@ -266,7 +303,10 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
           ref={pathRef}
         />
         {Array.isArray(props.authorities) && props.authorities.length > 0 && (
-          <select defaultValue={categories[selectedIdx].AUTH}>
+          <select
+            defaultValue={categories[selectedIdx].AUTH}
+            onChange={(e) => setAuth(+e.target.value)}
+          >
             {props.authorities.map((authority, idx) => (
               <option key={idx} value={authority.AUTH}>
                 {authority.DESCRIPTION}
@@ -351,6 +391,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       onRevertOrder={handleRevertOrder}
       onConfirmBtn={handleConfirmBtn}
       onModifyPopup={handleModifyPopup}
+      onDeleteRestore={handleDeleteRestore}
       onSingleUpdateCategory={handleSingleUpdateCategory}
       onCreateCategory={handleCreateCategory}
       onMultiUpdateCategory={handleMultiUpdateCategory}
@@ -375,6 +416,7 @@ interface typeCategoryManageCT
     priority?: number
   ) => void;
   requestSingleUpdateCategory: (
+    isDeleted: string,
     title: string,
     id: string,
     path: string,
@@ -384,6 +426,11 @@ interface typeCategoryManageCT
   ) => void;
   requestMultiUpdateCategory: (
     categories: Array<Category>,
+    id?: string
+  ) => void;
+  requestDeleteRestoreCategory: (
+    isDeleted: string,
+    categoryId: number,
     id?: string
   ) => void;
   requestAuthority: (id?: string) => void;

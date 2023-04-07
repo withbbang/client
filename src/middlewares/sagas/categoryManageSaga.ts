@@ -12,7 +12,10 @@ import {
   failSingleUpdateCategory,
   requestMultiUpdateCategory,
   successMultiUpdateCategory,
-  failMultiUpdateCategory
+  failMultiUpdateCategory,
+  requestDeleteRestoreCategory,
+  successDeleteRestoreCategory,
+  failDeleteRestoreCategory
 } from 'middlewares/reduxTookits/categoryManageSlice';
 
 export function* categoryManageSaga() {
@@ -23,6 +26,10 @@ export function* categoryManageSaga() {
     handlePostSingleUpdateCategory
   );
   yield takeEvery(requestMultiUpdateCategory.type, handlePostUpdateCategory);
+  yield takeEvery(
+    requestDeleteRestoreCategory.type,
+    handlePostDeleteRestoreCategory
+  );
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -64,6 +71,15 @@ function* handlePostUpdateCategory(data: any) {
   }
 }
 
+function* handlePostDeleteRestoreCategory(data: any) {
+  try {
+    const res: Generator = yield call(postDeleteRestoreCategory, data);
+    yield put(successDeleteRestoreCategory(res));
+  } catch (error: any) {
+    yield put(failDeleteRestoreCategory(error));
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -81,4 +97,8 @@ async function postSingleUpdateCategory(data: any): Promise<any> {
 
 async function postUpdateCategory(data: any): Promise<any> {
   return postAPI('/server/admin/category-manage/multi-update', data);
+}
+
+async function postDeleteRestoreCategory(data: any) {
+  return postAPI('/server/admin/category-manage/delete-restore', data);
 }

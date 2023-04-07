@@ -5,7 +5,8 @@ import {
   requestCategory,
   requestCreateCategory,
   requestSingleUpdateCategory,
-  requestMultiUpdateCategory
+  requestMultiUpdateCategory,
+  requestDeleteRestoreCategory
 } from 'middlewares/reduxTookits/categoryManageSlice';
 import { Action } from 'redux';
 import CategoryManageCT from './CategoryManageCT';
@@ -24,9 +25,9 @@ const mapStateToProps = (
   state: PropState
 ): CommonState | LogState | CategoryManageState | AuthorityState => {
   return {
+    ...state.categoryManage,
     ...state.common,
     ...state.log,
-    ...state.categoryManage,
     ...state.authority
   };
 };
@@ -46,6 +47,7 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
       dispatch(requestCreateCategory({ title, path, auth, id, priority }));
     },
     requestSingleUpdateCategory: (
+      isDeleted: string,
       title: string,
       id: string,
       path: string,
@@ -55,6 +57,7 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     ): void => {
       dispatch(
         requestSingleUpdateCategory({
+          isDeleted,
           title,
           id,
           path,
@@ -69,6 +72,13 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
       id?: string
     ): void => {
       dispatch(requestMultiUpdateCategory({ id, categories }));
+    },
+    requestDeleteRestoreCategory: (
+      isDeleted: string,
+      categoryId: number,
+      id?: string
+    ): void => {
+      dispatch(requestDeleteRestoreCategory({ isDeleted, categoryId, id }));
     },
     requestAuthority: (id?: string): void => {
       dispatch(requestAuthority({ id }));

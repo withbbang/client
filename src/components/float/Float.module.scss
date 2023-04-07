@@ -97,6 +97,14 @@
       -ms-transition: color 0.5s linear;
       -o-transition: color 0.5s linear;
     }
+
+    &.deleted {
+      opacity: 0.5;
+    }
+  }
+
+  &.deleted {
+    opacity: 0.5;
   }
 }
 
@@ -116,6 +124,7 @@
   .innerWrap {
     .floatBtns {
       display: flex;
+      align-items: center;
     }
   }
 }

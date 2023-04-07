@@ -35,7 +35,12 @@ const categoryManageSlice = createSlice({
     successMultiUpdateCategory(state: CategoryManageState, action) {
       state.categories = action.payload.categories;
     },
-    failMultiUpdateCategory(state: CategoryManageState) {}
+    failMultiUpdateCategory(state: CategoryManageState) {},
+    requestDeleteRestoreCategory(state: CategoryManageState, action) {},
+    successDeleteRestoreCategory(state: CategoryManageState, action) {
+      state.categories = action.payload.categories;
+    },
+    failDeleteRestoreCategory(state: CategoryManageState) {}
   }
 });
 
@@ -51,7 +56,10 @@ export const {
   failSingleUpdateCategory,
   requestMultiUpdateCategory,
   successMultiUpdateCategory,
-  failMultiUpdateCategory
+  failMultiUpdateCategory,
+  requestDeleteRestoreCategory,
+  successDeleteRestoreCategory,
+  failDeleteRestoreCategory
 } = categoryManageSlice.actions;
 
 export const categoryManageExtraReducers = {
@@ -142,6 +150,33 @@ export const categoryManageExtraReducers = {
     state.message = action.payload.message;
   },
   'categoryManage/failMultiUpdateCategory': (
+    state: CommonState,
+    action: any
+  ) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/requestDeleteRestoreCategory': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'categoryManage/successDeleteRestoreCategory': (
+    state: CommonState,
+    action: any
+  ) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'categoryManage/failDeleteRestoreCategory': (
     state: CommonState,
     action: any
   ) => {

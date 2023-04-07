@@ -37,6 +37,7 @@ const CategoryManagePT = ({
   onRevertOrder,
   onConfirmBtn,
   onModifyPopup,
+  onDeleteRestore,
   onSingleUpdateCategory,
   onCreateCategory,
   onMultiUpdateCategory,
@@ -91,10 +92,11 @@ const CategoryManagePT = ({
                   idx={idx}
                   isDrag={isDrag}
                   title={category.TITLE}
-                  content={category.CONTENT}
                   path={category.PATH}
+                  isDeleted={category.IS_DELETED}
                   description={category.DESCRIPTION}
                   onModifyPopup={onModifyPopup}
+                  onDeleteRestore={onDeleteRestore}
                   onDragStart={onDragStart}
                   onDragEnd={onDragEnd}
                   onDragOver={onDragOver}
@@ -194,6 +196,7 @@ interface typeCategoryManagePT {
   onRevertOrder: () => void;
   onConfirmBtn: (type?: string) => void;
   onModifyPopup: (idx?: number) => void;
+  onDeleteRestore: (idx?: number) => void;
   onSingleUpdateCategory: () => void;
   onCreateCategory: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
   onMultiUpdateCategory: () => void;

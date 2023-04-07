@@ -4,6 +4,7 @@ export interface Category {
   PRIORITY: number;
   PATH: string;
   DESCRIPTION?: string;
+  IS_DELETED: string;
   AUTH: number;
 }
 

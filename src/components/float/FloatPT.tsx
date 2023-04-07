@@ -7,17 +7,26 @@ const FloatPT = ({
   idx,
   isDrag,
   title,
-  content,
   path,
+  isDeleted,
   description,
   onModifyPopup,
+  onDeleteRestore,
   onDragStart,
   onDragEnd,
   onDragOver
 }: typeFloatPT): JSX.Element => {
   return (
     <div
-      className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
+      className={
+        isNight
+          ? isDeleted === 'Y'
+            ? [styles.wrap, styles.night, styles.deleted].join(' ')
+            : [styles.wrap, styles.night].join(' ')
+          : isDeleted === 'Y'
+          ? [styles.wrap, styles.deleted].join(' ')
+          : styles.wrap
+      }
       draggable
       onDragStart={(e) => onDragStart(e, idx)}
       onDragEnd={(e) => onDragEnd(e, idx)}
@@ -33,11 +42,11 @@ const FloatPT = ({
               fill={isNight ? '#fff' : '#000'}
             />
           </span>
-          <span>
+          <span onClick={() => onDeleteRestore(idx)}>
             <SVG
-              type="trash"
-              width="16px"
-              height="16px"
+              type={isDeleted === 'Y' ? 'restore' : 'trash'}
+              width={isDeleted === 'Y' ? '20px' : '16px'}
+              height={isDeleted === 'Y' ? '20px' : '16px'}
               fill={isNight ? '#fff' : '#000'}
             />
           </span>
@@ -55,10 +64,11 @@ interface typeFloatPT {
   idx: number;
   isDrag: boolean;
   title: string;
-  content?: string;
   path?: string;
+  isDeleted: string;
   description: string;
   onModifyPopup: (idx?: number) => void;
+  onDeleteRestore: (idx?: number) => void;
   onDragStart: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
   onDragEnd: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
