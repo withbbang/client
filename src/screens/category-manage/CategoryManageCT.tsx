@@ -387,12 +387,10 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       onSetToggle={handleSetToggle}
       onSetTitle={setTitle}
       onSetPath={setPath}
-      onSetIsConfirmPopupActive={setIsConfirmPopupActive}
       onRevertOrder={handleRevertOrder}
       onConfirmBtn={handleConfirmBtn}
       onModifyPopup={handleModifyPopup}
       onDeleteRestore={handleDeleteRestore}
-      onSingleUpdateCategory={handleSingleUpdateCategory}
       onCreateCategory={handleCreateCategory}
       onMultiUpdateCategory={handleMultiUpdateCategory}
       onDragStart={handleDragStart}

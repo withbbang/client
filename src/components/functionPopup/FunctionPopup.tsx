@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PropState } from 'middlewares/configureReducer';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { connect } from 'react-redux';

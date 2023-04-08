@@ -33,12 +33,10 @@ const CategoryManagePT = ({
   onSetToggle,
   onSetTitle,
   onSetPath,
-  onSetIsConfirmPopupActive,
   onRevertOrder,
   onConfirmBtn,
   onModifyPopup,
   onDeleteRestore,
-  onSingleUpdateCategory,
   onCreateCategory,
   onMultiUpdateCategory,
   onDragStart,
@@ -192,12 +190,10 @@ interface typeCategoryManagePT {
   onSetToggle: () => void;
   onSetTitle: React.Dispatch<React.SetStateAction<string>>;
   onSetPath: React.Dispatch<React.SetStateAction<string>>;
-  onSetIsConfirmPopupActive: React.Dispatch<React.SetStateAction<boolean>>;
   onRevertOrder: () => void;
   onConfirmBtn: (type?: string) => void;
   onModifyPopup: (idx?: number) => void;
   onDeleteRestore: (idx?: number) => void;
-  onSingleUpdateCategory: () => void;
   onCreateCategory: (e?: React.KeyboardEvent<HTMLInputElement>) => void;
   onMultiUpdateCategory: () => void;
   onDragStart: (e: React.DragEvent<HTMLDivElement>, idx: number) => void;
