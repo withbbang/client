@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Action } from 'redux';
 import styles from './Card.module.scss';
 import { useNavigate } from 'react-router-dom';
+import SVG from 'modules/SVG';
 
 const mapStateToProps = (state: PropState): CommonState => {
   return {
@@ -16,7 +17,7 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {};
 };
 
-const Card = ({ isNight, title, content, path }: typeCard): JSX.Element => {
+const Card = ({ isNight, id, title, content, path }: typeCard): JSX.Element => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -30,12 +31,22 @@ const Card = ({ isNight, title, content, path }: typeCard): JSX.Element => {
     >
       <h3>{title}</h3>
       <p>{content ? content : title}</p>
+      {id === 0 && (
+        <span className={styles.add}>
+          <SVG
+            type="add"
+            width="100px"
+            height="100px"
+            fill={isNight ? '#fff' : '#000'}
+          />
+        </span>
+      )}
     </div>
   );
 };
 
 interface typeCard extends CommonState {
-  id: string;
+  id: number;
   title: string;
   content?: string;
   path?: string;

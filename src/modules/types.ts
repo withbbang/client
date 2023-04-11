@@ -15,7 +15,11 @@ export interface Content {
   HIT: number;
   HEART: number;
   CREATE_DT: string;
+  UPDATE_DT: string;
+  IS_DONE: string;
+  IS_DELETED: string;
   PATH: string;
+  AUTH: number;
 }
 
 export interface typeSVG {

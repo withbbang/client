@@ -5,6 +5,9 @@ import log, { LogState } from 'middlewares/reduxTookits/logSlice';
 import categoryManage, {
   CategoryManageState
 } from './reduxTookits/categoryManageSlice';
+import contentManage, {
+  ContentManageState
+} from './reduxTookits/contentManageSlice';
 import contents, { ContentsState } from './reduxTookits/contentsSlice';
 import authority, { AuthorityState } from './reduxTookits/authoritySlice';
 import { persistReducer } from 'redux-persist';
@@ -16,6 +19,7 @@ const rootReducer = combineReducers({
   common,
   contents,
   categoryManage,
+  contentManage,
   authority
   // add others...
 });
@@ -44,6 +48,7 @@ interface PropState {
   common: CommonState;
   contents: ContentsState;
   categoryManage: CategoryManageState;
+  contentManage: ContentManageState;
   authority: AuthorityState;
   // add others...
 }

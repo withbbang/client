@@ -19,7 +19,7 @@ import {
 } from 'middlewares/reduxTookits/categoryManageSlice';
 
 export function* categoryManageSaga() {
-  yield takeEvery(requestCategory.type, handlepostCategories);
+  yield takeEvery(requestCategory.type, handlePostCategories);
   yield takeEvery(requestCreateCategory.type, handlePostCreateCategory);
   yield takeEvery(
     requestSingleUpdateCategory.type,
@@ -35,7 +35,7 @@ export function* categoryManageSaga() {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-function* handlepostCategories(data: any) {
+function* handlePostCategories(data: any) {
   try {
     const res: Generator = yield call(postCategories, data);
     yield put(successCategory(res));
