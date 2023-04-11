@@ -5,8 +5,13 @@ import styles from './ContentManage.module.scss';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import ErrorPopup from 'components/errorPopup';
+import { Content } from 'modules/types';
 
-const ContentManagePT = ({ loading, isNight }: typeContentManagePT) => {
+const ContentManagePT = ({
+  loading,
+  isNight,
+  content
+}: typeContentManagePT) => {
   return (
     <>
       <Loader loading={loading} />
@@ -26,6 +31,7 @@ const ContentManagePT = ({ loading, isNight }: typeContentManagePT) => {
 interface typeContentManagePT {
   loading?: boolean;
   isNight?: boolean;
+  content?: Content;
 }
 
 export default ContentManagePT;
