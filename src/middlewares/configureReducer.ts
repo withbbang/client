@@ -2,7 +2,6 @@ import { combineReducers } from '@reduxjs/toolkit';
 import sign, { SignState } from 'middlewares/reduxTookits/signSlice';
 import common, { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import log, { LogState } from 'middlewares/reduxTookits/logSlice';
-import post, { PostState } from './reduxTookits/postSlice';
 import categoryManage, {
   CategoryManageState
 } from './reduxTookits/categoryManageSlice';
@@ -15,7 +14,6 @@ const rootReducer = combineReducers({
   sign,
   log,
   common,
-  post,
   contents,
   categoryManage,
   authority
@@ -44,7 +42,6 @@ interface PropState {
   sign: SignState;
   log: LogState;
   common: CommonState;
-  post: PostState;
   contents: ContentsState;
   categoryManage: CategoryManageState;
   authority: AuthorityState;

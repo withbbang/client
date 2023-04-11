@@ -4,7 +4,6 @@ import { authorityExtraReducers } from './authoritySlice';
 import { categoryManageExtraReducers } from './categoryManageSlice';
 import { contentsExtraReducers } from './contentsSlice';
 import { logExtraReducers } from './logSlice';
-import { postExtraReducers } from './postSlice';
 import { signExtraReducers } from './signSlice';
 
 export interface CommonState {
@@ -127,7 +126,6 @@ const commonSlice = createSlice({
     ...authorityExtraReducers,
     ...contentsExtraReducers,
     ...logExtraReducers,
-    ...postExtraReducers,
     ...signExtraReducers
     // ...add others
   }

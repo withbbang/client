@@ -72,7 +72,7 @@ const Footer = ({ isNight }: typeFooter): JSX.Element => {
           isNight ? [styles.bottom, styles.night].join(' ') : styles.bottom
         }
       >
-        © 2023 BreadKim. All Rights Reserved.
+        © Since 2023 BreadKim. All Rights Reserved.
       </div>
     </div>
   );

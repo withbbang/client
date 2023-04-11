@@ -4,7 +4,6 @@ import { LogState } from 'middlewares/reduxTookits/logSlice';
 import ErrorPopupPT from './ErrorPopupPT';
 import { SignState } from 'middlewares/reduxTookits/signSlice';
 import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
-import { PostState } from 'middlewares/reduxTookits/postSlice';
 import { useNavigate } from 'react-router-dom';
 
 const ErrorPopupCT = (props: typeErrorPopupCT): JSX.Element => {
@@ -67,8 +66,7 @@ interface typeErrorPopupCT
   extends CommonState,
     SignState,
     LogState,
-    CategoryManageState,
-    PostState {
+    CategoryManageState {
   requestForceLogOut: (id: string) => void;
   handleCodeMessage: (code: string, message: string) => void;
 }
