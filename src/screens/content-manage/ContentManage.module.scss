@@ -1,0 +1,33 @@
+.wrap {
+  display: flex;
+  width: 100%;
+  min-height: calc(100% - 100px);
+  background: rgb(240, 240, 240);
+  transition: background-color 0.5s linear;
+  -moz-transition: background-color 0.5s linear;
+  -webkit-transition: background-color 0.5s linear;
+  -ms-transition: background-color 0.5s linear;
+  -o-transition: background-color 0.5s linear;
+
+  &.night {
+    background-color: rgb(75, 75, 75);
+    transition: background-color 0.5s linear;
+    -moz-transition: background-color 0.5s linear;
+    -webkit-transition: background-color 0.5s linear;
+    -ms-transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
+
+    .innerWrap {
+    }
+  }
+
+  .innerWrap {
+    padding: 10% 10%;
+    width: 80%;
+    display: flex;
+
+    > pre {
+      width: 100%;
+    }
+  }
+}

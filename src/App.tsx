@@ -18,6 +18,10 @@ const App = (): JSX.Element => {
         <Route path="/admin/category-manage" element={<CategoryManage />} />
         <Route path="/admin/contents" element={<Contents />} />
         <Route path="/admin/content-manage" element={<ContentManage />} />
+        <Route
+          path="/admin/content-manage/:contentId"
+          element={<ContentManage />}
+        />
         <Route path="/:path" element={<Index />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -11,19 +11,27 @@ import {
   ContentManageState,
   requestContent
 } from 'middlewares/reduxTookits/contentManageSlice';
+import {
+  CategoryManageState,
+  requestCategory
+} from 'middlewares/reduxTookits/categoryManageSlice';
 
 const mapStateToProps = (
   state: PropState
-): CommonState | LogState | ContentManageState => {
+): CommonState | LogState | CategoryManageState | ContentManageState => {
   return {
     ...state.common,
     ...state.log,
+    ...state.categoryManage,
     ...state.contentManage
   };
 };
 
 const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
+    requestCategory: (id?: string): void => {
+      dispatch(requestCategory({ id }));
+    },
     requestContent: (id?: string, contentId?: number): void => {
       dispatch(requestContent({ id, contentId }));
     },

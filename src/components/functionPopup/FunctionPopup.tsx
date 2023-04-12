@@ -33,6 +33,14 @@ const FunctionPopup = ({
           }
         >
           <div className={styles.modal_body}>
+            <div className={styles.dnd} draggable>
+              <SVG
+                type="dnd"
+                width="25px"
+                height="25px"
+                fill={isNight ? '#fff' : '#000'}
+              />
+            </div>
             <div className={styles.close} onClick={() => onClose()}>
               <SVG
                 type="close"

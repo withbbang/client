@@ -283,7 +283,7 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
 
   const handleChildren =
     selectedIdx > -1 ? (
-      <div className={styles.box}>
+      <div className={styles.categoryBox}>
         <input
           placeholder="TITLE"
           type="text"
