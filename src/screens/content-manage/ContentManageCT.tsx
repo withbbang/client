@@ -16,8 +16,10 @@ const ContentManageCT = (props: typeContentManageCT) => {
   const titleRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
   const contentRef =
     React.useRef() as React.MutableRefObject<HTMLTextAreaElement>;
-  const createBtnRef =
+  const createUpdateBtnRef =
     React.useRef() as React.MutableRefObject<HTMLButtonElement>;
+  const [isFunctionPopupActive, setIsFunctionPopupActive] =
+    useState<boolean>(true);
 
   const [markdownCheatSheets, setMarkdownCheatSheets] = useState(Array<string>);
   const [categoryId, setCategoryId] = useState<number>(-1);
@@ -49,7 +51,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
   const handleBlur = () => {
     titleRef && titleRef.current.blur();
     contentRef && contentRef.current.blur();
-    createBtnRef && createBtnRef.current.blur();
+    createUpdateBtnRef && createUpdateBtnRef.current.blur();
   };
 
   const handleCreateUpdateCategory = (
@@ -89,6 +91,10 @@ const ContentManageCT = (props: typeContentManageCT) => {
 
     //TODO: update 혹은 create api
     handleBlur();
+  };
+
+  const handleCreateUpdatePopup = () => {
+    setIsFunctionPopupActive(!isFunctionPopupActive);
   };
 
   const handleTextAreaTab = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -134,8 +140,11 @@ const ContentManageCT = (props: typeContentManageCT) => {
         onKeyDown={(e) => handleTextAreaTab(e)}
         ref={contentRef}
       />
-      <button onClick={() => handleCreateUpdateCategory()} ref={createBtnRef}>
-        카테고리 수정
+      <button
+        onClick={() => handleCreateUpdateCategory()}
+        ref={createUpdateBtnRef}
+      >
+        확인
       </button>
     </div>
   );
@@ -149,9 +158,11 @@ const ContentManageCT = (props: typeContentManageCT) => {
       title={title}
       content={content}
       children={handleChildren}
+      isFunctionPopupActive={isFunctionPopupActive}
       setCategoryId={setCategoryId}
       setTitle={setTitle}
       setContent={setContent}
+      onCreateUpdatePopup={handleCreateUpdatePopup}
     />
   );
 };

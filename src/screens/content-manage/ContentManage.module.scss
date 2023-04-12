@@ -19,6 +19,15 @@
 
     .innerWrap {
     }
+
+    .createUpdateBtn {
+      background-color: #000;
+      transition: background-color 0.5s linear;
+      -moz-transition: background-color 0.5s linear;
+      -webkit-transition: background-color 0.5s linear;
+      -ms-transition: background-color 0.5s linear;
+      -o-transition: background-color 0.5s linear;
+    }
   }
 
   .innerWrap {
@@ -29,5 +38,25 @@
     > pre {
       width: 100%;
     }
+  }
+
+  .createUpdateBtn {
+    width: 35px;
+    height: 35px;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #fff;
+    bottom: 120px;
+    right: 30px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.5s linear;
+    -moz-transition: background-color 0.5s linear;
+    -webkit-transition: background-color 0.5s linear;
+    -ms-transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
   }
 }

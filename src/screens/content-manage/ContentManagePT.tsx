@@ -14,18 +14,21 @@ import {
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 import FunctionPopup from 'components/functionPopup/FunctionPopup';
+import SVG from 'modules/SVG';
 
 const ContentManagePT = ({
   loading,
   isNight,
   markdownCheatSheets,
-  children,
   categoryId,
   title,
   content,
+  children,
+  isFunctionPopupActive,
   setCategoryId,
   setTitle,
-  setContent
+  setContent,
+  onCreateUpdatePopup
 }: typeContentManagePT) => {
   return (
     <>
@@ -33,7 +36,11 @@ const ContentManagePT = ({
       <Header />
       <LeftSideBar />
       <ErrorPopup />
-      <FunctionPopup isActive={true} children={children} onClose={() => {}} />
+      <FunctionPopup
+        isActive={isFunctionPopupActive}
+        children={children}
+        onClose={onCreateUpdatePopup}
+      />
       <div
         className={
           isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap
@@ -100,6 +107,14 @@ const ContentManagePT = ({
             }}
           />
         </div>
+        <div className={styles.createUpdateBtn} onClick={onCreateUpdatePopup}>
+          <SVG
+            type="modify"
+            width="20px"
+            height="20px"
+            fill={isNight ? '#fff' : '#000'}
+          />
+        </div>
       </div>
       <Footer />
     </>
@@ -114,9 +129,11 @@ interface typeContentManagePT {
   categoryId: number;
   title: string;
   content?: string;
+  isFunctionPopupActive: boolean;
   setCategoryId: React.Dispatch<React.SetStateAction<number>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setContent: React.Dispatch<React.SetStateAction<string | undefined>>;
+  onCreateUpdatePopup: () => void;
 }
 
 export default ContentManagePT;
