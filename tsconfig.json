@@ -1,21 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "noImplicitAny": false, // 암묵적 any타입 허용 유무
+    "allowSyntheticDefaultImports": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./src",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "isolatedModules": true, // 추가 검사를 수행하여 별도의 컴파일 (예를 들어 트랜스파일된 모듈 혹은 @babel/plugin-transform-typescript) 이 안전한지 확인
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src"]
 }

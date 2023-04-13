@@ -42,7 +42,7 @@ const persistConfig = {
  */
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-interface PropState {
+export interface PropState {
   sign: SignState;
   log: LogState;
   common: CommonState;
@@ -53,4 +53,4 @@ interface PropState {
   // add others...
 }
 
-export { persistedReducer, PropState };
+export { persistedReducer };
