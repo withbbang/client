@@ -20,7 +20,6 @@ const ContentManagePT = ({
   loading,
   isNight,
   markdownCheatSheets,
-  categoryId,
   title,
   content,
   children,
@@ -29,9 +28,6 @@ const ContentManagePT = ({
   isConfirmPopupActive,
   isFunctionPopupActive,
   onConfirmBtn,
-  setCategoryId,
-  setTitle,
-  setContent,
   onCreateUpdatePopup
 }: typeContentManagePT) => {
   return (
@@ -57,65 +53,67 @@ const ContentManagePT = ({
         }
       >
         <div className={styles.innerWrap}>
-          <ReactMarkdown
-            children={content ? content : ''}
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || '');
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    showLineNumbers={true}
-                    showInlineLineNumbers={true}
-                    children={String(children).replace(/\n$/, '')}
-                    style={isNight ? vscDarkPlus : vs}
-                    language={match[1]}
-                    PreTag="div"
-                  />
-                ) : (
-                  <div>
-                    {markdownCheatSheets && (
-                      <div>
-                        {markdownCheatSheets?.map(
-                          ({ element, syntax }: any) => {
-                            return (
-                              <div key={element}>
-                                <h1>{element}</h1>
-                                <p>{syntax}</p>
-                                <div>
-                                  <h3>Examples</h3>
-                                  <ReactMarkdown
-                                    children={syntax}
-                                    remarkPlugins={[remarkGfm]}
-                                    components={{
-                                      code({ children, ...props }) {
-                                        return (
-                                          <SyntaxHighlighter
-                                            showLineNumbers={true}
-                                            showInlineLineNumbers={true}
-                                            children={String(children).replace(
-                                              /\n$/,
-                                              ''
-                                            )}
-                                            style={isNight ? vscDarkPlus : vs}
-                                            PreTag="section"
-                                          />
-                                        );
-                                      }
-                                    }}
-                                  />
+          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.content}>
+            <ReactMarkdown
+              children={content ? content : ''}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      showLineNumbers={true}
+                      showInlineLineNumbers={true}
+                      children={String(children).replace(/\n$/, '')}
+                      style={isNight ? vscDarkPlus : vs}
+                      language={match[1]}
+                      PreTag="div"
+                    />
+                  ) : (
+                    <div>
+                      {markdownCheatSheets && (
+                        <div>
+                          {markdownCheatSheets?.map(
+                            ({ element, syntax }: any) => {
+                              return (
+                                <div key={element}>
+                                  <h1>{element}</h1>
+                                  <p>{syntax}</p>
+                                  <div>
+                                    <h3>Examples</h3>
+                                    <ReactMarkdown
+                                      children={syntax}
+                                      remarkPlugins={[remarkGfm]}
+                                      components={{
+                                        code({ children, ...props }) {
+                                          return (
+                                            <SyntaxHighlighter
+                                              showLineNumbers={true}
+                                              showInlineLineNumbers={true}
+                                              children={String(
+                                                children
+                                              ).replace(/\n$/, '')}
+                                              style={isNight ? vscDarkPlus : vs}
+                                              PreTag="section"
+                                            />
+                                          );
+                                        }
+                                      }}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                            );
-                          }
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-            }}
-          />
+                              );
+                            }
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+              }}
+            />
+          </div>
         </div>
         <div className={styles.createUpdateBtn} onClick={onCreateUpdatePopup}>
           <SVG
@@ -136,7 +134,6 @@ interface typeContentManagePT {
   isNight?: boolean;
   markdownCheatSheets: Array<string>;
   children: JSX.Element;
-  categoryId: number;
   title: string;
   content?: string;
   confirmType?: string;
@@ -144,9 +141,6 @@ interface typeContentManagePT {
   isConfirmPopupActive: boolean;
   isFunctionPopupActive: boolean;
   onConfirmBtn: (type?: string) => void;
-  setCategoryId: React.Dispatch<React.SetStateAction<number>>;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
   onCreateUpdatePopup: () => void;
 }
 

@@ -178,7 +178,6 @@ const ContentManageCT = (props: typeContentManageCT) => {
       loading={props.isFetching}
       isNight={props.isNight}
       markdownCheatSheets={markdownCheatSheets}
-      categoryId={categoryId}
       title={title}
       content={content}
       children={handleChildren}
@@ -187,9 +186,6 @@ const ContentManageCT = (props: typeContentManageCT) => {
       isConfirmPopupActive={isConfirmPopupActive}
       isFunctionPopupActive={isFunctionPopupActive}
       onConfirmBtn={handleConfirmBtn}
-      setCategoryId={setCategoryId}
-      setTitle={setTitle}
-      setContent={setContent}
       onCreateUpdatePopup={handleCreateUpdatePopup}
     />
   );
