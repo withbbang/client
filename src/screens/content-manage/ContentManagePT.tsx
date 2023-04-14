@@ -8,13 +8,13 @@ import ErrorPopup from 'components/errorPopup';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
-  darcula,
-  solarizedlight,
-  synthwave84
+  vscDarkPlus,
+  vs
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 import FunctionPopup from 'components/functionPopup/FunctionPopup';
 import SVG from 'modules/SVG';
+import ConfirmPopup from 'components/confirmPopup/ConfirmPopup';
 
 const ContentManagePT = ({
   loading,
@@ -24,7 +24,11 @@ const ContentManagePT = ({
   title,
   content,
   children,
+  confirmType,
+  confirmMessage,
+  isConfirmPopupActive,
   isFunctionPopupActive,
+  onConfirmBtn,
   setCategoryId,
   setTitle,
   setContent,
@@ -36,6 +40,12 @@ const ContentManagePT = ({
       <Header />
       <LeftSideBar />
       <ErrorPopup />
+      <ConfirmPopup
+        isActive={isConfirmPopupActive}
+        confirmMessage={confirmMessage}
+        confirmType={confirmType}
+        onConfirm={onConfirmBtn}
+      />
       <FunctionPopup
         isActive={isFunctionPopupActive}
         children={children}
@@ -58,7 +68,7 @@ const ContentManagePT = ({
                     showLineNumbers={true}
                     showInlineLineNumbers={true}
                     children={String(children).replace(/\n$/, '')}
-                    style={isNight ? synthwave84 : solarizedlight}
+                    style={isNight ? vscDarkPlus : vs}
                     language={match[1]}
                     PreTag="div"
                   />
@@ -87,7 +97,7 @@ const ContentManagePT = ({
                                               /\n$/,
                                               ''
                                             )}
-                                            style={darcula}
+                                            style={isNight ? vscDarkPlus : vs}
                                             PreTag="section"
                                           />
                                         );
@@ -129,10 +139,14 @@ interface typeContentManagePT {
   categoryId: number;
   title: string;
   content?: string;
+  confirmType?: string;
+  confirmMessage: string;
+  isConfirmPopupActive: boolean;
   isFunctionPopupActive: boolean;
+  onConfirmBtn: (type?: string) => void;
   setCategoryId: React.Dispatch<React.SetStateAction<number>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
-  setContent: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
   onCreateUpdatePopup: () => void;
 }
 

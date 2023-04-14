@@ -19,12 +19,17 @@ const ContentManageCT = (props: typeContentManageCT) => {
   const createUpdateBtnRef =
     React.useRef() as React.MutableRefObject<HTMLButtonElement>;
   const [isFunctionPopupActive, setIsFunctionPopupActive] =
-    useState<boolean>(true);
+    useState<boolean>(false);
+
+  const [confirmMessage, setConfirmMessage] = useState<string>('');
+  const [confirmType, setConfirmType] = useState<string | undefined>();
+  const [isConfirmPopupActive, setIsConfirmPopupActive] =
+    useState<boolean>(false);
 
   const [markdownCheatSheets, setMarkdownCheatSheets] = useState(Array<string>);
   const [categoryId, setCategoryId] = useState<number>(-1);
   const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string | undefined>();
+  const [content, setContent] = useState<string>('');
 
   useEffect(() => {
     if (
@@ -44,9 +49,41 @@ const ContentManageCT = (props: typeContentManageCT) => {
     if (props.content) {
       setCategoryId(props.content.CATEGORY_ID);
       setTitle(props.content.TITLE);
-      setContent(props.content.CONTENT);
+      props.content.CONTENT && setContent(props.content.CONTENT);
+    } else {
+      setIsFunctionPopupActive(true);
     }
   }, [props.content]);
+
+  const handleConfirmPopup = (type?: string) => {
+    setConfirmType(type);
+    switch (type) {
+      case 'create':
+        setConfirmMessage('생성하시겠습니까?');
+        setIsConfirmPopupActive(!isConfirmPopupActive);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleConfirmBtn = (type?: string) => {
+    setConfirmType('');
+    setConfirmMessage('');
+    setIsConfirmPopupActive(!isConfirmPopupActive);
+    switch (type) {
+      case 'create':
+        if (props.id) {
+          props.requestCreateContent(categoryId, title, content, props.id);
+          props.handleCodeMessage('', '');
+        } else {
+          props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleBlur = () => {
     titleRef && titleRef.current.blur();
@@ -76,20 +113,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
     }
 
     //TODO: 비교 필요
-    // const originCategory = props.categories && props.categories[selectedIdx];
-    // const copiedCategory = {
-    //   ...categories[selectedIdx],
-    //   TITLE: title,
-    //   PATH: path,
-    //   AUTH: auth
-    // };
-    // if (JSON.stringify(originCategory) === JSON.stringify(copiedCategory)) {
-    //   props.handleCodeMessage('SAME INPUTS', '입력값이 동일합니다.');
-    //   handleBlur();
-    //   return;
-    // }
-
-    //TODO: update 혹은 create api
+    handleConfirmPopup('create');
     handleBlur();
   };
 
@@ -158,7 +182,11 @@ const ContentManageCT = (props: typeContentManageCT) => {
       title={title}
       content={content}
       children={handleChildren}
+      confirmType={confirmType}
+      confirmMessage={confirmMessage}
+      isConfirmPopupActive={isConfirmPopupActive}
       isFunctionPopupActive={isFunctionPopupActive}
+      onConfirmBtn={handleConfirmBtn}
       setCategoryId={setCategoryId}
       setTitle={setTitle}
       setContent={setContent}
@@ -175,6 +203,12 @@ interface typeContentManageCT
   contentId?: number;
   requestCategory: (id?: string) => void;
   requestContent: (id?: string, contentId?: number) => void;
+  requestCreateContent: (
+    categoryId: number,
+    title: string,
+    content: string,
+    id?: string
+  ) => void;
   handleCodeMessage: (code: string, message: string) => void;
 }
 
