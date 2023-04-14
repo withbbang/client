@@ -8,9 +8,15 @@
     color: $most-dark;
     padding: 10% 20%;
     width: 80%;
+    overflow: auto;
+
+    :nth-child(n) {
+      word-break: break-all;
+    }
 
     > pre {
-      width: 100%;
+      white-space: pre-wrap;
+      overflow: auto;
     }
   }
 
