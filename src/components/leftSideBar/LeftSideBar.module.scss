@@ -4,15 +4,9 @@
   left: 0;
   width: 300px;
   height: 100%;
-  background-color: rgb(220, 220, 220);
-  transform: translateX(0);
-  transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-  -moz-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-  -webkit-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-  -ms-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-  -o-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
   box-sizing: border-box;
   z-index: 50;
+  @include background-transform($less-light, translateX(0));
 
   &.off {
     position: fixed;
@@ -20,43 +14,35 @@
     left: 0;
     width: 300px;
     height: 100%;
-    background-color: rgb(220, 220, 220);
-    transform: translateX(-300px);
-    transition: transform 0.5s ease-in-out;
-    -moz-transition: transform 0.5s ease-in-out;
-    -webkit-transition: transform 0.5s ease-in-out;
-    -ms-transition: transform 0.5s ease-in-out;
-    -o-transition: transform 0.5s ease-in-out;
     box-sizing: border-box;
     z-index: 50;
+    @include transform(translateX(-300px));
 
     &.night {
-      transform: translateX(-300px);
-      transition: transform 0.5s ease-in-out;
-      -moz-transition: transform 0.5s ease-in-out;
-      -webkit-transition: transform 0.5s ease-in-out;
-      -ms-transition: transform 0.5s ease-in-out;
-      -o-transition: transform 0.5s ease-in-out;
+      @include transform(translateX(-300px));
     }
   }
 
   &.night {
-    transform: translateX(0);
-    background-color: rgb(60, 60, 60);
-    transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-    -moz-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-    -webkit-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-    -ms-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
-    -o-transition: transform 0.5s ease-in-out, background-color 0.5s linear;
+    @include background-transform($more-dark, translateX(0));
 
     .inner_wrap {
+      .user {
+        &.log_in {
+          .infos {
+            > span {
+              @include font($most-light);
+            }
+          }
+        }
+      }
+
       .menu {
-        color: #fff;
-        transition: color 0.5s ease-in-out;
-        -moz-transition: color 0.5s linear;
-        -webkit-transition: color 0.5s linear;
-        -ms-transition: color 0.5s linear;
-        -o-transition: color 0.5s linear;
+        @include font($most-light);
+
+        &:hover {
+          background-color: $dark;
+        }
       }
     }
   }
@@ -72,14 +58,9 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      color: rgb(0, 0, 0);
       padding: 15px 15px 0 15px;
       margin-bottom: 30px;
-      transition: color 0.5s ease-in-out;
-      -moz-transition: color 0.5s linear;
-      -webkit-transition: color 0.5s linear;
-      -ms-transition: color 0.5s linear;
-      -o-transition: color 0.5s linear;
+      @include font($most-dark);
 
       .toggle {
         display: flex;
@@ -93,45 +74,28 @@
         font-size: 25px;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
-        background-color: rgb(220, 220, 220);
-        transition: background-color 0.5s linear;
-        -moz-transition: background-color 0.5s linear;
-        -webkit-transition: background-color 0.5s linear;
-        -ms-transition: background-color 0.5s linear;
-        -o-transition: background-color 0.5s linear;
         box-sizing: border-box;
         z-index: 50;
         cursor: pointer;
+        @include background($less-light);
 
         svg {
-          transform: rotate(180deg);
-          transition: transform linear 0.5s;
+          @include transform(rotate(180deg));
         }
 
         &.off {
           svg {
-            transform: rotate(0deg);
-            transition: transform linear 0.5s;
+            @include transform(rotate(0deg));
           }
         }
 
         &.night {
-          background-color: rgb(60, 60, 60);
-          transition: background-color 0.5s linear;
-          -moz-transition: background-color 0.5s linear;
-          -webkit-transition: background-color 0.5s linear;
-          -ms-transition: background-color 0.5s linear;
-          -o-transition: background-color 0.5s linear;
+          @include background($more-dark);
         }
       }
 
       &.night {
-        color: rgb(255, 255, 255);
-        transition: color 0.5s ease-in-out;
-        -moz-transition: color 0.5s linear;
-        -webkit-transition: color 0.5s linear;
-        -ms-transition: color 0.5s linear;
-        -o-transition: color 0.5s linear;
+        @include font($most-light);
       }
     }
 
@@ -143,7 +107,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      color: #fff;
       box-sizing: border-box;
 
       &.log_in {
@@ -168,7 +131,7 @@
           justify-content: center;
 
           > span {
-            color: #fff;
+            @include font($most-dark);
             font-size: 20px;
             font-weight: bold;
           }
@@ -181,21 +144,16 @@
       padding: 15px 15px 15px 0;
       display: flex;
       align-items: center;
-      color: #000;
       box-sizing: border-box;
-      transition: color 0.5s ease-in-out;
-      -moz-transition: color 0.5s linear;
-      -webkit-transition: color 0.5s linear;
-      -ms-transition: color 0.5s linear;
-      -o-transition: color 0.5s linear;
       cursor: pointer;
+      @include font($most-dark);
 
       .banner {
         width: 15px;
       }
 
       &:hover {
-        background-color: rgb(100, 100, 100);
+        background-color: $light;
       }
 
       .svg {

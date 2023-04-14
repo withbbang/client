@@ -110,7 +110,7 @@
     border-bottom-left-radius: 10px;
     box-sizing: border-box;
     z-index: 50;
-    @include background-transform($light, translateX(0));
+    @include background-transform($less-light, translateX(0));
 
     .toggle {
       display: flex;
@@ -126,7 +126,7 @@
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;
       cursor: pointer;
-      @include background($light);
+      @include background($less-light);
 
       svg {
         transition: transform linear 0.5s;
