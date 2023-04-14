@@ -1,35 +1,19 @@
 .wrap {
   width: 100%;
   height: calc(100% - 100px);
-  background: rgb(240, 240, 240);
-  transition: background-color 0.5s linear;
-  -moz-transition: background-color 0.5s linear;
-  -webkit-transition: background-color 0.5s linear;
-  -ms-transition: background-color 0.5s linear;
-  -o-transition: background-color 0.5s linear;
+  @include background($more-light);
 
   &.night {
-    background-color: rgb(75, 75, 75);
-    transition: background-color 0.5s linear;
-    -moz-transition: background-color 0.5s linear;
-    -webkit-transition: background-color 0.5s linear;
-    -ms-transition: background-color 0.5s linear;
-    -o-transition: background-color 0.5s linear;
+    @include background($dark);
 
     .innerWrap {
       .box {
-        background-color: rgb(25, 25, 25);
-        transition: background-color 0.5s linear;
-        -moz-transition: background-color 0.5s linear;
-        -webkit-transition: background-color 0.5s linear;
-        -ms-transition: background-color 0.5s linear;
-        -o-transition: background-color 0.5s linear;
+        @include background($more-dark);
 
         > input:focus,
         button:hover {
           border: solid 1px rgb(125, 125, 125);
-          box-shadow: 4px 4px 2px 1px rgba(255, 255, 255, 0.2);
-          transition: box-shadow 0.5s ease-in-out;
+          @include boxShadow(4px 4px 2px 1px rgba(255, 255, 255, 0.2));
         }
       }
     }
@@ -48,12 +32,7 @@
       flex-direction: column;
       border-radius: 10px;
       padding: 50px;
-      background: #fff;
-      transition: background-color 0.5s linear;
-      -moz-transition: background-color 0.5s linear;
-      -webkit-transition: background-color 0.5s linear;
-      -ms-transition: background-color 0.5s linear;
-      -o-transition: background-color 0.5s linear;
+      @include background($most-light);
 
       :nth-child(2) {
         margin: 20px 0;
@@ -65,9 +44,8 @@
         border: solid 1px rgb(125, 125, 125);
         border-radius: 10px;
         box-sizing: border-box;
-        box-shadow: none;
-        transition: box-shadow 0.5s ease-in-out;
         background: #fff;
+        @include boxShadow('none');
       }
 
       > input {
@@ -76,8 +54,7 @@
 
       > input:focus,
       button:hover {
-        box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-        transition: box-shadow 0.5s ease-in-out;
+        @include boxShadow(4px 4px 2px 1px rgba(0, 0, 0, 0.2));
       }
 
       > input::placeholder {

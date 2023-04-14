@@ -16,12 +16,22 @@
   -o-transition: background-color 0.5s ease-in-out;
 }
 
-@mixin boxShadow() {
+@mixin boxShadow($color) {
+  box-shadow: $color;
   transition: box-shadow 0.5s ease-in-out;
   -moz-transition: box-shadow 0.5s ease-in-out;
   -webkit-transition: box-shadow 0.5s ease-in-out;
   -ms-transition: box-shadow 0.5s ease-in-out;
   -o-transition: box-shadow 0.5s ease-in-out;
+}
+
+@mixin transform($transform) {
+  transform: $transform;
+  transition: transform 0.5s ease-in-out;
+  -moz-transition: transform 0.5s ease-in-out;
+  -webkit-transition: transform 0.5s ease-in-out;
+  -ms-transition: transform 0.5s ease-in-out;
+  -o-transition: transform 0.5s ease-in-out;
 }
 
 @mixin font-background($fontColor, $backgroundColor) {
@@ -56,6 +66,37 @@
   -o-transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
+@mixin background-transform($backgroundColor, $transform) {
+  background-color: $backgroundColor;
+  transform: $transform;
+  transition: background-color 0.5s linear, transform 0.5s ease-in-out;
+  -moz-transition: background-color 0.5s linear, transform 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s linear, transform 0.5s ease-in-out;
+  -ms-transition: background-color 0.5s linear, transform 0.5s ease-in-out;
+  -o-transition: background-color 0.5s linear, transform 0.5s ease-in-out;
+  z-index: 50;
+}
+
+@mixin background-boxShadow-transform(
+  $backgroundColor,
+  $boxShadowColor,
+  $transform
+) {
+  background-color: $backgroundColor;
+  box-shadow: $boxShadowColor;
+  transform: $transform;
+  transition: background-color 0.5s linear, box-shadow 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+  -moz-transition: background-color 0.5s linear, box-shadow 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s linear, box-shadow 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+  -ms-transition: background-color 0.5s linear, box-shadow 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+  -o-transition: background-color 0.5s linear, box-shadow 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+}
+
 @mixin font-background-boxShadow(
   $fontColor,
   $backgroundColor,
@@ -74,4 +115,14 @@
     box-shadow 0.5s ease-in-out;
   -o-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out,
     box-shadow 0.5s ease-in-out;
+}
+
+@mixin boxShadow-transform($boxShadowColor, $transform) {
+  box-shadow: $boxShadowColor;
+  transform: $transform;
+  transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+  -moz-transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+  -webkit-transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+  -ms-transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+  -o-transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
 }

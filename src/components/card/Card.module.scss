@@ -8,35 +8,17 @@
   box-sizing: border-box;
   max-height: 200px;
   min-height: 200px;
-  transform: scale(1);
-  box-shadow: none;
-  background: #fff;
-  transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-    box-shadow 0.5s ease-in-out;
-  -moz-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-    box-shadow 0.5s ease-in-out;
-  -webkit-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-    box-shadow 0.5s ease-in-out;
-  -ms-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-    box-shadow 0.5s ease-in-out;
-  -o-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-    box-shadow 0.5s ease-in-out;
+  @include background-boxShadow-transform($most-light, 'none', scale(1));
 
   h3 {
-    color: #000;
     margin: 0;
     font-size: 1.5em;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: color 0.5s ease-in-out;
-    -moz-transition: color 0.5s linear;
-    -webkit-transition: color 0.5s linear;
-    -ms-transition: color 0.5s linear;
-    -o-transition: color 0.5s linear;
+    @include font($most-dark);
   }
 
   p {
-    color: rgb(56, 72, 93);
     max-height: 110px;
     overflow: hidden;
     text-overflow: ellipsis; /* text 넘침 ...로 가리기 */
@@ -48,11 +30,7 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 
-    transition: color 0.5s ease-in-out;
-    -moz-transition: color 0.5s linear;
-    -webkit-transition: color 0.5s linear;
-    -ms-transition: color 0.5s linear;
-    -o-transition: color 0.5s linear;
+    @include font($less-dark);
   }
 
   .add {
@@ -62,36 +40,14 @@
   }
 
   &.night {
-    transform: scale(1);
-    box-shadow: none;
-    background-color: rgb(25, 25, 25);
-    transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-      box-shadow 0.5s ease-in-out;
-    -moz-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-      box-shadow 0.5s ease-in-out;
-    -webkit-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-      box-shadow 0.5s ease-in-out;
-    -ms-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-      box-shadow 0.5s ease-in-out;
-    -o-transition: background-color 0.5s linear, transform 0.5s ease-in-out,
-      box-shadow 0.5s ease-in-out;
+    background-color: $more-dark;
 
     h3 {
-      color: #fff;
-      transition: color 0.5s ease-in-out;
-      -moz-transition: color 0.5s linear;
-      -webkit-transition: color 0.5s linear;
-      -ms-transition: color 0.5s linear;
-      -o-transition: color 0.5s linear;
+      color: $more-light;
     }
 
     p {
       color: rgb(150, 150, 150);
-      transition: color 0.5s ease-in-out;
-      -moz-transition: color 0.5s linear;
-      -webkit-transition: color 0.5s linear;
-      -ms-transition: color 0.5s linear;
-      -o-transition: color 0.5s linear;
     }
   }
 }
@@ -99,11 +55,11 @@
 .wrap:hover {
   cursor: pointer;
   /* 1.03배로 크기 키우기 */
-  transform: scale(1.03);
+  // transform: scale(1.03);
   /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+  // box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
   /* transform, box-shadow 속성 0.5s 속도로 변경 */
-  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+  @include boxShadow-transform(4px 4px 2px 1px rgba(0, 0, 0, 0.2), scale(1.03));
 
   &.night {
     box-shadow: 4px 4px 2px 1px rgba(255, 255, 255, 0.2);

@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,9 +21,8 @@
     max-height: 80%;
     padding: 40px;
     text-align: center;
-    background-color: rgb(240, 240, 240);
     border-radius: 10px;
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    background-color: $more-light;
 
     > div {
       display: flex;
@@ -48,13 +47,12 @@
       :nth-child(n) {
         width: 250px;
         height: 40px;
-        border: solid 1px rgb(125, 125, 125);
+        border: solid 1px $less-light;
         border-radius: 10px;
         box-sizing: border-box;
-        box-shadow: none;
-        transition: box-shadow 0.5s ease-in-out;
-        background: #fff;
+        background-color: $most-light;
         margin: 10px 0;
+        @include boxShadow('none');
       }
 
       > input,
@@ -65,8 +63,7 @@
       > input:focus,
       select:focus,
       button:hover {
-        box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-        transition: box-shadow 0.5s ease-in-out;
+        @include boxShadow(4px 4px 2px 1px rgba(0, 0, 0, 0.2));
       }
 
       > input::placeholder {
@@ -83,8 +80,8 @@
       :nth-child(n) {
         width: 720px;
         height: 40px;
-        box-sizing: border-box;
         margin: 10px 0;
+        box-sizing: border-box;
       }
 
       .option {
@@ -94,15 +91,14 @@
 
         :nth-child(n) {
           width: 48%;
-          border: solid 1px rgb(125, 125, 125);
           border-radius: 10px;
           padding: 0 10px;
+          border: solid 1px $less-light;
         }
 
         > input:focus,
         select:focus {
-          box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-          transition: box-shadow 0.5s ease-in-out;
+          @include boxShadow(4px 4px 2px 1px rgba(0, 0, 0, 0.2));
         }
       }
 
@@ -114,17 +110,15 @@
       > textarea,
       button {
         padding: 10px;
-        border: solid 1px rgb(125, 125, 125);
+        border: solid 1px $less-light;
         border-radius: 10px;
-        box-shadow: none;
-        transition: box-shadow 0.5s ease-in-out;
-        background: #fff;
+        background: $most-light;
+        @include boxShadow('none');
       }
 
       > textarea:focus,
       button:hover {
-        box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-        transition: box-shadow 0.5s ease-in-out;
+        @include boxShadow(4px 4px 2px 1px rgba(0, 0, 0, 0.2));
       }
 
       > button,
@@ -135,10 +129,34 @@
   }
 
   &.night {
-    background: none;
     .modal_body {
-      background: rgb(75, 75, 75);
-      color: #fff;
+      color: $most-light;
+      background-color: $dark;
+
+      .categoryBox {
+        :nth-child(n) {
+          color: $most-light;
+          border: solid 1px $less-dark;
+          background-color: $more-dark;
+        }
+      }
+
+      .contentBox {
+        .option {
+          :nth-child(n) {
+            color: $most-light;
+            border: solid 1px $less-dark;
+            background-color: $more-dark;
+          }
+        }
+
+        > textarea,
+        button {
+          color: $most-light;
+          border: solid 1px $less-dark;
+          background-color: $more-dark;
+        }
+      }
     }
   }
 }

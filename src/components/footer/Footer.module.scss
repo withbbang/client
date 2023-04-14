@@ -5,28 +5,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(210, 210, 210);
-  transition: background-color 0.5s linear;
-  -moz-transition: background-color 0.5s linear;
-  -webkit-transition: background-color 0.5s linear;
-  -ms-transition: background-color 0.5s linear;
-  -o-transition: background-color 0.5s linear;
+  @include background($light);
 
   &.night {
-    background-color: rgb(50, 50, 50);
-    transition: background-color 0.5s linear;
-    -moz-transition: background-color 0.5s linear;
-    -webkit-transition: background-color 0.5s linear;
-    -ms-transition: background-color 0.5s linear;
-    -o-transition: background-color 0.5s linear;
+    @include background($more-dark);
 
     .bottom {
-      color: #fff;
-      transition: color 0.5s ease-in-out;
-      -moz-transition: color 0.5s linear;
-      -webkit-transition: color 0.5s linear;
-      -ms-transition: color 0.5s linear;
-      -o-transition: color 0.5s linear;
+      @include font($most-light);
     }
   }
 
@@ -55,14 +40,9 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: rgb(0, 0, 0);
     font-size: 0.7rem;
     font-weight: 100;
-    transition: color 0.5s ease-in-out;
-    -moz-transition: color 0.5s linear;
-    -webkit-transition: color 0.5s linear;
-    -ms-transition: color 0.5s linear;
-    -o-transition: color 0.5s linear;
+    @include font($more-dark);
   }
 
   > span:hover {

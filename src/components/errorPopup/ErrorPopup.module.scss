@@ -21,9 +21,8 @@
     height: 120px;
     padding: 40px;
     text-align: center;
-    background-color: rgb(240, 240, 240);
+    background-color: $more-light;
     border-radius: 10px;
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
     transform: translateX(-50%) translateY(-50%);
 
     > span {
@@ -36,54 +35,33 @@
       height: 40px;
       margin-top: auto;
       box-sizing: border-box;
-      color: #000;
+      color: $most-dark;
       font-weight: bold;
-      box-shadow: none;
-      background: rgb(255, 255, 255);
+      background: $most-light;
       border: none;
       border-radius: 10px;
-      transition: box-shadow 0.5s ease-in-out;
-      -moz-transition: box-shadow 0.5s ease-in-out;
-      -webkit-transition: box-shadow 0.5s ease-in-out;
-      -ms-transition: box-shadow 0.5s ease-in-out;
-      -o-transition: box-shadow 0.5s ease-in-out;
       cursor: pointer;
+      @include boxShadow('none');
     }
 
     > button:hover {
-      box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-      transition: box-shadow 0.5s ease-in-out;
-      -moz-transition: box-shadow 0.5s ease-in-out;
-      -webkit-transition: box-shadow 0.5s ease-in-out;
-      -ms-transition: box-shadow 0.5s ease-in-out;
-      -o-transition: box-shadow 0.5s ease-in-out;
+      @include boxShadow(4px 4px 2px 1px rgba(0, 0, 0, 0.2));
     }
   }
 
   &.night {
-    background: none;
     .modal_body {
-      background: rgb(75, 75, 75);
-      color: #fff;
+      color: $most-light;
+      background-color: $dark;
 
       > button {
-        color: #fff;
-        background: rgb(25, 25, 25);
-        box-shadow: none;
-        transition: box-shadow 0.5s ease-in-out;
-        -moz-transition: box-shadow 0.5s ease-in-out;
-        -webkit-transition: box-shadow 0.5s ease-in-out;
-        -ms-transition: box-shadow 0.5s ease-in-out;
-        -o-transition: box-shadow 0.5s ease-in-out;
+        color: $most-light;
+        background: $more-dark;
+        @include boxShadow('none');
       }
 
       > button:hover {
-        box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
-        transition: box-shadow 0.5s ease-in-out;
-        -moz-transition: box-shadow 0.5s ease-in-out;
-        -webkit-transition: box-shadow 0.5s ease-in-out;
-        -ms-transition: box-shadow 0.5s ease-in-out;
-        -o-transition: box-shadow 0.5s ease-in-out;
+        @include boxShadow(4px 4px 2px 1px rgba(0, 0, 0, 0.2));
       }
     }
   }

@@ -2,35 +2,10 @@
   display: flex;
   width: 100%;
   min-height: calc(100% - 100px);
-  background: rgb(240, 240, 240);
-  transition: background-color 0.5s linear;
-  -moz-transition: background-color 0.5s linear;
-  -webkit-transition: background-color 0.5s linear;
-  -ms-transition: background-color 0.5s linear;
-  -o-transition: background-color 0.5s linear;
-
-  &.night {
-    background-color: rgb(75, 75, 75);
-    transition: background-color 0.5s linear;
-    -moz-transition: background-color 0.5s linear;
-    -webkit-transition: background-color 0.5s linear;
-    -ms-transition: background-color 0.5s linear;
-    -o-transition: background-color 0.5s linear;
-
-    .innerWrap {
-    }
-
-    .createUpdateBtn {
-      background-color: #000;
-      transition: background-color 0.5s linear;
-      -moz-transition: background-color 0.5s linear;
-      -webkit-transition: background-color 0.5s linear;
-      -ms-transition: background-color 0.5s linear;
-      -o-transition: background-color 0.5s linear;
-    }
-  }
+  @include background($more-light);
 
   .innerWrap {
+    color: $most-dark;
     padding: 10% 10%;
     width: 80%;
     display: flex;
@@ -48,15 +23,21 @@
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    background: #fff;
     bottom: 120px;
     right: 30px;
     cursor: pointer;
-    background-color: #fff;
-    transition: background-color 0.5s linear;
-    -moz-transition: background-color 0.5s linear;
-    -webkit-transition: background-color 0.5s linear;
-    -ms-transition: background-color 0.5s linear;
-    -o-transition: background-color 0.5s linear;
+    @include background($most-light);
+  }
+
+  &.night {
+    @include background($dark);
+
+    .innerWrap {
+      color: $most-light;
+    }
+
+    .createUpdateBtn {
+      @include background($most-dark);
+    }
   }
 }
