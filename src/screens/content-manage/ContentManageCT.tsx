@@ -26,7 +26,9 @@ const ContentManageCT = (props: typeContentManageCT) => {
   const [isConfirmPopupActive, setIsConfirmPopupActive] =
     useState<boolean>(false);
 
-  const [markdownCheatSheets, setMarkdownCheatSheets] = useState(Array<string>);
+  const [markdownCheatSheets, setMarkdownCheatSheets] = useState<Array<string>>(
+    []
+  );
   const [categoryId, setCategoryId] = useState<number>(-1);
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
@@ -40,7 +42,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
     ) {
       navigate('/');
     } else {
-      contentId && props.requestContent(props.id, +contentId);
+      props.requestContent(props.id, contentId ? +contentId : 0);
       props.requestCategory(props.id);
     }
   }, []);
@@ -50,7 +52,11 @@ const ContentManageCT = (props: typeContentManageCT) => {
       setCategoryId(props.content.CATEGORY_ID);
       setTitle(props.content.TITLE);
       props.content.CONTENT && setContent(props.content.CONTENT);
+      setIsFunctionPopupActive(false);
     } else {
+      setCategoryId(-1);
+      setTitle('');
+      setContent('');
       setIsFunctionPopupActive(true);
     }
   }, [props.content]);

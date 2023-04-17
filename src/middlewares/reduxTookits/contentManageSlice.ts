@@ -8,7 +8,8 @@ export interface ContentManageState {
 }
 
 export const initialState: ContentManageState = {
-  contents: []
+  contents: [],
+  content: undefined
 };
 
 const contentManageSlice = createSlice({
@@ -27,15 +28,11 @@ const contentManageSlice = createSlice({
       state.content = action.payload.content;
     },
     failContent(state: ContentManageState) {
-      state.contents = [];
+      state.content = undefined;
     },
     requestCreateContent(state: ContentManageState, action) {},
-    successCreateContent(state: ContentManageState, action) {
-      state.content = action.payload.content;
-    },
-    failCreateContent(state: ContentManageState) {
-      state.contents = [];
-    }
+    successCreateContent(state: ContentManageState, action) {},
+    failCreateContent(state: ContentManageState) {}
   }
 });
 
