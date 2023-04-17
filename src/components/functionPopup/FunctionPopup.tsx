@@ -49,7 +49,7 @@ const FunctionPopup = ({
     }
   };
 
-  const handleDragEnd = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleDragEnd = () => {
     setInitialX(currentX);
     setInitialX(currentY);
     setIsDragging(false);

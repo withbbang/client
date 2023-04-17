@@ -40,7 +40,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
     ) {
       navigate('/');
     } else {
-      contentId && props.requestContent(props.id, props.contentId);
+      contentId && props.requestContent(props.id, +contentId);
       props.requestCategory(props.id);
     }
   }, []);
@@ -112,6 +112,15 @@ const ContentManageCT = (props: typeContentManageCT) => {
       return;
     }
 
+    if (categoryId < 0) {
+      props.handleCodeMessage(
+        'NO SELECTED CATEGORY',
+        'CATEGORY를 선택해주세요.'
+      );
+      handleBlur();
+      return;
+    }
+
     //TODO: 비교 필요
     handleConfirmPopup('create');
     handleBlur();
@@ -148,6 +157,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
             defaultValue={categoryId}
             onChange={(e) => setCategoryId(+e.target.value)}
           >
+            <option value={-1}>선택</option>
             {props.categories.map((category, idx) => (
               <option key={idx} value={category.ID}>
                 {category.TITLE}
