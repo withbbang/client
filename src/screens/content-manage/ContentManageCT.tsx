@@ -32,6 +32,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
   const [categoryId, setCategoryId] = useState<number>(-1);
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [isDone, setIsDone] = useState<string>('N');
 
   useEffect(() => {
     if (
@@ -52,11 +53,13 @@ const ContentManageCT = (props: typeContentManageCT) => {
       setCategoryId(props.content.CATEGORY_ID);
       setTitle(props.content.TITLE);
       props.content.CONTENT && setContent(props.content.CONTENT);
+      setIsDone(props.content.IS_DONE);
       setIsFunctionPopupActive(false);
     } else {
       setCategoryId(-1);
       setTitle('');
       setContent('');
+      setIsDone('N');
       setIsFunctionPopupActive(true);
     }
   }, [props.content]);
@@ -171,6 +174,13 @@ const ContentManageCT = (props: typeContentManageCT) => {
             ))}
           </select>
         )}
+        <select
+          defaultValue={isDone}
+          onChange={(e) => setIsDone(e.target.value)}
+        >
+          <option value={'N'}>비노출</option>
+          <option value={'Y'}>노출</option>
+        </select>
       </div>
       <textarea
         placeholder="CONTENT"
@@ -219,6 +229,7 @@ interface typeContentManageCT
     categoryId: number,
     title: string,
     content: string,
+    isDone?: string,
     id?: string
   ) => void;
   handleCodeMessage: (code: string, message: string) => void;
