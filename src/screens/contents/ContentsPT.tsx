@@ -38,6 +38,8 @@ const ContentsPT = ({ loading, isNight, contents }: typeContentsPT) => {
                 path={
                   item.PATH ? item.PATH : `/admin/content-manage/${item.ID}`
                 }
+                isAdmin={true}
+                isDeleted={item.isDeleted}
               />
             ))}
         </div>

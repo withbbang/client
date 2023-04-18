@@ -107,7 +107,6 @@ const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
       case 'deleteRestore':
         if (props.id) {
           props.requestDeleteRestoreCategory(
-            categories[selectedIdx].IS_DELETED,
             categories[selectedIdx].ID,
             props.id
           );
@@ -426,11 +425,7 @@ interface typeCategoryManageCT
     categories: Array<Category>,
     id?: string
   ) => void;
-  requestDeleteRestoreCategory: (
-    isDeleted: string,
-    categoryId: number,
-    id?: string
-  ) => void;
+  requestDeleteRestoreCategory: (categoryId: number, id?: string) => void;
   requestAuthority: (id?: string) => void;
   handleCodeMessage: (code: string, message: string) => void;
 }

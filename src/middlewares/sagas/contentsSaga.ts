@@ -27,5 +27,5 @@ function* handlePostContents(data: any) {
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 async function postContents(data: any) {
-  return postAPI('/server/contents', data);
+  return postAPI('/server/common/contents', data);
 }
