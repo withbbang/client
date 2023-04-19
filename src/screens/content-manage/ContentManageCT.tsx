@@ -83,7 +83,13 @@ const ContentManageCT = (props: typeContentManageCT) => {
     switch (type) {
       case 'create':
         if (props.id) {
-          props.requestCreateContent(categoryId, title, content, props.id);
+          props.requestCreateContent(
+            categoryId,
+            title,
+            content,
+            isDone,
+            props.id
+          );
           props.handleCodeMessage('', '');
         } else {
           props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
@@ -229,7 +235,7 @@ interface typeContentManageCT
     categoryId: number,
     title: string,
     content: string,
-    isDone?: string,
+    isDone: string,
     id?: string
   ) => void;
   handleCodeMessage: (code: string, message: string) => void;

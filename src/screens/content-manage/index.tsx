@@ -40,7 +40,7 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
       categoryId: number,
       title: string,
       content: string,
-      isDone?: string,
+      isDone: string,
       id?: string
     ) => {
       dispatch(
