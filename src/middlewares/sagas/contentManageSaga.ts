@@ -9,13 +9,20 @@ import {
   failContent,
   requestCreateContent,
   successCreateContent,
-  failCreateContent
+  failCreateContent,
+  requestDeleteRestoreContent,
+  successDeleteRestoreContent,
+  failDeleteRestoreContent
 } from 'middlewares/reduxTookits/contentManageSlice';
 
 export function* contentManageSaga() {
   yield takeEvery(requestContents.type, handlePostContents);
   yield takeEvery(requestContent.type, handlePostContent);
   yield takeEvery(requestCreateContent.type, handlePostCreateContent);
+  yield takeEvery(
+    requestDeleteRestoreContent.type,
+    handlePostDeleteRestoreContent
+  );
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -48,6 +55,15 @@ function* handlePostCreateContent(data: any) {
   }
 }
 
+function* handlePostDeleteRestoreContent(data: any) {
+  try {
+    const res: Generator = yield call(postDeleteRestoreContent, data);
+    yield put(successDeleteRestoreContent(res));
+  } catch (error: any) {
+    yield put(failDeleteRestoreContent(error));
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -61,4 +77,8 @@ async function postContent(data: any): Promise<any> {
 
 async function postCreateContent(data: any): Promise<any> {
   return postAPI('/server/admin/content-manage/create-content', data);
+}
+
+async function postDeleteRestoreContent(data: any) {
+  return postAPI('/server/admin/content-manage/delete-restore', data);
 }
