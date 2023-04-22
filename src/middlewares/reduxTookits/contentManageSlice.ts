@@ -8,7 +8,8 @@ export interface ContentManageState {
 }
 
 export const initialState: ContentManageState = {
-  contents: []
+  contents: [],
+  content: undefined
 };
 
 const contentManageSlice = createSlice({
@@ -27,15 +28,16 @@ const contentManageSlice = createSlice({
       state.content = action.payload.content;
     },
     failContent(state: ContentManageState) {
-      state.contents = [];
+      state.content = undefined;
     },
     requestCreateContent(state: ContentManageState, action) {},
-    successCreateContent(state: ContentManageState, action) {
-      state.content = action.payload.content;
+    successCreateContent(state: ContentManageState, action) {},
+    failCreateContent(state: ContentManageState) {},
+    requestDeleteRestoreContent(state: ContentManageState, action) {},
+    successDeleteRestoreContent(state: ContentManageState, action) {
+      state.contents = action.payload.contents;
     },
-    failCreateContent(state: ContentManageState) {
-      state.contents = [];
-    }
+    failDeleteRestoreContent(state: ContentManageState) {}
   }
 });
 
@@ -48,7 +50,10 @@ export const {
   failContent,
   requestCreateContent,
   successCreateContent,
-  failCreateContent
+  failCreateContent,
+  requestDeleteRestoreContent,
+  successDeleteRestoreContent,
+  failDeleteRestoreContent
 } = contentManageSlice.actions;
 
 export const contentManageExtraReducers = {
@@ -109,6 +114,33 @@ export const contentManageExtraReducers = {
     state.message = action.payload.message;
   },
   'contentManage/failCreateContent': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'contentManage/requestDeleteRestoreContent': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'contentManage/successDeleteRestoreContent': (
+    state: CommonState,
+    action: any
+  ) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'contentManage/failDeleteRestoreContent': (
+    state: CommonState,
+    action: any
+  ) => {
     state.isFetching = false;
     state.isSuccess = false;
     state.isFail = true;

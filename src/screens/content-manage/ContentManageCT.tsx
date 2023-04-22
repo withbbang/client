@@ -26,10 +26,13 @@ const ContentManageCT = (props: typeContentManageCT) => {
   const [isConfirmPopupActive, setIsConfirmPopupActive] =
     useState<boolean>(false);
 
-  const [markdownCheatSheets, setMarkdownCheatSheets] = useState(Array<string>);
+  const [markdownCheatSheets, setMarkdownCheatSheets] = useState<Array<string>>(
+    []
+  );
   const [categoryId, setCategoryId] = useState<number>(-1);
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [isDone, setIsDone] = useState<string>('N');
 
   useEffect(() => {
     if (
@@ -40,7 +43,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
     ) {
       navigate('/');
     } else {
-      contentId && props.requestContent(props.id, props.contentId);
+      props.requestContent(props.id, contentId ? +contentId : 0);
       props.requestCategory(props.id);
     }
   }, []);
@@ -50,7 +53,13 @@ const ContentManageCT = (props: typeContentManageCT) => {
       setCategoryId(props.content.CATEGORY_ID);
       setTitle(props.content.TITLE);
       props.content.CONTENT && setContent(props.content.CONTENT);
+      setIsDone(props.content.IS_DONE);
+      setIsFunctionPopupActive(false);
     } else {
+      setCategoryId(-1);
+      setTitle('');
+      setContent('');
+      setIsDone('N');
       setIsFunctionPopupActive(true);
     }
   }, [props.content]);
@@ -74,7 +83,13 @@ const ContentManageCT = (props: typeContentManageCT) => {
     switch (type) {
       case 'create':
         if (props.id) {
-          props.requestCreateContent(categoryId, title, content, props.id);
+          props.requestCreateContent(
+            categoryId,
+            title,
+            content,
+            isDone,
+            props.id
+          );
           props.handleCodeMessage('', '');
         } else {
           props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
@@ -108,6 +123,15 @@ const ContentManageCT = (props: typeContentManageCT) => {
 
     if (!content) {
       props.handleCodeMessage('EMPTY CONTENT', 'CONTENT을 입력해주세요.');
+      handleBlur();
+      return;
+    }
+
+    if (categoryId < 0) {
+      props.handleCodeMessage(
+        'NO SELECTED CATEGORY',
+        'CATEGORY를 선택해주세요.'
+      );
       handleBlur();
       return;
     }
@@ -148,6 +172,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
             defaultValue={categoryId}
             onChange={(e) => setCategoryId(+e.target.value)}
           >
+            <option value={-1}>선택</option>
             {props.categories.map((category, idx) => (
               <option key={idx} value={category.ID}>
                 {category.TITLE}
@@ -155,6 +180,13 @@ const ContentManageCT = (props: typeContentManageCT) => {
             ))}
           </select>
         )}
+        <select
+          defaultValue={isDone}
+          onChange={(e) => setIsDone(e.target.value)}
+        >
+          <option value={'N'}>비노출</option>
+          <option value={'Y'}>노출</option>
+        </select>
       </div>
       <textarea
         placeholder="CONTENT"
@@ -203,6 +235,7 @@ interface typeContentManageCT
     categoryId: number,
     title: string,
     content: string,
+    isDone: string,
     id?: string
   ) => void;
   handleCodeMessage: (code: string, message: string) => void;

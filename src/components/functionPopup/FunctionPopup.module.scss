@@ -23,17 +23,11 @@
     text-align: center;
     border-radius: 10px;
     background-color: $more-light;
+    cursor: move;
 
     > div {
       display: flex;
       flex-direction: column;
-    }
-
-    .dnd {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      cursor: move;
     }
 
     .close {

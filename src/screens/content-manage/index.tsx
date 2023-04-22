@@ -40,9 +40,12 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
       categoryId: number,
       title: string,
       content: string,
+      isDone: string,
       id?: string
     ) => {
-      dispatch(requestCreateContent({ categoryId, title, content, id }));
+      dispatch(
+        requestCreateContent({ categoryId, title, content, isDone, id })
+      );
     },
     handleCodeMessage: (code: string, message: string): void => {
       dispatch(handleCodeMessage({ code, message }));

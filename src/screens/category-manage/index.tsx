@@ -73,12 +73,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     ): void => {
       dispatch(requestMultiUpdateCategory({ id, categories }));
     },
-    requestDeleteRestoreCategory: (
-      isDeleted: string,
-      categoryId: number,
-      id?: string
-    ): void => {
-      dispatch(requestDeleteRestoreCategory({ isDeleted, categoryId, id }));
+    requestDeleteRestoreCategory: (categoryId: number, id?: string): void => {
+      dispatch(requestDeleteRestoreCategory({ categoryId, id }));
     },
     requestAuthority: (id?: string): void => {
       dispatch(requestAuthority({ id }));
