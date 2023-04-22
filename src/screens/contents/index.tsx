@@ -9,7 +9,8 @@ import {
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import {
   ContentManageState,
-  requestContents
+  requestContents,
+  requestDeleteRestoreContent
 } from 'middlewares/reduxTookits/contentManageSlice';
 
 const mapStateToProps = (
@@ -26,6 +27,9 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
     requestContents: (id?: string): void => {
       dispatch(requestContents({ id }));
+    },
+    requestDeleteRestoreContent: (contentId: number, id?: string): void => {
+      dispatch(requestDeleteRestoreContent({ contentId, id }));
     },
     handleCodeMessage: (code: string, message: string): void => {
       dispatch(handleCodeMessage({ code, message }));
