@@ -24,6 +24,7 @@ const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
             {items.map((item: any, idx: number) => (
               <Card
                 key={idx}
+                idx={idx}
                 id={item.ID}
                 title={item.TITLE}
                 content={item.CONTENT}

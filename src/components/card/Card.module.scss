@@ -61,6 +61,14 @@
     p {
       color: rgb(150, 150, 150);
     }
+
+    &.deleted {
+      opacity: 0.5;
+    }
+  }
+
+  &.deleted {
+    opacity: 0.5;
   }
 }
 

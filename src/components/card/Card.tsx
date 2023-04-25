@@ -19,12 +19,14 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
 
 const Card = ({
   isNight,
+  idx,
   id,
   title,
   content,
   path,
   isAdmin,
-  isDeleted
+  isDeleted,
+  onDeleteRestore
 }: typeCard): JSX.Element => {
   const navigate = useNavigate();
 
@@ -32,14 +34,29 @@ const Card = ({
     path ? navigate(path) : alert('부적절한 요청입니다.');
   };
 
+  const handleDeleteRestore = (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    onDeleteRestore && onDeleteRestore(idx);
+  };
+
   return (
     <div
-      className={isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap}
+      className={
+        isNight
+          ? isDeleted === 'Y'
+            ? [styles.wrap, styles.night, styles.deleted].join(' ')
+            : [styles.wrap, styles.night].join(' ')
+          : isDeleted === 'Y'
+          ? [styles.wrap, styles.deleted].join(' ')
+          : styles.wrap
+      }
       onClick={handleNavigate}
     >
       {isAdmin && (
         <div className={styles.floatBtns}>
-          <span>
+          <span onClick={(e) => handleDeleteRestore(e)}>
             <SVG
               type={isDeleted === 'Y' ? 'restore' : 'trash'}
               width={isDeleted === 'Y' ? '20px' : '16px'}
@@ -66,12 +83,14 @@ const Card = ({
 };
 
 interface typeCard extends CommonState {
+  idx: number;
   id: number;
   title: string;
   content?: string;
   path?: string;
   isAdmin?: boolean;
   isDeleted?: string;
+  onDeleteRestore?: (idx?: number) => void;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);
