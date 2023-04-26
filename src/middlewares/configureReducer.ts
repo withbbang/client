@@ -9,6 +9,9 @@ import contentManage, {
   ContentManageState
 } from './reduxTookits/contentManageSlice';
 import contents, { ContentsState } from './reduxTookits/contentsSlice';
+import searchContents, {
+  SearchContentsState
+} from './reduxTookits/searchContents';
 import authority, { AuthorityState } from './reduxTookits/authoritySlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -20,7 +23,8 @@ const rootReducer = combineReducers({
   contents,
   categoryManage,
   contentManage,
-  authority
+  authority,
+  searchContents
   // add others...
 });
 
@@ -50,6 +54,7 @@ interface PropState {
   categoryManage: CategoryManageState;
   contentManage: ContentManageState;
   authority: AuthorityState;
+  searchContents: SearchContentsState;
   // add others...
 }
 
