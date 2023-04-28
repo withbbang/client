@@ -90,6 +90,10 @@
           border: solid 1px $less-light;
         }
 
+        :nth-child(2) {
+          margin: 0 10px;
+        }
+
         > input:focus,
         select:focus {
           @include boxShadow(4px 4px 2px 1px rgba(0, 0, 0, 0.2));

@@ -10,7 +10,8 @@ import { LogState } from 'middlewares/reduxTookits/logSlice';
 import {
   ContentManageState,
   requestContent,
-  requestCreateContent
+  requestCreateContent,
+  requestUpdateContent
 } from 'middlewares/reduxTookits/contentManageSlice';
 import {
   CategoryManageState,
@@ -45,6 +46,25 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     ) => {
       dispatch(
         requestCreateContent({ categoryId, title, content, isDone, id })
+      );
+    },
+    requestUpdateContent: (
+      categoryId: number,
+      contentId: number,
+      title: string,
+      content: string,
+      isDone: string,
+      id?: string
+    ): void => {
+      dispatch(
+        requestUpdateContent({
+          categoryId,
+          contentId,
+          title,
+          content,
+          isDone,
+          id
+        })
       );
     },
     handleCodeMessage: (code: string, message: string): void => {

@@ -71,6 +71,10 @@ const ContentManageCT = (props: typeContentManageCT) => {
         setConfirmMessage('생성하시겠습니까?');
         setIsConfirmPopupActive(!isConfirmPopupActive);
         break;
+      case 'update':
+        setConfirmMessage('수정하시겠습니까?');
+        setIsConfirmPopupActive(!isConfirmPopupActive);
+        break;
       default:
         break;
     }
@@ -85,6 +89,21 @@ const ContentManageCT = (props: typeContentManageCT) => {
         if (props.id) {
           props.requestCreateContent(
             categoryId,
+            title,
+            content,
+            isDone,
+            props.id
+          );
+          props.handleCodeMessage('', '');
+        } else {
+          props.handleCodeMessage('EMPTY USER INFO', '유저 정보 부재');
+        }
+        break;
+      case 'update':
+        if (props.id && contentId) {
+          props.requestUpdateContent(
+            categoryId,
+            +contentId,
             title,
             content,
             isDone,
@@ -137,7 +156,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
     }
 
     //TODO: 비교 필요
-    handleConfirmPopup('create');
+    handleConfirmPopup(contentId ? 'update' : 'create');
     handleBlur();
   };
 
@@ -233,6 +252,14 @@ interface typeContentManageCT
   requestContent: (id?: string, contentId?: number) => void;
   requestCreateContent: (
     categoryId: number,
+    title: string,
+    content: string,
+    isDone: string,
+    id?: string
+  ) => void;
+  requestUpdateContent: (
+    categoryId: number,
+    contentId: number,
     title: string,
     content: string,
     isDone: string,

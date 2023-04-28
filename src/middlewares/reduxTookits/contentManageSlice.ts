@@ -37,7 +37,10 @@ const contentManageSlice = createSlice({
     successDeleteRestoreContent(state: ContentManageState, action) {
       state.contents = action.payload.contents;
     },
-    failDeleteRestoreContent(state: ContentManageState) {}
+    failDeleteRestoreContent(state: ContentManageState) {},
+    requestUpdateContent(state: ContentManageState, action) {},
+    successUpdateContent(state: ContentManageState, action) {},
+    failUpdateContent(state: ContentManageState) {}
   }
 });
 
@@ -53,7 +56,10 @@ export const {
   failCreateContent,
   requestDeleteRestoreContent,
   successDeleteRestoreContent,
-  failDeleteRestoreContent
+  failDeleteRestoreContent,
+  requestUpdateContent,
+  successUpdateContent,
+  failUpdateContent
 } = contentManageSlice.actions;
 
 export const contentManageExtraReducers = {
@@ -141,6 +147,27 @@ export const contentManageExtraReducers = {
     state: CommonState,
     action: any
   ) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'contentManage/requestUpdateContent': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'contentManage/successUpdateContent': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'contentManage/failUpdateContent': (state: CommonState, action: any) => {
     state.isFetching = false;
     state.isSuccess = false;
     state.isFail = true;

@@ -59,16 +59,17 @@ const ContentManagePT = ({
               children={content ? content : ''}
               remarkPlugins={[remarkGfm]}
               components={{
+                p: 'div',
                 code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || '');
                   return !inline && match ? (
                     <SyntaxHighlighter
-                      showLineNumbers={true}
-                      showInlineLineNumbers={true}
                       children={String(children).replace(/\n$/, '')}
-                      style={isNight ? vscDarkPlus : vs}
                       language={match[1]}
                       PreTag="div"
+                      // showLineNumbers={true}
+                      // showInlineLineNumbers={true}
+                      style={isNight ? vscDarkPlus : vs}
                     />
                   ) : (
                     <div>
@@ -89,13 +90,13 @@ const ContentManagePT = ({
                                         code({ children, ...props }) {
                                           return (
                                             <SyntaxHighlighter
-                                              showLineNumbers={true}
-                                              showInlineLineNumbers={true}
+                                              // showLineNumbers={true}
+                                              // showInlineLineNumbers={true}
                                               children={String(
                                                 children
                                               ).replace(/\n$/, '')}
+                                              PreTag="div"
                                               style={isNight ? vscDarkPlus : vs}
-                                              PreTag="section"
                                             />
                                           );
                                         }
