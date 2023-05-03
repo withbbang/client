@@ -39,9 +39,11 @@ const SearchPT = ({
               onKeyUp={(e) => onSearchContents(e)}
               ref={snippetRef}
             />
-            {didSearch && Array.isArray(searchContents) && (
+            {didSearch && (
               <span>
-                {'총 ' + searchContents.length + '개의 포스트를 찾았습니다.'}
+                {Array.isArray(searchContents) && searchContents.length > 0
+                  ? '총 ' + searchContents.length + '개의 포스트를 찾았습니다.'
+                  : '검색 결과가 없습니다.'}
               </span>
             )}
           </div>
