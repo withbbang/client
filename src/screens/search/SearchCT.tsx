@@ -34,9 +34,13 @@ const SearchCT = (props: typeSearchCT): JSX.Element => {
 
   return (
     <SearchPT
+      isNight={props.isNight}
       searchContents={props.searchContents}
       snippet={snippet}
       didSearch={didSearch}
+      snippetRef={snippetRef}
+      onSetSnippet={setSnippet}
+      onSearchContents={handleSearchContents}
     />
   );
 };

@@ -79,7 +79,7 @@ const Header = (props: typeHeader): JSX.Element => {
         <span onClick={props.onIsNight}>
           <SVG type={props.isNight ? 'night' : 'day'} fill={'#fffb00'} />
         </span>
-        <span>
+        <span onClick={() => navigate('/search')}>
           <SVG type="search" fill={props.isNight ? '#fff' : '#000'} />
         </span>
         <span className={styles.log} onClick={handleLog}>

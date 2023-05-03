@@ -7,6 +7,7 @@ import Log from 'screens/log';
 import CategoryManage from './screens/category-manage';
 import ContentManage from './screens/content-manage';
 import Contents from './screens/contents';
+import Search from 'screens/search';
 
 const App = (): JSX.Element => {
   return (
@@ -15,6 +16,7 @@ const App = (): JSX.Element => {
         <Route path="/" element={<Index />} />
         <Route path="/sign" element={<Sign />} />
         <Route path="/log" element={<Log />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/admin/category-manage" element={<CategoryManage />} />
         <Route path="/admin/contents" element={<Contents />} />
         <Route path="/admin/content-manage" element={<ContentManage />} />

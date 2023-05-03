@@ -147,8 +147,7 @@
         border: solid 1px rgb(125, 125, 125);
         border-radius: 10px;
         box-sizing: border-box;
-        background-color: $most-light;
-        @include boxShadow('none');
+        @include font-background-boxShadow($most-dark, $most-light, 'none');
       }
 
       > input,
@@ -180,6 +179,10 @@
       }
 
       .innerBox {
+        :nth-child(n) {
+          @include font-background($most-light, $more-dark);
+        }
+
         > input:focus,
         select:focus,
         button:hover {
