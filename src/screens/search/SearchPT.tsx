@@ -28,13 +28,7 @@ const SearchPT = ({
           isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap
         }
       >
-        <div
-          className={
-            Array.isArray(searchContents) && searchContents.length > 0
-              ? styles.innerWrap
-              : [styles.innerWrap, styles.nothing].join(' ')
-          }
-        >
+        <div className={styles.innerWrap}>
           <div className={styles.option}>
             <input
               placeholder="검색어를 입력하세요"
@@ -52,11 +46,11 @@ const SearchPT = ({
             )}
           </div>
           {didSearch
-            ? Array.isArray(searchContents) && searchContents.length > 0
-              ? searchContents.map((content: any, idx: number) => (
-                  <li>{content.TITLE}</li>
-                ))
-              : '컨텐츠가 없습니다~!'
+            ? Array.isArray(searchContents) &&
+              searchContents.length > 0 &&
+              searchContents.map((content: any, idx: number) => (
+                <li>{content.TITLE}</li>
+              ))
             : null}
         </div>
       </div>
