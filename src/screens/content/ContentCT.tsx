@@ -16,7 +16,10 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   );
 
   useEffect(() => {
-    props.requestContent(props.id, contentId ? +contentId : 0);
+    if (contentId) {
+      props.requestContent(props.id, +contentId);
+      props.requestHeartsCount(+contentId);
+    }
   }, []);
 
   useEffect(() => {
@@ -42,6 +45,7 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
 
 interface typeContentCT extends CommonState, LogState, ContentsState {
   requestContent: (id?: string, contentId?: number) => void;
+  requestHeartsCount: (contentId?: number) => void;
 }
 
 export default ContentCT;

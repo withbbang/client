@@ -13,6 +13,7 @@ import searchContents, {
   SearchContentsState
 } from './reduxTookits/searchContents';
 import authority, { AuthorityState } from './reduxTookits/authoritySlice';
+import heart, { HeartState } from './reduxTookits/heartSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   categoryManage,
   contentManage,
   authority,
-  searchContents
+  searchContents,
+  heart
   // add others...
 });
 
@@ -55,6 +57,7 @@ interface PropState {
   contentManage: ContentManageState;
   authority: AuthorityState;
   searchContents: SearchContentsState;
+  heart: HeartState;
   // add others...
 }
 

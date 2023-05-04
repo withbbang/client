@@ -7,6 +7,7 @@ import { categoryManageSaga } from './sagas/categoryManageSaga';
 import { contentManageSaga } from './sagas/contentManageSaga';
 import { authoritySaga } from './sagas/authoritySaga';
 import { searchContentsSaga } from './sagas/searchContentsSaga';
+import { heartSaga } from './sagas/heartSaga';
 
 function sagaConfigure(sagaMiddleware: SagaMiddleware): void {
   sagaMiddleware.run(signSaga);
@@ -17,6 +18,7 @@ function sagaConfigure(sagaMiddleware: SagaMiddleware): void {
   sagaMiddleware.run(contentManageSaga);
   sagaMiddleware.run(authoritySaga);
   sagaMiddleware.run(searchContentsSaga);
+  sagaMiddleware.run(heartSaga);
   // add others...
 }
 

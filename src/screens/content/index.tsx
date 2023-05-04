@@ -2,15 +2,13 @@ import { PropState } from 'middlewares/configureReducer';
 import { connect } from 'react-redux';
 import { Action } from 'redux';
 import ContentCT from './ContentCT';
-import {
-  CommonState,
-  handleCodeMessage
-} from 'middlewares/reduxTookits/commonSlice';
+import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import {
   ContentsState,
   requestContent
 } from 'middlewares/reduxTookits/contentsSlice';
+import { requestHeartsCount } from 'middlewares/reduxTookits/heartSlice';
 
 const mapStateToProps = (
   state: PropState
@@ -27,8 +25,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestContent: (id?: string, contentId?: number): void => {
       dispatch(requestContent({ id, contentId }));
     },
-    handleCodeMessage: (code: string, message: string): void => {
-      dispatch(handleCodeMessage({ code, message }));
+    requestHeartsCount: (contentId?: number): void => {
+      dispatch(requestHeartsCount({ contentId }));
     }
   };
 };
