@@ -4,6 +4,7 @@ import { CommonState } from './commonSlice';
 
 export interface ContentsState {
   contents?: Array<Content>;
+  content?: Content;
 }
 
 export const initialState: ContentsState = {
@@ -20,12 +21,23 @@ const contentsSlice = createSlice({
     },
     failContents(state: ContentsState): void {
       state.contents = [];
-    }
+    },
+    requestContent(state: ContentsState, action): void {},
+    successContent(state: ContentsState, action): void {
+      state.content = action.payload.content;
+    },
+    failContent(state: ContentsState): void {}
   }
 });
 
-export const { requestContents, successContents, failContents } =
-  contentsSlice.actions;
+export const {
+  requestContents,
+  successContents,
+  failContents,
+  requestContent,
+  successContent,
+  failContent
+} = contentsSlice.actions;
 
 export const contentsExtraReducers = {
   'contents/requestContents': (state: CommonState) => {
@@ -43,6 +55,27 @@ export const contentsExtraReducers = {
     state.message = action.payload.message;
   },
   'contents/failContents': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'contents/requestContent': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'contents/successContent': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'contents/failContent': (state: CommonState, action: any) => {
     state.isFetching = false;
     state.isSuccess = false;
     state.isFail = true;

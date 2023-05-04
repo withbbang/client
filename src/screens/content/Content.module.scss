@@ -1,0 +1,48 @@
+.wrap {
+  display: flex;
+  width: 100%;
+  min-height: calc(100% - 100px);
+  @include background($more-light);
+
+  .innerWrap {
+    width: 100%;
+    padding: 10% 20%;
+    overflow: auto;
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      word-break: break-all;
+      @include font($most-dark);
+    }
+
+    .content {
+      overflow: auto;
+      @include font($most-dark);
+
+      :nth-child(n) {
+        word-break: break-all;
+      }
+
+      > pre {
+        white-space: pre-wrap;
+        overflow: auto;
+      }
+    }
+  }
+
+  &.night {
+    @include background($dark);
+
+    .innerWrap {
+      .title {
+        color: $most-light;
+      }
+
+      .content {
+        color: $most-light;
+      }
+    }
+  }
+}

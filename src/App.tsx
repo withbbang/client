@@ -8,6 +8,7 @@ import CategoryManage from './screens/category-manage';
 import ContentManage from './screens/content-manage';
 import Contents from './screens/contents';
 import Search from 'screens/search';
+import Content from './screens/content';
 
 const App = (): JSX.Element => {
   return (
@@ -25,6 +26,7 @@ const App = (): JSX.Element => {
           element={<ContentManage />}
         />
         <Route path="/:path" element={<Index />} />
+        <Route path="/:path/:contentId" element={<Content />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
