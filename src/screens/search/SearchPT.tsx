@@ -6,6 +6,7 @@ import LeftSideBar from 'components/leftSideBar';
 import ErrorPopup from 'components/errorPopup';
 import Footer from 'components/footer/Footer';
 import { Content } from 'modules/types';
+import Post from 'components/post/Post';
 
 const SearchPT = ({
   loading,
@@ -51,7 +52,14 @@ const SearchPT = ({
             ? Array.isArray(searchContents) &&
               searchContents.length > 0 &&
               searchContents.map((content: any, idx: number) => (
-                <li>{content.TITLE}</li>
+                <Post
+                  key={idx}
+                  idx={idx}
+                  id={content.ID}
+                  title={content.TITLE}
+                  content={content.CONTENT}
+                  path={content.PATH}
+                />
               ))
             : null}
         </div>

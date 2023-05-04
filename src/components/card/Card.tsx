@@ -31,7 +31,7 @@ const Card = ({
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    path ? navigate(path) : alert('부적절한 요청입니다.');
+    navigate(path);
   };
 
   const handleDeleteRestore = (
@@ -87,7 +87,7 @@ interface typeCard extends CommonState {
   id: number;
   title: string;
   content?: string;
-  path?: string;
+  path: string;
   isAdmin?: boolean;
   isDeleted?: string;
   onDeleteRestore?: (idx?: number) => void;
