@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
-import ContentPT from './ContentPT';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { ContentsState } from 'middlewares/reduxTookits/contentsSlice';
+import ContentPT from './ContentPT';
 
 const ContentCT = (props: typeContentCT): JSX.Element => {
   const navigate = useNavigate();
