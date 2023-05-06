@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
-import CategoryManagePT from './CategoryManagePT';
 import { handleGetCookie } from 'modules/cookie';
 import { useNavigate } from 'react-router-dom';
 import { Category } from 'modules/types';
@@ -8,6 +7,7 @@ import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { AuthorityState } from 'middlewares/reduxTookits/authoritySlice';
 import styles from 'components/functionPopup/FunctionPopup.module.scss';
+import CategoryManagePT from './CategoryManagePT';
 
 const CategoryManageCT = (props: typeCategoryManageCT): JSX.Element => {
   const navigate = useNavigate();
