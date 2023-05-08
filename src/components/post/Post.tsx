@@ -3,9 +3,8 @@ import { PropState } from 'middlewares/configureReducer';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { connect } from 'react-redux';
 import { Action } from 'redux';
-import styles from './Post.module.scss';
 import { useNavigate } from 'react-router-dom';
-import SVG from 'modules/SVG';
+import styles from './Post.module.scss';
 
 const mapStateToProps = (state: PropState): CommonState => {
   return {
