@@ -14,9 +14,9 @@ const SearchPT = ({
   snippet,
   didSearch,
   searchContents,
+  snippetRef,
   onSetSnippet,
-  onSearchContents,
-  snippetRef
+  onSearchContents
 }: typeSearchPT): JSX.Element => {
   return (
     <>
