@@ -22,7 +22,8 @@ const ContentPT = ({
   title,
   content,
   markdownCheatSheets,
-  heart
+  heart,
+  onSetHeart
 }: typeContentPT) => {
   return (
     <>
@@ -101,7 +102,7 @@ const ContentPT = ({
         </div>
         <div className={styles.bottom}>
           <div className={styles.heart}>
-            <span>
+            <span onClick={onSetHeart}>
               <SVG
                 type="heart"
                 width="25px"
@@ -127,6 +128,7 @@ interface typeContentPT {
   content?: string;
   markdownCheatSheets: Array<string>;
   heart?: Heart;
+  onSetHeart: () => void;
 }
 
 export default ContentPT;

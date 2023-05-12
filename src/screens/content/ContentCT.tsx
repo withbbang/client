@@ -33,6 +33,11 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     }
   }, [props.content]);
 
+  const handleSetHeart = () => {
+    contentId
+      ? props.requestSetHeart(+contentId)
+      : props.handleCodeMessage('EMPTY CONTENTID ERROR', '컨텐트 아이디 에러');
+  };
   return (
     <ContentPT
       loading={props.isFetching}
@@ -41,6 +46,7 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       content={content}
       markdownCheatSheets={markdownCheatSheets}
       heart={props.heart}
+      onSetHeart={handleSetHeart}
     />
   );
 };
@@ -50,8 +56,10 @@ interface typeContentCT
     LogState,
     ContentsState,
     HeartState {
+  handleCodeMessage: (code: string, message: string) => void;
   requestContent: (id?: string, contentId?: number) => void;
   requestHeart: (contentId?: number) => void;
+  requestSetHeart: (contentId?: number) => void;
 }
 
 export default ContentCT;

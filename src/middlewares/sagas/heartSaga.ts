@@ -3,11 +3,15 @@ import { postAPI } from 'modules/apis';
 import {
   failHeart,
   requestHeart,
-  successHeart
+  successHeart,
+  requestSetHeart,
+  successSetHeart,
+  failSetHeart
 } from 'middlewares/reduxTookits/heartSlice';
 
 export function* heartSaga() {
   yield takeEvery(requestHeart.type, handlePostHeart);
+  yield takeEvery(requestSetHeart.type, handlePostSetHeart);
 }
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
@@ -18,6 +22,15 @@ function* handlePostHeart(data: any) {
     yield put(successHeart(res));
   } catch (error: any) {
     yield put(failHeart(error));
+  }
+}
+
+function* handlePostSetHeart(data: any) {
+  try {
+    const res: Generator = yield call(postSetHeart, data);
+    yield put(successSetHeart(res));
+  } catch (error: any) {
+    yield put(failSetHeart(error));
   }
 }
 
@@ -34,3 +47,7 @@ async function postHeart(data: any): Promise<any> {
 //   } = data;
 //   return getAPI(`/server/common/heart/count/${contentId}`);
 // }
+
+async function postSetHeart(data: any): Promise<any> {
+  return postAPI('/server/common/set-heart', data);
+}
