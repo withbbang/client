@@ -10,8 +10,6 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   const navigate = useNavigate();
   const { contentId } = useParams();
 
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
   const [markdownCheatSheets, setMarkdownCheatSheets] = useState<Array<string>>(
     []
   );
@@ -23,16 +21,6 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     }
   }, []);
 
-  useEffect(() => {
-    if (props.content) {
-      setTitle(props.content.TITLE);
-      props.content.CONTENT && setContent(props.content.CONTENT);
-    } else {
-      setTitle('');
-      setContent('');
-    }
-  }, [props.content]);
-
   const handleSetHeart = () => {
     contentId
       ? props.requestSetHeart(+contentId)
@@ -42,8 +30,7 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     <ContentPT
       loading={props.isFetching}
       isNight={props.isNight}
-      title={title}
-      content={content}
+      content={props.content}
       markdownCheatSheets={markdownCheatSheets}
       heart={props.heart}
       onSetHeart={handleSetHeart}

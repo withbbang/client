@@ -14,12 +14,11 @@ import {
 import remarkGfm from 'remark-gfm';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import SVG from 'modules/SVG';
-import { Heart } from 'modules/types';
+import { Content, Heart } from 'modules/types';
 
 const ContentPT = ({
   loading,
   isNight,
-  title,
   content,
   markdownCheatSheets,
   heart,
@@ -37,10 +36,35 @@ const ContentPT = ({
         }
       >
         <div className={styles.innerWrap}>
-          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.contentInfo}>
+            <span>
+              <SVG
+                type="category"
+                width="30px"
+                height="30px"
+                fill={isNight ? '#fff' : '#000'}
+              />
+              {content?.CATEGORY}
+            </span>
+            <span>
+              <SVG
+                type="time"
+                width="25px"
+                height="25px"
+                fill={isNight ? '#fff' : '#000'}
+              />
+              {content &&
+                (content.UPDATE_DT
+                  ? content.UPDATE_DT
+                  : content.CREATE_DT
+                  ? content.UPDATE_DT
+                  : '')}
+            </span>
+          </div>
+          <h1 className={styles.title}>{content ? content.TITLE : ''}</h1>
           <div className={styles.content}>
             <ReactMarkdown
-              children={content ? content : ''}
+              children={content && content.CONTENT ? content.CONTENT : ''}
               remarkPlugins={[remarkGfm]}
               components={{
                 p: 'div',
@@ -114,6 +138,7 @@ const ContentPT = ({
             </span>
             <span>{heart !== undefined && heart.COUNT}</span>
           </div>
+          <div className={styles.commentBox}></div>
         </div>
       </div>
       <Footer />
@@ -124,8 +149,7 @@ const ContentPT = ({
 interface typeContentPT {
   loading?: boolean;
   isNight?: boolean;
-  title: string;
-  content?: string;
+  content?: Content;
   markdownCheatSheets: Array<string>;
   heart?: Heart;
   onSetHeart: () => void;

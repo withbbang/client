@@ -9,6 +9,22 @@
     padding: 10% 20%;
     overflow: auto;
 
+    .contentInfo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      > span {
+        display: flex;
+        align-items: center;
+        @include font($most-dark);
+
+        :nth-child(1) {
+          margin-right: 10px;
+        }
+      }
+    }
+
     .title {
       display: flex;
       align-items: center;
@@ -47,6 +63,7 @@
         align-items: center;
         justify-content: center;
         margin-right: 10px;
+        @include font($most-dark);
       }
 
       :nth-child(1):hover {
@@ -59,6 +76,12 @@
     @include background($dark);
 
     .innerWrap {
+      .contentInfo {
+        > span {
+          @include font($most-light);
+        }
+      }
+
       .title {
         color: $most-light;
       }
