@@ -32,10 +32,16 @@ export interface typeSVG {
   logFill?: string;
   bracketFill?: string;
   quoteFill?: string;
+  stroke?: string;
 }
 
 export interface Authority {
   AUTH: number;
   PERMISSION?: string;
   DESCRIPTION: string;
+}
+
+export interface Heart {
+  COUNT: number;
+  IS_HEART: number;
 }

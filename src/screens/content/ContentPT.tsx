@@ -12,13 +12,17 @@ import {
   vs
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import SVG from 'modules/SVG';
+import { Heart } from 'modules/types';
 
 const ContentPT = ({
   loading,
   isNight,
   title,
   content,
-  markdownCheatSheets
+  markdownCheatSheets,
+  heart
 }: typeContentPT) => {
   return (
     <>
@@ -95,6 +99,21 @@ const ContentPT = ({
             />
           </div>
         </div>
+        <div className={styles.bottom}>
+          <div className={styles.heart}>
+            <span>
+              <SVG
+                type="heart"
+                width="25px"
+                height="25px"
+                fill={
+                  heart !== undefined && heart.IS_HEART > 0 ? '#f00' : '#fff'
+                }
+              />
+            </span>
+            <span>{heart !== undefined && heart.COUNT}</span>
+          </div>
+        </div>
       </div>
       <Footer />
     </>
@@ -107,6 +126,7 @@ interface typeContentPT {
   title: string;
   content?: string;
   markdownCheatSheets: Array<string>;
+  heart?: Heart;
 }
 
 export default ContentPT;

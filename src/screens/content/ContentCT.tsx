@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import { ContentsState } from 'middlewares/reduxTookits/contentsSlice';
 import ContentPT from './ContentPT';
+import { HeartState } from 'middlewares/reduxTookits/heartSlice';
 
 const ContentCT = (props: typeContentCT): JSX.Element => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   useEffect(() => {
     if (contentId) {
       props.requestContent(props.id, +contentId);
-      props.requestHeartsCount(+contentId);
+      props.requestHeart(+contentId);
     }
   }, []);
 
@@ -39,13 +40,18 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       title={title}
       content={content}
       markdownCheatSheets={markdownCheatSheets}
+      heart={props.heart}
     />
   );
 };
 
-interface typeContentCT extends CommonState, LogState, ContentsState {
+interface typeContentCT
+  extends CommonState,
+    LogState,
+    ContentsState,
+    HeartState {
   requestContent: (id?: string, contentId?: number) => void;
-  requestHeartsCount: (contentId?: number) => void;
+  requestHeart: (contentId?: number) => void;
 }
 
 export default ContentCT;

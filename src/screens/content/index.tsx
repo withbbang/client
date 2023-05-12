@@ -8,15 +8,16 @@ import {
   ContentsState,
   requestContent
 } from 'middlewares/reduxTookits/contentsSlice';
-import { requestHeartsCount } from 'middlewares/reduxTookits/heartSlice';
+import { HeartState, requestHeart } from 'middlewares/reduxTookits/heartSlice';
 
 const mapStateToProps = (
   state: PropState
-): CommonState | LogState | ContentsState => {
+): CommonState | LogState | ContentsState | HeartState => {
   return {
     ...state.common,
     ...state.log,
-    ...state.contents
+    ...state.contents,
+    ...state.heart
   };
 };
 
@@ -25,8 +26,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestContent: (id?: string, contentId?: number): void => {
       dispatch(requestContent({ id, contentId }));
     },
-    requestHeartsCount: (contentId?: number): void => {
-      dispatch(requestHeartsCount({ contentId }));
+    requestHeart: (contentId?: number): void => {
+      dispatch(requestHeart({ contentId }));
     }
   };
 };

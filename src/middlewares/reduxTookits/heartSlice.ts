@@ -1,30 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { CommonState } from './commonSlice';
+import { Heart } from 'modules/types';
 
 export interface HeartState {
-  heartsCount: number;
+  heart?: Heart;
 }
 
 export const initialState: HeartState = {
-  heartsCount: 0
+  heart: undefined
 };
 
 const heartSlice = createSlice({
   name: 'heart',
   initialState,
   reducers: {
-    requestHeartsCount(state: HeartState, action) {},
-    successHeartsCount(state: HeartState, action) {
-      state.heartsCount = action.payload.heartsCount;
+    requestHeart(state: HeartState, action) {},
+    successHeart(state: HeartState, action) {
+      state.heart = action.payload.heart;
     },
-    failHeartsCount(state: HeartState) {
-      state.heartsCount = 0;
+    failHeart(state: HeartState, action) {
+      state.heart = undefined;
     }
   }
 });
 
-export const { requestHeartsCount, successHeartsCount, failHeartsCount } =
-  heartSlice.actions;
+export const { requestHeart, successHeart, failHeart } = heartSlice.actions;
 
 export const heartExtraReducers = {
   'heart/requestHeart': (state: CommonState) => {

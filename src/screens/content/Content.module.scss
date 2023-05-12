@@ -1,11 +1,11 @@
 .wrap {
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: calc(100% - 100px);
   @include background($more-light);
 
   .innerWrap {
-    width: 100%;
     padding: 10% 20%;
     overflow: auto;
 
@@ -32,6 +32,29 @@
     }
   }
 
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20%;
+
+    .heart {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+      }
+
+      :nth-child(1):hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   &.night {
     @include background($dark);
 
@@ -42,6 +65,14 @@
 
       .content {
         color: $most-light;
+      }
+    }
+
+    .bottom {
+      .heart {
+        > span {
+          @include font($most-light);
+        }
       }
     }
   }
