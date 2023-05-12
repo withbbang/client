@@ -12,7 +12,6 @@ import {
   vs
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import SVG from 'modules/SVG';
 import { Content, Heart } from 'modules/types';
 
@@ -40,8 +39,8 @@ const ContentPT = ({
             <span>
               <SVG
                 type="category"
-                width="30px"
-                height="30px"
+                width="25px"
+                height="25px"
                 fill={isNight ? '#fff' : '#000'}
               />
               {content?.CATEGORY}
@@ -49,8 +48,8 @@ const ContentPT = ({
             <span>
               <SVG
                 type="time"
-                width="25px"
-                height="25px"
+                width="20px"
+                height="20px"
                 fill={isNight ? '#fff' : '#000'}
               />
               {content &&
