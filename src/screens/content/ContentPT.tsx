@@ -137,7 +137,10 @@ const ContentPT = ({
             </span>
             <span>{heart !== undefined && heart.COUNT}</span>
           </div>
-          <div className={styles.commentBox}></div>
+          <div className={styles.commentBox}>
+            <div className={styles.comments}></div>
+            <div className={styles.createBox}></div>
+          </div>
         </div>
       </div>
       <Footer />
