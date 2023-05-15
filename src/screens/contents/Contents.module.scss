@@ -9,7 +9,7 @@
 
     .innerWrap {
       &.nothing {
-        @include font($most-light);
+        @include font($light);
       }
     }
   }

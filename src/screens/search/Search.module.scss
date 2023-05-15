@@ -11,7 +11,7 @@
       .option {
         > input {
           border: solid 1px $less-dark;
-          @include font-background($most-light, $more-dark);
+          @include font-background($light, $more-dark);
         }
 
         > input:focus {
@@ -19,7 +19,7 @@
         }
 
         > span {
-          @include font($most-light);
+          @include font($light);
         }
       }
     }

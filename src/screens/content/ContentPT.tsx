@@ -21,6 +21,7 @@ const ContentPT = ({
   content,
   markdownCheatSheets,
   heart,
+  testComments,
   onSetHeart
 }: typeContentPT) => {
   return (
@@ -137,11 +138,60 @@ const ContentPT = ({
             </span>
             <span>{heart !== undefined && heart.COUNT}</span>
           </div>
+          <div className={styles.crossBar} />
           <div className={styles.commentBox}>
             <div className={styles.comments}>
-              <span>
-                <SVG />
-              </span>
+              {Array.isArray(testComments) &&
+                testComments.length > 0 &&
+                testComments.map((comment, idx) => (
+                  <>
+                    <div
+                      className={
+                        comment.REF_ID !== undefined
+                          ? [styles.comment, styles.padding].join(' ')
+                          : styles.comment
+                      }
+                    >
+                      <div className={styles.photo}>
+                        <span>
+                          <SVG
+                            type="user"
+                            width="35px"
+                            height="35px"
+                            fill={isNight ? '#fff' : '#000'}
+                          />
+                        </span>
+                      </div>
+                      <div className={styles.commentContents}>
+                        <div className={styles.topContents}>
+                          <div className={styles.leftContents}>
+                            <strong>{`${comment.NICKNAME}`}</strong>
+                            <span>
+                              &nbsp;&nbsp;|&nbsp;&nbsp;
+                              {`${
+                                comment.UPDATE_DT
+                                  ? comment.UPDATE_DT
+                                  : comment.CREATE_DT
+                              }`}
+                            </span>
+                          </div>
+                          <div className={styles.rightContents}>
+                            <span>수정/삭제</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>댓글</span>
+                          </div>
+                        </div>
+                        <div className={styles.bottomContents}>
+                          {comment.COMMENTS}
+                        </div>
+                      </div>
+                    </div>
+                    {((testComments[idx + 1] &&
+                      testComments[idx + 1].REF_ID === undefined) ||
+                      testComments[idx + 1] === undefined) && (
+                      <div className={styles.crossBar} />
+                    )}
+                  </>
+                ))}
             </div>
             <div className={styles.createBox}></div>
           </div>
@@ -158,6 +208,7 @@ interface typeContentPT {
   content?: Content;
   markdownCheatSheets: Array<string>;
   heart?: Heart;
+  testComments: Array<any>;
   onSetHeart: () => void;
 }
 

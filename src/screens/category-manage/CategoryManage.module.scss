@@ -10,11 +10,11 @@
 
     .innerWrap {
       .count {
-        @include font($most-light);
+        @include font($light);
 
         > div {
           > button {
-            @include font-background-boxShadow($most-light, $more-dark, 'none');
+            @include font-background-boxShadow($light, $more-dark, 'none');
           }
 
           > button:disabled {
@@ -29,7 +29,7 @@
 
       .contents {
         &.noContents {
-          @include font($most-light);
+          @include font($light);
         }
       }
     }
@@ -180,7 +180,7 @@
 
       .innerBox {
         :nth-child(n) {
-          @include font-background($most-light, $more-dark);
+          @include font-background($light, $more-dark);
         }
 
         > input:focus,

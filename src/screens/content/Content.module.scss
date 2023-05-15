@@ -56,6 +56,7 @@
 
     .heart {
       display: flex;
+      margin-bottom: 10px;
       align-items: center;
       width: 100%;
 
@@ -71,6 +72,61 @@
         cursor: pointer;
       }
     }
+
+    .crossBar {
+      height: 1px;
+      @include background($most-dark);
+    }
+
+    .commentBox {
+      .comments {
+        display: flex;
+        flex-direction: column;
+
+        .comment {
+          display: flex;
+          width: 100%;
+          margin: 10px 0;
+
+          &.padding {
+            width: calc(100% - 30px);
+            padding-left: 30px;
+          }
+
+          .photo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            > span {
+              display: flex;
+              border-radius: 10px;
+              @include background($light);
+            }
+          }
+
+          .commentContents {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+
+            .topContents {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 100%;
+
+              .leftContents {
+              }
+
+              .rightContents {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   &.night {
@@ -79,23 +135,43 @@
     .innerWrap {
       .contentInfo {
         > span {
-          @include font($most-light);
+          @include font($light);
         }
       }
 
       .title {
-        color: $most-light;
+        color: $light;
       }
 
       .content {
-        color: $most-light;
+        color: $light;
       }
     }
 
     .bottom {
       .heart {
         > span {
-          @include font($most-light);
+          @include font($light);
+        }
+      }
+
+      .crossBar {
+        @include background($most-light);
+      }
+
+      .commentBox {
+        .comments {
+          .comment {
+            .photo {
+              > span {
+                @include background($less-dark);
+              }
+            }
+
+            .commentContents {
+              @include font($light);
+            }
+          }
         }
       }
     }

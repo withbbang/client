@@ -128,12 +128,12 @@
 
   &.night {
     .modal_body {
-      color: $most-light;
+      color: $light;
       background-color: $dark;
 
       .categoryBox {
         :nth-child(n) {
-          color: $most-light;
+          color: $light;
           border: solid 1px $less-dark;
           background-color: $more-dark;
         }
@@ -142,7 +142,7 @@
       .contentBox {
         .option {
           :nth-child(n) {
-            color: $most-light;
+            color: $light;
             border: solid 1px $less-dark;
             background-color: $more-dark;
           }
@@ -150,7 +150,7 @@
 
         > textarea,
         button {
-          color: $most-light;
+          color: $light;
           border: solid 1px $less-dark;
           background-color: $more-dark;
         }

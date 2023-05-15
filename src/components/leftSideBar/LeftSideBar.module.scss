@@ -31,14 +31,14 @@
         &.log_in {
           .infos {
             > span {
-              @include font($most-light);
+              @include font($light);
             }
           }
         }
       }
 
       .menu {
-        @include font($most-light);
+        @include font($light);
 
         &:hover {
           background-color: $dark;
@@ -95,7 +95,7 @@
       }
 
       &.night {
-        @include font($most-light);
+        @include font($light);
       }
     }
 

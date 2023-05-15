@@ -58,12 +58,12 @@
 
   &.night {
     .modal_body {
-      color: $most-light;
+      color: $light;
       background-color: $dark;
 
       > div {
         > button {
-          color: $most-light;
+          color: $light;
           background: $more-dark;
           @include boxShadow('none');
         }

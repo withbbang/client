@@ -16,15 +16,20 @@ import {
   requestHeart,
   requestSetHeart
 } from 'middlewares/reduxTookits/heartSlice';
+import {
+  CommentState,
+  requestComments
+} from 'middlewares/reduxTookits/commentSlice';
 
 const mapStateToProps = (
   state: PropState
-): CommonState | LogState | ContentsState | HeartState => {
+): CommonState | LogState | ContentsState | HeartState | CommentState => {
   return {
     ...state.common,
     ...state.log,
     ...state.contents,
-    ...state.heart
+    ...state.heart,
+    ...state.comments
   };
 };
 
@@ -41,6 +46,9 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     },
     requestSetHeart: (contentId?: number): void => {
       dispatch(requestSetHeart({ contentId }));
+    },
+    requestComments: (contentId?: number): void => {
+      dispatch(requestComments({ contentId }));
     }
   };
 };

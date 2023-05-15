@@ -16,6 +16,7 @@ import authority, { AuthorityState } from './reduxTookits/authoritySlice';
 import heart, { HeartState } from './reduxTookits/heartSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import comment, { CommentState } from './reduxTookits/commentSlice';
 
 const rootReducer = combineReducers({
   sign,
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   contentManage,
   authority,
   searchContents,
-  heart
+  heart,
+  comment
   // add others...
 });
 
@@ -58,6 +60,7 @@ interface PropState {
   authority: AuthorityState;
   searchContents: SearchContentsState;
   heart: HeartState;
+  comments: CommentState;
   // add others...
 }
 
