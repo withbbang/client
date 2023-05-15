@@ -181,7 +181,10 @@ const ContentPT = ({
                           </div>
                         </div>
                         <div className={styles.bottomContents}>
-                          {comment.COMMENTS}
+                          {/* TODO: api에서부터 암호화된 상태로 가져와야함 */}
+                          {comment.IS_SECRET === 'Y'
+                            ? '비밀 댓글입니다.'
+                            : comment.COMMENTS}
                         </div>
                       </div>
                     </div>
