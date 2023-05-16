@@ -22,11 +22,19 @@ const ContentPT = ({
   content,
   markdownCheatSheets,
   heart,
+  nickName,
+  password,
+  comments,
+  isSecret,
   isConfirmPopupActive,
   confirmMessage,
   confirmType,
   onSetHeart,
+  onSetNickName,
+  onSetPassword,
+  onSetComments,
   onConfirmBtn,
+  onCreateUpdateComment,
   testComments
 }: typeContentPT) => {
   return (
@@ -206,7 +214,34 @@ const ContentPT = ({
                   </>
                 ))}
             </div>
-            <div className={styles.createBox}></div>
+            <div className={styles.createBox}>
+              <div className={styles.topContents}>
+                <input
+                  placeholder="NICKNAME"
+                  type="text"
+                  id="nickName"
+                  value={nickName}
+                  onChange={(e) => onSetNickName(e.target.value)}
+                />
+                <input
+                  placeholder="PASSWORD"
+                  type="text"
+                  id="password"
+                  value={password}
+                  onChange={(e) => onSetPassword(e.target.value)}
+                />
+                <input type="checkbox" defaultValue={'N'} value={isSecret} />
+                <button onClick={onCreateUpdateComment}>댓글달기</button>
+              </div>
+              <div className={styles.bottomContents}>
+                <textarea
+                  placeholder="COMMENTS"
+                  id="comments"
+                  value={comments}
+                  onChange={(e) => onSetComments(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -221,10 +256,18 @@ interface typeContentPT {
   content?: Content;
   markdownCheatSheets: Array<string>;
   heart?: Heart;
+  nickName: string;
+  password: string;
+  comments: string;
+  isSecret: string;
   isConfirmPopupActive: boolean;
   confirmMessage: string;
   confirmType?: string;
   onSetHeart: () => void;
+  onSetNickName: React.Dispatch<React.SetStateAction<string>>;
+  onSetPassword: React.Dispatch<React.SetStateAction<string>>;
+  onSetComments: React.Dispatch<React.SetStateAction<string>>;
+  onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
   onConfirmBtn: (type?: string) => void;
   onCreateUpdateComment: () => void;
   testComments: Array<any>;
