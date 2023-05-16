@@ -225,12 +225,15 @@ const ContentPT = ({
                 />
                 <input
                   placeholder="PASSWORD"
-                  type="text"
+                  type="password"
                   id="password"
                   value={password}
                   onChange={(e) => onSetPassword(e.target.value)}
                 />
-                <input type="checkbox" defaultValue={'N'} value={isSecret} />
+                <label className={styles.secret}>
+                  <input type="checkbox" defaultValue={'N'} value={isSecret} />
+                  &nbsp;Secret
+                </label>
                 <button onClick={onCreateUpdateComment}>댓글달기</button>
               </div>
               <div className={styles.bottomContents}>
