@@ -14,6 +14,7 @@ import {
 import remarkGfm from 'remark-gfm';
 import SVG from 'modules/SVG';
 import { Content, Heart } from 'modules/types';
+import ConfirmPopup from 'components/confirmPopup/ConfirmPopup';
 
 const ContentPT = ({
   loading,
@@ -21,8 +22,12 @@ const ContentPT = ({
   content,
   markdownCheatSheets,
   heart,
-  testComments,
-  onSetHeart
+  isConfirmPopupActive,
+  confirmMessage,
+  confirmType,
+  onSetHeart,
+  onConfirmBtn,
+  testComments
 }: typeContentPT) => {
   return (
     <>
@@ -30,6 +35,12 @@ const ContentPT = ({
       <Header />
       <LeftSideBar />
       <ErrorPopup />
+      <ConfirmPopup
+        isActive={isConfirmPopupActive}
+        confirmMessage={confirmMessage}
+        confirmType={confirmType}
+        onConfirm={onConfirmBtn}
+      />
       <div
         className={
           isNight ? [styles.wrap, styles.night].join(' ') : styles.wrap
@@ -188,9 +199,8 @@ const ContentPT = ({
                         </div>
                       </div>
                     </div>
-                    {((testComments[idx + 1] &&
-                      testComments[idx + 1].REF_ID === undefined) ||
-                      testComments[idx + 1] === undefined) && (
+                    {(testComments[idx + 1] === undefined ||
+                      testComments[idx + 1].REF_ID === undefined) && (
                       <div className={styles.crossBar} />
                     )}
                   </>
@@ -211,8 +221,13 @@ interface typeContentPT {
   content?: Content;
   markdownCheatSheets: Array<string>;
   heart?: Heart;
-  testComments: Array<any>;
+  isConfirmPopupActive: boolean;
+  confirmMessage: string;
+  confirmType?: string;
   onSetHeart: () => void;
+  onConfirmBtn: (type?: string) => void;
+  onCreateUpdateComment: () => void;
+  testComments: Array<any>;
 }
 
 export default ContentPT;

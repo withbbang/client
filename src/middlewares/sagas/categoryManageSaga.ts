@@ -99,6 +99,6 @@ async function postUpdateCategory(data: any): Promise<any> {
   return postAPI('/server/admin/category-manage/multi-update', data);
 }
 
-async function postDeleteRestoreCategory(data: any) {
+async function postDeleteRestoreCategory(data: any): Promise<any> {
   return postAPI('/server/admin/category-manage/delete-restore', data);
 }

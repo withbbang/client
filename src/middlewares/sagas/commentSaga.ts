@@ -3,11 +3,15 @@ import { getAPI, postAPI } from 'modules/apis';
 import {
   requestComments,
   successComments,
-  failComments
+  failComments,
+  requestCreateComment,
+  successCreateComment,
+  failCreateComment
 } from 'middlewares/reduxTookits/commentSlice';
 
 export function* commentSaga() {
   yield takeEvery(requestComments.type, handleGetComments);
+  yield takeEvery(requestCreateComment.type, handlePostCreateComment);
 }
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
@@ -21,6 +25,15 @@ function* handleGetComments(data: any) {
   }
 }
 
+function* handlePostCreateComment(data: any) {
+  try {
+    const res: Generator = yield call(postCreateComment, data);
+    yield put(successCreateComment(res));
+  } catch (error: any) {
+    yield put(failCreateComment(error));
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -29,4 +42,8 @@ async function getComments(data: any): Promise<any> {
     payload: { contentId }
   } = data;
   return getAPI(`/server/common/comments/${contentId}`);
+}
+
+async function postCreateComment(data: any): Promise<any> {
+  return postAPI('/server/common/create-comment', data);
 }

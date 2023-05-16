@@ -82,6 +82,7 @@
       .comments {
         display: flex;
         flex-direction: column;
+        font-size: 0.9rem;
 
         .comment {
           display: flex;
@@ -101,7 +102,7 @@
             > span {
               display: flex;
               border-radius: 10px;
-              @include background($light);
+              @include background($less-light);
             }
           }
 
@@ -115,9 +116,6 @@
               align-items: center;
               justify-content: space-between;
               width: 100%;
-
-              .leftContents {
-              }
 
               .rightContents {
                 cursor: pointer;

@@ -18,7 +18,8 @@ import {
 } from 'middlewares/reduxTookits/heartSlice';
 import {
   CommentState,
-  requestComments
+  requestComments,
+  requestCreateComment
 } from 'middlewares/reduxTookits/commentSlice';
 
 const mapStateToProps = (
@@ -49,6 +50,25 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     },
     requestComments: (contentId?: number): void => {
       dispatch(requestComments({ contentId }));
+    },
+    requestCreateComment: (
+      nickName: string,
+      password: string,
+      contentId: number,
+      comments: string,
+      isSecret?: string,
+      refId?: number
+    ): void => {
+      dispatch(
+        requestCreateComment({
+          nickName,
+          password,
+          contentId,
+          comments,
+          isSecret,
+          refId
+        })
+      );
     }
   };
 };

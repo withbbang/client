@@ -125,7 +125,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
     createUpdateBtnRef && createUpdateBtnRef.current.blur();
   };
 
-  const handleCreateUpdateCategory = (
+  const handleCreateUpdateContent = (
     e?: React.KeyboardEvent<HTMLInputElement>
   ) => {
     e?.preventDefault();
@@ -183,7 +183,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          onKeyUp={(e) => handleCreateUpdateCategory(e)}
+          onKeyUp={(e) => handleCreateUpdateContent(e)}
           ref={titleRef}
         />
         {Array.isArray(props.categories) && props.categories.length > 0 && (
@@ -216,7 +216,7 @@ const ContentManageCT = (props: typeContentManageCT) => {
         ref={contentRef}
       />
       <button
-        onClick={() => handleCreateUpdateCategory()}
+        onClick={() => handleCreateUpdateContent()}
         ref={createUpdateBtnRef}
       >
         확인

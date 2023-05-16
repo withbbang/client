@@ -20,12 +20,23 @@ const commentSlice = createSlice({
     },
     failComments(state: CommentState, action) {
       state.comments = [];
-    }
+    },
+    requestCreateComment(state: CommentState, action) {},
+    successCreateComment(state: CommentState, action) {
+      state.comments = action.payload.comments;
+    },
+    failCreateComment(state: CommentState, action) {}
   }
 });
 
-export const { requestComments, successComments, failComments } =
-  commentSlice.actions;
+export const {
+  requestComments,
+  successComments,
+  failComments,
+  requestCreateComment,
+  successCreateComment,
+  failCreateComment
+} = commentSlice.actions;
 
 export const commentExtraReducers = {
   'comment/requestComments': (state: CommonState) => {
@@ -43,6 +54,27 @@ export const commentExtraReducers = {
     state.message = action.payload.message;
   },
   'comment/failComments': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'comment/requestCreateComment': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'comment/successCreateComment': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'comment/failCreateComment': (state: CommonState, action: any) => {
     state.isFetching = false;
     state.isSuccess = false;
     state.isFail = true;
