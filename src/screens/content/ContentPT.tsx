@@ -234,7 +234,7 @@ const ContentPT = ({
                   <input type="checkbox" defaultValue={'N'} value={isSecret} />
                   &nbsp;Secret
                 </label>
-                <button onClick={onCreateUpdateComment}>댓글달기</button>
+                <button onClick={onCreateUpdateComment}>Comment !</button>
               </div>
               <div className={styles.bottomContents}>
                 <textarea

@@ -148,6 +148,7 @@
             align-items: center;
             font-size: 0.7rem;
             cursor: pointer;
+            @include font($most-dark);
           }
 
           > input {
@@ -234,8 +235,12 @@
 
         .createBox {
           .topContents {
-            :nth-child(n) {
+            :not(.secret) {
               @include font-background($light, $more-dark);
+            }
+
+            > label {
+              @include font($light);
             }
 
             > input:focus,
