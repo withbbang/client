@@ -118,7 +118,10 @@
               width: 100%;
 
               .rightContents {
-                cursor: pointer;
+                > span {
+                  margin-left: 15px;
+                  cursor: pointer;
+                }
               }
             }
           }

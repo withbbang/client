@@ -21,10 +21,12 @@ const CreateCommentBox = ({
   password,
   comments,
   isSecret,
+  isDoing,
   onSetNickName,
   onSetPassword,
   onSetComments,
   onSetIsSecret,
+  onSetIsDoing,
   onCreateUpdateComment
 }: typeCreateCommentBox): JSX.Element => {
   return (
@@ -50,9 +52,23 @@ const CreateCommentBox = ({
             onChange={(e) => onSetPassword(e.target.value)}
           />
           <label className={styles.secret}>
-            <input type="checkbox" defaultValue={'N'} value={isSecret} />
+            <input
+              type="checkbox"
+              defaultValue={'N'}
+              value={isSecret}
+              onChange={(e) => onSetIsSecret(e.target.checked ? 'Y' : 'N')}
+            />
             &nbsp;Secret
           </label>
+          {isDoing !== undefined && (
+            <button
+              onClick={() =>
+                onSetIsDoing && isDoing !== undefined && onSetIsDoing(!isDoing)
+              }
+            >
+              Cancel
+            </button>
+          )}
           <button onClick={onCreateUpdateComment}>Comment !</button>
         </div>
         <div className={styles.bottomContents}>
@@ -73,10 +89,12 @@ interface typeCreateCommentBox extends CommonState {
   password: string;
   comments: string;
   isSecret: string;
+  isDoing?: boolean;
   onSetNickName: React.Dispatch<React.SetStateAction<string>>;
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
   onSetComments: React.Dispatch<React.SetStateAction<string>>;
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
+  onSetIsDoing?: React.Dispatch<React.SetStateAction<boolean>>;
   onCreateUpdateComment: () => void;
 }
 

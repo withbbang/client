@@ -24,6 +24,8 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   const [password, setPassword] = useState<string>('');
   const [comments, setComments] = useState<string>('');
   const [isSecret, setIsSecret] = useState<string>('N');
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const [isReComment, setIsReComment] = useState<boolean>(false);
 
   useEffect(() => {
     if (contentId) {
@@ -147,6 +149,8 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       password={password}
       comments={comments}
       isSecret={isSecret}
+      isUpdate={isUpdate}
+      isReComment={isReComment}
       isConfirmPopupActive={isConfirmPopupActive}
       confirmMessage={confirmMessage}
       confirmType={confirmType}
@@ -155,6 +159,8 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       onSetPassword={setPassword}
       onSetComments={setComments}
       onSetIsSecret={setIsSecret}
+      onSetIsUpdate={setIsUpdate}
+      onSetIsReComment={setIsReComment}
       onConfirmBtn={handleConfirmBtn}
       onCreateUpdateComment={handleCreateUpdateComment}
     />
