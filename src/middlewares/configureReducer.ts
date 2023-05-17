@@ -60,7 +60,7 @@ interface PropState {
   authority: AuthorityState;
   searchContents: SearchContentsState;
   heart: HeartState;
-  comments: CommentState;
+  comment: CommentState;
   // add others...
 }
 

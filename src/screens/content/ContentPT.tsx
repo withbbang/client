@@ -13,7 +13,7 @@ import {
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 import SVG from 'modules/SVG';
-import { Content, Heart } from 'modules/types';
+import { Content, Heart, Comment } from 'modules/types';
 import ConfirmPopup from 'components/confirmPopup/ConfirmPopup';
 
 const ContentPT = ({
@@ -22,6 +22,7 @@ const ContentPT = ({
   content,
   markdownCheatSheets,
   heart,
+  commentList,
   nickName,
   password,
   comments,
@@ -34,8 +35,7 @@ const ContentPT = ({
   onSetPassword,
   onSetComments,
   onConfirmBtn,
-  onCreateUpdateComment,
-  testComments
+  onCreateUpdateComment
 }: typeContentPT) => {
   return (
     <>
@@ -160,13 +160,14 @@ const ContentPT = ({
           <div className={styles.crossBar} />
           <div className={styles.commentBox}>
             <div className={styles.comments}>
-              {Array.isArray(testComments) &&
-                testComments.length > 0 &&
-                testComments.map((comment, idx) => (
+              {Array.isArray(commentList) &&
+                commentList.length > 0 &&
+                commentList.map((comment, idx) => (
                   <>
                     <div
+                      key={comment.ID}
                       className={
-                        comment.REF_ID !== undefined
+                        comment.REF_ID !== null
                           ? [styles.comment, styles.padding].join(' ')
                           : styles.comment
                       }
@@ -207,8 +208,9 @@ const ContentPT = ({
                         </div>
                       </div>
                     </div>
-                    {(testComments[idx + 1] === undefined ||
-                      testComments[idx + 1].REF_ID === undefined) && (
+                    {(commentList[idx + 1] === undefined ||
+                      commentList[idx + 1].REF_ID === undefined ||
+                      commentList[idx + 1].REF_ID === null) && (
                       <div className={styles.crossBar} />
                     )}
                   </>
@@ -259,6 +261,7 @@ interface typeContentPT {
   content?: Content;
   markdownCheatSheets: Array<string>;
   heart?: Heart;
+  commentList?: Array<Comment>;
   nickName: string;
   password: string;
   comments: string;
@@ -273,7 +276,6 @@ interface typeContentPT {
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
   onConfirmBtn: (type?: string) => void;
   onCreateUpdateComment: () => void;
-  testComments: Array<any>;
 }
 
 export default ContentPT;

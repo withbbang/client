@@ -4,7 +4,8 @@ import { Action } from 'redux';
 import ContentCT from './ContentCT';
 import {
   CommonState,
-  handleCodeMessage
+  handleCodeMessage,
+  requestPublicKey
 } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import {
@@ -30,7 +31,7 @@ const mapStateToProps = (
     ...state.log,
     ...state.contents,
     ...state.heart,
-    ...state.comments
+    ...state.comment
   };
 };
 
@@ -38,6 +39,9 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
   return {
     handleCodeMessage: (code: string, message: string): void => {
       dispatch(handleCodeMessage({ code, message }));
+    },
+    requestPublicKey: (): void => {
+      dispatch(requestPublicKey());
     },
     requestContent: (id?: string, contentId?: number): void => {
       dispatch(requestContent({ id, contentId }));
