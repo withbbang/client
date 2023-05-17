@@ -24,8 +24,14 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   const [password, setPassword] = useState<string>('');
   const [comments, setComments] = useState<string>('');
   const [isSecret, setIsSecret] = useState<string>('N');
+
+  const [reNickName, setReNickName] = useState<string>('');
+  const [rePassword, setRePassword] = useState<string>('');
+  const [reComments, setReComments] = useState<string>('');
+  const [reIsSecret, setReIsSecret] = useState<string>('N');
+
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
-  const [isReComment, setIsReComment] = useState<boolean>(false);
+  const [isReComment, setIsReComment] = useState<number>(-1);
 
   useEffect(() => {
     if (contentId) {

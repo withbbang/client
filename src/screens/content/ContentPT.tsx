@@ -170,73 +170,55 @@ const ContentPT = ({
                 commentList.length > 0 &&
                 commentList.map((comment, idx) => (
                   <>
-                    {isUpdate ? (
-                      <CreateCommentBox
-                        nickName={comment.NICKNAME}
-                        password={password}
-                        isSecret={comment.IS_SECRET}
-                        comments={comment.COMMENTS}
-                        isDoing={isUpdate}
-                        onSetNickName={onSetNickName}
-                        onSetPassword={onSetPassword}
-                        onSetComments={onSetComments}
-                        onSetIsSecret={onSetIsSecret}
-                        onSetIsDoing={onSetIsUpdate}
-                        onCreateUpdateComment={onCreateUpdateComment}
-                      />
-                    ) : (
-                      <div
-                        key={comment.ID}
-                        className={
-                          comment.REF_ID !== null
-                            ? [styles.comment, styles.padding].join(' ')
-                            : styles.comment
-                        }
-                      >
-                        <div className={styles.photo}>
-                          <span>
-                            <SVG
-                              type="user"
-                              width="35px"
-                              height="35px"
-                              fill={isNight ? '#fff' : '#000'}
-                            />
-                          </span>
+                    <div
+                      key={comment.ID}
+                      className={
+                        comment.REF_ID !== null
+                          ? [styles.comment, styles.padding].join(' ')
+                          : styles.comment
+                      }
+                    >
+                      <div className={styles.photo}>
+                        <span>
+                          <SVG
+                            type="user"
+                            width="35px"
+                            height="35px"
+                            fill={isNight ? '#fff' : '#000'}
+                          />
+                        </span>
+                      </div>
+                      <div className={styles.commentContents}>
+                        <div className={styles.topContents}>
+                          <div className={styles.leftContents}>
+                            <strong>{`${comment.NICKNAME}`}</strong>
+                            <span>
+                              &nbsp;&nbsp;|&nbsp;&nbsp;
+                              {`${
+                                comment.UPDATE_DT
+                                  ? comment.UPDATE_DT
+                                  : comment.CREATE_DT
+                              }`}
+                            </span>
+                          </div>
+                          <div className={styles.rightContents}>
+                            <span onClick={() => onSetIsUpdate(!isUpdate)}>
+                              수정
+                            </span>
+                            <span>삭제</span>
+                            <span onClick={() => onSetIsReComment(comment.ID)}>
+                              댓글
+                            </span>
+                          </div>
                         </div>
-                        <div className={styles.commentContents}>
-                          <div className={styles.topContents}>
-                            <div className={styles.leftContents}>
-                              <strong>{`${comment.NICKNAME}`}</strong>
-                              <span>
-                                &nbsp;&nbsp;|&nbsp;&nbsp;
-                                {`${
-                                  comment.UPDATE_DT
-                                    ? comment.UPDATE_DT
-                                    : comment.CREATE_DT
-                                }`}
-                              </span>
-                            </div>
-                            <div className={styles.rightContents}>
-                              <span onClick={() => onSetIsUpdate(!isUpdate)}>
-                                수정
-                              </span>
-                              <span>삭제</span>
-                              <span
-                                onClick={() => onSetIsReComment(!isReComment)}
-                              >
-                                댓글
-                              </span>
-                            </div>
-                          </div>
-                          <div className={styles.bottomContents}>
-                            {/* TODO: api에서부터 암호화된 상태로 가져와야함 */}
-                            {comment.IS_SECRET === 'Y'
-                              ? '비밀 댓글입니다.'
-                              : comment.COMMENTS}
-                          </div>
+                        <div className={styles.bottomContents}>
+                          {/* TODO: api에서부터 암호화된 상태로 가져와야함 */}
+                          {comment.IS_SECRET === 'Y'
+                            ? '비밀 댓글입니다.'
+                            : comment.COMMENTS}
                         </div>
                       </div>
-                    )}
+                    </div>
                     {(commentList[idx + 1] === undefined ||
                       commentList[idx + 1].REF_ID === undefined ||
                       commentList[idx + 1].REF_ID === null) && (
@@ -276,7 +258,7 @@ interface typeContentPT {
   comments: string;
   isSecret: string;
   isUpdate: boolean;
-  isReComment: boolean;
+  isReComment: number;
   isConfirmPopupActive: boolean;
   confirmMessage: string;
   confirmType?: string;
@@ -286,7 +268,7 @@ interface typeContentPT {
   onSetComments: React.Dispatch<React.SetStateAction<string>>;
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
   onSetIsUpdate: React.Dispatch<React.SetStateAction<boolean>>;
-  onSetIsReComment: React.Dispatch<React.SetStateAction<boolean>>;
+  onSetIsReComment: React.Dispatch<React.SetStateAction<number>>;
   onConfirmBtn: (type?: string) => void;
   onCreateUpdateComment: () => void;
 }

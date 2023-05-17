@@ -89,12 +89,12 @@ interface typeCreateCommentBox extends CommonState {
   password: string;
   comments: string;
   isSecret: string;
-  isDoing?: boolean;
+  isDoing?: boolean | number;
   onSetNickName: React.Dispatch<React.SetStateAction<string>>;
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
   onSetComments: React.Dispatch<React.SetStateAction<string>>;
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
-  onSetIsDoing?: React.Dispatch<React.SetStateAction<boolean>>;
+  onSetIsDoing?: React.Dispatch<React.SetStateAction<boolean | number>>;
   onCreateUpdateComment: () => void;
 }
 
