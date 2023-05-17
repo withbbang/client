@@ -15,6 +15,7 @@ import remarkGfm from 'remark-gfm';
 import SVG from 'modules/SVG';
 import { Content, Heart, Comment } from 'modules/types';
 import ConfirmPopup from 'components/confirmPopup/ConfirmPopup';
+import CreateCommentBox from 'components/createCommentBox/CreateCommentBox';
 
 const ContentPT = ({
   loading,
@@ -34,6 +35,7 @@ const ContentPT = ({
   onSetNickName,
   onSetPassword,
   onSetComments,
+  onSetIsSecret,
   onConfirmBtn,
   onCreateUpdateComment
 }: typeContentPT) => {
@@ -216,37 +218,17 @@ const ContentPT = ({
                   </>
                 ))}
             </div>
-            <div className={styles.createBox}>
-              <div className={styles.topContents}>
-                <input
-                  placeholder="NICKNAME"
-                  type="text"
-                  id="nickName"
-                  value={nickName}
-                  onChange={(e) => onSetNickName(e.target.value)}
-                />
-                <input
-                  placeholder="PASSWORD"
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => onSetPassword(e.target.value)}
-                />
-                <label className={styles.secret}>
-                  <input type="checkbox" defaultValue={'N'} value={isSecret} />
-                  &nbsp;Secret
-                </label>
-                <button onClick={onCreateUpdateComment}>Comment !</button>
-              </div>
-              <div className={styles.bottomContents}>
-                <textarea
-                  placeholder="COMMENTS"
-                  id="comments"
-                  value={comments}
-                  onChange={(e) => onSetComments(e.target.value)}
-                />
-              </div>
-            </div>
+            <CreateCommentBox
+              nickName={nickName}
+              password={password}
+              isSecret={isSecret}
+              comments={comments}
+              onSetNickName={onSetNickName}
+              onSetPassword={onSetPassword}
+              onSetComments={onSetComments}
+              onSetIsSecret={onSetIsSecret}
+              onCreateUpdateComment={onCreateUpdateComment}
+            />
           </div>
         </div>
       </div>
