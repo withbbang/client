@@ -7,6 +7,7 @@ import { ContentsState } from 'middlewares/reduxTookits/contentsSlice';
 import ContentPT from './ContentPT';
 import { HeartState } from 'middlewares/reduxTookits/heartSlice';
 import { CommentState } from 'middlewares/reduxTookits/commentSlice';
+import { synchronized } from 'modules/utils';
 
 const ContentCT = (props: typeContentCT): JSX.Element => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   const [reComments, setReComments] = useState<string>('');
   const [reIsSecret, setReIsSecret] = useState<string>('N');
 
-  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const [isUpdate, setIsUpdate] = useState<number>(-1);
   const [isReComment, setIsReComment] = useState<number>(-1);
 
   useEffect(() => {
@@ -38,7 +39,6 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       props.requestContent(props.id, +contentId);
       props.requestHeart(+contentId);
       props.requestComments(+contentId);
-      props.requestPublicKey();
     }
   }, []);
 
@@ -71,30 +71,38 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     switch (type) {
       case 'create':
         if (contentId) {
-          props.publicKey && encrypt.setPublicKey(props.publicKey);
+          synchronized()
+            .then(() => props.requestPublicKey())
+            .then(() => {
+              props.publicKey && encrypt.setPublicKey(props.publicKey);
 
-          let encrypted: string | boolean = '';
-          try {
-            encrypted = encrypt.encrypt(password);
-          } catch (e) {
-            props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
-            return;
-          }
+              let encrypted: string | boolean = '';
+              try {
+                encrypted = encrypt.encrypt(password);
+              } catch (e) {
+                props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
+                return;
+              }
 
-          if (encrypted === false) {
-            props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
-            return;
-          }
+              if (encrypted === false) {
+                props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
+                return;
+              }
 
-          props.requestCreateComment(
-            nickName,
-            encrypted,
-            +contentId,
-            comments,
-            isSecret
-            //refId
-          );
-          props.handleCodeMessage('', '');
+              props.requestCreateComment(
+                nickName,
+                encrypted,
+                +contentId,
+                comments,
+                isSecret
+                //refId
+              );
+              setNickName('');
+              setPassword('');
+              setComments('');
+              setIsSecret('N');
+              props.handleCodeMessage('', '');
+            });
         } else {
           props.handleCodeMessage('EMPTY CONTENT INFO', '컨텐트 정보 부재');
         }

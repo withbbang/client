@@ -169,9 +169,8 @@ const ContentPT = ({
               {Array.isArray(commentList) &&
                 commentList.length > 0 &&
                 commentList.map((comment, idx) => (
-                  <>
+                  <div key={comment.ID}>
                     <div
-                      key={comment.ID}
                       className={
                         comment.REF_ID !== null
                           ? [styles.comment, styles.padding].join(' ')
@@ -192,8 +191,8 @@ const ContentPT = ({
                         <div className={styles.topContents}>
                           <div className={styles.leftContents}>
                             <strong>{`${comment.NICKNAME}`}</strong>
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
                             <span>
-                              &nbsp;&nbsp;|&nbsp;&nbsp;
                               {`${
                                 comment.UPDATE_DT
                                   ? comment.UPDATE_DT
@@ -202,7 +201,7 @@ const ContentPT = ({
                             </span>
                           </div>
                           <div className={styles.rightContents}>
-                            <span onClick={() => onSetIsUpdate(!isUpdate)}>
+                            <span onClick={() => onSetIsUpdate(comment.ID)}>
                               수정
                             </span>
                             <span>삭제</span>
@@ -212,10 +211,7 @@ const ContentPT = ({
                           </div>
                         </div>
                         <div className={styles.bottomContents}>
-                          {/* TODO: api에서부터 암호화된 상태로 가져와야함 */}
-                          {comment.IS_SECRET === 'Y'
-                            ? '비밀 댓글입니다.'
-                            : comment.COMMENTS}
+                          {comment.COMMENTS}
                         </div>
                       </div>
                     </div>
@@ -224,8 +220,37 @@ const ContentPT = ({
                       commentList[idx + 1].REF_ID === null) && (
                       <div className={styles.crossBar} />
                     )}
-                  </>
+                  </div>
                 ))}
+              {(isUpdate > -1 || isReComment > -1) && (
+                <div className={styles.reCommentBox}>
+                  <CreateCommentBox
+                    nickName={nickName}
+                    password={password}
+                    isSecret={isSecret}
+                    comments={comments}
+                    isDoing={
+                      isUpdate > -1
+                        ? isUpdate
+                        : isReComment > -1
+                        ? isReComment
+                        : undefined
+                    }
+                    onSetNickName={onSetNickName}
+                    onSetPassword={onSetPassword}
+                    onSetComments={onSetComments}
+                    onSetIsSecret={onSetIsSecret}
+                    onSetIsDoing={
+                      isUpdate > -1
+                        ? onSetIsUpdate
+                        : isReComment > -1
+                        ? onSetIsReComment
+                        : undefined
+                    }
+                    onCreateUpdateComment={onCreateUpdateComment}
+                  />
+                </div>
+              )}
             </div>
             <CreateCommentBox
               nickName={nickName}
@@ -257,7 +282,7 @@ interface typeContentPT {
   password: string;
   comments: string;
   isSecret: string;
-  isUpdate: boolean;
+  isUpdate: number;
   isReComment: number;
   isConfirmPopupActive: boolean;
   confirmMessage: string;
@@ -267,7 +292,7 @@ interface typeContentPT {
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
   onSetComments: React.Dispatch<React.SetStateAction<string>>;
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
-  onSetIsUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  onSetIsUpdate: React.Dispatch<React.SetStateAction<number>>;
   onSetIsReComment: React.Dispatch<React.SetStateAction<number>>;
   onConfirmBtn: (type?: string) => void;
   onCreateUpdateComment: () => void;
