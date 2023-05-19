@@ -28,6 +28,10 @@ const ContentPT = ({
   password,
   comments,
   isSecret,
+  reNickName,
+  rePassword,
+  reIsSecret,
+  reComments,
   isReComment,
   isConfirmPopupActive,
   confirmMessage,
@@ -37,6 +41,10 @@ const ContentPT = ({
   onSetPassword,
   onSetComments,
   onSetIsSecret,
+  onSetReNickName,
+  onSetRePassword,
+  onSetReComments,
+  onSetReIsSecret,
   onSetIsReComment,
   onConfirmBtn,
   onCreateComment,
@@ -208,7 +216,17 @@ const ContentPT = ({
                               {/* 수정/삭제 */}
                               삭제
                             </span>
-                            <span onClick={() => onSetIsReComment(comment.ID)}>
+                            <span
+                              onClick={() =>
+                                onSetIsReComment(
+                                  comment.REF_ID !== undefined &&
+                                    comment.REF_ID !== null &&
+                                    comment.REF_ID > -1
+                                    ? comment.REF_ID
+                                    : comment.ID
+                                )
+                              }
+                            >
                               댓글
                             </span>
                           </div>
@@ -223,27 +241,29 @@ const ContentPT = ({
                       commentList[idx + 1].REF_ID === null) && (
                       <div className={styles.crossBar} />
                     )}
+                    {isReComment === comment.ID && (
+                      <div className={styles.reCommentBoxWrap}>
+                        <div className={styles.reCommentBox}>
+                          <CreateCommentBox
+                            nickName={reNickName}
+                            password={rePassword}
+                            isSecret={reIsSecret}
+                            comments={reComments}
+                            isDoing={isReComment > -1 ? isReComment : undefined}
+                            onSetNickName={onSetReNickName}
+                            onSetPassword={onSetRePassword}
+                            onSetComments={onSetReComments}
+                            onSetIsSecret={onSetReIsSecret}
+                            onSetIsDoing={
+                              isReComment > -1 ? onSetIsReComment : undefined
+                            }
+                            onCreateComment={onCreateComment}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
-              {isReComment > -1 && (
-                <div className={styles.reCommentBox}>
-                  <CreateCommentBox
-                    nickName={nickName}
-                    password={password}
-                    isSecret={isSecret}
-                    comments={comments}
-                    isDoing={isReComment > -1 ? isReComment : undefined}
-                    onSetNickName={onSetNickName}
-                    onSetPassword={onSetPassword}
-                    onSetComments={onSetComments}
-                    onSetIsSecret={onSetIsSecret}
-                    onSetIsDoing={
-                      isReComment > -1 ? onSetIsReComment : undefined
-                    }
-                    onCreateComment={onCreateComment}
-                  />
-                </div>
-              )}
             </div>
             <CreateCommentBox
               nickName={nickName}
@@ -275,6 +295,10 @@ interface typeContentPT {
   password: string;
   comments: string;
   isSecret: string;
+  reNickName: string;
+  rePassword: string;
+  reComments: string;
+  reIsSecret: string;
   isReComment: number;
   isConfirmPopupActive: boolean;
   confirmMessage: string;
@@ -284,7 +308,11 @@ interface typeContentPT {
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
   onSetComments: React.Dispatch<React.SetStateAction<string>>;
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
-  onSetIsReComment: React.Dispatch<React.SetStateAction<number>>;
+  onSetReNickName: React.Dispatch<React.SetStateAction<string>>;
+  onSetRePassword: React.Dispatch<React.SetStateAction<string>>;
+  onSetReComments: React.Dispatch<React.SetStateAction<string>>;
+  onSetReIsSecret: React.Dispatch<React.SetStateAction<string>>;
+  onSetIsReComment: (commentId: number) => void;
   onConfirmBtn: (type?: string) => void;
   onCreateComment: () => void;
   onOpenUpateDeleteWindow: (commentId: number) => void;

@@ -93,13 +93,22 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
                 encrypted,
                 +contentId,
                 comments,
-                isSecret
-                //refId
+                isSecret,
+                isReComment > -1 ? isReComment : undefined
               );
-              setNickName('');
-              setPassword('');
-              setComments('');
-              setIsSecret('N');
+
+              if (isReComment > -1) {
+                setReNickName('');
+                setRePassword('');
+                setReComments('');
+                setReIsSecret('N');
+                setIsReComment(-1);
+              } else {
+                setNickName('');
+                setPassword('');
+                setComments('');
+                setIsSecret('N');
+              }
               props.handleCodeMessage('', '');
             });
         } else {
@@ -158,6 +167,21 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     );
   };
 
+  // 코멘트 대댓글 달기 팝업 띄웠을 경우 스크롤 방지
+  const handleSetIsReComment = (commentId: number) => {
+    if (commentId > -1) {
+      document.body.style.overflow = 'hidden';
+      setReNickName('');
+      setRePassword('');
+      setReComments('');
+      setReIsSecret('N');
+      setIsReComment(commentId);
+    } else {
+      document.body.style.overflow = '';
+      setIsReComment(-1);
+    }
+  };
+
   return (
     <ContentPT
       loading={props.isFetching}
@@ -170,6 +194,10 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       password={password}
       comments={comments}
       isSecret={isSecret}
+      reNickName={reNickName}
+      rePassword={rePassword}
+      reComments={reComments}
+      reIsSecret={reIsSecret}
       isReComment={isReComment}
       isConfirmPopupActive={isConfirmPopupActive}
       confirmMessage={confirmMessage}
@@ -179,7 +207,11 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       onSetPassword={setPassword}
       onSetComments={setComments}
       onSetIsSecret={setIsSecret}
-      onSetIsReComment={setIsReComment}
+      onSetReNickName={setReNickName}
+      onSetRePassword={setRePassword}
+      onSetReComments={setReComments}
+      onSetReIsSecret={setReIsSecret}
+      onSetIsReComment={handleSetIsReComment}
       onConfirmBtn={handleConfirmBtn}
       onCreateComment={handleCreateComment}
       onOpenUpateDeleteWindow={handleOpenUpateDeleteWindow}
