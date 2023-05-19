@@ -34,14 +34,15 @@ const CommentManagePT = ({
         }
       >
         <div className={styles.innerWrap}>
-          <div className={styles.header}>댓글 수정/삭제</div>
+          {/* <div className={styles.header}>댓글 수정/삭제</div> */}
+          <div className={styles.header}>댓글 삭제</div>
           <div className={styles.tap}>
-            <span
+            {/* <span
               className={type === 'update' ? styles.active : ''}
               onClick={() => onSetType('update')}
             >
               수정
-            </span>
+            </span> */}
             <span
               className={type === 'delete' ? styles.active : ''}
               onClick={() => onSetType('delete')}

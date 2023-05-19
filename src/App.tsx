@@ -21,7 +21,7 @@ const App = (): JSX.Element => {
         <Route path="/log" element={<Log />} />
         <Route path="/search" element={<Search />} />
         <Route path="/comment/manage/:commentId" element={<CommentManage />} />
-        <Route path="/comment/update/:commentId" element={<CommentUpdate />} />
+        {/* <Route path="/comment/update/:commentId" element={<CommentUpdate />} /> */}
         <Route path="/admin/category-manage" element={<CategoryManage />} />
         <Route path="/admin/contents" element={<Contents />} />
         <Route path="/admin/content-manage" element={<ContentManage />} />

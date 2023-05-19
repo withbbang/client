@@ -205,7 +205,8 @@ const ContentPT = ({
                                 onOpenUpateDeleteWindow(comment.ID)
                               }
                             >
-                              수정/삭제
+                              {/* 수정/삭제 */}
+                              삭제
                             </span>
                             <span onClick={() => onSetIsReComment(comment.ID)}>
                               댓글

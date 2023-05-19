@@ -9,7 +9,7 @@ const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
   const navigate = useNavigate();
   const encrypt = new JSEncrypt();
   const { commentId } = useParams();
-  const [type, setType] = useState<string>('update');
+  const [type, setType] = useState<string>('delete');
 
   const [confirmMessage, setConfirmMessage] = useState<string>('');
   const [confirmType, setConfirmType] = useState<string | undefined>();
