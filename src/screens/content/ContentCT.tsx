@@ -31,7 +31,6 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   const [reComments, setReComments] = useState<string>('');
   const [reIsSecret, setReIsSecret] = useState<string>('N');
 
-  const [isUpdate, setIsUpdate] = useState<number>(-1);
   const [isReComment, setIsReComment] = useState<number>(-1);
 
   useEffect(() => {
@@ -127,7 +126,7 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     }
   };
 
-  const handleCreateUpdateComment = () => {
+  const handleCreateComment = () => {
     // if (e !== undefined && e.key !== 'Enter') {
     //   return;
     // }
@@ -151,6 +150,14 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     handleConfirmPopup('create');
   };
 
+  const handleOpenUpateDeleteWindow = (commentId: number) => {
+    window.open(
+      '/comment/manage/' + commentId,
+      '_blank',
+      'width=500, height=400'
+    );
+  };
+
   return (
     <ContentPT
       loading={props.isFetching}
@@ -163,7 +170,6 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       password={password}
       comments={comments}
       isSecret={isSecret}
-      isUpdate={isUpdate}
       isReComment={isReComment}
       isConfirmPopupActive={isConfirmPopupActive}
       confirmMessage={confirmMessage}
@@ -173,10 +179,10 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       onSetPassword={setPassword}
       onSetComments={setComments}
       onSetIsSecret={setIsSecret}
-      onSetIsUpdate={setIsUpdate}
       onSetIsReComment={setIsReComment}
       onConfirmBtn={handleConfirmBtn}
-      onCreateUpdateComment={handleCreateUpdateComment}
+      onCreateComment={handleCreateComment}
+      onOpenUpateDeleteWindow={handleOpenUpateDeleteWindow}
     />
   );
 };

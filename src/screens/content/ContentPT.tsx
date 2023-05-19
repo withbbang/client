@@ -28,7 +28,6 @@ const ContentPT = ({
   password,
   comments,
   isSecret,
-  isUpdate,
   isReComment,
   isConfirmPopupActive,
   confirmMessage,
@@ -38,10 +37,10 @@ const ContentPT = ({
   onSetPassword,
   onSetComments,
   onSetIsSecret,
-  onSetIsUpdate,
   onSetIsReComment,
   onConfirmBtn,
-  onCreateUpdateComment
+  onCreateComment,
+  onOpenUpateDeleteWindow
 }: typeContentPT) => {
   return (
     <>
@@ -201,10 +200,13 @@ const ContentPT = ({
                             </span>
                           </div>
                           <div className={styles.rightContents}>
-                            <span onClick={() => onSetIsUpdate(comment.ID)}>
-                              수정
+                            <span
+                              onClick={() =>
+                                onOpenUpateDeleteWindow(comment.ID)
+                              }
+                            >
+                              수정/삭제
                             </span>
-                            <span>삭제</span>
                             <span onClick={() => onSetIsReComment(comment.ID)}>
                               댓글
                             </span>
@@ -222,32 +224,22 @@ const ContentPT = ({
                     )}
                   </div>
                 ))}
-              {(isUpdate > -1 || isReComment > -1) && (
+              {isReComment > -1 && (
                 <div className={styles.reCommentBox}>
                   <CreateCommentBox
                     nickName={nickName}
                     password={password}
                     isSecret={isSecret}
                     comments={comments}
-                    isDoing={
-                      isUpdate > -1
-                        ? isUpdate
-                        : isReComment > -1
-                        ? isReComment
-                        : undefined
-                    }
+                    isDoing={isReComment > -1 ? isReComment : undefined}
                     onSetNickName={onSetNickName}
                     onSetPassword={onSetPassword}
                     onSetComments={onSetComments}
                     onSetIsSecret={onSetIsSecret}
                     onSetIsDoing={
-                      isUpdate > -1
-                        ? onSetIsUpdate
-                        : isReComment > -1
-                        ? onSetIsReComment
-                        : undefined
+                      isReComment > -1 ? onSetIsReComment : undefined
                     }
-                    onCreateUpdateComment={onCreateUpdateComment}
+                    onCreateComment={onCreateComment}
                   />
                 </div>
               )}
@@ -261,7 +253,7 @@ const ContentPT = ({
               onSetPassword={onSetPassword}
               onSetComments={onSetComments}
               onSetIsSecret={onSetIsSecret}
-              onCreateUpdateComment={onCreateUpdateComment}
+              onCreateComment={onCreateComment}
             />
           </div>
         </div>
@@ -282,7 +274,6 @@ interface typeContentPT {
   password: string;
   comments: string;
   isSecret: string;
-  isUpdate: number;
   isReComment: number;
   isConfirmPopupActive: boolean;
   confirmMessage: string;
@@ -292,10 +283,10 @@ interface typeContentPT {
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
   onSetComments: React.Dispatch<React.SetStateAction<string>>;
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
-  onSetIsUpdate: React.Dispatch<React.SetStateAction<number>>;
   onSetIsReComment: React.Dispatch<React.SetStateAction<number>>;
   onConfirmBtn: (type?: string) => void;
-  onCreateUpdateComment: () => void;
+  onCreateComment: () => void;
+  onOpenUpateDeleteWindow: (commentId: number) => void;
 }
 
 export default ContentPT;

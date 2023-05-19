@@ -25,7 +25,13 @@ const commentSlice = createSlice({
     successCreateComment(state: CommentState, action) {
       state.comments = action.payload.comments;
     },
-    failCreateComment(state: CommentState, action) {}
+    failCreateComment(state: CommentState, action) {},
+    requestUpdateComment(state: CommentState, action) {},
+    successUpdateComment(state: CommentState, action) {},
+    failUpdateComment(state: CommentState, action) {},
+    requestDeleteComment(state: CommentState, action) {},
+    successDeleteComment(state: CommentState, action) {},
+    failDeleteComment(state: CommentState, action) {}
   }
 });
 
@@ -35,7 +41,13 @@ export const {
   failComments,
   requestCreateComment,
   successCreateComment,
-  failCreateComment
+  failCreateComment,
+  requestUpdateComment,
+  successUpdateComment,
+  failUpdateComment,
+  requestDeleteComment,
+  successDeleteComment,
+  failDeleteComment
 } = commentSlice.actions;
 
 export const commentExtraReducers = {
@@ -75,6 +87,48 @@ export const commentExtraReducers = {
     state.message = action.payload.message;
   },
   'comment/failCreateComment': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'comment/requestUpdateComment': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'comment/successUpdateComment': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'comment/failUpdateComment': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = false;
+    state.isFail = true;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'comment/requestDeleteComment': (state: CommonState) => {
+    state.isFetching = true;
+    state.isSuccess = false;
+    state.isFail = false;
+    state.code = '';
+    state.message = '';
+  },
+  'comment/successDeleteComment': (state: CommonState, action: any) => {
+    state.isFetching = false;
+    state.isSuccess = true;
+    state.isFail = false;
+    state.code = action.payload.code;
+    state.message = action.payload.message;
+  },
+  'comment/failDeleteComment': (state: CommonState, action: any) => {
     state.isFetching = false;
     state.isSuccess = false;
     state.isFail = true;

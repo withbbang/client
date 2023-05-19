@@ -27,7 +27,7 @@ const CreateCommentBox = ({
   onSetComments,
   onSetIsSecret,
   onSetIsDoing,
-  onCreateUpdateComment
+  onCreateComment
 }: typeCreateCommentBox): JSX.Element => {
   return (
     <>
@@ -64,7 +64,7 @@ const CreateCommentBox = ({
               Cancel
             </button>
           )}
-          <button onClick={onCreateUpdateComment}>Comment !</button>
+          <button onClick={onCreateComment}>Comment !</button>
         </div>
         <div className={styles.bottomContents}>
           <textarea
@@ -90,7 +90,7 @@ interface typeCreateCommentBox extends CommonState {
   onSetComments: React.Dispatch<React.SetStateAction<string>>;
   onSetIsSecret: React.Dispatch<React.SetStateAction<string>>;
   onSetIsDoing?: React.Dispatch<React.SetStateAction<number>>;
-  onCreateUpdateComment: () => void;
+  onCreateComment: () => void;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCommentBox);

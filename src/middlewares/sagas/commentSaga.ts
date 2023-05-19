@@ -6,12 +6,20 @@ import {
   failComments,
   requestCreateComment,
   successCreateComment,
-  failCreateComment
+  failCreateComment,
+  requestUpdateComment,
+  successUpdateComment,
+  failUpdateComment,
+  requestDeleteComment,
+  successDeleteComment,
+  failDeleteComment
 } from 'middlewares/reduxTookits/commentSlice';
 
 export function* commentSaga() {
   yield takeEvery(requestComments.type, handleGetComments);
   yield takeEvery(requestCreateComment.type, handlePostCreateComment);
+  yield takeEvery(requestUpdateComment.type, handlePostUpdateComment);
+  yield takeEvery(requestDeleteComment.type, handlePostDeleteComment);
 }
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
@@ -34,6 +42,24 @@ function* handlePostCreateComment(data: any) {
   }
 }
 
+function* handlePostUpdateComment(data: any) {
+  try {
+    const res: Generator = yield call(postUpdateComment, data);
+    yield put(successUpdateComment(res));
+  } catch (error: any) {
+    yield put(failUpdateComment(error));
+  }
+}
+
+function* handlePostDeleteComment(data: any) {
+  try {
+    const res: Generator = yield call(postDeleteComment, data);
+    yield put(successDeleteComment(res));
+  } catch (error: any) {
+    yield put(failDeleteComment(error));
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -46,4 +72,12 @@ async function getComments(data: any): Promise<any> {
 
 async function postCreateComment(data: any): Promise<any> {
   return postAPI('/server/common/create-comment', data);
+}
+
+async function postUpdateComment(data: any): Promise<any> {
+  return postAPI('/server/common/update-comment', data);
+}
+
+async function postDeleteComment(data: any): Promise<any> {
+  return postAPI('/server/common/delete-comment', data);
 }
