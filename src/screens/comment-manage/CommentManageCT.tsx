@@ -97,6 +97,7 @@ const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
 
       setPassword('');
       props.handleCodeMessage('', '');
+      window.close();
     } else {
       props.handleCodeMessage('EMPTY COMMENT INFO', '코멘트 정보 부재');
     }
