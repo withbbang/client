@@ -165,4 +165,36 @@ function deleteAPI(url: string, { payload }: any = {}): Promise<any> {
   });
 }
 
-export { getAPI, postAPI, putAPI, deleteAPI };
+/**
+ * 리다이렉트용 POST API
+ * @param {string} url 요청 URL
+ * @param {any} payload 요청 DATA
+ * @returns {Promise<any>}
+ */
+function redirectPostAPI(url: string, payload: any): void {
+  console.debug('parameters: ', payload);
+  fetch(url, {
+    method: 'POST',
+    // mode: "no-cors",
+    redirect: 'follow',
+    headers: handleSetHeaders(),
+    body: JSON.stringify(payload)
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      } else {
+        if (window.confirm('오류 발생!')) {
+          window.close();
+        }
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      if (window.confirm('오류 발생!')) {
+        window.close();
+      }
+    });
+}
+
+export { getAPI, postAPI, putAPI, deleteAPI, redirectPostAPI };

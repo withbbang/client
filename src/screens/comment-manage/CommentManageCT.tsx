@@ -3,7 +3,7 @@ import { JSEncrypt } from 'jsencrypt';
 import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import CommentManagePT from './CommentManagePT';
-import { synchronized } from 'modules/utils';
+import { redirectPostAPI } from 'modules/apis';
 
 const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
   const navigate = useNavigate();
@@ -23,12 +23,17 @@ const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
       if (window.confirm('선택된 코멘트가 없습니다.')) {
         window.close();
       }
+    } else {
+      props.requestPublicKey();
     }
-  });
+  }, []);
 
   const handleConfirmPopup = (type: string) => {
     setConfirmType(type);
     switch (type) {
+      case 'update':
+        handleSynchronize(type);
+        break;
       case 'delete':
         setConfirmMessage('삭제하시겠습니까?');
         setIsConfirmPopupActive(!isConfirmPopupActive);
@@ -44,39 +49,14 @@ const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
     setIsConfirmPopupActive(!isConfirmPopupActive);
     switch (type) {
       case 'delete':
-        if (commentId) {
-          synchronized()
-            .then(() => props.requestPublicKey())
-            .then(() => {
-              props.publicKey && encrypt.setPublicKey(props.publicKey);
-
-              let encrypted: string | boolean = '';
-              try {
-                encrypted = encrypt.encrypt(password);
-              } catch (e) {
-                props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
-                return;
-              }
-
-              if (encrypted === false) {
-                props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
-                return;
-              }
-
-              props.requestDeleteComment(+commentId, encrypted);
-              setPassword('');
-              props.handleCodeMessage('', '');
-            });
-        } else {
-          props.handleCodeMessage('EMPTY COMMENT INFO', '코멘트 정보 부재');
-        }
+        handleSynchronize(type);
         break;
       default:
         break;
     }
   };
 
-  const handleDeleteComment = (type: string) => {
+  const handleUpdateDeleteComment = (type: string) => {
     if (!password) {
       props.handleCodeMessage('EMPTY PASSWORD', 'PASSWORD을 입력해주세요.');
       return;
@@ -87,6 +67,39 @@ const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
 
   const handleCancel = () => {
     window.close();
+  };
+
+  const handleSynchronize = (type: string) => {
+    if (commentId) {
+      props.publicKey && encrypt.setPublicKey(props.publicKey);
+
+      let encrypted: string | boolean = '';
+      try {
+        encrypted = encrypt.encrypt(password);
+      } catch (e) {
+        props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
+        return;
+      }
+
+      if (encrypted === false) {
+        props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
+        return;
+      }
+
+      if (type === 'update') {
+        redirectPostAPI('/server/common/update-comment-page', {
+          commentId: +commentId,
+          password: encrypted
+        });
+      } else if (type === 'delete') {
+        props.requestDeleteComment(+commentId, encrypted);
+      }
+
+      setPassword('');
+      props.handleCodeMessage('', '');
+    } else {
+      props.handleCodeMessage('EMPTY COMMENT INFO', '코멘트 정보 부재');
+    }
   };
 
   return (
@@ -102,7 +115,7 @@ const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
       onSetPassword={setPassword}
       onConfirmBtn={handleConfirmBtn}
       onCancel={handleCancel}
-      onDeleteComment={handleDeleteComment}
+      onUpdateDeleteComment={handleUpdateDeleteComment}
     />
   );
 };

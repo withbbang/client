@@ -16,7 +16,7 @@ const CommentManagePT = ({
   onSetPassword,
   onConfirmBtn,
   onCancel,
-  onDeleteComment
+  onUpdateDeleteComment
 }: typeCommentManagePT) => {
   return (
     <>
@@ -60,7 +60,7 @@ const CommentManagePT = ({
             />
             <div className={styles.buttons}>
               <button onClick={onCancel}>취소</button>
-              <button onClick={() => onDeleteComment(type)}>확인</button>
+              <button onClick={() => onUpdateDeleteComment(type)}>확인</button>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ interface typeCommentManagePT {
   onSetPassword: React.Dispatch<React.SetStateAction<string>>;
   onConfirmBtn: (type?: string) => void;
   onCancel: () => void;
-  onDeleteComment: (type: string) => void;
+  onUpdateDeleteComment: (type: string) => void;
 }
 
 export default CommentManagePT;
