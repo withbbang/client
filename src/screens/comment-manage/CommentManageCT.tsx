@@ -92,12 +92,12 @@ const CommentManageCT = (props: typeCommentManageCT): JSX.Element => {
           password: encrypted
         });
       } else if (type === 'delete') {
+        //TODO: 댓글 삭제 완료 후 창 닫히도록 구현 필요
         props.requestDeleteComment(+commentId, encrypted);
       }
 
       setPassword('');
       props.handleCodeMessage('', '');
-      window.close();
     } else {
       props.handleCodeMessage('EMPTY COMMENT INFO', '코멘트 정보 부재');
     }
