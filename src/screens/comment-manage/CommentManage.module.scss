@@ -99,5 +99,33 @@
   }
 
   &.night {
+    @include background($dark);
+
+    .innerWrap {
+      @include font($light);
+
+      .header {
+        @include font-background($light, $less-dark);
+      }
+
+      .tap {
+        .active {
+          @include background($less-dark);
+        }
+      }
+
+      .content {
+        > input,
+        button {
+          @include font-background($light, $more-dark);
+        }
+
+        > input:focus,
+        button:hover {
+          border: solid 1px rgb(125, 125, 125);
+          @include boxShadow(4px 4px 2px 1px rgba(255, 255, 255, 0.2));
+        }
+      }
+    }
   }
 }
