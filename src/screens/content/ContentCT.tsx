@@ -37,7 +37,7 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
     if (contentId) {
       props.requestContent(props.id, +contentId);
       props.requestHeart(+contentId);
-      props.requestComments(+contentId);
+      props.requestComments(props.id, +contentId);
     }
   }, []);
 
@@ -230,7 +230,7 @@ interface typeContentCT
   requestContent: (id?: string, contentId?: number) => void;
   requestHeart: (contentId?: number) => void;
   requestSetHeart: (contentId?: number) => void;
-  requestComments: (contentId?: number) => void;
+  requestComments: (id?: string, contentId?: number) => void;
   requestCreateComment: (
     nickName: string,
     password: string,

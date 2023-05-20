@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { getAPI, postAPI } from 'modules/apis';
+import { postAPI } from 'modules/apis';
 import {
   requestComments,
   successComments,
@@ -16,7 +16,7 @@ import {
 } from 'middlewares/reduxTookits/commentSlice';
 
 export function* commentSaga() {
-  yield takeEvery(requestComments.type, handleGetComments);
+  yield takeEvery(requestComments.type, handlePostComments);
   yield takeEvery(requestCreateComment.type, handlePostCreateComment);
   yield takeEvery(requestUpdateComment.type, handlePostUpdateComment);
   yield takeEvery(requestDeleteComment.type, handlePostDeleteComment);
@@ -24,9 +24,9 @@ export function* commentSaga() {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////        process         ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-function* handleGetComments(data: any) {
+function* handlePostComments(data: any) {
   try {
-    const res: Generator = yield call(getComments, data);
+    const res: Generator = yield call(postComments, data);
     yield put(successComments(res));
   } catch (error: any) {
     yield put(failComments(error));
@@ -63,11 +63,8 @@ function* handlePostDeleteComment(data: any) {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////      API function      ///////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-async function getComments(data: any): Promise<any> {
-  const {
-    payload: { contentId }
-  } = data;
-  return getAPI(`/server/common/comments/${contentId}`);
+async function postComments(data: any): Promise<any> {
+  return postAPI('/server/common/comments/', data);
 }
 
 async function postCreateComment(data: any): Promise<any> {

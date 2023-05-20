@@ -52,8 +52,8 @@ const mapDispatchToProps = (dispatch: (actionFunction: Action<any>) => any) => {
     requestSetHeart: (contentId?: number): void => {
       dispatch(requestSetHeart({ contentId }));
     },
-    requestComments: (contentId?: number): void => {
-      dispatch(requestComments({ contentId }));
+    requestComments: (id?: string, contentId?: number): void => {
+      dispatch(requestComments({ id, contentId }));
     },
     requestCreateComment: (
       nickName: string,
