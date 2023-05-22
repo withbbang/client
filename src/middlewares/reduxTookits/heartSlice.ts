@@ -45,15 +45,11 @@ export const heartExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'heart/successHeart': (state: CommonState, action: any) => {
+  'heart/successHeart': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'heart/failHeart': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -66,15 +62,11 @@ export const heartExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'heart/successSetHeart': (state: CommonState, action: any) => {
+  'heart/successSetHeart': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'heart/failSetHeart': (state: CommonState, action: any) => {
     state.isFetching = false;

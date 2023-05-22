@@ -6,6 +6,8 @@ import { contentsExtraReducers } from './contentsSlice';
 import { logExtraReducers } from './logSlice';
 import { signExtraReducers } from './signSlice';
 import { contentManageExtraReducers } from './contentManageSlice';
+import { heartExtraReducers } from './heartSlice';
+import { commentExtraReducers } from './commentSlice';
 
 export interface CommonState {
   code?: string;
@@ -38,15 +40,11 @@ const commonSlice = createSlice({
   initialState,
   reducers: {
     requestPublicKey(state: CommonState): void {
-      state.code = '';
-      state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successPublicKey(state: CommonState, action): void {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
@@ -61,15 +59,11 @@ const commonSlice = createSlice({
       state.publicKey = '';
     },
     requestVisitCount(state: CommonState): void {
-      state.code = '';
-      state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successVisitCount(state: CommonState, action): void {
-      state.code = action.payload.code;
-      state.message = '';
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
@@ -86,15 +80,11 @@ const commonSlice = createSlice({
       state.total = 0;
     },
     requestSideBarCategory(state: CommonState, action) {
-      state.code = '';
-      state.message = '';
       state.isFetching = true;
       state.isSuccess = false;
       state.isFail = false;
     },
     successSideBarCategory(state: CommonState, action) {
-      state.code = action.payload.code;
-      state.message = action.payload.message;
       state.isFetching = false;
       state.isSuccess = true;
       state.isFail = false;
@@ -128,7 +118,9 @@ const commonSlice = createSlice({
     ...contentsExtraReducers,
     ...logExtraReducers,
     ...signExtraReducers,
-    ...contentManageExtraReducers
+    ...contentManageExtraReducers,
+    ...heartExtraReducers,
+    ...commentExtraReducers
     // ...add others
   }
 });

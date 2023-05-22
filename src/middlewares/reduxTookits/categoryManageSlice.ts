@@ -67,15 +67,11 @@ export const categoryManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
   'categoryManage/successCategory': (state: CommonState, action: any) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'categoryManage/failCategory': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -88,15 +84,11 @@ export const categoryManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
   'categoryManage/successCreateCategory': (state: CommonState, action: any) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'categoryManage/failCreateCategory': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -109,18 +101,11 @@ export const categoryManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'categoryManage/successSingleUpdateCategory': (
-    state: CommonState,
-    action: any
-  ) => {
+  'categoryManage/successSingleUpdateCategory': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'categoryManage/failSingleUpdateCategory': (
     state: CommonState,
@@ -136,18 +121,11 @@ export const categoryManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'categoryManage/successMultiUpdateCategory': (
-    state: CommonState,
-    action: any
-  ) => {
+  'categoryManage/successMultiUpdateCategory': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'categoryManage/failMultiUpdateCategory': (
     state: CommonState,
@@ -163,18 +141,11 @@ export const categoryManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'categoryManage/successDeleteRestoreCategory': (
-    state: CommonState,
-    action: any
-  ) => {
+  'categoryManage/successDeleteRestoreCategory': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'categoryManage/failDeleteRestoreCategory': (
     state: CommonState,

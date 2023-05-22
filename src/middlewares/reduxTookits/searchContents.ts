@@ -35,15 +35,11 @@ export const contentsExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'searchContents/successSearchContents': (state: CommonState, action: any) => {
+  'searchContents/successSearchContents': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'searchContents/failSearchContents': (state: CommonState, action: any) => {
     state.isFetching = false;

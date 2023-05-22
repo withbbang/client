@@ -44,15 +44,11 @@ export const contentsExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'contents/successContents': (state: CommonState, action: any) => {
+  'contents/successContents': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'contents/failContents': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -65,15 +61,11 @@ export const contentsExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'contents/successContent': (state: CommonState, action: any) => {
+  'contents/successContent': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'contents/failContent': (state: CommonState, action: any) => {
     state.isFetching = false;

@@ -32,15 +32,11 @@ export const authorityExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
   'authority/successAuthority': (state: CommonState, action: any) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'authority/failAuthority': (state: CommonState, action: any) => {
     state.isFetching = false;

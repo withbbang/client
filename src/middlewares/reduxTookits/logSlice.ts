@@ -80,15 +80,11 @@ export const logExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'log/successLogIn': (state: CommonState, action: any) => {
+  'log/successLogIn': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'log/failLogIn': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -101,15 +97,11 @@ export const logExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'log/successLogOut': (state: CommonState, action: any) => {
+  'log/successLogOut': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'log/failLogOut': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -122,15 +114,11 @@ export const logExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'log/successForceLogOut': (state: CommonState, action: any) => {
+  'log/successForceLogOut': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'log/failForceLogOut': (state: CommonState, action: any) => {
     state.isFetching = false;

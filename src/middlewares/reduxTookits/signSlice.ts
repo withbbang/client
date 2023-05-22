@@ -53,15 +53,11 @@ export const signExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'sign/successSignUp': (state: CommonState, action: any) => {
+  'sign/successSignUp': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'sign/failSignUp': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -74,15 +70,11 @@ export const signExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'sign/successSignOut': (state: CommonState, action: any) => {
+  'sign/successSignOut': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'sign/failSignOut': (state: CommonState, action: any) => {
     state.isFetching = false;

@@ -67,15 +67,11 @@ export const contentManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'contentManage/successContents': (state: CommonState, action: any) => {
+  'contentManage/successContents': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'contentManage/failContents': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -88,15 +84,11 @@ export const contentManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'contentManage/successContent': (state: CommonState, action: any) => {
+  'contentManage/successContent': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'contentManage/failContent': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -109,15 +101,11 @@ export const contentManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'contentManage/successCreateContent': (state: CommonState, action: any) => {
+  'contentManage/successCreateContent': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'contentManage/failCreateContent': (state: CommonState, action: any) => {
     state.isFetching = false;
@@ -130,18 +118,11 @@ export const contentManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'contentManage/successDeleteRestoreContent': (
-    state: CommonState,
-    action: any
-  ) => {
+  'contentManage/successDeleteRestoreContent': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'contentManage/failDeleteRestoreContent': (
     state: CommonState,
@@ -157,15 +138,11 @@ export const contentManageExtraReducers = {
     state.isFetching = true;
     state.isSuccess = false;
     state.isFail = false;
-    state.code = '';
-    state.message = '';
   },
-  'contentManage/successUpdateContent': (state: CommonState, action: any) => {
+  'contentManage/successUpdateContent': (state: CommonState) => {
     state.isFetching = false;
     state.isSuccess = true;
     state.isFail = false;
-    state.code = action.payload.code;
-    state.message = action.payload.message;
   },
   'contentManage/failUpdateContent': (state: CommonState, action: any) => {
     state.isFetching = false;
