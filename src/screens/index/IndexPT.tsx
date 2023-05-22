@@ -6,6 +6,7 @@ import Card from 'components/card/Card';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import ErrorPopup from 'components/errorPopup';
+import { Content } from 'modules/types';
 
 const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
   return (
@@ -21,7 +22,7 @@ const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
       >
         {Array.isArray(items) && items.length > 0 ? (
           <div className={styles.innerWrap}>
-            {items.map((item: any, idx: number) => (
+            {items.map((item: Content, idx: number) => (
               <Card
                 key={idx}
                 idx={idx}
@@ -46,7 +47,7 @@ const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
 interface typeIndexPT {
   loading?: boolean;
   isNight?: boolean;
-  items?: Array<any>;
+  items?: Array<Content>;
 }
 
 export default IndexPT;
