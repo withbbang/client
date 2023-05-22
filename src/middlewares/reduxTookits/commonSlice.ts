@@ -6,6 +6,7 @@ import { contentsExtraReducers } from './contentsSlice';
 import { logExtraReducers } from './logSlice';
 import { signExtraReducers } from './signSlice';
 import { contentManageExtraReducers } from './contentManageSlice';
+import { searchContentsExtraReducers } from './searchContents';
 import { heartExtraReducers } from './heartSlice';
 import { commentExtraReducers } from './commentSlice';
 
@@ -119,6 +120,7 @@ const commonSlice = createSlice({
     ...logExtraReducers,
     ...signExtraReducers,
     ...contentManageExtraReducers,
+    ...searchContentsExtraReducers,
     ...heartExtraReducers,
     ...commentExtraReducers
     // ...add others

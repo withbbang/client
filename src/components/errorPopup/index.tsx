@@ -6,7 +6,6 @@ import {
 import { connect } from 'react-redux';
 import { Action } from 'redux';
 import { SignState } from 'middlewares/reduxTookits/signSlice';
-import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
 import {
   CommonState,
   handleCodeMessage
@@ -15,12 +14,11 @@ import ErrorPopupCT from './ErrorPopupCT';
 
 const mapStateToProps = (
   state: PropState
-): CommonState | SignState | LogState | CategoryManageState => {
+): CommonState | SignState | LogState => {
   return {
     ...state.common,
     ...state.sign,
-    ...state.log,
-    ...state.categoryManage
+    ...state.log
   };
 };
 

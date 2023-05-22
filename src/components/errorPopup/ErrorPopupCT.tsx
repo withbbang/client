@@ -3,7 +3,6 @@ import { CommonState } from 'middlewares/reduxTookits/commonSlice';
 import { LogState } from 'middlewares/reduxTookits/logSlice';
 import ErrorPopupPT from './ErrorPopupPT';
 import { SignState } from 'middlewares/reduxTookits/signSlice';
-import { CategoryManageState } from 'middlewares/reduxTookits/categoryManageSlice';
 import { useNavigate } from 'react-router-dom';
 
 const ErrorPopupCT = (props: typeErrorPopupCT): JSX.Element => {
@@ -45,6 +44,7 @@ const ErrorPopupCT = (props: typeErrorPopupCT): JSX.Element => {
         props.handleCodeMessage('', '');
         break;
       default:
+        props.handleCodeMessage('', '');
         break;
     }
 
@@ -62,11 +62,7 @@ const ErrorPopupCT = (props: typeErrorPopupCT): JSX.Element => {
   );
 };
 
-interface typeErrorPopupCT
-  extends CommonState,
-    SignState,
-    LogState,
-    CategoryManageState {
+interface typeErrorPopupCT extends CommonState, SignState, LogState {
   requestForceLogOut: (id: string) => void;
   handleCodeMessage: (code: string, message: string) => void;
 }

@@ -30,7 +30,7 @@ export const {
   failSearchContents
 } = searchContentsSlice.actions;
 
-export const contentsExtraReducers = {
+export const searchContentsExtraReducers = {
   'searchContents/requestSearchContents': (state: CommonState) => {
     state.isFetching = true;
     state.isSuccess = false;
