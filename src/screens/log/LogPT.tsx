@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 import LeftSideBar from 'components/leftSideBar';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
@@ -18,7 +18,7 @@ const LogPT = ({
 }: typeLogPT): JSX.Element => {
   return (
     <>
-      <Loader loading={loading} />
+      <Loader />
       <Header />
       <LeftSideBar />
       <ErrorPopup />

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Search.module.scss';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 import Header from 'components/header/Header';
 import LeftSideBar from 'components/leftSideBar';
 import ErrorPopup from 'components/errorPopup';
@@ -20,7 +20,7 @@ const SearchPT = ({
 }: typeSearchPT): JSX.Element => {
   return (
     <>
-      <Loader loading={loading} />
+      <Loader />
       <Header />
       <LeftSideBar />
       <ErrorPopup />

@@ -1,6 +1,6 @@
 import React from 'react';
 import LeftSideBar from 'components/leftSideBar';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 import styles from './Index.module.scss';
 import Card from 'components/card/Card';
 import Header from 'components/header/Header';
@@ -11,7 +11,7 @@ import { Content } from 'modules/types';
 const IndexPT = ({ loading, isNight, items }: typeIndexPT) => {
   return (
     <>
-      <Loader loading={loading} />
+      <Loader />
       <Header />
       <LeftSideBar />
       <ErrorPopup />

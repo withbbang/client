@@ -1,6 +1,6 @@
 import React from 'react';
 import LeftSideBar from 'components/leftSideBar';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import ErrorPopup from 'components/errorPopup';
@@ -21,7 +21,7 @@ const ContentsPT = ({
 }: typeContentsPT) => {
   return (
     <>
-      <Loader loading={loading} />
+      <Loader />
       <Header />
       <LeftSideBar />
       <ErrorPopup />

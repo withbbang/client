@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CommentManage.module.scss';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 import ErrorPopup from 'components/errorPopup';
 import ConfirmPopup from 'components/confirmPopup/ConfirmPopup';
 
@@ -20,7 +20,7 @@ const CommentManagePT = ({
 }: typeCommentManagePT) => {
   return (
     <>
-      <Loader loading={loading} />
+      <Loader />
       <ErrorPopup />
       <ConfirmPopup
         isActive={isConfirmPopupActive}

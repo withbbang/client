@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 import { Authority, Category } from 'modules/types';
 import LeftSideBar from 'components/leftSideBar';
 import Header from 'components/header/Header';
@@ -44,7 +44,7 @@ const CategoryManagePT = ({
   onDragOver
 }: typeCategoryManagePT): JSX.Element => (
   <>
-    <Loader loading={loading} />
+    <Loader />
     <Header />
     <LeftSideBar />
     <ErrorPopup />

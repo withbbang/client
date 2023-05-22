@@ -1,11 +1,11 @@
 import React from 'react';
 import LeftSideBar from 'components/leftSideBar';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 
 const SignPT = ({ loading, onSignUp, onSignOut }: typeSignPT): JSX.Element => {
   return (
     <div>
-      <Loader loading={loading} />
+      <Loader />
       <LeftSideBar />
       <input type="text" id="id" />
       <input type="password" id="password" />

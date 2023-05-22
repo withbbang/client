@@ -1,6 +1,6 @@
 import React from 'react';
 import LeftSideBar from 'components/leftSideBar';
-import { Loader } from 'components/loader/Loader';
+import Loader from 'components/loader/Loader';
 import styles from './Content.module.scss';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
@@ -52,7 +52,7 @@ const ContentPT = ({
 }: typeContentPT) => {
   return (
     <>
-      <Loader loading={loading} />
+      <Loader />
       <Header />
       <LeftSideBar />
       <ErrorPopup />
