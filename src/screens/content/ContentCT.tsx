@@ -77,7 +77,9 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
 
               let encrypted: string | boolean = '';
               try {
-                encrypted = encrypt.encrypt(password);
+                encrypted = encrypt.encrypt(
+                  isReComment > -1 ? rePassword : password
+                );
               } catch (e) {
                 props.handleCodeMessage('ENCRYPT ERROR', '암호화 에러');
                 return;
@@ -88,22 +90,30 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
                 return;
               }
 
-              props.requestCreateComment(
-                nickName,
-                encrypted,
-                +contentId,
-                comments,
-                isSecret,
-                isReComment > -1 ? isReComment : undefined
-              );
-
               if (isReComment > -1) {
+                props.requestCreateComment(
+                  reNickName,
+                  encrypted,
+                  +contentId,
+                  reComments,
+                  reIsSecret,
+                  isReComment
+                );
+
                 setReNickName('');
                 setRePassword('');
                 setReComments('');
                 setReIsSecret('N');
                 setIsReComment(-1);
               } else {
+                props.requestCreateComment(
+                  nickName,
+                  encrypted,
+                  +contentId,
+                  comments,
+                  isSecret
+                );
+
                 setNickName('');
                 setPassword('');
                 setComments('');
@@ -136,21 +146,31 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
   };
 
   const handleCreateComment = () => {
-    // if (e !== undefined && e.key !== 'Enter') {
-    //   return;
-    // }
+    let _nickName = '',
+      _password = '',
+      _comments = '';
 
-    if (!nickName) {
+    if (isReComment > -1) {
+      _nickName = reNickName;
+      _password = rePassword;
+      _comments = reComments;
+    } else {
+      _nickName = nickName;
+      _password = password;
+      _comments = comments;
+    }
+
+    if (!_nickName) {
       props.handleCodeMessage('EMPTY NICKNAME', 'NICKNAME을 입력해주세요.');
       return;
     }
 
-    if (!password) {
+    if (!_password) {
       props.handleCodeMessage('EMPTY PASSWORD', 'PASSWORD을 입력해주세요.');
       return;
     }
 
-    if (!comments) {
+    if (!_comments) {
       props.handleCodeMessage('EMPTY COMMENT', 'COMMENT을 입력해주세요.');
       return;
     }
