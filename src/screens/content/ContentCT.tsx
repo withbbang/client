@@ -175,7 +175,6 @@ const ContentCT = (props: typeContentCT): JSX.Element => {
       return;
     }
 
-    //TODO: 비교 필요, UPDATE 작업, refId, isSecret 연결 필요
     handleConfirmPopup('create');
   };
 
